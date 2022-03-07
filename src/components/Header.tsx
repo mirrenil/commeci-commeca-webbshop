@@ -1,10 +1,13 @@
 import React, { CSSProperties } from "react";
 import userIcon from "../assets/icons/icon-user.svg";
+import cartIcon from "../assets/icons/icon-shopping-cart.svg";
 
 function Header() {
   return (
     <header style={rootStyle}>
       <h1>comme ci comme ça</h1>
+      <img style={iconStyle} src={userIcon} alt="user" />
+      <img style={iconStyle} src={cartIcon} alt="cart" />
     </header>
   );
 }
