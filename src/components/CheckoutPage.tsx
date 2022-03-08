@@ -1,4 +1,4 @@
 function CheckoutPage() {
-  return <div></div>;
+  return <div>CHECKOUT PAGE</div>
 }
 export default CheckoutPage;
