@@ -52,6 +52,8 @@ function ProductCard() {
 
             <CardActionArea>
               <CardMedia
+                component="img"
+                height="140"
                 style={cardStyle}
                 image="../assets/products/soffbord.png"
                 title="table"
@@ -73,6 +75,8 @@ function ProductCard() {
 
             <CardActionArea>
               <CardMedia
+                component="img"
+                height="140"
                 style={cardStyle}
                 image="../assets/products/soffbord.png"
                 title="table"
@@ -94,6 +98,8 @@ function ProductCard() {
 
             <CardActionArea>
               <CardMedia
+                component="img"
+                height="140"
                 style={cardStyle}
                 image="../assets/products/soffbord.png"
                 title="table"
@@ -115,6 +121,8 @@ function ProductCard() {
 
             <CardActionArea>
               <CardMedia
+                component="img"
+                height="140"
                 style={cardStyle}
                 image="../assets/products/soffbord.png"
                 title="table"
@@ -136,6 +144,8 @@ function ProductCard() {
 
             <CardActionArea>
               <CardMedia
+                component="img"
+                height="140"
                 style={cardStyle}
                 image="../assets/products/soffbord.png"
                 title="table"
