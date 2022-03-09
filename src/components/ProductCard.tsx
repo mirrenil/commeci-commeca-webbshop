@@ -16,12 +16,12 @@ interface Props {
 
 function ProductCard(props: Props) {
   return (
-    <div style={divStyle}>
-      <Card style={rootStyle} sx={{ maxWidth: 345 }}>
+    <div style={rootStyle}>
+      <Card style={cardStyle} sx={{ maxWidth: 345 }}>
         <CardActionArea>
           <CardMedia
             component="img"
-            height="auto"
+            height="250"
             style={imgStyle}
             src={props.product.image}
             title={props.product.title}
@@ -30,10 +30,10 @@ function ProductCard(props: Props) {
           ></CardMedia>
           <CardContent>
             <Typography gutterBottom variant="h5" component="h2">
-              NAME OF PRODUKT
+              {props.product.title}
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              PRICE HERE:-
+              {props.product.price}:-
             </Typography>
           </CardContent>
         </CardActionArea>
@@ -47,19 +47,18 @@ function ProductCard(props: Props) {
   );
 }
 
-const rootStyle: CSSProperties = {
-  maxWidth: 330,
-  padding: "2rem",
+const cardStyle: CSSProperties = {
+  width: 250,
+  padding: "1rem",
 };
 const imgStyle: CSSProperties = {
   height: 250,
 };
-const divStyle: CSSProperties = {
+const rootStyle: CSSProperties = {
   display: "flex",
   flexDirection: "row",
   flexWrap: "wrap",
-  margin: "4rem",
-  justifyContent: "space-evenly",
+  justifyContent: "space-around",
 };
 
 export default ProductCard;
