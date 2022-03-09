@@ -14,11 +14,10 @@ interface Props {
   product: Data;
 }
 
-
 function ProductCard(props: Props) {
   return (
     <div style={divStyle}>
-      <Card style={cardStyle} sx={{ maxWidth: 345 }}>
+      <Card style={rootStyle} sx={{ maxWidth: 345 }}>
         <CardActionArea>
           <CardMedia
             component="img"
@@ -44,7 +43,6 @@ function ProductCard(props: Props) {
           </Button>
         </CardActions>
       </Card>
-
     </div>
   );
 }
