@@ -9,7 +9,7 @@ import {
   Typography,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { Box, color } from "@mui/system";
+import { Box } from "@mui/system";
 import { MouseEvent, useState } from "react";
 import { Link } from "react-router-dom";
 import cartIcon from "../assets/icons/icon-shopping-cart.webp";
