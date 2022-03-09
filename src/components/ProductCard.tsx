@@ -14,10 +14,11 @@ interface Props {
   product: Data;
 }
 
+
 function ProductCard(props: Props) {
   return (
     <div style={divStyle}>
-      <Card style={rootStyle}>
+      <Card style={cardStyle} sx={{ maxWidth: 345 }}>
         <CardActionArea>
           <CardMedia
             component="img"
@@ -30,10 +31,10 @@ function ProductCard(props: Props) {
           ></CardMedia>
           <CardContent>
             <Typography gutterBottom variant="h5" component="h2">
-              {props.product.title}
+              NAME OF PRODUKT
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              {props.product.price}
+              PRICE HERE:-
             </Typography>
           </CardContent>
         </CardActionArea>
@@ -43,6 +44,7 @@ function ProductCard(props: Props) {
           </Button>
         </CardActions>
       </Card>
+
     </div>
   );
 }
