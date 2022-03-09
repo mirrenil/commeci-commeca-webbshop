@@ -63,7 +63,7 @@ function Header() {
     return (
       <div className={iconsContainer}>
         <Link to="/account">
-          <img className={icon} src={userIcon} alt="login/logout" />
+          <img className={icon} src={userIcon} alt="account" />
         </Link>
         <Link to="/checkoutpage">
           <img className={icon} src={cartIcon} alt="cart" />
