@@ -2,12 +2,15 @@ import { Data } from "../ProductData";
 import ProductCard from "./ProductCard";
 
 interface Props {
-  data: Data;
+  products: Data[];
 }
+
 function ProductPage(props: Props) {
   return (
     <div>
-      <ProductCard data={undefined} />
+      {props.products.map((product) => (
+        <ProductCard key={product.id} product={product} />
+      ))}
     </div>
   );
 }

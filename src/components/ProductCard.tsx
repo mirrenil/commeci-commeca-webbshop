@@ -11,7 +11,7 @@ import { CSSProperties } from "react";
 import { Data } from "../ProductData";
 
 interface Props {
-  data: Data;
+  product: Data;
 }
 
 function ProductCard(props: Props) {
@@ -21,219 +21,19 @@ function ProductCard(props: Props) {
         <CardActionArea>
           <CardMedia
             component="img"
-            height="140"
-            style={cardStyle}
-            src={props.data.image}
-            title={props.data.title}
-            id={props.data.id}
+            height="auto"
+            style={imgStyle}
+            src={props.product.image}
+            title={props.product.title}
+            id={props.product.id}
             /* onClick={() => onselect()} */
           ></CardMedia>
           <CardContent>
             <Typography gutterBottom variant="h5" component="h2">
-              {props.data.title}
+              {props.product.title}
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              {props.data.price}
-            </Typography>
-          </CardContent>
-        </CardActionArea>
-        <CardActions>
-          <Button size="small" color="primary">
-            Lägg till i varukorgen
-          </Button>
-        </CardActions>
-      </Card>
-      <Card style={rootStyle}>
-        <CardActionArea>
-          <CardMedia
-            component="img"
-            height="140"
-            style={cardStyle}
-            src={props.data.image}
-            title={props.data.title}
-            id={props.data.id}
-          ></CardMedia>
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="h2">
-              NAME OF PRODUKT
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              PRICE:-
-            </Typography>
-          </CardContent>
-        </CardActionArea>
-        <CardActions>
-          <Button size="small" color="primary">
-            Lägg till i varukorgen
-          </Button>
-        </CardActions>
-      </Card>
-      <Card style={rootStyle}>
-        <CardActionArea>
-          <CardMedia
-            component="img"
-            height="140"
-            style={cardStyle}
-            src={props.data.image}
-            title={props.data.title}
-            id={props.data.id}
-          ></CardMedia>
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="h2">
-              NAME OF PRODUKT
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              PRICE:-
-            </Typography>
-          </CardContent>
-        </CardActionArea>
-        <CardActions>
-          <Button size="small" color="primary">
-            Lägg till i varukorgen
-          </Button>
-        </CardActions>
-      </Card>
-      <Card style={rootStyle}>
-        <CardActionArea>
-          <CardMedia
-            component="img"
-            height="140"
-            style={cardStyle}
-            src={props.data.image}
-            title={props.data.title}
-            id={props.data.id}
-          ></CardMedia>
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="h2">
-              NAME OF PRODUKT
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              PRICE:-
-            </Typography>
-          </CardContent>
-        </CardActionArea>
-        <CardActions>
-          <Button size="small" color="primary">
-            Lägg till i varukorgen
-          </Button>
-        </CardActions>
-      </Card>
-      <Card style={rootStyle}>
-        <CardActionArea>
-          <CardMedia
-            component="img"
-            height="140"
-            style={cardStyle}
-            src={props.data.image}
-            title={props.data.title}
-            id={props.data.id}
-          ></CardMedia>
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="h2">
-              NAME OF PRODUKT
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              PRICE:-
-            </Typography>
-          </CardContent>
-        </CardActionArea>
-        <CardActions>
-          <Button size="small" color="primary">
-            Lägg till i varukorgen
-          </Button>
-        </CardActions>
-      </Card>
-      <Card style={rootStyle}>
-        <CardActionArea>
-          <CardMedia
-            component="img"
-            height="140"
-            style={cardStyle}
-            src={props.data.image}
-            title={props.data.title}
-            id={props.data.id}
-          ></CardMedia>
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="h2">
-              NAME OF PRODUKT
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              PRICE:-
-            </Typography>
-          </CardContent>
-        </CardActionArea>
-        <CardActions>
-          <Button size="small" color="primary">
-            Lägg till i varukorgen
-          </Button>
-        </CardActions>
-      </Card>
-      <Card style={rootStyle}>
-        <CardActionArea>
-          <CardMedia
-            component="img"
-            height="140"
-            style={cardStyle}
-            src={props.data.image}
-            title={props.data.title}
-            id={props.data.id}
-          ></CardMedia>
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="h2">
-              NAME OF PRODUKT
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              PRICE:-
-            </Typography>
-          </CardContent>
-        </CardActionArea>
-        <CardActions>
-          <Button size="small" color="primary">
-            Lägg till i varukorgen
-          </Button>
-        </CardActions>
-      </Card>
-      <Card style={rootStyle}>
-        <CardActionArea>
-          <CardMedia
-            component="img"
-            height="140"
-            style={cardStyle}
-            src={props.data.image}
-            title={props.data.title}
-            id={props.data.id}
-          ></CardMedia>
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="h2">
-              NAME OF PRODUKT
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              PRICE:-
-            </Typography>
-          </CardContent>
-        </CardActionArea>
-        <CardActions>
-          <Button size="small" color="primary">
-            Lägg till i varukorgen
-          </Button>
-        </CardActions>
-      </Card>
-      <Card style={rootStyle}>
-        <CardActionArea>
-          <CardMedia
-            component="img"
-            height="140"
-            style={cardStyle}
-            src={props.data.image}
-            title={props.data.title}
-            id={props.data.id}
-          ></CardMedia>
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="h2">
-              NAME OF PRODUKT
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              PRICE:-
+              {props.product.price}
             </Typography>
           </CardContent>
         </CardActionArea>
@@ -251,14 +51,14 @@ const rootStyle: CSSProperties = {
   maxWidth: 330,
   padding: "2rem",
 };
-const cardStyle: CSSProperties = {
+const imgStyle: CSSProperties = {
   height: 250,
 };
 const divStyle: CSSProperties = {
   display: "flex",
   flexDirection: "row",
   flexWrap: "wrap",
-  margin: "2rem",
+  margin: "4rem",
   justifyContent: "space-evenly",
 };
 
