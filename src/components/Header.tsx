@@ -122,10 +122,12 @@ function Header() {
     <AppBar
       sx={{
         backgroundColor: "#6C665F",
-        padding: "0.5rem 1rem",
+        padding: "0rem 1rem",
         placeContent: "center",
         display: "flex",
         flexDirection: "row",
+        height: "6rem",
+        position: "relative",
       }}
     >
       <Toolbar
