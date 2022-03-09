@@ -9,7 +9,7 @@ import {
   Typography,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { Box } from "@mui/system";
+import { Box, color } from "@mui/system";
 import { MouseEvent, useState } from "react";
 import { Link } from "react-router-dom";
 import cartIcon from "../assets/icons/icon-shopping-cart.webp";
@@ -23,7 +23,7 @@ interface Page {
 
 function Header() {
   const [anchorMenu, setAnchorMenu] = useState(false);
-  const { logoStyle, icon, iconsContainer, menuItems } = useStyles();
+  const { logoStyle, icon, iconsContainer } = useStyles();
 
   const menuLeft: Page[] = [
     {
@@ -76,6 +76,7 @@ function Header() {
     return menuLeft.map(({ label, href }) => {
       return (
         <Button
+          component={Link}
           {...{
             key: label,
             color: "inherit",
@@ -98,18 +99,18 @@ function Header() {
     return menuRight.map(({ label, href }) => {
       return (
         <Button
+          component={Link}
           {...{
             key: label,
             color: "inherit",
-            component: <Link to={href}>,
-          }
+            to: href,
+          }}
           sx={{
             textTransform: "capitalize",
             fontFamily: "Prata",
             m: "2.5rem",
             display: { xs: "none", sm: "none", md: "block", lg: "block" },
-          }}}
-          
+          }}
         >
           {label}
         </Button>
@@ -171,12 +172,12 @@ function Header() {
           >
             {menuLeft.map((item) => (
               <MenuItem
+                component={Link}
                 sx={{
                   width: "200px",
                 }}
                 key={item.label}
                 onClick={handleCloseMenu}
-                component={Link}
                 to={item.href}
               >
                 <Typography
@@ -213,7 +214,9 @@ function Header() {
           </Menu>
         </Box>
         {getMenuButtonsLeft()}
-        <img className={logoStyle} src={logo} alt="comme ci comme ca"></img>
+        <Link to="/">
+          <img className={logoStyle} src={logo} alt="comme ci comme ca"></img>
+        </Link>
         {getMenuButtonsRight()}
         {icons()}
       </Toolbar>
