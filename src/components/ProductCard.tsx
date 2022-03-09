@@ -9,11 +9,11 @@ import {
 } from "@mui/material";
 import { CSSProperties } from "react";
 
-const rootStyle: CSSProperties = {
+const cardStyle: CSSProperties = {
   maxWidth: 330,
   padding: "2rem",
 };
-const cardStyle: CSSProperties = {
+const imgStyle: CSSProperties = {
   height: 250,
 };
 const divStyle: CSSProperties = {
@@ -27,12 +27,12 @@ const divStyle: CSSProperties = {
 function ProductCard() {
   return (
     <div style={divStyle}>
-      <Card style={rootStyle}>
+      <Card style={cardStyle} sx={{ maxWidth: 345 }}>
         <CardActionArea>
           <CardMedia
             component="img"
             height="140"
-            style={cardStyle}
+            style={imgStyle}
             image=""
             title=""
           ></CardMedia>
@@ -52,12 +52,12 @@ function ProductCard() {
         </CardActions>
       </Card>
 
-      <Card style={rootStyle}>
+      <Card style={cardStyle} sx={{ maxWidth: 345 }}>
         <CardActionArea>
           <CardMedia
             component="img"
             height="140"
-            style={cardStyle}
+            style={imgStyle}
             image="../assets/products/soffbord.png"
             title="table"
           ></CardMedia>
@@ -77,12 +77,12 @@ function ProductCard() {
         </CardActions>
       </Card>
 
-      <Card style={rootStyle}>
+      <Card style={cardStyle} sx={{ maxWidth: 345 }}>
         <CardActionArea>
           <CardMedia
             component="img"
             height="140"
-            style={cardStyle}
+            style={imgStyle}
             image="../assets/products/soffbord.png"
             title="table"
           ></CardMedia>
@@ -102,12 +102,12 @@ function ProductCard() {
         </CardActions>
       </Card>
 
-      <Card style={rootStyle}>
+      <Card style={cardStyle} sx={{ maxWidth: 345 }}>
         <CardActionArea>
           <CardMedia
             component="img"
             height="140"
-            style={cardStyle}
+            style={imgStyle}
             image="../assets/products/soffbord.png"
             title="table"
           ></CardMedia>
@@ -127,12 +127,12 @@ function ProductCard() {
         </CardActions>
       </Card>
 
-      <Card style={rootStyle}>
+      <Card style={cardStyle} sx={{ maxWidth: 345 }}>
         <CardActionArea>
           <CardMedia
             component="img"
             height="140"
-            style={cardStyle}
+            style={imgStyle}
             image="../assets/products/soffbord.png"
             title="table"
           ></CardMedia>
@@ -151,12 +151,12 @@ function ProductCard() {
           </Button>
         </CardActions>
       </Card>
-      <Card style={rootStyle}>
+      <Card style={cardStyle}>
         <CardActionArea>
           <CardMedia
             component="img"
             height="140"
-            style={cardStyle}
+            style={imgStyle}
             image="../assets/products/soffbord.png"
             title="table"
           ></CardMedia>
@@ -175,12 +175,12 @@ function ProductCard() {
           </Button>
         </CardActions>
       </Card>
-      <Card style={rootStyle}>
+      <Card style={cardStyle} sx={{ maxWidth: 345 }}>
         <CardActionArea>
           <CardMedia
             component="img"
             height="140"
-            style={cardStyle}
+            style={imgStyle}
             image="../assets/products/soffbord.png"
             title="table"
           ></CardMedia>
@@ -199,12 +199,12 @@ function ProductCard() {
           </Button>
         </CardActions>
       </Card>
-      <Card style={rootStyle}>
+      <Card style={cardStyle} sx={{ maxWidth: 345 }}>
         <CardActionArea>
           <CardMedia
             component="img"
             height="140"
-            style={cardStyle}
+            style={imgStyle}
             image="../assets/products/soffbord.png"
             title="table"
           ></CardMedia>
@@ -223,12 +223,12 @@ function ProductCard() {
           </Button>
         </CardActions>
       </Card>
-      <Card style={rootStyle}>
+      <Card style={cardStyle} sx={{ maxWidth: 345 }}>
         <CardActionArea>
           <CardMedia
             component="img"
             height="140"
-            style={cardStyle}
+            style={imgStyle}
             image="../assets/products/soffbord.png"
             title="table"
           ></CardMedia>
