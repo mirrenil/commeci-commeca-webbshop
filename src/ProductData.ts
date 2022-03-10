@@ -16,7 +16,7 @@ import barrel from "./assets/images/barrel.webp";
 import SkrivbordAlba from "./assets/images/SkrivbordAlba.webp";
 import sanggavelBetty from "./assets/images/sanggavelBetty.webp";
 
-export interface Data {
+export interface ProductData {
   image: string;
   title: string;
   description: string;
@@ -24,7 +24,7 @@ export interface Data {
   id: string;
 }
 
-export const ProductData: Data[] = [
+export const productData: ProductData[] = [
   {
     image: PallJolly,
     title: "Pall Jolly",

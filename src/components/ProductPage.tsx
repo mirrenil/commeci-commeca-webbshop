@@ -1,8 +1,8 @@
-import { Data } from "../ProductData";
+import { ProductData } from "../ProductData";
 import ProductCard from "./ProductCard";
 
 interface Props {
-  products: Data[];
+  products: ProductData[];
 }
 
 function ProductPage(props: Props) {

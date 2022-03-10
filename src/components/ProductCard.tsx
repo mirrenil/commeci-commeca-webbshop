@@ -8,13 +8,16 @@ import {
   Typography,
 } from "@mui/material";
 import { CSSProperties } from "react";
-import { Data } from "../ProductData";
+import { useCart } from "../context/CartContextProvider";
+import { ProductData } from "../ProductData";
 
 interface Props {
-  product: Data;
+  product: ProductData;
 }
 
 function ProductCard(props: Props) {
+  const { addToCart } = useCart();
+
   return (
     <div style={divStyle}>
       <Card style={rootStyle} sx={{ maxWidth: 345 }}>
@@ -38,7 +41,11 @@ function ProductCard(props: Props) {
           </CardContent>
         </CardActionArea>
         <CardActions>
-          <Button size="small" color="primary">
+          <Button
+            size="small"
+            color="primary"
+            onClick={() => addToCart(props.product)}
+          >
             Lägg till i varukorgen
           </Button>
         </CardActions>
