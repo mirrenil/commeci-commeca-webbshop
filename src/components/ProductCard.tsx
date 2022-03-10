@@ -5,6 +5,8 @@ import {
   CardActions,
   CardContent,
   CardMedia,
+  SxProps,
+  Theme,
   Typography,
 } from "@mui/material";
 import { CSSProperties } from "react";
@@ -16,8 +18,8 @@ interface Props {
 
 function ProductCard(props: Props) {
   return (
-    <div style={rootStyle}>
-      <Card style={cardStyle} sx={{ maxWidth: 345 }}>
+    <div>
+      <Card sx={cardStyle}>
         <CardActionArea>
           <CardMedia
             component="img"
@@ -38,8 +40,8 @@ function ProductCard(props: Props) {
           </CardContent>
         </CardActionArea>
         <CardActions>
-          <Button size="small" color="primary">
-            Lägg till i varukorgen
+          <Button size="small" color="inherit" variant="contained">
+            Add to cart
           </Button>
         </CardActions>
       </Card>
@@ -47,18 +49,14 @@ function ProductCard(props: Props) {
   );
 }
 
-const cardStyle: CSSProperties = {
+const cardStyle: SxProps<Theme> = {
   width: 250,
   padding: "1rem",
+  maxWidth: 345,
+  boxShadow: "none",
 };
 const imgStyle: CSSProperties = {
   height: 250,
-};
-const rootStyle: CSSProperties = {
-  display: "flex",
-  flexDirection: "row",
-  flexWrap: "wrap",
-  justifyContent: "space-around",
 };
 
 export default ProductCard;

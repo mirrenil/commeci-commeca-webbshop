@@ -8,7 +8,7 @@ export function Footer() {
       <Box
         px={{ xs: 3, sm: 10 }}
         py={{ xs: 5, sm: 10 }}
-        bgcolor="text.secondary"
+        bgcolor="#6C665F"
         color="white"
       >
         <Container maxWidth="lg">
@@ -17,7 +17,7 @@ export function Footer() {
               <Box borderBottom={1}>Customer Care</Box>
               <Box>
                 <Link href="/" color="inherit">
-                  Kontakta oss
+                  Contact us
                 </Link>
               </Box>
               <Box>
@@ -45,20 +45,20 @@ export function Footer() {
               </Box>
             </Grid>
             <Grid item xs={12} sm={4}>
-              <Box borderBottom={1}>Om oss</Box>
+              <Box borderBottom={1}>About us</Box>
               <Box>
                 <Link href="/" color="inherit">
-                  Designfiliosofi
+                  Design philiosophy
                 </Link>
               </Box>
               <Box>
                 <Link href="/" color="inherit">
-                  Hitta butiker
+                  Find a store near you
                 </Link>
               </Box>
               <Box>
                 <Link href="/" color="inherit">
-                  Arbeta hos oss
+                  Work with us
                 </Link>
               </Box>
             </Grid>
