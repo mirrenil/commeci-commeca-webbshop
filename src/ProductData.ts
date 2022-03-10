@@ -27,137 +27,137 @@ export interface Data {
 export const ProductData: Data[] = [
   {
     image: PallJolly,
-    title: "Pall Jolly",
+    title: "Jolly",
     description:
-      "Pall med bekväm, formad sits. Av massivt trä, i träslaget Toon Wood. Höjd 61 cm. Sits 40x32 cm. Sitthöjd: 61 cm Bredd nedtill 47 cm. Monterad.",
+      "Stool with comfortable, shaped seat. Made of solid wood, in the Toon Wood type. Height 61 cm. Seat 40x32 cm. Seat height: 61 cm Width at the bottom 47 cm. Mounted.",
     price: "1599 SEK",
     id: "1",
   },
   {
     image: fatoljChardonne,
-    title: "Fåtölj Chardonne",
+    title: "Chardonne",
     description:
-      "Fåtölj med stomme i furu och plywood med nozagfjädring och skumfyllning. Ben av borstad metall. Mått: Bredd 89 cm, höjd 77 cm, djup 83 cm. Sitthöjd 43 cm, sittdjup 62 cm, sittbredd 54 cm.",
+      "Armchair with pine and plywood frame with nozag suspension and foam filling. Brushed metal legs. Dimensions: Width 89 cm, height 77 cm, depth 83 cm. Seat height 43 cm, seat depth 62 cm, seat width 54 cm.",
     price: "3919 SEK",
     id: "2",
   },
   {
     image: FatoljXander,
-    title: "Loungefåtölj Xander",
+    title: "Xander",
     description:
-      "Loungefåtölj med klädsel i bouclétyg och passpoalkant längs överkanten. Ben och stomme i pulverlackad metall. Skumfyllning. Enklare montering.",
+      "Lounge armchair with upholstery in bouquet fabric and passpoalk edge along the top edge. Legs and frame in powder-coated metal. Foam filling. Easier installation.",
     price: "2299 SEK",
     id: "3",
   },
   {
     image: SangbordMagnolia,
-    title: "Sängbord Magnolia",
+    title: "Magnolia",
     description:
-      "Sängbord i rotting med hylla undertill. Toppen är förstärkt med en plywoodskiva under rottingen. Mått: Bredd 41 cm, höjd 71 cm, djup 31 cm. Benhöjd 22 cm. Höjd till nedre hyllans överkant 25 cm. Mått mellan hyllorna 42,5 cm.",
+      "Rattan bedside table with shelf underneath. The top is reinforced with a plywood board under the rattan. Dimensions: Width 41 cm, height 71 cm, depth 31 cm. Leg height 22 cm. Height to the upper edge of the lower shelf 25 cm. Dimensions between the shelves 42.5 cm.",
     price: "1299 SEK",
     id: "4",
   },
   {
     image: SanggavelBella,
-    title: "Sänggavel Bella",
+    title: "Bella",
     description:
-      "Stoppad sänggavel som fästs på väggen (två krokar på baksidan). Stomme av trä (tall). Klädsel i sammet av polyester och fyllning av polyeter. Bredd 95 cm. Höjd 61,5 cm. Djup 7,5 cm.",
-    price: "999",
+      "Upholstered headboard attached to the wall (two hooks on the back). Wooden frame (pine). Upholstery in velvet of polyester and filling of polyether. Width 95 cm. Height 61.5 cm. Depth 7.5 cm.",
+    price: "999 SEK",
     id: "5",
   },
   {
     image: SidobordEssentials,
-    title: "Sidobord / skåp Essentials",
+    title: "Essentials",
     description:
-      "Sidobord / skåp i massivt mangoträ med vaxbehandlad yta. Två dörrar med trähandtag och mjuk stängning. Skåpet är avdelat invändigt och har ett fast hyllplan. Mått mellan hyllplan ca 27 cm. Frihöjd under möbel 14 cm. Levereras monterat.",
+      "Side table / cabinet in solid mango wood with wax-treated surface. Two doors with wooden handles and soft closing. The cabinet is divided inside and has a fixed shelf. Dimensions between shelves approx. 27 cm. Clear height under furniture 14 cm. Delivered assembled.",
     price: "5499 SEK",
     id: "6",
   },
   {
     image: BankDagny,
-    title: "Bänk Dagny",
+    title: "Dagny",
     description:
-      "Bänk i lackat bokträ med sits i flätat juterep. Färgen är vattenbaserad. FSC-certifierad produkt, vilket innebär att den innehåller trä som är avverkat från ett ansvarsfullt skogsbruk som tar hänsyn till människor och miljö.",
+      "Bench in lacquered beech wood with seat in braided jute rope. The paint is water-based. FSC-certified product, which means that it contains wood that has been harvested from a responsible forestry that takes people and the environment into account.",
     price: "2999 SEK",
     id: "7",
   },
   {
     image: KuddfodralDaisy,
-    title: "Kuddfodral Daisy Bubble",
+    title: "Daisy Bubble",
     description:
-      "Kuddfodral av sammet med fin lyster och ett sytt, dekorativt mönster på framsidan. Slät baksida. Dragkedja i botten.",
+      "Velvet pillowcase with a nice luster and a sewn, decorative pattern on the front. Smooth back. Zipper at the bottom.",
     price: "199 SEK",
     id: "8",
   },
   {
     image: barrel,
-    title: "Loungestol Barrel",
+    title: "Barrel",
     description:
-      "Loungestol i PU-läder (skinnimitation) med ett levande ton-i-ton-mönster och jeanssöm mitt fram på sits och rygg. Ben av pulverlackad metall. Skumfyllning. Levereras monterad.",
+      "Lounge chair in PU leather (imitation leather) with a vibrant tone-on-tone pattern and denim seam in the middle of the front of the seat and back. Legs of powder coated metal. Foam filling. Delivered assembled.",
     price: "1799 SEK",
     id: "9",
   },
   {
     image: SkrivbordAlba,
-    title: "Skrivbord Alba",
+    title: "Alba",
     description:
-      "Skrivbord av mangoträ med vaxad yta. Tre lådor med lådstopp. Frihöjd under möbel 57 cm. Enklare montering.",
+      "Mango wood desk with waxed surface. Three drawers with drawer stop. Clear height under furniture 57 cm. Easier installation.",
     price: "3449 SEK",
     id: "10",
   },
   {
     image: skapVincent,
-    title: "Skåp Vinvent",
+    title: "Vinvent",
     description:
-      "Ett gediget, rymligt skåp med många användningsområden. Av MDF med sidor och skjutdörrar av glas. Skjutdörrarna har handtag av antikmässingsfärgad metall. Två fasta hyllplan och en mellanvägg.",
+      "A solid, spacious cabinet with many uses. Made of MDF with sides and sliding glass doors. The sliding doors have handles made of antique brass-colored metal. Two fixed shelves and a partition.",
     price: "5999 SEK",
     id: "11",
   },
   {
     image: charleston,
-    title: "Fåtölj Charleston",
+    title: "Charleston",
     description:
-      "Fåtölj med klädsel i sammet. Överdel med rynkat tyg på både ut- och insidan. Prydnadskudde i sammet med klädd knapp medföljer. Trästomme. Underrede och ben av pulverlackad metall. Stoppning av polyeter.Höjd 78 cm, bredd 78 cm, djup 80 cm. Sitthöjd 47 cm, sittdjup 65 cm. Sittbredd 50 cm. Max belastning 135 kg. Montera benen vid leverans.",
+      "Armchair with upholstery in velvet. Top with wrinkled fabric on both the outside and inside. Ornamental pillow in velvet with upholstered button included. Wooden frame. Base and legs of powder coated metal. Upholstery of polyether. Height 78 cm, width 78 cm, depth 80 cm. Seat height 47 cm, seat depth 65 cm. Seat width 50 cm. Max load 135 kg. Assemble the legs on delivery.",
     price: "2899 SEK",
     id: "12",
   },
   {
     image: sanggavelBetty,
-    title: "Sänggavel Betty",
+    title: "Betty",
     description:
-      "Sänggavel i mangoträ med spårat mönster fram. Försänkta järn på baksidan som förhindrar trämaterialet från att vrida sig eller spricka. 3 st nyckelhålsfästen bak för väggupphängning. Mått: Bredd 183 cm, höjd 60 cm, djup 2,5 cm.",
+      "Headboard in mango wood with a grooved pattern at the front. Countersunk iron on the back that prevents the wood material from twisting or cracking. 3 keyhole brackets at the back for wall mounting. Dimensions: Width 183 cm, height 60 cm, depth 2.5 cm.",
     price: "2899 SEK",
     id: "13",
   },
   {
     image: golvSpegelMinna,
-    title: "GolvSpegel Minna",
+    title: "Minna",
     description:
-      "Spegel av spraymålad massiv valnöt. Höjd 158 cm. Bredd 39 cm. Djup 6 cm. Totalt djup fullt utfälld 37 cm (botten).",
+      "Mirror of spray-painted solid walnut. Height 158 ​​cm. Width 39 cm. Depth 6 cm. Total depth fully unfolded 37 cm (bottom).",
     price: "1199 SEK",
     id: "14",
   },
   {
     image: stolPirri,
-    title: "Stol Pirri 2-pack",
+    title: "Pirri 2-pack",
     description:
-      "2 stolar i skandinavisk, stilren design med skålat ryggstöd. Klädsel med skumfyllning. Ben av metall. Max viktbelastning 150 kg. Enklare montering.",
+      "2 chairs in Scandinavian, stylish design with toasted backrest. Upholstery with foam filling. Metal legs. Maximum weight load 150 kg. Easier installation.",
     price: "2699 SEK",
     id: "15",
   },
   {
     image: Merlisso,
-    title: "Soffbord Melisso",
+    title: "Melisso",
     description:
-      "Lågt, modernt soffbord med skiva av marmor. Stomme och ben av massiv bok. Höjd 34 cm, bredd 100 cm, längd 100 cm. Benhöjd 23 cm. Max viktbelastning 50 kg. Enklare montering (benen skruvas på vid leverans).",
+      "Low, modern coffee table with marble top. Frame and legs of solid beech. Height 34 cm, width 100 cm, length 100 cm. Leg height 23 cm. Maximum weight load 50 kg. Easier assembly (legs screwed on upon delivery).",
     price: "4999 SEK",
     id: "16",
   },
   {
     image: skankDitti,
-    title: "Skänk Ditti",
+    title: "Ditti",
     description:
-      "Skänk i massivt furu och MDF. Två små lådor. Höjd 82,5 cm, Bredd 104 cm, Djup 37 cm. Höjd från golv till hyllplanet 7 cm. Lev. omonterad.",
+      "Sideboard in solid pine and MDF. Two small drawers. Height 82.5 cm, Width 104 cm, Depth 37 cm. Height from floor to shelf 7 cm. Lev. unassembled.",
     price: "1999 SEK",
     id: "17",
   },
