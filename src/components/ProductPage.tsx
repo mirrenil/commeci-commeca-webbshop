@@ -1,6 +1,7 @@
 import { CSSProperties } from "react";
 import { Data } from "../ProductData";
 import ProductCard from "./ProductCard";
+import "../index.css"
 
 interface Props {
   products: Data[];
@@ -8,20 +9,26 @@ interface Props {
 
 function ProductPage(props: Props) {
   return (
-    <div style={rootStyle}>
-      {props.products.map((product) => (
-        <ProductCard key={product.id} product={product} />
-      ))}
+    <div>
+      <h5 style={{fontFamily:"Prata", fontWeight:"400", fontSize:"1.5rem", marginTop:"2rem", marginLeft:"10rem"}}>FURNITURE</h5>
+      <div style={rootStyle}>
+        {props.products.map((product) => (
+          <ProductCard key={product.id} product={product} />
+        ))}
+      </div>
     </div>
   );
 }
 
+
+
 const rootStyle: CSSProperties = {
   display: "flex",
   flexWrap: "wrap",
-  gap: "4rem",
+  columnGap: "10rem",
+  rowGap: "3rem",
   justifyContent: "center",
-  paddingTop: "5rem",
+  paddingTop: "2rem",
   paddingBottom: "6rem",
 };
 
