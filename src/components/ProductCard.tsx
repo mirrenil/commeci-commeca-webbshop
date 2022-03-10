@@ -5,6 +5,8 @@ import {
   CardActions,
   CardContent,
   CardMedia,
+  SxProps,
+  Theme,
   Typography,
 } from "@mui/material";
 import { CSSProperties } from "react";
@@ -54,9 +56,11 @@ function ProductCard(props: Props) {
   );
 }
 
-const cardStyle: CSSProperties = {
+const cardStyle: SxProps<Theme> = {
   width: 250,
   padding: "1rem",
+  maxWidth: 345,
+  boxShadow: "none",
 };
 const imgStyle: CSSProperties = {
   height: 250,
