@@ -20,7 +20,7 @@ interface Props {
 function ProductCard(props: Props) {
   return (
     <Card sx={cardStyle}>
-      <Link to={`/detail/${props.product.id}`}>
+      <Link to={`/detail/${props.product.id}`} style={linkStyle}>
         <CardActionArea>
           <CardMedia
             component="img"
@@ -31,27 +31,28 @@ function ProductCard(props: Props) {
             id={props.product.id}
             /* onClick={() => onselect()} */
           ></CardMedia>
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="h2">
-              {props.product.title}
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              {props.product.price}:-
-            </Typography>
-          </CardContent>
+          <CardContent></CardContent>
         </CardActionArea>
+        <Typography gutterBottom variant="h5" component="h2">
+          {props.product.title}
+        </Typography>
       </Link>
-      <CardActions>
-        <Button
-          size="small"
-          variant="contained"
-          style={{
-            backgroundColor: "#CAC2B9",
-          }}
-        >
-          Add to cart
-        </Button>
-      </CardActions>
+        <div style={{ display: "flex", gap: "2rem", alignItems: "center" }}>
+          <Typography variant="body2" color="text.secondary">
+            {props.product.price}:-
+          </Typography>
+          <CardActions>
+            <Button
+              size="small"
+              variant="contained"
+              style={{
+                backgroundColor: "#CAC2B9",
+              }}
+            >
+              Add to cart
+            </Button>
+          </CardActions>
+        </div>
     </Card>
   );
 }
@@ -63,7 +64,11 @@ const cardStyle: SxProps<Theme> = {
   boxShadow: "none",
 };
 const imgStyle: CSSProperties = {
-  height: 250,
+  height: 350,
 };
+const linkStyle: CSSProperties = {
+  textDecoration: "none",
+  color: "#333",
+}
 
 export default ProductCard;
