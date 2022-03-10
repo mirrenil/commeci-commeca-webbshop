@@ -21,7 +21,7 @@ const rootStyle: CSSProperties = {
   flexWrap: "wrap",
   gap: "4rem",
   justifyContent: "center",
-  paddingTop: "12rem",
+  paddingTop: "5rem",
   paddingBottom: "6rem",
 };
 
