@@ -9,7 +9,7 @@ import {
   Typography,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { Box, color } from "@mui/system";
+import { Box } from "@mui/system";
 import { MouseEvent, useState } from "react";
 import { Link } from "react-router-dom";
 import cartIcon from "../assets/icons/icon-shopping-cart.webp";
@@ -63,7 +63,7 @@ function Header() {
     return (
       <div className={iconsContainer}>
         <Link to="/account">
-          <img className={icon} src={userIcon} alt="login/logout" />
+          <img className={icon} src={userIcon} alt="account" />
         </Link>
         <Link to="/checkoutpage">
           <img className={icon} src={cartIcon} alt="cart" />
@@ -122,10 +122,12 @@ function Header() {
     <AppBar
       sx={{
         backgroundColor: "#6C665F",
-        padding: "0.5rem 1rem",
+        padding: "0rem 1rem",
         placeContent: "center",
         display: "flex",
         flexDirection: "row",
+        height: "6rem",
+        position: "relative",
       }}
     >
       <Toolbar
