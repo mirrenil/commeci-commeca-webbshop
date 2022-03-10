@@ -1,6 +1,7 @@
 import MenuIcon from "@mui/icons-material/Menu";
 import {
   AppBar,
+  Badge,
   Button,
   IconButton,
   Menu,
@@ -23,7 +24,7 @@ interface Page {
 
 function Header() {
   const [anchorMenu, setAnchorMenu] = useState(false);
-  const { logoStyle, icon, iconsContainer } = useStyles();
+  const { ccLogo, icon, iconsContainer, quantityIcon } = useStyles();
 
   const menuLeft: Page[] = [
     {
@@ -65,8 +66,10 @@ function Header() {
         <Link to="/account">
           <img className={icon} src={userIcon} alt="account" />
         </Link>
-        <Link to="/checkoutpage">
-          <img className={icon} src={cartIcon} alt="cart" />
+        <Link className={quantityIcon} to="/checkoutpage">
+          <Badge badgeContent={1} color="warning">
+            <img className={icon} src={cartIcon} alt="cart" />
+          </Badge>
         </Link>
       </div>
     );
@@ -217,7 +220,7 @@ function Header() {
         </Box>
         {getMenuButtonsLeft()}
         <Link to="/">
-          <img className={logoStyle} src={logo} alt="comme ci comme ca"></img>
+          <img className={ccLogo} src={logo} alt="comme ci comme ca"></img>
         </Link>
         {getMenuButtonsRight()}
         {icons()}
@@ -227,7 +230,7 @@ function Header() {
 }
 
 const useStyles = makeStyles(() => ({
-  logoStyle: {
+  ccLogo: {
     width: "80px",
     height: "80px",
     margin: "0 1rem",
@@ -244,6 +247,10 @@ const useStyles = makeStyles(() => ({
   menuItems: {
     textTransform: "capitalize",
     fontFamily: "Prata",
+  },
+  quantityIcon: {
+    textDecoration: "none",
+    position: "relative",
   },
 }));
 
