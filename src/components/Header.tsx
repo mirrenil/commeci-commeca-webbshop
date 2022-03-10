@@ -16,6 +16,7 @@ import { Link } from "react-router-dom";
 import cartIcon from "../assets/icons/icon-shopping-cart.webp";
 import userIcon from "../assets/icons/icon-user.webp";
 import logo from "../assets/images/logo.svg";
+import { useCart } from "../context/CartContextProvider";
 
 interface Page {
   label: string;
@@ -23,6 +24,7 @@ interface Page {
 }
 
 function Header() {
+  const { sumCartQuantity } = useCart();
   const [anchorMenu, setAnchorMenu] = useState(false);
   const { ccLogo, icon, iconsContainer, quantityIcon } = useStyles();
 
@@ -67,7 +69,14 @@ function Header() {
           <img className={icon} src={userIcon} alt="account" />
         </Link>
         <Link className={quantityIcon} to="/checkoutpage">
-          <Badge badgeContent={1} color="warning">
+          <Badge
+            anchorOrigin={{
+              vertical: "top",
+              horizontal: "right",
+            }}
+            badgeContent={sumCartQuantity()}
+            color="warning"
+          >
             <img className={icon} src={cartIcon} alt="cart" />
           </Badge>
         </Link>

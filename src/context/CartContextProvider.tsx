@@ -1,46 +1,50 @@
-import { createContext, FC, useContext, useState } from "react";
+import { createContext, FC, MouseEvent, useContext, useState } from "react";
 import { ProductData } from "../ProductData";
 
 interface CartItemData extends ProductData {
   quantity: number;
 }
-
 interface ContextValue {
   cart: CartItemData[];
   addToCart: (product: ProductData) => void;
+  sumCartQuantity: () => number;
 }
 
 export const CartContext = createContext<ContextValue>({
   cart: [],
   addToCart: () => {},
+  sumCartQuantity: () => 0,
 });
 
 const CartProvider: FC = (props) => {
   const [cart, setCart] = useState<CartItemData[]>([]);
 
   const addToCart = async (product: ProductData) => {
+    console.log("called add to cart");
     const cartItem: CartItemData = { ...product, quantity: 1 };
-
-    // if the cartItem has the same ID as one of the objects in the cart array
     if (cart.map((item) => item.id).includes(cartItem.id)) {
       cart.map((item) => item.quantity++);
-      console.log("yes, ");
-      // console.log("cart: " + cart.map((item) => item.id));
-      // console.log("cartItem: " + cartItem.id);
-      console.log(cart);
+      console.log("added :" + cartItem.quantity);
     } else {
-      console.log("no");
-      // console.log("cart: " + cart.map((item) => item.id));
-      // console.log("cartItem: " + cartItem.id);
       setCart([...cart, cartItem]);
-      console.log(cart);
+      console.log("added :" + cartItem.quantity);
     }
+    console.log(cart);
   };
 
-  console.log(cart);
+  const sumCartQuantity = () => {
+    console.log("called sum");
+    let sum = 0;
+    for (let i = 0; i < cart.length; i++) {
+      sum += cart[i].quantity;
+    }
+    console.log(sum);
+    return sum;
+    // return cart.reduce((sum, item) => sum + item.quantity, 0);
+  };
 
   return (
-    <CartContext.Provider value={{ cart, addToCart }}>
+    <CartContext.Provider value={{ cart, addToCart, sumCartQuantity }}>
       {props.children}
     </CartContext.Provider>
   );
