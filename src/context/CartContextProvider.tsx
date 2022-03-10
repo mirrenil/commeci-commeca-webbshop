@@ -21,13 +21,17 @@ const CartProvider: FC = (props) => {
 
   const addToCart = async (product: ProductData) => {
     console.log("called add to cart");
-    const cartItem: CartItemData = { ...product, quantity: 1 };
-    if (cart.map((item) => item.id).includes(cartItem.id)) {
-      cart.map((item) => item.quantity++);
-      console.log("added :" + cartItem.quantity);
+    // if (cart.some(item => item.id === product.id))
+    if (cart.map((item) => item.id).includes(product.id)) {
+      const updatedCart = cart.map((item) => {
+        if (product.id !== item.id) return item;
+        return { ...item, quantity: item.quantity + 1 };
+      });
+
+      setCart(updatedCart);
     } else {
+      const cartItem: CartItemData = { ...product, quantity: 1 };
       setCart([...cart, cartItem]);
-      console.log("added :" + cartItem.quantity);
     }
     console.log(cart);
   };
