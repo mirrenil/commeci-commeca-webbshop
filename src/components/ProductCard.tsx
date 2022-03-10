@@ -5,11 +5,17 @@ import {
   CardActions,
   CardContent,
   CardMedia,
+  SxProps,
+  Theme,
   Typography,
 } from "@mui/material";
 import { CSSProperties } from "react";
+
 import { useCart } from "../context/CartContextProvider";
 import { ProductData } from "../ProductData";
+
+//import { Link } from "react-router-dom";
+//import { Data } from "../ProductData";
 
 interface Props {
   product: ProductData;
@@ -19,54 +25,54 @@ function ProductCard(props: Props) {
   const { addToCart } = useCart();
 
   return (
-    <div style={divStyle}>
-      <Card style={rootStyle} sx={{ maxWidth: 345 }}>
+    <Card sx={cardStyle}>
+      <Link to={`/detail/${props.product.id}`} style={linkStyle}>
         <CardActionArea>
           <CardMedia
             component="img"
-            height="auto"
+            height="250"
             style={imgStyle}
             src={props.product.image}
             title={props.product.title}
             id={props.product.id}
-            /* onClick={() => onselect()} */
           ></CardMedia>
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="h2">
-              NAME OF PRODUKT
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              PRICE HERE:-
-            </Typography>
-          </CardContent>
         </CardActionArea>
-        <CardActions>
-          <Button
-            size="small"
-            color="primary"
-            onClick={() => addToCart(props.product)}
-          >
-            Lägg till i varukorgen
-          </Button>
-        </CardActions>
-      </Card>
-    </div>
+        <Typography gutterBottom variant="h5" component="h2">
+          {props.product.title}
+        </Typography>
+      </Link>
+        <div style={{ display: "flex", gap: "2rem", alignItems: "center" }}>
+          <Typography variant="body2" color="text.secondary">
+            {props.product.price}:-
+          </Typography>
+          <CardActions>
+            <Button
+              size="small"
+              variant="contained"
+              style={{
+                backgroundColor: "#CAC2B9",
+              }} onClick={() => addToCart(props.product)}
+            >
+              Add to cart
+            </Button>
+          </CardActions>
+        </div>
+    </Card>
   );
 }
 
-const rootStyle: CSSProperties = {
-  maxWidth: 330,
-  padding: "2rem",
+const cardStyle: SxProps<Theme> = {
+  width: 250,
+  padding: "1rem",
+  maxWidth: 345,
+  boxShadow: "none",
 };
 const imgStyle: CSSProperties = {
-  height: 250,
+  height: 350,
 };
-const divStyle: CSSProperties = {
-  display: "flex",
-  flexDirection: "row",
-  flexWrap: "wrap",
-  margin: "4rem",
-  justifyContent: "space-evenly",
-};
+const linkStyle: CSSProperties = {
+  textDecoration: "none",
+  color: "#333",
+}
 
 export default ProductCard;
