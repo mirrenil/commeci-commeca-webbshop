@@ -18,6 +18,7 @@ import userIcon from "../assets/icons/icon-user.webp";
 import logo from "../assets/images/logo.svg";
 import { useCart } from "../context/CartContextProvider";
 
+
 interface Page {
   label: string;
   href: string;
@@ -27,6 +28,7 @@ function Header() {
   const { sumCartQuantity } = useCart();
   const [anchorMenu, setAnchorMenu] = useState(false);
   const { ccLogo, icon, iconsContainer, quantityIcon } = useStyles();
+  
 
   const menuLeft: Page[] = [
     {
@@ -70,8 +72,8 @@ function Header() {
   const icons = () => {
     return (
       <div className={iconsContainer}>
-        <Link to="/account">
-          <img className={icon} src={userIcon} alt="account" />
+        <Link to="/admin">
+          <img className={icon} src={userIcon} alt="admin" />
         </Link>
         <Link className={quantityIcon} to="/checkoutpage">
           <Badge
@@ -269,3 +271,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 export default Header;
+function useAdmin(): { user: any; isLoading: any; login: any; } {
+  throw new Error("Function not implemented.");
+}
+

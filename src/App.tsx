@@ -8,6 +8,7 @@ import NotFound from "./components/NotFound";
 import ProductPage from "./components/ProductPage";
 import CartProvider from "./context/CartContextProvider";
 import { productData } from "./ProductData";
+import AdminPage from "./components/AdminPage";
 
 function App() {
   return (
@@ -27,7 +28,8 @@ function App() {
               element={<EmptyPage page="Inspiration" />}
             />
             <Route path="/detail/:id" element={<DetailPage />} />
-            <Route path="/account" element="Account or admin page?" />
+            {/* added a quick fix in AdminPage component for now */}
+            <Route path="/admin" element={<AdminPage products={[]} />} />
             <Route path="/checkoutpage" element={<CheckoutPage />} />
             <Route path="/test" element={<Checkout />} />{" "}
             {/* the above line will be deleted when Checkout.tsx is being inserted to Sara's layout */}
