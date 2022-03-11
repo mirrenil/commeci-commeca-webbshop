@@ -64,9 +64,7 @@ const CartProvider: FC = (props) => {
 
   const sumProductPrice = (product) => {
     let sum = 0;
-    for (let i = 0; i < cart.length; i++) {
-      sum += product.price * product.quantity;
-    }
+    sum += product.price * product.quantity;
     return sum;
   };
 
