@@ -45,6 +45,7 @@ function Header() {
     },
   ];
 
+  // last object in the below array to be deleted when Checkout.tsx is being inserted to Sara's layout
   const menuRight: Page[] = [
     {
       label: "Decoration",
@@ -53,6 +54,10 @@ function Header() {
     {
       label: "Inspiration",
       href: "/inspiration",
+    },
+    {
+      label: "CheckoutTest",
+      href: "test",
     },
   ];
 
@@ -141,7 +146,7 @@ function Header() {
         display: "flex",
         flexDirection: "row",
         height: "6rem",
-        position: "relative",
+        position: "sticky",
       }}
     >
       <Toolbar
