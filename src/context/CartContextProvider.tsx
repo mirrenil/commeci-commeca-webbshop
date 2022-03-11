@@ -62,35 +62,31 @@ const CartProvider: FC = (props) => {
     return sum;
   };
 
-  const sumProductPrice = (product) => {
+  const sumProductPrice = (product: CartItemData) => {
     let sum = 0;
     sum += product.price * product.quantity;
     return sum;
   };
 
-  const onAddQuantity = (product) => {
-    if (cart.some((item) => item.id === product.id)) {
-      const updatedQuantity = cart.map((item) => {
-        if (product.id !== item.id) return item;
-        return { ...item, quantity: item.quantity + 1 };
-      });
-      setCart(updatedQuantity);
-    }
+  const onAddQuantity = (product: CartItemData) => {
+    const updatedQuantity = cart.map((item) => {
+      if (product.id !== item.id) return item;
+      return { ...item, quantity: item.quantity + 1 };
+    });
+    setCart(updatedQuantity);
   };
 
-  const onReduceQuantity = (product) => {
-    if (cart.some((item) => item.id === product.id)) {
-      const updatedQuantity = cart.map((item) => {
-        if (product.id !== item.id) return item;
-        if (item.quantity > 1) return { ...item, quantity: item.quantity - 1 };
-        return item; // if item.quantity <= 0, remove from cart
-      });
-      setCart(updatedQuantity);
-    }
+  const onReduceQuantity = (product: CartItemData) => {
+    const updatedQuantity = cart.map((item) => {
+      if (product.id === item.id && item.quantity > 1)
+        return { ...item, quantity: item.quantity - 1 };
+      return item;
+    });
+    setCart(updatedQuantity);
   };
 
-  const removeFromCart = (product) => {
-    if (cart.some((item) => item.id === product.id)) {
+  const removeFromCart = (product: CartItemData) => {
+    if (cart.find((item) => item.id === product.id)) {
       const updatedCart = cart.filter((item) => item.id !== product.id);
       setCart(updatedCart);
     }
@@ -115,5 +111,4 @@ const CartProvider: FC = (props) => {
 };
 
 export default CartProvider;
-
 export const useCart = () => useContext(CartContext);
