@@ -1,9 +1,11 @@
 import { Box, Button, Typography } from "@mui/material";
 import { useParams } from "react-router-dom";
 import detailInfo from "../assets/images/detailinfo.png";
+import { useCart } from "../context/CartContextProvider";
 import { productData } from "../ProductData";
 
 function DetailPage() {
+  const { addToCart } = useCart();
   const params = useParams<{ id: string }>();
   const product = productData.find((products) => products.id === params?.id);
   if (!product) return null;
@@ -41,7 +43,7 @@ function DetailPage() {
             gutterBottom
             style={{ marginLeft: "2.3rem", fontSize: "1rem" }}
           >
-            {product.price}
+            {product.price} SEK
           </Typography>
           <Button
             size="large"
@@ -52,6 +54,7 @@ function DetailPage() {
               backgroundColor: "#CAC2B9",
               letterSpacing: "3px",
             }}
+            onClick={() => addToCart(product)}
           >
             Add to cart
           </Button>
