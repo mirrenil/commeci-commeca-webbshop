@@ -1,10 +1,12 @@
+
+import { ProductData } from "../ProductData";
 import { CSSProperties } from "react";
 import { Data } from "../ProductData";
 import ProductCard from "./ProductCard";
 import "../index.css"
 
 interface Props {
-  products: Data[];
+  products: ProductData[];
 }
 
 function ProductPage(props: Props) {

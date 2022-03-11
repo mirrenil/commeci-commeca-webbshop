@@ -10,14 +10,20 @@ import {
   Typography,
 } from "@mui/material";
 import { CSSProperties } from "react";
-import { Link } from "react-router-dom";
-import { Data } from "../ProductData";
+
+import { useCart } from "../context/CartContextProvider";
+import { ProductData } from "../ProductData";
+
+//import { Link } from "react-router-dom";
+//import { Data } from "../ProductData";
 
 interface Props {
-  product: Data;
+  product: ProductData;
 }
 
 function ProductCard(props: Props) {
+  const { addToCart } = useCart();
+
   return (
     <Card sx={cardStyle}>
       <Link to={`/detail/${props.product.id}`} style={linkStyle}>
@@ -29,9 +35,7 @@ function ProductCard(props: Props) {
             src={props.product.image}
             title={props.product.title}
             id={props.product.id}
-            /* onClick={() => onselect()} */
           ></CardMedia>
-          <CardContent></CardContent>
         </CardActionArea>
         <Typography gutterBottom variant="h5" component="h2">
           {props.product.title}
@@ -47,7 +51,7 @@ function ProductCard(props: Props) {
               variant="contained"
               style={{
                 backgroundColor: "#CAC2B9",
-              }}
+              }} onClick={() => addToCart(props.product)}
             >
               Add to cart
             </Button>
