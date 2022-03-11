@@ -41,7 +41,7 @@ function ProductCard(props: Props) {
       </Link>
       <div style={{ display: "flex", gap: "2rem", alignItems: "center" }}>
         <Typography variant="body2" color="text.secondary">
-          {props.product.price}:-
+          {props.product.price} SEK:-
         </Typography>
         <CardActions>
           <Button
