@@ -1,13 +1,11 @@
-import { Box, Typography, Button } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import { useParams } from "react-router-dom";
-import { ProductData } from "../ProductData";
-
 import detailInfo from "../assets/images/detailinfo.png";
-import { title } from "process";
+import { productData } from "../ProductData";
 
 function DetailPage() {
   const params = useParams<{ id: string }>();
-  const product = ProductData.find((products) => products.id === params?.id);
+  const product = productData.find((products) => products.id === params?.id);
   if (!product) return null;
 
   return (

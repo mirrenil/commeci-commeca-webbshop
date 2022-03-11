@@ -3,18 +3,16 @@ import {
   Card,
   CardActionArea,
   CardActions,
-  CardContent,
   CardMedia,
   SxProps,
   Theme,
   Typography,
 } from "@mui/material";
 import { CSSProperties } from "react";
-
+import { Link } from "react-router-dom";
 import { useCart } from "../context/CartContextProvider";
 import { ProductData } from "../ProductData";
 
-//import { Link } from "react-router-dom";
 //import { Data } from "../ProductData";
 
 interface Props {
@@ -41,22 +39,23 @@ function ProductCard(props: Props) {
           {props.product.title}
         </Typography>
       </Link>
-        <div style={{ display: "flex", gap: "2rem", alignItems: "center" }}>
-          <Typography variant="body2" color="text.secondary">
-            {props.product.price}:-
-          </Typography>
-          <CardActions>
-            <Button
-              size="small"
-              variant="contained"
-              style={{
-                backgroundColor: "#CAC2B9",
-              }} onClick={() => addToCart(props.product)}
-            >
-              Add to cart
-            </Button>
-          </CardActions>
-        </div>
+      <div style={{ display: "flex", gap: "2rem", alignItems: "center" }}>
+        <Typography variant="body2" color="text.secondary">
+          {props.product.price}:-
+        </Typography>
+        <CardActions>
+          <Button
+            size="small"
+            variant="contained"
+            style={{
+              backgroundColor: "#CAC2B9",
+            }}
+            onClick={() => addToCart(props.product)}
+          >
+            Add to cart
+          </Button>
+        </CardActions>
+      </div>
     </Card>
   );
 }
@@ -73,6 +72,6 @@ const imgStyle: CSSProperties = {
 const linkStyle: CSSProperties = {
   textDecoration: "none",
   color: "#333",
-}
+};
 
 export default ProductCard;

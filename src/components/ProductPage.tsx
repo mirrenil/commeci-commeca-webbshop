@@ -1,9 +1,7 @@
-
-import { ProductData } from "../ProductData";
 import { CSSProperties } from "react";
-import { Data } from "../ProductData";
+import "../index.css";
+import { ProductData } from "../ProductData";
 import ProductCard from "./ProductCard";
-import "../index.css"
 
 interface Props {
   products: ProductData[];
@@ -12,7 +10,17 @@ interface Props {
 function ProductPage(props: Props) {
   return (
     <div>
-      <h5 style={{fontFamily:"Prata", fontWeight:"400", fontSize:"1.5rem", marginTop:"2rem", marginLeft:"10rem"}}>FURNITURE</h5>
+      <h5
+        style={{
+          fontFamily: "Prata",
+          fontWeight: "400",
+          fontSize: "1.5rem",
+          marginTop: "2rem",
+          marginLeft: "10rem",
+        }}
+      >
+        FURNITURE
+      </h5>
       <div style={rootStyle}>
         {props.products.map((product) => (
           <ProductCard key={product.id} product={product} />
@@ -21,8 +29,6 @@ function ProductPage(props: Props) {
     </div>
   );
 }
-
-
 
 const rootStyle: CSSProperties = {
   display: "flex",
