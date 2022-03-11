@@ -1,12 +1,9 @@
 import { Box, Button, Typography } from "@mui/material";
 import { useParams } from "react-router-dom";
 import detailInfo from "../assets/images/detailinfo.png";
-import { ProductData, productData } from "../ProductData";
-interface Props {
-  products: ProductData[];
-}
+import { productData } from "../ProductData";
 
-function DetailPage(props: Props) {
+function DetailPage() {
   const params = useParams<{ id: string }>();
   const product = productData.find((products) => products.id === params?.id);
   if (!product) return null;

@@ -4,16 +4,12 @@ import Layout from "./components/Layout";
 import ProductPage from "./components/ProductPage";
 import DetailPage from "./components/DetailPage";
 import CheckoutPage from "./components/CheckoutPage";
-import {  productData, ProductData } from "./ProductData";
+import { productData } from "./ProductData";
 import EmptyPage from "./components/EmptyPage";
 import NotFound from "./components/NotFound";
 import CartProvider from "./context/CartContextProvider";
 
-interface Props {
-  products: ProductData[];
-}
-
-function App(props: Props) {
+function App() {
   return (
     <BrowserRouter>
       <CartProvider>
@@ -30,7 +26,7 @@ function App(props: Props) {
               path="/inspiration"
               element={<EmptyPage page="Inspiration" />}
             />
-            <Route path="/detail/:id" element={<DetailPage products={productData}/>} />
+            <Route path="/detail/:id" element={<DetailPage />} />
             <Route path="/account" element="Account or admin page?" />
             <Route path="/checkoutpage" element={<CheckoutPage />} />
             <Route path="*" element={<NotFound />} />
