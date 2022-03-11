@@ -12,9 +12,6 @@ import { CSSProperties } from "react";
 import { Link } from "react-router-dom";
 import { useCart } from "../context/CartContextProvider";
 import { ProductData } from "../ProductData";
-
-//import { Data } from "../ProductData";
-
 interface Props {
   product: ProductData;
 }
