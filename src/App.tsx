@@ -8,6 +8,7 @@ import { productData } from "./ProductData";
 import EmptyPage from "./components/EmptyPage";
 import NotFound from "./components/NotFound";
 import CartProvider from "./context/CartContextProvider";
+import AdminPage from "./components/AdminPage";
 
 function App() {
   return (
@@ -27,7 +28,8 @@ function App() {
               element={<EmptyPage page="Inspiration" />}
             />
             <Route path="/detail/:id" element={<DetailPage />} />
-            <Route path="/account" element="Account or admin page?" />
+            {/* added a quick fix in AdminPage component for now */}
+            <Route path="/admin" element={<AdminPage products={[]} />} />
             <Route path="/checkoutpage" element={<CheckoutPage />} />
             <Route path="*" element={<NotFound />} />
           </Route>
