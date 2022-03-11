@@ -1,6 +1,8 @@
-import RemoveIcon from "@mui/icons-material/Remove";
+// only delete this file after it's being inserted to Sara's layout
 import AddIcon from "@mui/icons-material/Add";
-import { Box, Button, ButtonGroup, Typography } from "@mui/material";
+import ClearIcon from "@mui/icons-material/Clear";
+import RemoveIcon from "@mui/icons-material/Remove";
+import { Box, Button, ButtonGroup, Container, Typography } from "@mui/material";
 import { CSSProperties } from "react";
 import { useCart } from "../context/CartContextProvider";
 
@@ -11,83 +13,181 @@ function Checkout() {
     sumProductPrice,
     onAddQuantity,
     onReduceQuantity,
+    removeFromCart,
   } = useCart();
 
   return (
-    <div style={rootStyle}>
-      <h1>Hello</h1>
-      {cart.map((product) => (
-        <Box
-          sx={{
-            fontFamily: "Prata",
-            backgroundColor: "yellow",
-            width: "800px",
-            textAlign: "center",
-            display: "flex",
-            flexDirection: "row",
-            gap: "1rem",
-          }}
-          key={product.id}
-        >
-          <p style={pStyle}>Title: {product.title}</p>
-          <ButtonGroup>
-            <Button
-              sx={{
-                height: "1.5rem",
-                width: ".5rem",
-                backgroundColor: "red",
-                border: "none",
-                color: "white",
-                m: "auto",
-              }}
-              aria-label="reduce"
-              onClick={() => onReduceQuantity(product)}
-            >
-              <RemoveIcon fontSize="small" />
-            </Button>
-            <p style={pStyle}>Quantity: {product.quantity}</p>
-            <Button
-              sx={{
-                height: "1.5rem",
-                width: ".5rem",
-                backgroundColor: "red",
-                border: "none",
-                color: "white",
-                m: "auto",
-              }}
-              aria-label="reduce"
-              onClick={() => onAddQuantity(product)}
-            >
-              <AddIcon fontSize="small" />
-            </Button>
-          </ButtonGroup>
-          <p style={pStyle}>Unit Price: {product.price}</p>
-          <p style={pStyle}>Subtotal: {sumProductPrice(product)}</p>
-        </Box>
-      ))}
+    <Container
+      sx={{
+        minHeight: "38rem",
+        padding: "1rem",
+      }}
+    >
       <Typography
         sx={{
+          textTransform: "uppercase",
           fontFamily: "Prata",
-          backgroundColor: "skyblue",
-          width: "800px",
-          textAlign: "center",
+          mt: "1rem",
+          mb: "1rem",
+        }}
+        variant="h5"
+      >
+        1. Shopping Cart
+      </Typography>
+      <Container
+        sx={{
+          backgroundColor: "#F3F2F0",
           display: "flex",
-          flexDirection: "row",
-          gap: "1rem",
+          flexDirection: "column",
+          padding: "1rem",
+          margin: "auto",
         }}
       >
-        {sumCartAmount()} SEK
-      </Typography>
-    </div>
+        {cart.map((product) => (
+          <Box
+            sx={{
+              fontFamily: "Prata",
+              textAlign: "center",
+              display: "flex",
+              padding: ".8rem 2rem",
+            }}
+            key={product.id}
+          >
+            <img style={imageStyle} src={product.image} alt={product.title} />
+            <Box
+              key={product.id}
+              sx={{
+                width: "82%",
+                display: "flex",
+                justifyContent: "space-between",
+                margin: "auto",
+              }}
+            >
+              <Box>
+                <Typography variant="inherit" align="left" m="1rem">
+                  {product.title}
+                </Typography>
+                <ButtonGroup>
+                  <Button
+                    sx={{
+                      "&:hover": {
+                        color: "#828282",
+                        border: "none",
+                      },
+                      height: "1.5rem",
+                      width: ".5rem",
+                      border: "none",
+                      color: "black",
+                      m: "auto",
+                    }}
+                    aria-label="reduce"
+                    onClick={() => onReduceQuantity(product)}
+                  >
+                    <RemoveIcon fontSize="small" />
+                  </Button>
+                  <Typography
+                    variant="body2"
+                    sx={{ background: "white", padding: ".2rem .8rem" }}
+                  >
+                    {product.quantity}
+                  </Typography>
+                  <Button
+                    sx={{
+                      "&:hover": {
+                        color: "#828282",
+                        border: "none",
+                      },
+                      height: "1.5rem",
+                      width: ".5rem",
+                      border: "none",
+                      color: "black",
+                      m: "auto",
+                    }}
+                    aria-label="reduce"
+                    onClick={() => onAddQuantity(product)}
+                  >
+                    <AddIcon fontSize="small" />
+                  </Button>
+                </ButtonGroup>
+              </Box>
+              {/* <p style={textStyle}>Unit Price: {product.price}</p> */}
+              <Typography
+                variant="inherit"
+                sx={{
+                  display: "flex",
+                  placeItems: "center",
+                }}
+              >
+                {sumProductPrice(product)} kr
+              </Typography>
+            </Box>
+            <ClearIcon
+              fontSize="small"
+              sx={{
+                "&:hover": {
+                  color: "#828282",
+                  border: "none",
+                },
+                border: "none",
+                color: "black",
+                cursor: "pointer",
+              }}
+              onClick={() => removeFromCart(product)}
+            >
+              Delete
+            </ClearIcon>
+          </Box>
+        ))}
+        <Box
+          sx={{
+            borderTop: "1px solid #AAAAAA",
+            width: "80%",
+            margin: "1.5rem auto",
+          }}
+        ></Box>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-around",
+            m: "0rem 2rem",
+          }}
+        >
+          <Typography
+            variant="h6"
+            sx={{
+              fontFamily: "Prata",
+              width: "800px",
+              display: "flex",
+              flexDirection: "row",
+              gap: "1rem",
+            }}
+          >
+            Total
+          </Typography>
+          <Typography
+            sx={{
+              fontFamily: "Prata",
+              width: "800px",
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "flex-end",
+              gap: "1rem",
+            }}
+          >
+            {sumCartAmount()} SEK
+          </Typography>
+        </Box>
+      </Container>
+    </Container>
   );
 }
 
-const rootStyle: CSSProperties = {
-  minHeight: "40rem",
+const textStyle: CSSProperties = {
+  margin: "1rem",
 };
 
-const pStyle: CSSProperties = {
-  margin: "1rem",
+const imageStyle: CSSProperties = {
+  width: "80px",
 };
 
 export default Checkout;
