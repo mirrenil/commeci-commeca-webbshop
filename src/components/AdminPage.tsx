@@ -1,0 +1,35 @@
+import { ProductData, productData } from "../ProductData"
+import ProductList from "./ProductList";
+
+interface Props {
+  products: ProductData[];
+}
+
+function AdminPage(props: Props) {
+
+    console.log(productData);
+    
+    
+    
+    return (
+      <div>
+        <h5
+          style={{
+            fontFamily: "Prata",
+            fontWeight: "400",
+            fontSize: "1.5rem",
+            marginTop: "2rem",
+            marginLeft: "10rem",
+          }}
+        >
+          Admin
+        </h5>
+    
+            <ProductList />
+     </div>
+    );
+}
+
+
+
+export default AdminPage;
