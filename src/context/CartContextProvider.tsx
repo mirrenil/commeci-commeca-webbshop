@@ -12,6 +12,7 @@ interface ContextValue {
   sumProductPrice: (product) => number;
   onAddQuantity: (product) => void;
   onReduceQuantity: (product) => void;
+  removeFromCart: (product) => void;
 }
 
 export const CartContext = createContext<ContextValue>({
@@ -22,14 +23,15 @@ export const CartContext = createContext<ContextValue>({
   sumProductPrice: () => 0,
   onAddQuantity: () => {},
   onReduceQuantity: () => {},
+  removeFromCart: () => {},
 });
 
 const CartProvider: FC = (props) => {
   const [cart, setCart] = useState<CartItemData[]>([]);
 
   const addToCart = async (product: ProductData) => {
-    // if (cart.some(item => item.id === product.id))
-    if (cart.map((item) => item.id).includes(product.id)) {
+    // if (cart.map((item) => item.id).includes(product.id))
+    if (cart.some((item) => item.id === product.id)) {
       const updatedCart = cart.map((item) => {
         if (product.id !== item.id) return item;
         return { ...item, quantity: item.quantity + 1 };
@@ -48,7 +50,6 @@ const CartProvider: FC = (props) => {
       sum += cart[i].quantity;
     }
     sumCartAmount();
-    console.log(sum);
     return sum;
     // return cart.reduce((sum, item) => sum + item.quantity, 0);
   };
@@ -57,9 +58,7 @@ const CartProvider: FC = (props) => {
     let sum = 0;
     for (let i = 0; i < cart.length; i++) {
       sum += cart[i].price * cart[i].quantity;
-      console.log(sum);
     }
-    console.log("total :" + sum);
     return sum;
   };
 
@@ -85,9 +84,17 @@ const CartProvider: FC = (props) => {
     if (cart.some((item) => item.id === product.id)) {
       const updatedQuantity = cart.map((item) => {
         if (product.id !== item.id) return item;
-        return { ...item, quantity: item.quantity - 1 };
+        if (item.quantity > 1) return { ...item, quantity: item.quantity - 1 };
+        return item; // if item.quantity <= 0, remove from cart
       });
       setCart(updatedQuantity);
+    }
+  };
+
+  const removeFromCart = (product) => {
+    if (cart.some((item) => item.id === product.id)) {
+      const updatedCart = cart.filter((item) => item.id !== product.id);
+      setCart(updatedCart);
     }
   };
 
@@ -101,6 +108,7 @@ const CartProvider: FC = (props) => {
         sumProductPrice,
         onAddQuantity,
         onReduceQuantity,
+        removeFromCart,
       }}
     >
       {props.children}
