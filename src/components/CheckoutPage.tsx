@@ -1,6 +1,8 @@
 import { Box, Button, Checkbox, TextField, Typography } from "@mui/material";
 import PostnordLogo from "../assets/images/PostnordLogo.webp";
 import DhlLogo from "../assets/images/DhlLogo.png";
+import SwishLogo from "../assets/images/SwishLogo.svg";
+import SkrivbordAlba from "../assets/images/SkrivbordAlba.webp";
 
 function CheckoutPage() {
   return (
@@ -10,17 +12,44 @@ function CheckoutPage() {
       </Typography>
       <Box
         sx={{
-          height: 400,
+          height: 330,
           backgroundColor: "#F3F2F0",
         }}
-      />
+      >
+        <Box
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+          }}
+        >
+          <Box
+            component="img"
+            display="flex"
+            style={{
+              height: "150px",
+              margin: "2rem",
+              justifyContent: "center",
+            }}
+            src={SkrivbordAlba}
+          />
+          <Typography style={{ margin: "1rem" }}>Skrivbord Alba</Typography>
+          <Typography style={{ fontWeight: "bold" }}>2999:-</Typography>
+        </Box>
+        <Typography
+          style={{ fontWeight: "bold", marginLeft: "2rem", marginTop: "1rem" }}
+          variant="h5"
+        >
+          Totalt:
+        </Typography>
+      </Box>
 
       <Typography variant="h5" gutterBottom style={{ marginTop: "2rem" }}>
         2. Delivery method
       </Typography>
       <Box
         sx={{
-          height: 400,
+          height: 350,
           backgroundColor: "#F3F2F0",
         }}
       >
@@ -109,6 +138,9 @@ function CheckoutPage() {
           }}
         >
           <TextField
+            style={{
+              backgroundColor: "white",
+            }}
             id="name-input"
             name="name"
             label="Name"
@@ -117,6 +149,9 @@ function CheckoutPage() {
             margin="normal"
           />
           <TextField
+            style={{
+              backgroundColor: "white",
+            }}
             id="address-input"
             name="address"
             label="Home Address"
@@ -125,6 +160,9 @@ function CheckoutPage() {
             margin="normal"
           />
           <TextField
+            style={{
+              backgroundColor: "white",
+            }}
             id="email-input"
             name="email"
             label="Emailaddress"
@@ -133,6 +171,9 @@ function CheckoutPage() {
             margin="normal"
           />
           <TextField
+            style={{
+              backgroundColor: "white",
+            }}
             id="phonennumber-input"
             name="phonenumber"
             label="Phonenumber"
@@ -150,23 +191,102 @@ function CheckoutPage() {
         sx={{
           height: 300,
           backgroundColor: "#F3F2F0",
-        }}
-      />
-
-      <Button
-        size="large"
-        variant="contained"
-        style={{
-          textAlign: "center",
-          margin: "2rem",
-          width: "400px",
-          backgroundColor: "#CAC2B9",
-          color: "black",
-          letterSpacing: "3px",
+          display: "flex",
+          justifyContent: "center",
+          flexDirection: "column",
         }}
       >
-        Confirm purchase
-      </Button>
+        <Typography
+          variant="h6"
+          gutterBottom
+          style={{
+            margin: "2rem",
+          }}
+        >
+          Choose Payment Method:
+        </Typography>
+        <Box
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            marginLeft: "2rem",
+            marginBottom: "1rem",
+          }}
+        >
+          <Checkbox />
+          <Typography style={{ marginLeft: "1rem", fontWeight: "bold" }}>
+            Kort
+          </Typography>
+        </Box>
+
+        <Box
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            marginLeft: "2rem",
+            marginBottom: "1rem",
+          }}
+        >
+          <Checkbox />
+          <Box
+            component="img"
+            display="flex"
+            style={{
+              height: "20px",
+              justifyContent: "center",
+              marginLeft: "1rem",
+            }}
+            src={SwishLogo}
+          />
+        </Box>
+
+        <Box
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            marginLeft: "2rem",
+          }}
+        >
+          <Checkbox />
+          <Typography style={{ marginLeft: "1rem", fontWeight: "bold" }}>
+            Faktura
+          </Typography>
+        </Box>
+      </Box>
+
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <Typography
+          variant="h5"
+          style={{ marginTop: "2rem", fontWeight: "bold" }}
+        >
+          Total:
+        </Typography>
+        <Button
+          size="large"
+          variant="contained"
+          style={{
+            textAlign: "center",
+            margin: "2rem",
+            width: "400px",
+            backgroundColor: "#CAC2B9",
+            color: "black",
+            letterSpacing: "3px",
+            fontWeight: "bold",
+          }}
+        >
+          Confirm purchase
+        </Button>
+      </Box>
     </div>
   );
 }
