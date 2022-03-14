@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Checkout from "./components/Checkout";
+import AdminPage from "./components/AdminPage";
 import CheckoutPage from "./components/CheckoutPage";
 import DetailPage from "./components/DetailPage";
 import EmptyPage from "./components/EmptyPage";
@@ -8,7 +8,6 @@ import NotFound from "./components/NotFound";
 import ProductPage from "./components/ProductPage";
 import CartProvider from "./context/CartContextProvider";
 import { productData } from "./ProductData";
-import AdminPage from "./components/AdminPage";
 
 function App() {
   return (
@@ -31,8 +30,6 @@ function App() {
             {/* added a quick fix in AdminPage component for now */}
             <Route path="/admin" element={<AdminPage products={[]} />} />
             <Route path="/checkoutpage" element={<CheckoutPage />} />
-            <Route path="/test" element={<Checkout />} />{" "}
-            {/* the above line will be deleted when Checkout.tsx is being inserted to Sara's layout */}
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>
