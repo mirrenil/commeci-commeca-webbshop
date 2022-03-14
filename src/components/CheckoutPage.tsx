@@ -14,7 +14,7 @@ import EmptyCart from "./EmptyCart";
 import ShoppingCart from "./ShoppingCart";
 
 function CheckoutPage() {
-  const { cart } = useCart();
+  const { cart, numWithSpaces, sumCartAmount } = useCart();
 
   return cart.length < 1 ? (
     <EmptyCart />
@@ -249,10 +249,14 @@ function CheckoutPage() {
         }}
       >
         <Typography
-          variant="h5"
-          style={{ marginTop: "2rem", fontWeight: "bold" }}
+          variant="h6"
+          style={{
+            marginTop: "2rem",
+            fontWeight: "bold",
+            fontFamily: "Prata",
+          }}
         >
-          Total:
+          Total: {numWithSpaces(sumCartAmount())} SEK
         </Typography>
         <Button
           size="large"
