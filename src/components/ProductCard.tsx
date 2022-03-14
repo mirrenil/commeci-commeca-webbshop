@@ -35,11 +35,22 @@ function ProductCard(props: Props) {
             id={props.product.id}
           ></CardMedia>
         </CardActionArea>
-        <Typography gutterBottom variant="h5" component="h2">
+        <Typography
+          style={{ marginTop: "1rem" }}
+          gutterBottom
+          variant="h5"
+          component="h2"
+        >
           {props.product.title}
         </Typography>
       </Link>
-      <div style={{ display: "flex", gap: "2rem", alignItems: "center" }}>
+      <div
+        style={{
+          display: "flex",
+          gap: "2rem",
+          alignItems: "center",
+        }}
+      >
         <Typography variant="body2" color="text.secondary">
           {props.product.price} SEK:-
         </Typography>
