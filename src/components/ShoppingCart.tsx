@@ -3,6 +3,7 @@ import ClearIcon from "@mui/icons-material/Clear";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { Box, Button, ButtonGroup, Container, Typography } from "@mui/material";
 import { CSSProperties } from "react";
+import { Link } from "react-router-dom";
 import { useCart } from "../context/CartContextProvider";
 
 function ShoppingCart() {
@@ -62,9 +63,14 @@ function ShoppingCart() {
               }}
             >
               <Box>
-                <Typography variant="inherit" align="left" m="1rem">
-                  {product.title}
-                </Typography>
+                <Link
+                  style={{ color: "black", textDecoration: "none" }}
+                  to={`/detail/${product.id}`}
+                >
+                  <Typography variant="inherit" align="left" m="1rem">
+                    {product.title}
+                  </Typography>
+                </Link>
                 <ButtonGroup>
                   <Button
                     sx={{
@@ -116,7 +122,7 @@ function ShoppingCart() {
                   placeItems: "center",
                 }}
               >
-                {sumProductPrice(product)} kr
+                {sumProductPrice(product)} SEK
               </Typography>
             </Box>
             <ClearIcon
@@ -147,7 +153,7 @@ function ShoppingCart() {
           sx={{
             display: "flex",
             justifyContent: "space-around",
-            m: "0rem 2rem",
+            m: "1rem 2rem",
           }}
         >
           <Typography
