@@ -32,7 +32,7 @@ export function Footer() {
               </Box>
             </Grid>
             <Grid item xs={12} sm={4}>
-              <Box borderBottom={1}>Kollektion</Box>
+              <Box borderBottom={1}>Collection</Box>
               <Box>
                 <Link href="/" color="inherit">
                   The Lookbook
