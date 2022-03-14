@@ -1,49 +1,20 @@
-import { Box, Button, Checkbox, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Checkbox,
+  Container,
+  TextField,
+  Typography,
+} from "@mui/material";
 import PostnordLogo from "../assets/images/PostnordLogo.webp";
 import DhlLogo from "../assets/images/DhlLogo.png";
 import SwishLogo from "../assets/images/SwishLogo.svg";
-import SkrivbordAlba from "../assets/images/SkrivbordAlba.webp";
+import ShoppingCart from "./ShoppingCart";
 
 function CheckoutPage() {
   return (
-    <div style={{ display: "flex", flexDirection: "column", margin: "3rem" }}>
-      <Typography variant="h5" gutterBottom style={{ marginTop: "1rem" }}>
-        1. Shopping Cart
-      </Typography>
-      <Box
-        sx={{
-          height: 330,
-          backgroundColor: "#F3F2F0",
-        }}
-      >
-        <Box
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-          }}
-        >
-          <Box
-            component="img"
-            display="flex"
-            style={{
-              height: "150px",
-              margin: "2rem",
-              justifyContent: "center",
-            }}
-            src={SkrivbordAlba}
-          />
-          <Typography style={{ margin: "1rem" }}>Skrivbord Alba</Typography>
-          <Typography style={{ fontWeight: "bold" }}>2999:-</Typography>
-        </Box>
-        <Typography
-          style={{ fontWeight: "bold", marginLeft: "2rem", marginTop: "1rem" }}
-          variant="h5"
-        >
-          Totalt:
-        </Typography>
-      </Box>
-
+    <Container>
+      <ShoppingCart />
       <Typography variant="h5" gutterBottom style={{ marginTop: "2rem" }}>
         2. Delivery method
       </Typography>
@@ -286,7 +257,7 @@ function CheckoutPage() {
           Confirm purchase
         </Button>
       </Box>
-    </div>
+    </Container>
   );
 }
 
