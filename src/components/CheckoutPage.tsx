@@ -279,9 +279,8 @@ function CheckoutPage() {
             margin: "2rem",
             width: "400px",
             backgroundColor: "#CAC2B9",
-            color: "black",
+            color: "white",
             letterSpacing: "3px",
-            fontWeight: "bold",
           }}
         >
           Confirm purchase
