@@ -77,8 +77,7 @@ function DetailPage() {
               width: "400px",
               backgroundColor: "#CAC2B9",
               letterSpacing: "3px",
-              color: "black",
-              fontWeight: "bold",
+              color: "white",
             }}
           >
             Add to cart
