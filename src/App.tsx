@@ -29,7 +29,10 @@ function App() {
             />
             <Route path="/detail/:id" element={<DetailPage />} />
             {/* added a quick fix in AdminPage component for now */}
-            <Route path="/admin" element={<AdminPage products={[]} />} />
+            <Route
+              path="/admin"
+              element={<AdminPage products={productData} />}
+            />
             <Route path="/checkoutpage" element={<CheckoutPage />} />
             <Route path="*" element={<NotFound />} />
           </Route>
