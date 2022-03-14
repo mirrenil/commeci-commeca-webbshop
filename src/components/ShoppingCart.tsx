@@ -14,6 +14,7 @@ function ShoppingCart() {
     onAddQuantity,
     onReduceQuantity,
     removeFromCart,
+    numWithSpaces,
   } = useCart();
 
   return (
@@ -122,7 +123,7 @@ function ShoppingCart() {
                   placeItems: "center",
                 }}
               >
-                {sumProductPrice(product)} SEK
+                {numWithSpaces(sumProductPrice(product))} SEK
               </Typography>
             </Box>
             <ClearIcon
@@ -178,7 +179,7 @@ function ShoppingCart() {
               gap: "1rem",
             }}
           >
-            {sumCartAmount()} SEK
+            {numWithSpaces(sumCartAmount())} SEK
           </Typography>
         </Box>
       </Container>

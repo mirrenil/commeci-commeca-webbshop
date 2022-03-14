@@ -14,6 +14,7 @@ interface ContextValue {
   onAddQuantity: (product) => void;
   onReduceQuantity: (product) => void;
   removeFromCart: (product) => void;
+  numWithSpaces: (num: number) => string;
 }
 
 export const CartContext = createContext<ContextValue>({
@@ -25,6 +26,7 @@ export const CartContext = createContext<ContextValue>({
   onAddQuantity: () => {},
   onReduceQuantity: () => {},
   removeFromCart: () => {},
+  numWithSpaces: () => "", // this function can be written in the product context as well for formatting the price
 });
 
 const CartProvider: FC = (props) => {
@@ -96,6 +98,10 @@ const CartProvider: FC = (props) => {
     }
   };
 
+  function numWithSpaces(num: number) {
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+  }
+
   return (
     <CartContext.Provider
       value={{
@@ -107,6 +113,7 @@ const CartProvider: FC = (props) => {
         onAddQuantity,
         onReduceQuantity,
         removeFromCart,
+        numWithSpaces,
       }}
     >
       {props.children}
