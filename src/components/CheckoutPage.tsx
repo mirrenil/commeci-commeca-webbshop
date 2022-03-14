@@ -6,18 +6,25 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import PostnordLogo from "../assets/images/PostnordLogo.webp";
 import DhlLogo from "../assets/images/DhlLogo.png";
+import PostnordLogo from "../assets/images/PostnordLogo.webp";
 import SwishLogo from "../assets/images/SwishLogo.svg";
+import { useCart } from "../context/CartContextProvider";
+import EmptyCart from "./EmptyCart";
 import ShoppingCart from "./ShoppingCart";
 
 function CheckoutPage() {
-  return (
+  const { cart } = useCart();
+
+  return cart.length < 1 ? (
+    <EmptyCart />
+  ) : (
     <Container>
       <ShoppingCart />
       <Typography variant="h5" gutterBottom style={{ marginTop: "2rem" }}>
         2. Delivery method
       </Typography>
+
       <Box
         sx={{
           height: 350,
@@ -44,7 +51,11 @@ function CheckoutPage() {
           <Box
             component="img"
             display="flex"
-            style={{ height: "20px", margin: "2rem", justifyContent: "center" }}
+            style={{
+              height: "20px",
+              margin: "2rem",
+              justifyContent: "center",
+            }}
             src={PostnordLogo}
           />
           <Typography style={{}}>495:- (3-5 Weekdays)</Typography>
@@ -62,12 +73,15 @@ function CheckoutPage() {
           <Box
             component="img"
             display="flex"
-            style={{ height: "20px", margin: "2rem", justifyContent: "center" }}
+            style={{
+              height: "20px",
+              margin: "2rem",
+              justifyContent: "center",
+            }}
             src={DhlLogo}
           />
           <Typography style={{}}>345:- (5-7 Weekdays)</Typography>
         </Box>
-
         <Box
           style={{
             display: "flex",
@@ -154,7 +168,6 @@ function CheckoutPage() {
           />
         </Box>
       </Box>
-
       <Typography variant="h5" gutterBottom style={{ marginTop: "2rem" }}>
         4. Payment method
       </Typography>
@@ -227,7 +240,6 @@ function CheckoutPage() {
           </Typography>
         </Box>
       </Box>
-
       <Box
         sx={{
           display: "flex",
