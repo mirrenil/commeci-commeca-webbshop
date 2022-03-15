@@ -11,6 +11,8 @@ import PostnordLogo from "../assets/images/PostnordLogo.webp";
 import DhlLogo from "../assets/images/DhlLogo.png";
 import SwishLogo from "../assets/images/SwishLogo.svg";
 import SkrivbordAlba from "../assets/images/SkrivbordAlba.webp";
+import * as yup from "yup";
+import { useFormik } from "formik";
 
 function CheckoutPage() {
   return (
@@ -84,7 +86,7 @@ function CheckoutPage() {
                 <Box sx={{ display: "flex" }}>
                   <img src={PostnordLogo} alt="Postnord" height="20px" />
                   <Typography style={{ marginLeft: "1rem" }}>
-                    495:- (3-5 Weekdays)
+                    495 SEK (3-5 Weekdays)
                   </Typography>
                 </Box>
               }
@@ -95,7 +97,7 @@ function CheckoutPage() {
                 <Box sx={{ display: "flex" }}>
                   <img src={DhlLogo} alt="Postnord" height="20px" />
                   <Typography style={{ marginLeft: "1rem" }}>
-                    345:- (5-7 Weekdays)
+                    345 SEK (5-7 Weekdays)
                   </Typography>
                 </Box>
               }
@@ -108,7 +110,7 @@ function CheckoutPage() {
                     Pick up on terminal
                   </Typography>
                   <Typography style={{ marginLeft: "1rem" }}>
-                    Gratis (2-3 Weekdays)
+                    Free (2-3 Weekdays)
                   </Typography>
                 </Box>
               }
