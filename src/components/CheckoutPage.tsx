@@ -1,4 +1,12 @@
-import { Box, Button, Checkbox, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Checkbox,
+  FormControlLabel,
+  FormGroup,
+  TextField,
+  Typography,
+} from "@mui/material";
 import PostnordLogo from "../assets/images/PostnordLogo.webp";
 import DhlLogo from "../assets/images/DhlLogo.png";
 import SwishLogo from "../assets/images/SwishLogo.svg";
@@ -69,52 +77,43 @@ function CheckoutPage() {
             marginLeft: "2rem",
           }}
         >
-          <Checkbox />
-          <Box
-            component="img"
-            display="flex"
-            style={{ height: "20px", margin: "2rem", justifyContent: "center" }}
-            src={PostnordLogo}
-          />
-          <Typography style={{}}>495:- (3-5 Weekdays)</Typography>
-        </Box>
-
-        <Box
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            marginLeft: "2rem",
-          }}
-        >
-          <Checkbox />
-          <Box
-            component="img"
-            display="flex"
-            style={{ height: "20px", margin: "2rem", justifyContent: "center" }}
-            src={DhlLogo}
-          />
-          <Typography style={{}}>345:- (5-7 Weekdays)</Typography>
-        </Box>
-
-        <Box
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            marginLeft: "2rem",
-          }}
-        >
-          <Checkbox />
-          <Typography
-            variant="body1"
-            style={{ marginLeft: "2rem", fontWeight: "bold" }}
-          >
-            Pick up on terminal
-          </Typography>
-          <Typography style={{ marginLeft: "1rem" }}>
-            0:- (2-3 Weekdays)
-          </Typography>
+          <FormGroup>
+            <FormControlLabel
+              control={<Checkbox defaultChecked />}
+              label={
+                <Box sx={{ display: "flex" }}>
+                  <img src={PostnordLogo} alt="Postnord" height="20px" />
+                  <Typography style={{ marginLeft: "1rem" }}>
+                    495:- (3-5 Weekdays)
+                  </Typography>
+                </Box>
+              }
+            />
+            <FormControlLabel
+              control={<Checkbox />}
+              label={
+                <Box sx={{ display: "flex" }}>
+                  <img src={DhlLogo} alt="Postnord" height="20px" />
+                  <Typography style={{ marginLeft: "1rem" }}>
+                    345:- (5-7 Weekdays)
+                  </Typography>
+                </Box>
+              }
+            />
+            <FormControlLabel
+              control={<Checkbox />}
+              label={
+                <Box sx={{ display: "flex" }}>
+                  <Typography style={{ fontWeight: "bold" }}>
+                    Pick up on terminal
+                  </Typography>
+                  <Typography style={{ marginLeft: "1rem" }}>
+                    Gratis (2-3 Weekdays)
+                  </Typography>
+                </Box>
+              }
+            />
+          </FormGroup>
         </Box>
       </Box>
       <Typography variant="h5" gutterBottom style={{ marginTop: "2rem" }}>
