@@ -9,8 +9,8 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
-import { ThemeProvider } from "@mui/styles";
 import { useCart } from "../context/CartContextProvider";
+import HomeButton from "./shared/HomeButton";
 
 const OrderConfirmation = () => {
   const { cart, sumProductPrice, numWithSpaces, sumCartAmount } = useCart();
@@ -289,13 +289,9 @@ const OrderConfirmation = () => {
               </TableBody>
             </Table>
           </TableContainer>
-          {/* <Typography sx={{ textAlign: "center", fontFamily: "Prata" }}>
-            We are working hard to source new products from worldwide. <br />
-            Sign up for our membership to make sure you are the first to be
-            notified when we officially launch our store.
-          </Typography> */}
         </Box>
       </Container>
+      <HomeButton message="Back to home" />
     </Container>
   );
 };

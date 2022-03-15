@@ -1,4 +1,5 @@
 import { Box, Container, Typography } from "@mui/material";
+import HomeButton from "./shared/HomeButton";
 
 const NotFound = () => {
   return (
@@ -18,6 +19,7 @@ const NotFound = () => {
         <Typography sx={{ textAlign: "center", fontFamily: "Prata" }}>
           This page doesn't seem to exist.
         </Typography>
+        <HomeButton message="Back to home" />
       </Box>
     </Container>
   );
