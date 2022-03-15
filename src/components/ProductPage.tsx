@@ -1,3 +1,4 @@
+import { Container, Typography } from "@mui/material";
 import { CSSProperties } from "react";
 import "../index.css";
 import { ProductData } from "../ProductData";
@@ -10,17 +11,18 @@ interface Props {
 function ProductPage(props: Props) {
   return (
     <div>
-      <h5
-        style={{
-          fontFamily: "Prata",
-          fontWeight: "400",
-          fontSize: "1.5rem",
-          marginTop: "2rem",
-          marginLeft: "10rem",
+      <Container
+        sx={{
+          padding: "1rem",
         }}
       >
-        FURNITURE
-      </h5>
+        <Typography
+          sx={{ textTransform: "uppercase", fontFamily: "Prata", mt: "1rem" }}
+          variant="h5"
+        >
+          Furniture
+        </Typography>
+      </Container>
       <div style={rootStyle}>
         {props.products.map((product) => (
           <ProductCard key={product.id} product={product} />

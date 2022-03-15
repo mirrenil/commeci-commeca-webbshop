@@ -11,6 +11,7 @@ const EmptyPage = (props: Props) => {
         display: "flex",
         flexDirection: "column",
         padding: "1rem",
+        minHeight: "35rem",
       }}
     >
       <Typography
@@ -21,7 +22,6 @@ const EmptyPage = (props: Props) => {
       </Typography>
       <Box
         sx={{
-          height: "20rem",
           pt: "10rem",
         }}
       >

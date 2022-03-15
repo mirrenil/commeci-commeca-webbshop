@@ -1,52 +1,30 @@
-import { Box, Button, Checkbox, TextField, Typography } from "@mui/material";
-import PostnordLogo from "../assets/images/PostnordLogo.webp";
+import {
+  Box,
+  Button,
+  Checkbox,
+  Container,
+  TextField,
+  Typography,
+} from "@mui/material";
 import DhlLogo from "../assets/images/DhlLogo.png";
+import PostnordLogo from "../assets/images/PostnordLogo.webp";
 import SwishLogo from "../assets/images/SwishLogo.svg";
-import SkrivbordAlba from "../assets/images/SkrivbordAlba.webp";
+import { useCart } from "../context/CartContextProvider";
+import EmptyCart from "./EmptyCart";
+import ShoppingCart from "./ShoppingCart";
 
 function CheckoutPage() {
-  return (
-    <div style={{ display: "flex", flexDirection: "column", margin: "3rem" }}>
-      <Typography variant="h5" gutterBottom style={{ marginTop: "1rem" }}>
-        1. Shopping Cart
-      </Typography>
-      <Box
-        sx={{
-          height: 330,
-          backgroundColor: "#F3F2F0",
-        }}
-      >
-        <Box
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-          }}
-        >
-          <Box
-            component="img"
-            display="flex"
-            style={{
-              height: "150px",
-              margin: "2rem",
-              justifyContent: "center",
-            }}
-            src={SkrivbordAlba}
-          />
-          <Typography style={{ margin: "1rem" }}>Skrivbord Alba</Typography>
-          <Typography style={{ fontWeight: "bold" }}>2999:-</Typography>
-        </Box>
-        <Typography
-          style={{ fontWeight: "bold", marginLeft: "2rem", marginTop: "1rem" }}
-          variant="h5"
-        >
-          Totalt:
-        </Typography>
-      </Box>
+  const { cart, numWithSpaces, sumCartAmount } = useCart();
 
+  return cart.length < 1 ? (
+    <EmptyCart />
+  ) : (
+    <Container>
+      <ShoppingCart />
       <Typography variant="h5" gutterBottom style={{ marginTop: "2rem" }}>
         2. Delivery method
       </Typography>
+
       <Box
         sx={{
           height: 350,
@@ -73,7 +51,11 @@ function CheckoutPage() {
           <Box
             component="img"
             display="flex"
-            style={{ height: "20px", margin: "2rem", justifyContent: "center" }}
+            style={{
+              height: "20px",
+              margin: "2rem",
+              justifyContent: "center",
+            }}
             src={PostnordLogo}
           />
           <Typography style={{}}>495:- (3-5 Weekdays)</Typography>
@@ -91,12 +73,15 @@ function CheckoutPage() {
           <Box
             component="img"
             display="flex"
-            style={{ height: "20px", margin: "2rem", justifyContent: "center" }}
+            style={{
+              height: "20px",
+              margin: "2rem",
+              justifyContent: "center",
+            }}
             src={DhlLogo}
           />
           <Typography style={{}}>345:- (5-7 Weekdays)</Typography>
         </Box>
-
         <Box
           style={{
             display: "flex",
@@ -183,7 +168,6 @@ function CheckoutPage() {
           />
         </Box>
       </Box>
-
       <Typography variant="h5" gutterBottom style={{ marginTop: "2rem" }}>
         4. Payment method
       </Typography>
@@ -256,7 +240,6 @@ function CheckoutPage() {
           </Typography>
         </Box>
       </Box>
-
       <Box
         sx={{
           display: "flex",
@@ -266,10 +249,14 @@ function CheckoutPage() {
         }}
       >
         <Typography
-          variant="h5"
-          style={{ marginTop: "2rem", fontWeight: "bold" }}
+          variant="h6"
+          style={{
+            marginTop: "2rem",
+            fontWeight: "bold",
+            fontFamily: "Prata",
+          }}
         >
-          Total:
+          Total: {numWithSpaces(sumCartAmount())} SEK
         </Typography>
         <Button
           size="large"
@@ -286,7 +273,7 @@ function CheckoutPage() {
           Confirm purchase
         </Button>
       </Box>
-    </div>
+    </Container>
   );
 }
 

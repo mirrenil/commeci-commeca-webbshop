@@ -18,7 +18,6 @@ import userIcon from "../assets/icons/icon-user.webp";
 import logo from "../assets/images/logo.svg";
 import { useCart } from "../context/CartContextProvider";
 
-
 interface Page {
   label: string;
   href: string;
@@ -28,7 +27,6 @@ function Header() {
   const { sumCartQuantity } = useCart();
   const [anchorMenu, setAnchorMenu] = useState(false);
   const { ccLogo, icon, iconsContainer, quantityIcon } = useStyles();
-  
 
   const menuLeft: Page[] = [
     {
@@ -45,7 +43,6 @@ function Header() {
     },
   ];
 
-  // last object in the below array to be deleted when Checkout.tsx is being inserted to Sara's layout
   const menuRight: Page[] = [
     {
       label: "Decoration",
@@ -54,10 +51,6 @@ function Header() {
     {
       label: "Inspiration",
       href: "/inspiration",
-    },
-    {
-      label: "CheckoutTest",
-      href: "test",
     },
   ];
 
@@ -271,7 +264,6 @@ const useStyles = makeStyles(() => ({
 }));
 
 export default Header;
-function useAdmin(): { user: any; isLoading: any; login: any; } {
+function useAdmin(): { user: any; isLoading: any; login: any } {
   throw new Error("Function not implemented.");
 }
-

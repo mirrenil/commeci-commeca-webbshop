@@ -1,4 +1,5 @@
-import { createContext, FC, useContext, useState } from "react";
+import { createContext, FC, useContext } from "react";
+import { useLocalStorageState } from "../components/hooks/useLocalStorageState";
 import { ProductData } from "../ProductData";
 
 interface CartItemData extends ProductData {
@@ -13,6 +14,7 @@ interface ContextValue {
   onAddQuantity: (product) => void;
   onReduceQuantity: (product) => void;
   removeFromCart: (product) => void;
+  numWithSpaces: (num: number) => string;
 }
 
 export const CartContext = createContext<ContextValue>({
@@ -24,10 +26,12 @@ export const CartContext = createContext<ContextValue>({
   onAddQuantity: () => {},
   onReduceQuantity: () => {},
   removeFromCart: () => {},
+  numWithSpaces: () => "", // this function can be written in the product context as well for formatting the price
 });
 
 const CartProvider: FC = (props) => {
-  const [cart, setCart] = useState<CartItemData[]>([]);
+  // const [cart, setCart] = useState<CartItemData[]>([]); removed and replaced with the below one that save to LS
+  const [cart, setCart] = useLocalStorageState<CartItemData[]>([], "cc-cart");
 
   const addToCart = async (product: ProductData) => {
     // if (cart.map((item) => item.id).includes(product.id))
@@ -37,8 +41,10 @@ const CartProvider: FC = (props) => {
         return { ...item, quantity: item.quantity + 1 };
       });
       setCart(updatedCart);
+      setCart(updatedCart); // update to LS
     } else {
       const cartItem: CartItemData = { ...product, quantity: 1 };
+      setCart([...cart, cartItem]);
       setCart([...cart, cartItem]);
     }
     console.log(cart);
@@ -92,6 +98,10 @@ const CartProvider: FC = (props) => {
     }
   };
 
+  function numWithSpaces(num: number) {
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+  }
+
   return (
     <CartContext.Provider
       value={{
@@ -103,6 +113,7 @@ const CartProvider: FC = (props) => {
         onAddQuantity,
         onReduceQuantity,
         removeFromCart,
+        numWithSpaces,
       }}
     >
       {props.children}
