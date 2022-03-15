@@ -21,21 +21,19 @@ const AddToCartButton = (props: Props) => {
   };
 
   return (
-    <Box>
-      <LoadingButton
-        size={props.size}
-        variant="contained"
-        loading={isLoading}
-        loadingIndicator="Adding..."
-        style={{ ...props.style, backgroundColor: "#CAC2B9" }}
-        onClick={() => {
-          addToCart(props.product);
-          buttonOnLoad();
-        }}
-      >
-        Add to cart
-      </LoadingButton>
-    </Box>
+    <LoadingButton
+      size={props.size}
+      variant="contained"
+      loading={isLoading}
+      loadingIndicator="Adding..."
+      style={{ ...props.style, backgroundColor: "#CAC2B9" }}
+      onClick={() => {
+        addToCart(props.product);
+        buttonOnLoad();
+      }}
+    >
+      Add to cart
+    </LoadingButton>
   );
 };
 
