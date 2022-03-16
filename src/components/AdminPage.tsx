@@ -6,7 +6,6 @@ interface Props {
 }
 
 function AdminPage(props: Props) {
-  console.log(productData);
 
   return (
     <div>

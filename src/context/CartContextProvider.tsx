@@ -104,7 +104,7 @@ const CartProvider: FC = (props) => {
 
   return (
     <CartContext.Provider
-      value={{
+    value={{
         cart,
         addToCart,
         sumCartQuantity,

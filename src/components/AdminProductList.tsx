@@ -11,15 +11,20 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
+import { count } from "console";
+import { parse } from "path";
 import * as React from "react";
-import { ProductData } from "../ProductData";
+import {productData, ProductData } from "../ProductData";
+import { useLocalStorageState } from "./hooks/useLocalStorageState";
 
 interface Props {
   product: ProductData;
 }
+
 function Row(props: Props) {
   const [open, setOpen] = React.useState(false);
   console.log("Product", props.product);
+
   return (
     <React.Fragment>
       <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
@@ -59,7 +64,7 @@ function Row(props: Props) {
                       <img
                         src={props.product.image}
                         alt={props.product.title}
-                        style={{ maxHeight: "200px" }}
+                        style={{ maxHeight: "200px", maxWidth: "auto" }}
                       />
                       <Button
                         variant="contained"
@@ -93,7 +98,16 @@ interface PropsTable {
 }
 
 export default function CollapsibleTable(props: PropsTable) {
-  console.log(props.products);
+
+  // LS TEST
+  //const [products, setProducts] = useLocalStorageState(props.products, "adminLSTEST");
+  //setProducts(productData)
+  //console.log(productData);
+
+  // LS
+  const [products, setProducts] = useLocalStorageState(productData, "adminLS");
+  //setProducts(/* modifierad lista */ )
+
   return (
     <TableContainer component={Paper}>
       <Table aria-label="collapsible table">
@@ -108,7 +122,6 @@ export default function CollapsibleTable(props: PropsTable) {
         </TableHead>
         <TableBody>
           {props.products.map((product) => {
-            console.log("ROW");
             return <Row key={product.id} product={product} />;
           })}
         </TableBody>
