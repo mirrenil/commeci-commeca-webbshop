@@ -1,6 +1,6 @@
-import { Box, Button, Container, Typography } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Box, Container, Typography } from "@mui/material";
 import emptyCart from "../assets/images/empty-cart.webp";
+import HomeButton from "./shared/HomeButton";
 
 const EmptyCart = () => {
   return (
@@ -29,20 +29,7 @@ const EmptyCart = () => {
         <Typography sx={{ fontFamily: "Prata" }}>
           Your cart is empty.
         </Typography>
-        <Button
-          component={Link}
-          size="small"
-          variant="contained"
-          to="/"
-          style={{
-            backgroundColor: "#CAC2B9",
-            marginTop: "1rem",
-            fontFamily: "Prata",
-            textTransform: "none",
-          }}
-        >
-          Explore our collections
-        </Button>
+        <HomeButton message="Explore our collections" />
       </Box>
     </Container>
   );
