@@ -18,6 +18,8 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
+import { count } from "console";
+import { parse } from "path";
 import * as React from "react";
 import { productData, ProductData } from "../ProductData";
 import AddIcon from "@mui/icons-material/AddBoxOutlined";
@@ -29,6 +31,7 @@ import CreateIcon from "@mui/icons-material/Create";
 interface Props {
   product: ProductData;
 }
+
 function Row(props: Props) {
   const [open, setOpen] = React.useState(false);
 
