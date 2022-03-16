@@ -2,31 +2,33 @@ import {
   Box,
   Button,
   Checkbox,
+  Container,
   FormControlLabel,
   FormGroup,
   TextField,
   Typography,
-  Container,
 } from "@mui/material";
+import { useFormik } from "formik";
+import * as yup from "yup";
 import DhlLogo from "../assets/images/DhlLogo.png";
 import PostnordLogo from "../assets/images/PostnordLogo.webp";
 import SwishLogo from "../assets/images/SwishLogo.svg";
-import SkrivbordAlba from "../assets/images/SkrivbordAlba.webp";
-import * as yup from "yup";
-import { useFormik } from "formik";
+import { useCart } from "../context/CartContextProvider";
+import EmptyCart from "./EmptyCart";
+import ShoppingCart from "./ShoppingCart";
 
 interface FormValues {
   name: string;
   email: string;
   address: string;
-  phonenumber: string;
+  phonenumber: number;
 }
 
 const InitialValue: FormValues = {
   name: "Name",
   address: "Address",
   email: "Email",
-  phonenumber: "Phonenumber",
+  phonenumber: 12345,
 };
 
 const validationSchema = yup.object({
@@ -39,6 +41,7 @@ const validationSchema = yup.object({
 });
 
 function CheckoutPage() {
+  const { cart, numWithSpaces, sumCartAmount } = useCart();
   const { values, errors, touched, handleSubmit, handleChange } =
     useFormik<FormValues>({
       initialValues: InitialValue,
@@ -49,103 +52,41 @@ function CheckoutPage() {
       },
     });
 
-  return (
-    <div style={{ display: "flex", flexDirection: "column", margin: "3rem" }}>
-      <Typography variant="h5" gutterBottom style={{ marginTop: "1rem" }}>
-        1. Shopping Cart
-      </Typography>
-      <Box
-        sx={{
-          height: 330,
-          backgroundColor: "#F3F2F0",
-        }}
-      >
-        <Box
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-          }}
-        >
-          <Box
-            component="img"
-            display="flex"
-            style={{
-              height: "150px",
-              margin: "2rem",
-              justifyContent: "center",
-            }}
-            src={SkrivbordAlba}
-          />
-          <Typography style={{ margin: "1rem" }}>Skrivbord Alba</Typography>
-          <Typography style={{ fontWeight: "bold" }}>2999:-</Typography>
-        </Box>
-        <Typography
-          style={{
-            fontWeight: "bold",
-            marginLeft: "2rem",
-            marginTop: "1rem",
-          }}
-          variant="h5"
-        >
-          Totalt:
-        </Typography>
-      </Box>
-      <form onSubmit={handleSubmit}>
-        <Typography variant="h5" gutterBottom style={{ marginTop: "2rem" }}>
-          2. Delivery method
-=======
-import { useCart } from "../context/CartContextProvider";
-import EmptyCart from "./EmptyCart";
-import ShoppingCart from "./ShoppingCart";
-
-function CheckoutPage() {
-  const { cart, numWithSpaces, sumCartAmount } = useCart();
-
   return cart.length < 1 ? (
     <EmptyCart />
   ) : (
     <Container>
+      {/* below is for shopping cart */}
       <ShoppingCart />
-      <Typography variant="h5" gutterBottom style={{ marginTop: "2rem" }}>
-        2. Delivery method
-      </Typography>
 
-      <Box
+      {/* below is for delivery method */}
+      <Container
         sx={{
-          height: 350,
-          backgroundColor: "#F3F2F0",
+          padding: "1rem",
         }}
       >
-        <Typography
-          variant="h6"
-          gutterBottom
-          style={{ marginTop: "2rem", marginLeft: "2rem" }}
-        >
-          Choose delivery:
-          </Typography>
-          <Checkbox />
-          <Box
-            component="img"
-            display="flex"
-            style={{
-              height: "20px",
-              margin: "2rem",
-              justifyContent: "center",
+        <form onSubmit={handleSubmit}>
+          <Typography
+            sx={{
+              textTransform: "uppercase",
+              fontFamily: "Prata",
+              mt: "1rem",
+              mb: "1rem",
             }}
-            src={PostnordLogo}
-          />
-          <Typography style={{}}>495:- (3-5 Weekdays)</Typography>
-        </Box>
+            variant="h5"
+          >
+            2. Delivery Method
+          </Typography>
 
           <Box
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "center",
-              marginLeft: "2rem",
+            sx={{
+              backgroundColor: "#F3F2F0",
+              padding: "1rem",
             }}
           >
+            {/* <Typography variant="h6" gutterBottom>
+              Choose delivery:
+            </Typography> */}
             <FormGroup>
               <FormControlLabel
                 control={<Checkbox defaultChecked />}
@@ -184,226 +125,185 @@ function CheckoutPage() {
               />
             </FormGroup>
           </Box>
-        </Box>
-        <Typography variant="h5" gutterBottom style={{ marginTop: "2rem" }}>
-          3. Contact details
-        </Typography>
-        <Box
-          sx={{
-            height: 470,
-            backgroundColor: "#F3F2F0",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
+
+          {/* below is for contact details */}
+          <Typography
+            sx={{
+              textTransform: "uppercase",
+              fontFamily: "Prata",
+              mt: "3rem",
+              mb: "1rem",
+            }}
+            variant="h5"
+          >
+            3. Contact Details
+          </Typography>
+          <Box
+            sx={{
+              height: 470,
+              backgroundColor: "#F3F2F0",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                width: "600px",
+              }}
+            >
+              <TextField
+                style={{
+                  backgroundColor: "white",
+                }}
+                id="name-input"
+                name="name"
+                label="Name"
+                type="text"
+                margin="normal"
+                value={values.name}
+                onChange={handleChange}
+                error={touched.name && Boolean(errors.name)}
+                helperText={errors.name}
+              />
+              <TextField
+                style={{
+                  backgroundColor: "white",
+                }}
+                id="address-input"
+                name="address"
+                label="Home Address"
+                type="text"
+                margin="normal"
+                value={values.address}
+                onChange={handleChange}
+                error={touched.address && Boolean(errors.address)}
+                helperText={errors.address}
+              />
+              <TextField
+                style={{
+                  backgroundColor: "white",
+                }}
+                id="email-input"
+                name="email"
+                label="Email"
+                type="text"
+                margin="normal"
+                value={values.email}
+                onChange={handleChange}
+                error={touched.address && Boolean(errors.email)}
+                helperText={errors.email}
+              />
+              <TextField
+                style={{
+                  backgroundColor: "white",
+                }}
+                id="phonennumber-input"
+                name="phonenumber"
+                label="Phonenumber"
+                type="text"
+                margin="normal"
+                value={values.phonenumber}
+                onChange={handleChange}
+                error={touched.phonenumber && Boolean(errors.phonenumber)}
+                helperText={errors.phonenumber}
+              />
+            </Box>
+          </Box>
+
+          {/* below is for payment method */}
+          <Typography
+            sx={{
+              textTransform: "uppercase",
+              fontFamily: "Prata",
+              mt: "3rem",
+              mb: "1rem",
+            }}
+            variant="h5"
+          >
+            4. Payment Method
+          </Typography>
+
+          <Box
+            sx={{
+              backgroundColor: "#F3F2F0",
+              padding: "1rem",
+            }}
+          >
+            {/* <Typography variant="h6" gutterBottom>
+              Choose payment method:
+            </Typography> */}
+            <FormGroup>
+              <FormControlLabel
+                control={<Checkbox />}
+                label={
+                  <Box sx={{ display: "flex" }}>
+                    <Typography style={{ fontWeight: "bold" }}>Kort</Typography>
+                  </Box>
+                }
+              />
+              <FormControlLabel
+                control={<Checkbox />}
+                label={
+                  <Box sx={{ display: "flex" }}>
+                    <img src={SwishLogo} alt="Swish" height="20px" />
+                  </Box>
+                }
+              />
+              <FormControlLabel
+                control={<Checkbox />}
+                label={
+                  <Box sx={{ display: "flex" }}>
+                    <Typography style={{ fontWeight: "bold" }}>
+                      Invoice
+                    </Typography>
+                  </Box>
+                }
+              />
+            </FormGroup>
+          </Box>
+
+          {/* below is for total and form submit */}
           <Box
             sx={{
               display: "flex",
+              justifyContent: "center",
               flexDirection: "column",
-              width: "600px",
-            }}
-          >
-            <TextField
-              style={{
-                backgroundColor: "white",
-              }}
-              id="name-input"
-              name="name"
-              label="Name"
-              type="text"
-              margin="normal"
-              value={values.name}
-              onChange={handleChange}
-              error={touched.name && Boolean(errors.name)}
-              helperText={errors.name}
-            />
-            <TextField
-              style={{
-                backgroundColor: "white",
-              }}
-              id="address-input"
-              name="address"
-              label="Home Address"
-              type="text"
-              margin="normal"
-              value={values.address}
-              onChange={handleChange}
-              error={touched.address && Boolean(errors.address)}
-              helperText={errors.address}
-            />
-            <TextField
-              style={{
-                backgroundColor: "white",
-              }}
-              id="email-input"
-              name="email"
-              label="Email"
-              type="text"
-              margin="normal"
-              value={values.email}
-              onChange={handleChange}
-              error={touched.address && Boolean(errors.email)}
-              helperText={errors.email}
-            />
-            <TextField
-              style={{
-                backgroundColor: "white",
-              }}
-              id="phonennumber-input"
-              name="phonenumber"
-              label="Phonenumber"
-              type="text"
-              margin="normal"
-              value={values.phonenumber}
-              onChange={handleChange}
-              error={touched.phonenumber && Boolean(errors.phonenumber)}
-              helperText={errors.phonenumber}
-            />
-          </Box>
-        </Box>
-
-        <Typography variant="h5" gutterBottom style={{ marginTop: "2rem" }}>
-          4. Payment method
-        </Typography>
-        <Box
-          sx={{
-            height: 300,
-            backgroundColor: "#F3F2F0",
-            display: "flex",
-            justifyContent: "center",
-            flexDirection: "column",
-          }}
-        >
-          <Typography
-            variant="h6"
-            gutterBottom
-            style={{
-              margin: "2rem",
-            }}
-          >
-            Choose Payment Method:
-          </Typography>
-          <Box
-            style={{
-              display: "flex",
-              flexDirection: "row",
               alignItems: "center",
-              marginLeft: "2rem",
-              marginBottom: "1rem",
             }}
           >
-            <Checkbox />
-            <Typography style={{ marginLeft: "1rem", fontWeight: "bold" }}>
-              Kort
+            <Typography
+              variant="h6"
+              style={{
+                marginTop: "2rem",
+                fontWeight: "bold",
+                fontFamily: "Prata",
+              }}
+            >
+              Total: {numWithSpaces(sumCartAmount())} SEK
             </Typography>
-          </Box>
-
-          <Box
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "center",
-              marginLeft: "2rem",
-              marginBottom: "1rem",
-            }}
-          >
-            <Checkbox />
-            <Box
-              component="img"
-              display="flex"
+            <Button
+              size="large"
+              variant="contained"
               style={{
-                height: "20px",
-                justifyContent: "center",
-                marginLeft: "1rem",
+                textAlign: "center",
+                margin: "2rem",
+                width: "400px",
+                backgroundColor: "#CAC2B9",
+                color: "white",
+                letterSpacing: "3px",
               }}
-              src={SwishLogo}
-            />
+              type="submit"
+            >
+              Confirm purchase
+            </Button>
           </Box>
-
-          <Box
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "center",
-              marginLeft: "2rem",
-            }}
-          >
-            <Checkbox />
-            <Typography style={{ marginLeft: "1rem", fontWeight: "bold" }}>
-              Faktura
-            </Typography>
-          </Box>
-        </Box>
-
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
-          <Typography
-            variant="h5"
-            style={{ marginTop: "2rem", fontWeight: "bold" }}
-          >
-            Total:
-          </Typography>
-          <Button
-            size="large"
-            variant="contained"
-            style={{
-              textAlign: "center",
-              margin: "2rem",
-              width: "400px",
-              backgroundColor: "#CAC2B9",
-              color: "white",
-              letterSpacing: "3px",
-            }}
-            type="submit"
-          >
-            Confirm purchase
-          </Button>
-        </Box>
-
-      </Box>
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
-        <Typography
-          variant="h6"
-          style={{
-            marginTop: "2rem",
-            fontWeight: "bold",
-            fontFamily: "Prata",
-          }}
-        >
-          Total: {numWithSpaces(sumCartAmount())} SEK
-        </Typography>
-        <Button
-          size="large"
-          variant="contained"
-          style={{
-            textAlign: "center",
-            margin: "2rem",
-            width: "400px",
-            backgroundColor: "#CAC2B9",
-            color: "white",
-            letterSpacing: "3px",
-          }}
-        >
-          Confirm purchase
-        </Button>
-      </Box>
+        </form>
+      </Container>
     </Container>
-
   );
 }
 
