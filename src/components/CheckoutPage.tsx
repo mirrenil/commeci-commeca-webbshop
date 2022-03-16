@@ -280,7 +280,6 @@ function CheckoutPage() {
               style={{
                 marginTop: "2rem",
                 fontWeight: "bold",
-                fontFamily: "Prata",
               }}
             >
               Total: {numWithSpaces(sumCartAmount())} SEK

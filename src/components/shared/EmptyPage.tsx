@@ -26,7 +26,7 @@ const EmptyPage = (props: Props) => {
           pt: "10rem",
         }}
       >
-        <Typography sx={{ textAlign: "center", fontFamily: "Prata" }}>
+        <Typography sx={{ textAlign: "center", mb: "3rem" }}>
           We are working hard to source new products from worldwide. <br />
           Sign up for our membership to make sure you are the first to be
           notified when we officially launch our store.

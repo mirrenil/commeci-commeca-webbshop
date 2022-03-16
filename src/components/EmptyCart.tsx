@@ -26,9 +26,7 @@ const EmptyCart = () => {
         }}
       >
         <img src={emptyCart} alt="empty cart" height="300px" />
-        <Typography sx={{ fontFamily: "Prata" }}>
-          Your cart is empty.
-        </Typography>
+        <Typography>Your cart is empty.</Typography>
         <HomeButton message="Explore our collections" />
       </Box>
     </Container>
