@@ -114,7 +114,7 @@ function CheckoutPage() {
                     }}
                   >
                     <img src={PostnordLogo} alt="Postnord" height="20px" />
-                    <Typography style={{ marginLeft: "1rem" }}>
+                    <Typography variant="body2" style={{ marginLeft: "1rem" }}>
                       495 SEK (3-5 Weekdays)
                     </Typography>
                   </Box>
@@ -132,7 +132,7 @@ function CheckoutPage() {
                     }}
                   >
                     <img src={DhlLogo} alt="DHL" height="20px" />
-                    <Typography style={{ marginLeft: "1rem" }}>
+                    <Typography variant="body2" style={{ marginLeft: "1rem" }}>
                       345 SEK (5-7 Weekdays)
                     </Typography>
                   </Box>
@@ -152,7 +152,7 @@ function CheckoutPage() {
                     <Typography style={{ fontWeight: "bold" }}>
                       Pick up on terminal
                     </Typography>
-                    <Typography style={{ marginLeft: "1rem" }}>
+                    <Typography variant="body2" style={{ marginLeft: "1rem" }}>
                       Free (2-3 Weekdays)
                     </Typography>
                   </Box>
@@ -283,7 +283,7 @@ function CheckoutPage() {
                   control={<Radio />}
                   value="card"
                   label={
-                    <Box sx={{ display: "flex" }}>
+                    <Box sx={{ display: "flex", m: "1rem" }}>
                       <Typography style={{ fontWeight: "bold" }}>
                         Card
                       </Typography>
@@ -294,16 +294,16 @@ function CheckoutPage() {
                   control={<Radio />}
                   value="swish"
                   label={
-                    <Box sx={{ display: "flex" }}>
+                    <Box sx={{ display: "flex", m: "1rem" }}>
                       <img src={SwishLogo} alt="Swish" height="20px" />
                     </Box>
                   }
                 />
                 <FormControlLabel
                   control={<Radio />}
-                  value="Paylater"
+                  value="invoice"
                   label={
-                    <Box sx={{ display: "flex" }}>
+                    <Box sx={{ display: "flex", m: "1rem" }}>
                       <Typography style={{ fontWeight: "bold" }}>
                         Invoice
                       </Typography>
