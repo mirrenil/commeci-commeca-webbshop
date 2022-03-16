@@ -33,7 +33,8 @@ const ProductProvider = (props) => {
    
     
     const removeProduct = (product: ProductData) => {
-        setProducts(products.filter(({id}) => id !== product.id));
+        //setProducts(products.filter(({id}) => id !== product.id));
+        alert('YOU CLICKED DELETE')
     };
 
     return (
