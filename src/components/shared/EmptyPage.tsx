@@ -1,4 +1,5 @@
 import { Box, Container, Typography } from "@mui/material";
+import HomeButton from "./HomeButton";
 
 interface Props {
   page: string;
@@ -11,6 +12,7 @@ const EmptyPage = (props: Props) => {
         display: "flex",
         flexDirection: "column",
         padding: "1rem",
+        minHeight: "35rem",
       }}
     >
       <Typography
@@ -21,7 +23,6 @@ const EmptyPage = (props: Props) => {
       </Typography>
       <Box
         sx={{
-          height: "20rem",
           pt: "10rem",
         }}
       >
@@ -30,6 +31,7 @@ const EmptyPage = (props: Props) => {
           Sign up for our membership to make sure you are the first to be
           notified when we officially launch our store.
         </Typography>
+        <HomeButton message="Back to home" />
       </Box>
     </Container>
   );

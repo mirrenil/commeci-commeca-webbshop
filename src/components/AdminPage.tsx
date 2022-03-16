@@ -1,5 +1,5 @@
-import { ProductData, productData } from "../ProductData"
-import ProductList from "./ProductList";
+import { ProductData, productData } from "../ProductData";
+import ProductList from "./AdminProductList";
 
 interface Props {
   products: ProductData[];
@@ -7,29 +7,23 @@ interface Props {
 
 function AdminPage(props: Props) {
 
-    console.log(productData);
-    
-    
-    
-    return (
-      <div>
-        <h5
-          style={{
-            fontFamily: "Prata",
-            fontWeight: "400",
-            fontSize: "1.5rem",
-            marginTop: "2rem",
-            marginLeft: "10rem",
-          }}
-        >
-          Admin
-        </h5>
-    
-            <ProductList />
-     </div>
-    );
+  return (
+    <div>
+      <h5
+        style={{
+          fontFamily: "Prata",
+          fontWeight: "400",
+          fontSize: "1.5rem",
+          marginTop: "2rem",
+          marginLeft: "10rem",
+        }}
+      >
+        Admin
+      </h5>
+
+      <ProductList products={productData} />
+    </div>
+  );
 }
-
-
 
 export default AdminPage;
