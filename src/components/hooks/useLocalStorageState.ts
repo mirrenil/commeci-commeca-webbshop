@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 
 export function useLocalStorageState<S>(defaultState: S, key: string) {
-  console.log("LOCAL STORAGE HOOK", defaultState, key);
   const preparedState = localStorage[key]
     ? (JSON.parse(localStorage[key]) as S)
     : defaultState;
