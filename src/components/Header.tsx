@@ -52,6 +52,8 @@ function Header() {
       label: "Inspiration",
       href: "/inspiration",
     },
+    { label: "Confirmation", href: "/confirmation" },
+    // above line for confirmation to be deleted when confirmation is linked to checkout
   ];
 
   const handleOpenMenu = (event: MouseEvent<HTMLElement>) => {
@@ -264,6 +266,3 @@ const useStyles = makeStyles(() => ({
 }));
 
 export default Header;
-function useAdmin(): { user: any; isLoading: any; login: any } {
-  throw new Error("Function not implemented.");
-}

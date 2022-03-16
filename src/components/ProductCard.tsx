@@ -1,5 +1,4 @@
 import {
-  Button,
   Card,
   CardActionArea,
   CardActions,
@@ -10,18 +9,14 @@ import {
 } from "@mui/material";
 import { CSSProperties } from "react";
 import { Link } from "react-router-dom";
-import { useCart } from "../context/CartContextProvider";
 import { ProductData } from "../ProductData";
-
-//import { Data } from "../ProductData";
+import AddToCartButton from "./shared/AddToCartButton";
 
 interface Props {
   product: ProductData;
 }
 
 function ProductCard(props: Props) {
-  const { addToCart } = useCart();
-
   return (
     <Card sx={cardStyle}>
       <Link to={`/detail/${props.product.id}`} style={linkStyle}>
@@ -52,19 +47,10 @@ function ProductCard(props: Props) {
         }}
       >
         <Typography variant="body2" color="text.secondary">
-          {props.product.price} SEK:-
+          {props.product.price} SEK
         </Typography>
         <CardActions>
-          <Button
-            size="small"
-            variant="contained"
-            style={{
-              backgroundColor: "#CAC2B9",
-            }}
-            onClick={() => addToCart(props.product)}
-          >
-            Add to cart
-          </Button>
+          <AddToCartButton product={props.product} size="small" />
         </CardActions>
       </div>
     </Card>
