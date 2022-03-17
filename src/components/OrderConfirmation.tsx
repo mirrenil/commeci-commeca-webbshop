@@ -13,20 +13,15 @@ import { useCart } from "../context/CartContextProvider";
 import HomeButton from "./shared/HomeButton";
 
 const OrderConfirmation = () => {
-  const { cart, sumProductPrice, numWithSpaces, sumCartAmount } = useCart();
+  // const getBoughtItemsFromOrder = () => {
+  //   customerDetails.map((arrItems) => {
+  //     let bought = arrItems.boughtItems;
+  //     return bought;
+  //   });
+  // };
 
-  // this function should probably be put the step before and pass in to the order array/api (if there is one) as a new number is generated now whenever we refresh the page
-  const generateOrderNum = () => {
-    const yy: string = new Date().getFullYear().toString().substr(-2);
-    const mm: number = new Date().getMonth() + 1;
-    const dd: number = new Date().getDate();
-    const formattedDate =
-      yy + (mm > 9 ? "" : "0") + mm + (dd > 9 ? "" : "0") + dd;
-
-    const randomNum: number = Math.floor(Math.random() * 100000);
-    const orderNum: string = formattedDate + "-" + randomNum;
-    return orderNum;
-  };
+  const { cart, order, sumProductPrice, numWithSpaces, sumCartAmount } =
+    useCart();
 
   return (
     <Container
@@ -52,13 +47,14 @@ const OrderConfirmation = () => {
           Thank you for your purchase!
         </Typography>
         <Typography sx={{ fontFamily: "Prata", mt: "1rem" }} variant="inherit">
-          Order#: {generateOrderNum()}
+          Order#: {order[0].orderNo}
+          {console.log(order)}
         </Typography>
         <Typography
           sx={{ fontFamily: "Prata", mt: "1rem" }}
           variant="inherit"
         ></Typography>
-        <Box sx={{}}>
+        <Box>
           <TableContainer>
             <Table aria-label="order list">
               <TableHead>
@@ -158,7 +154,6 @@ const OrderConfirmation = () => {
                   </TableCell>
                 </TableRow>
                 <TableRow>
-                  {/* <TableCell sx={{ border: "none" }} /> */}
                   <TableCell
                     sx={{
                       border: "none",
@@ -202,12 +197,12 @@ const OrderConfirmation = () => {
                   <TableCell
                     sx={{
                       border: "none",
-                      padding: "16px 16px 0px 16px",
+                      padding: "16px 16px 0 16px",
                       fontWeight: "bold",
                     }}
                     colSpan={3}
                   >
-                    Name
+                    {order[0].name}
                   </TableCell>
                 </TableRow>
                 <TableRow>
@@ -215,37 +210,18 @@ const OrderConfirmation = () => {
                     colSpan={1}
                     sx={{
                       border: "none",
+                      padding: "0 16px",
                     }}
                   />
                   <TableCell
                     sx={{
                       border: "none",
-                      padding: "0px 16px",
+                      padding: "0 16px",
                       fontWeight: "bold",
                     }}
                     colSpan={3}
                   >
-                    Address Line 1 <br />
-                    Address Line 2
-                  </TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell
-                    colSpan={1}
-                    sx={{
-                      border: "none",
-                      padding: "0px 16px",
-                    }}
-                  />
-                  <TableCell
-                    sx={{
-                      border: "none",
-                      padding: "0px 16px",
-                      fontWeight: "bold",
-                    }}
-                    colSpan={3}
-                  >
-                    Email Address
+                    {order[0].address}
                   </TableCell>
                 </TableRow>
                 <TableRow>
@@ -264,7 +240,26 @@ const OrderConfirmation = () => {
                     }}
                     colSpan={3}
                   >
-                    Contact Number
+                    {order[0].email}
+                  </TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell
+                    colSpan={1}
+                    sx={{
+                      border: "none",
+                      padding: "0px 16px",
+                    }}
+                  />
+                  <TableCell
+                    sx={{
+                      border: "none",
+                      padding: "0px 16px",
+                      fontWeight: "bold",
+                    }}
+                    colSpan={3}
+                  >
+                    {order[0].phonenumber}
                   </TableCell>
                 </TableRow>
                 <TableRow>
