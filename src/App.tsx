@@ -18,7 +18,7 @@ function App() {
         <CartProvider>
           <Routes>
             <Route path="/" element={<Layout />}>
-              <Route index element={<ProductPage products={productData} />} />
+              <Route index element={<ProductPage />} />
               <Route path="/textiles" element={<EmptyPage page="Textiles" />} />
               <Route path="/lighting" element={<EmptyPage page="Lighting" />} />
               <Route

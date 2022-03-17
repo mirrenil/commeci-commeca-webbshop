@@ -20,31 +20,18 @@ export const ProductContext = createContext<ContextValue>({
     removeProduct: (product) => [],
 });
 
-const ProductProvider = (props) => {
-    
+const ProductProvider = (props) => { 
     // This line controlls how many rows should be shown, in this case 4
     const [products, setProducts] = useLocalStorageState(productData, "adminLS");
-    
- 
 
     const addProduct = (product: ProductData) => {
         setProducts([...products, product]);
     }
 
-        const removeProduct = (productToBeRemoved: ProductData) => {
-
-          const updatedProductList = products.filter((product) => productToBeRemoved.id !== product.id)
-
-
-            updateProductsToLS()
-            
-            setProducts(updatedProductList);
-       
-           
-        };
-        
-
-    
+    const removeProduct = (productToBeRemoved: ProductData) => {
+        const updatedProductList = products.filter((product) => productToBeRemoved.id !== product.id)  
+        setProducts(updatedProductList);
+    };
 
     return (
         <ProductContext.Provider
@@ -63,10 +50,4 @@ const ProductProvider = (props) => {
 export default ProductProvider;
 export const useAdmin = () => useContext(ProductContext);
 
-  
-
-    function updateProductsToLS() {
-        const productsAsString = JSON.stringify(productData);
-        localStorage.setItem("productsHELLO", productsAsString)
-    }
 
