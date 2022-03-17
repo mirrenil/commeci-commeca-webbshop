@@ -3,8 +3,10 @@ import {
   Button,
   Checkbox,
   Container,
+  FormControl,
   FormControlLabel,
   FormGroup,
+  FormLabel,
   Radio,
   RadioGroup,
   TextField,
@@ -13,6 +15,7 @@ import {
 import { useFormik } from "formik";
 import { FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
+
 import * as yup from "yup";
 import DhlLogo from "../assets/images/DhlLogo.png";
 import PostnordLogo from "../assets/images/PostnordLogo.webp";
@@ -45,6 +48,7 @@ const validationSchema = yup.object({
 });
 
 function CheckoutPage() {
+
   const navigate = useNavigate();
   const [order, setOrder] = useState<FormValues[]>([]); // not done, re issue #45
 
@@ -59,6 +63,9 @@ function CheckoutPage() {
       // what to do onSubmit: (1) generate order number; (2) save the orer number, the purchase and form values;
       // (3) empty the cart; (4) direct to confirmation page (details in confirmation page shouldnt be inserted from cart)
       onSubmit: (values) => {
+
+        console.log(values);
+
         let promise = new Promise((resolve) => {
           setTimeout(() => {
             setOrder([...order, values]);
@@ -122,9 +129,15 @@ function CheckoutPage() {
                 control={<Radio />}
                 value="postnord"
                 label={
-                  <Box sx={{ display: "flex" }}>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      justifyContent: "space-around",
+                      m: "1rem 2rem",
+                    }}
+                  >
                     <img src={PostnordLogo} alt="Postnord" height="20px" />
-                    <Typography style={{ marginLeft: "1rem" }}>
+                    <Typography variant="body2" style={{ marginLeft: "1rem" }}>
                       495 SEK (3-5 Weekdays)
                     </Typography>
                   </Box>
@@ -134,9 +147,16 @@ function CheckoutPage() {
                 control={<Radio />}
                 value="dhl"
                 label={
-                  <Box sx={{ display: "flex" }}>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      justifyContent: "space-around",
+                      m: "1rem 2rem",
+                    }}
+                  >
                     <img src={DhlLogo} alt="DHL" height="20px" />
-                    <Typography style={{ marginLeft: "1rem" }}>
+                    <Typography variant="body2" style={{ marginLeft: "1rem" }}>
+
                       345 SEK (5-7 Weekdays)
                     </Typography>
                   </Box>
@@ -146,11 +166,17 @@ function CheckoutPage() {
                 control={<Radio />}
                 value="pickup"
                 label={
-                  <Box sx={{ display: "flex" }}>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      justifyContent: "space-around",
+                      m: "1rem 2rem",
+                    }}
+                  >
                     <Typography style={{ fontWeight: "bold" }}>
                       Pick up on terminal
                     </Typography>
-                    <Typography style={{ marginLeft: "1rem" }}>
+                    <Typography variant="body2" style={{ marginLeft: "1rem" }}>
                       Free (2-3 Weekdays)
                     </Typography>
                   </Box>
@@ -264,39 +290,52 @@ function CheckoutPage() {
             sx={{
               backgroundColor: "#F3F2F0",
               padding: "1rem",
+              margin: "1rem",
             }}
           >
             {/* <Typography variant="h6" gutterBottom>
               Choose payment method:
             </Typography> */}
-            <FormGroup>
-              <FormControlLabel
-                control={<Checkbox />}
-                label={
-                  <Box sx={{ display: "flex" }}>
-                    <Typography style={{ fontWeight: "bold" }}>Kort</Typography>
-                  </Box>
-                }
-              />
-              <FormControlLabel
-                control={<Checkbox />}
-                label={
-                  <Box sx={{ display: "flex" }}>
-                    <img src={SwishLogo} alt="Swish" height="20px" />
-                  </Box>
-                }
-              />
-              <FormControlLabel
-                control={<Checkbox />}
-                label={
-                  <Box sx={{ display: "flex" }}>
-                    <Typography style={{ fontWeight: "bold" }}>
-                      Invoice
-                    </Typography>
-                  </Box>
-                }
-              />
-            </FormGroup>
+            <RadioGroup
+              aria-label="payment method"
+              name="payment"
+              onChange={handleRadioChange}
+              value={value}
+            >
+              <FormGroup>
+                <FormControlLabel
+                  control={<Radio />}
+                  value="card"
+                  label={
+                    <Box sx={{ display: "flex", m: "1rem" }}>
+                      <Typography style={{ fontWeight: "bold" }}>
+                        Card
+                      </Typography>
+                    </Box>
+                  }
+                />
+                <FormControlLabel
+                  control={<Radio />}
+                  value="swish"
+                  label={
+                    <Box sx={{ display: "flex", m: "1rem" }}>
+                      <img src={SwishLogo} alt="Swish" height="20px" />
+                    </Box>
+                  }
+                />
+                <FormControlLabel
+                  control={<Radio />}
+                  value="invoice"
+                  label={
+                    <Box sx={{ display: "flex", m: "1rem" }}>
+                      <Typography style={{ fontWeight: "bold" }}>
+                        Invoice
+                      </Typography>
+                    </Box>
+                  }
+                />
+              </FormGroup>
+            </RadioGroup>
           </Box>
 
           {/* below is for total and form submit */}
