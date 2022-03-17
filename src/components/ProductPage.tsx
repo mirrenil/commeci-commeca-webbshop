@@ -1,14 +1,14 @@
 import { Container, Typography } from "@mui/material";
+import React from "react";
 import { CSSProperties } from "react";
+import { ProductContext } from "../context/AdminPageContext";
 import "../index.css";
-import { ProductData } from "../ProductData";
 import ProductCard from "./ProductCard";
 
-interface Props {
-  products: ProductData[];
-}
-
-function ProductPage(props: Props) {
+ 
+function ProductPage() {
+  const products = React.useContext(ProductContext).products;
+  
   return (
     <div>
       <Container
@@ -24,10 +24,11 @@ function ProductPage(props: Props) {
         </Typography>
       </Container>
       <div style={rootStyle}>
-        {props.products.map((product) => (
+        {products.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}
       </div>
+     
     </div>
   );
 }

@@ -32,6 +32,7 @@ function ProductTable(props: Props) {
 
   const [open, setOpen] = React.useState(false);
   const [rows, setRows] = React.useState(productData);
+  
 
  
   // Handle the case of delete confirmation where
