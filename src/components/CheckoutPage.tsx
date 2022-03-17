@@ -1,12 +1,9 @@
 import {
   Box,
   Button,
-  Checkbox,
   Container,
-  FormControl,
   FormControlLabel,
   FormGroup,
-  FormLabel,
   Radio,
   RadioGroup,
   TextField,
@@ -42,13 +39,10 @@ const validationSchema = yup.object({
   name: yup.string().required("Name is required"),
   address: yup.string().required("Address is required"),
   email: yup.string().required("Email is required"),
-  phonenumber: yup
-    .string()
-    .min(10, "Phonenumber should be minimum 10 characters"),
+  phonenumber: yup.string().required("Phonenumber is required"),
 });
 
 function CheckoutPage() {
-
   const navigate = useNavigate();
   const [order, setOrder] = useState<FormValues[]>([]); // not done, re issue #45
 
@@ -63,7 +57,6 @@ function CheckoutPage() {
       // what to do onSubmit: (1) generate order number; (2) save the orer number, the purchase and form values;
       // (3) empty the cart; (4) direct to confirmation page (details in confirmation page shouldnt be inserted from cart)
       onSubmit: (values) => {
-
         console.log(values);
 
         let promise = new Promise((resolve) => {
@@ -156,7 +149,6 @@ function CheckoutPage() {
                   >
                     <img src={DhlLogo} alt="DHL" height="20px" />
                     <Typography variant="body2" style={{ marginLeft: "1rem" }}>
-
                       345 SEK (5-7 Weekdays)
                     </Typography>
                   </Box>
