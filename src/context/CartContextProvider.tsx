@@ -1,12 +1,19 @@
-import { createContext, FC, useContext } from "react";
+import { createContext, FC, useContext, useState } from "react";
+import { FormValues } from "../components/CheckoutPage";
 import { useLocalStorageState } from "../components/hooks/useLocalStorageState";
 import { ProductData } from "../ProductData";
 
 interface CartItemData extends ProductData {
   quantity: number;
 }
+interface OrderData extends FormValues, CartItemData {
+  orderNo: string;
+  boughtItems: CartItemData[];
+}
+
 interface ContextValue {
   cart: CartItemData[];
+  order: OrderData[];
   addToCart: (product: ProductData) => void;
   sumCartQuantity: () => number;
   sumCartAmount: () => number;
@@ -15,11 +22,14 @@ interface ContextValue {
   onReduceQuantity: (product) => void;
   removeFromCart: (product) => void;
   numWithSpaces: (num: number) => string;
+  createOrder: (values) => void;
+  generateOrderNum: () => string;
   emptyCart: () => void;
 }
 
 export const CartContext = createContext<ContextValue>({
   cart: [],
+  order: [],
   addToCart: () => {},
   sumCartQuantity: () => 0,
   sumCartAmount: () => 0,
@@ -28,12 +38,27 @@ export const CartContext = createContext<ContextValue>({
   onReduceQuantity: () => {},
   removeFromCart: () => {},
   numWithSpaces: () => "", // this function can be written in the product context as well for formatting the price
+  createOrder: () => {},
+  generateOrderNum: () => "",
   emptyCart: () => {},
 });
 
 const CartProvider: FC = (props) => {
   // const [cart, setCart] = useState<CartItemData[]>([]); removed and replaced with the below one that save to LS
   const [cart, setCart] = useLocalStorageState<CartItemData[]>([], "cc-cart");
+  const [order, setOrder] = useState<OrderData[]>([]);
+
+  const createOrder = (values) => {
+    // order.length = 0; // add back when done
+    const boughtItems = { ...cart };
+    let updatedOrder: OrderData = {
+      ...values,
+      boughtItems: boughtItems,
+      orderNo: generateOrderNum(),
+    };
+    setOrder([...order, updatedOrder]);
+  };
+  console.log(order);
 
   const addToCart = async (product: ProductData) => {
     // if (cart.map((item) => item.id).includes(product.id))
@@ -49,7 +74,7 @@ const CartProvider: FC = (props) => {
       setCart([...cart, cartItem]);
       setCart([...cart, cartItem]);
     }
-    console.log(cart);
+    // console.log(cart);
   };
 
   const sumCartQuantity = () => {
@@ -104,6 +129,18 @@ const CartProvider: FC = (props) => {
     return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
   };
 
+  const generateOrderNum = () => {
+    const yy: string = new Date().getFullYear().toString().substr(-2);
+    const mm: number = new Date().getMonth() + 1;
+    const dd: number = new Date().getDate();
+    const formattedDate =
+      yy + (mm > 9 ? "" : "0") + mm + (dd > 9 ? "" : "0") + dd;
+
+    const randomNum: number = Math.floor(Math.random() * 100000);
+    const orderNum: string = formattedDate + "-" + randomNum;
+    return orderNum;
+  };
+
   const emptyCart = () => {
     cart.length = 0;
   };
@@ -112,6 +149,7 @@ const CartProvider: FC = (props) => {
     <CartContext.Provider
       value={{
         cart,
+        order,
         addToCart,
         sumCartQuantity,
         sumCartAmount,
@@ -120,6 +158,8 @@ const CartProvider: FC = (props) => {
         onReduceQuantity,
         removeFromCart,
         numWithSpaces,
+        createOrder,
+        generateOrderNum,
         emptyCart,
       }}
     >
