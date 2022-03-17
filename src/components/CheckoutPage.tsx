@@ -5,10 +5,14 @@ import {
   Container,
   FormControlLabel,
   FormGroup,
+  Radio,
+  RadioGroup,
   TextField,
   Typography,
 } from "@mui/material";
 import { useFormik } from "formik";
+import { FormEvent, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
 import DhlLogo from "../assets/images/DhlLogo.png";
 import PostnordLogo from "../assets/images/PostnordLogo.webp";
@@ -41,16 +45,37 @@ const validationSchema = yup.object({
 });
 
 function CheckoutPage() {
-  const { cart, numWithSpaces, sumCartAmount } = useCart();
+  const navigate = useNavigate();
+  const [order, setOrder] = useState<FormValues[]>([]); // not done, re issue #45
+
+  const [value, setValue] = useState("postnord");
+  const { cart, numWithSpaces, sumCartAmount, emptyCart } = useCart();
+
   const { values, errors, touched, handleSubmit, handleChange } =
     useFormik<FormValues>({
       initialValues: InitialValue,
       validationSchema: validationSchema,
+
+      // what to do onSubmit: (1) generate order number; (2) save the orer number, the purchase and form values;
+      // (3) empty the cart; (4) direct to confirmation page (details in confirmation page shouldnt be inserted from cart)
       onSubmit: (values) => {
-        alert(JSON.stringify(values, null, 2));
-        console.log("submitted");
+        let promise = new Promise((resolve) => {
+          setTimeout(() => {
+            setOrder([...order, values]);
+            resolve(values);
+          }, 2000);
+        });
+        promise.then(() => {
+          navigate("/confirmation");
+          emptyCart(); // not reflecting in header
+          // console.log(order); // not correct
+        });
       },
     });
+
+  const handleRadioChange = (event: FormEvent<HTMLInputElement>) => {
+    setValue(event.currentTarget.value);
+  };
 
   return cart.length < 1 ? (
     <EmptyCart />
@@ -87,9 +112,15 @@ function CheckoutPage() {
             {/* <Typography variant="h6" gutterBottom>
               Choose delivery:
             </Typography> */}
-            <FormGroup>
+            <RadioGroup
+              aria-label="delivery method"
+              name="delivery"
+              onChange={handleRadioChange}
+              value={value}
+            >
               <FormControlLabel
-                control={<Checkbox defaultChecked />}
+                control={<Radio />}
+                value="postnord"
                 label={
                   <Box sx={{ display: "flex" }}>
                     <img src={PostnordLogo} alt="Postnord" height="20px" />
@@ -100,10 +131,11 @@ function CheckoutPage() {
                 }
               />
               <FormControlLabel
-                control={<Checkbox />}
+                control={<Radio />}
+                value="dhl"
                 label={
                   <Box sx={{ display: "flex" }}>
-                    <img src={DhlLogo} alt="Postnord" height="20px" />
+                    <img src={DhlLogo} alt="DHL" height="20px" />
                     <Typography style={{ marginLeft: "1rem" }}>
                       345 SEK (5-7 Weekdays)
                     </Typography>
@@ -111,7 +143,8 @@ function CheckoutPage() {
                 }
               />
               <FormControlLabel
-                control={<Checkbox />}
+                control={<Radio />}
+                value="pickup"
                 label={
                   <Box sx={{ display: "flex" }}>
                     <Typography style={{ fontWeight: "bold" }}>
@@ -123,7 +156,7 @@ function CheckoutPage() {
                   </Box>
                 }
               />
-            </FormGroup>
+            </RadioGroup>
           </Box>
 
           {/* below is for contact details */}
@@ -280,7 +313,6 @@ function CheckoutPage() {
               style={{
                 marginTop: "2rem",
                 fontWeight: "bold",
-                fontFamily: "Prata",
               }}
             >
               Total: {numWithSpaces(sumCartAmount())} SEK

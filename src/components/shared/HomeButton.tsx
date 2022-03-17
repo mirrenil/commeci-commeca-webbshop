@@ -17,7 +17,6 @@ const HomeButton = (props: Props) => {
         width: "fit-content",
         backgroundColor: "#CAC2B9",
         margin: "1rem auto",
-        fontFamily: "Prata",
         textTransform: "none",
       }}
     >
