@@ -1,12 +1,9 @@
 import {
   Box,
   Button,
-  Checkbox,
   Container,
-  FormControl,
   FormControlLabel,
   FormGroup,
-  FormLabel,
   Radio,
   RadioGroup,
   TextField,
@@ -15,7 +12,6 @@ import {
 import { useFormik } from "formik";
 import { FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
 import * as yup from "yup";
 import DhlLogo from "../assets/images/DhlLogo.png";
 import PostnordLogo from "../assets/images/PostnordLogo.webp";
@@ -24,7 +20,7 @@ import { useCart } from "../context/CartContextProvider";
 import EmptyCart from "./EmptyCart";
 import ShoppingCart from "./ShoppingCart";
 
-interface FormValues {
+export interface FormValues {
   name: string;
   email: string;
   address: string;
@@ -35,7 +31,7 @@ const InitialValue: FormValues = {
   name: "Name",
   address: "Address",
   email: "Email",
-  phonenumber: 12345,
+  phonenumber: 0,
 };
 
 const validationSchema = yup.object({
@@ -48,35 +44,30 @@ const validationSchema = yup.object({
 });
 
 function CheckoutPage() {
-
   const navigate = useNavigate();
-  const [order, setOrder] = useState<FormValues[]>([]); // not done, re issue #45
-
   const [value, setValue] = useState("postnord");
-  const { cart, numWithSpaces, sumCartAmount, emptyCart } = useCart();
+  const { cart, numWithSpaces, sumCartAmount, emptyCart, createOrder } =
+    useCart();
 
   const { values, errors, touched, handleSubmit, handleChange } =
     useFormik<FormValues>({
       initialValues: InitialValue,
       validationSchema: validationSchema,
 
-      // what to do onSubmit: (1) generate order number; (2) save the orer number, the purchase and form values;
-      // (3) empty the cart; (4) direct to confirmation page (details in confirmation page shouldnt be inserted from cart)
+      // what to do onSubmit: (1) generate order number -done; (2) save the order number, the purchase and form values -half done, saved order no and part of the form value;
+      // (3) empty the cart -done with bug (4) direct to confirmation page (details in confirmation page shouldnt be inserted from order)
       onSubmit: (values) => {
-
-        console.log(values);
-
         let promise = new Promise((resolve) => {
           setTimeout(() => {
-            setOrder([...order, values]);
+            createOrder(values);
             resolve(values);
           }, 2000);
         });
         promise.then(() => {
           navigate("/confirmation");
-          emptyCart(); // not reflecting in header
-          // console.log(order); // not correct
+          emptyCart(); // cart qty is not updated on header
         });
+        // console.log(cart)
       },
     });
 
@@ -156,7 +147,6 @@ function CheckoutPage() {
                   >
                     <img src={DhlLogo} alt="DHL" height="20px" />
                     <Typography variant="body2" style={{ marginLeft: "1rem" }}>
-
                       345 SEK (5-7 Weekdays)
                     </Typography>
                   </Box>
