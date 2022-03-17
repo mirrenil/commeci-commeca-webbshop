@@ -46,7 +46,6 @@ function ShoppingCart() {
         {cart.map((product) => (
           <Box
             sx={{
-              fontFamily: "Prata",
               textAlign: "center",
               display: "flex",
               padding: ".8rem 2rem",
@@ -160,7 +159,6 @@ function ShoppingCart() {
           <Typography
             variant="h6"
             sx={{
-              fontFamily: "Prata",
               width: "800px",
               display: "flex",
               flexDirection: "row",
@@ -171,7 +169,6 @@ function ShoppingCart() {
           </Typography>
           <Typography
             sx={{
-              fontFamily: "Prata",
               width: "800px",
               display: "flex",
               flexDirection: "row",

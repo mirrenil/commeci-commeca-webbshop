@@ -14,6 +14,8 @@ import {
 } from "@mui/material";
 import { useFormik } from "formik";
 import { FormEvent, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import * as yup from "yup";
 import DhlLogo from "../assets/images/DhlLogo.png";
 import PostnordLogo from "../assets/images/PostnordLogo.webp";
@@ -46,14 +48,35 @@ const validationSchema = yup.object({
 });
 
 function CheckoutPage() {
+
+  const navigate = useNavigate();
+  const [order, setOrder] = useState<FormValues[]>([]); // not done, re issue #45
+
   const [value, setValue] = useState("postnord");
-  const { cart, numWithSpaces, sumCartAmount } = useCart();
+  const { cart, numWithSpaces, sumCartAmount, emptyCart } = useCart();
+
   const { values, errors, touched, handleSubmit, handleChange } =
     useFormik<FormValues>({
       initialValues: InitialValue,
       validationSchema: validationSchema,
+
+      // what to do onSubmit: (1) generate order number; (2) save the orer number, the purchase and form values;
+      // (3) empty the cart; (4) direct to confirmation page (details in confirmation page shouldnt be inserted from cart)
       onSubmit: (values) => {
+
         console.log(values);
+
+        let promise = new Promise((resolve) => {
+          setTimeout(() => {
+            setOrder([...order, values]);
+            resolve(values);
+          }, 2000);
+        });
+        promise.then(() => {
+          navigate("/confirmation");
+          emptyCart(); // not reflecting in header
+          // console.log(order); // not correct
+        });
       },
     });
 
@@ -133,6 +156,7 @@ function CheckoutPage() {
                   >
                     <img src={DhlLogo} alt="DHL" height="20px" />
                     <Typography variant="body2" style={{ marginLeft: "1rem" }}>
+
                       345 SEK (5-7 Weekdays)
                     </Typography>
                   </Box>
