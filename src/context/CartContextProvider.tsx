@@ -17,12 +17,12 @@ interface ContextValue {
   addToCart: (product: ProductData) => void;
   sumCartQuantity: () => number;
   sumCartAmount: () => number;
-  sumProductPrice: (product) => number;
-  onAddQuantity: (product) => void;
-  onReduceQuantity: (product) => void;
-  removeFromCart: (product) => void;
+  sumProductPrice: (product: CartItemData) => number;
+  onAddQuantity: (product: CartItemData) => void;
+  onReduceQuantity: (product: CartItemData) => void;
+  removeFromCart: (product: CartItemData) => void;
   numWithSpaces: (num: number) => string;
-  createOrder: (values) => void;
+  createOrder: (values: FormValues) => void;
   generateOrderNum: () => string;
   emptyCart: () => void;
 }
@@ -48,11 +48,11 @@ const CartProvider: FC = (props) => {
   const [cart, setCart] = useLocalStorageState<CartItemData[]>([], "cc-cart");
   const [order, setOrder] = useState<OrderData[]>([]);
 
-  const createOrder = (values) => {
+  const createOrder = (formValues) => {
     // order.length = 0; // add back when done
     const boughtItems = { ...cart };
     let updatedOrder: OrderData = {
-      ...values,
+      ...formValues,
       boughtItems: boughtItems,
       orderNo: generateOrderNum(),
     };
