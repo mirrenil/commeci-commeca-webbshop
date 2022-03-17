@@ -5,6 +5,8 @@ import { Button } from "@mui/material";
 import Box from "@mui/material/Box";
 import Collapse from "@mui/material/Collapse";
 import IconButton from "@mui/material/IconButton";
+import EditIcon from '@mui/icons-material/Edit';
+import DoneIcon from '@mui/icons-material/Done';
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -15,6 +17,7 @@ import TableRow from "@mui/material/TableRow";
 import * as React from "react";
 import { ProductContext, useAdmin } from "../context/AdminPageContext";
 import { productData, ProductData } from "../ProductData";
+import { isContentEditable, isEditable } from "@testing-library/user-event/dist/utils";
 
 interface Props {
   product: ProductData;
@@ -22,34 +25,19 @@ interface Props {
 
 function ProductTable(props: Props) {
 
-    const 
+  const
     {
-    products,
-    addProduct,
-    removeProduct,
+      products,
+      addProduct,
+      isEdit,
+      setEdit,
+      saveProduct,
+      removeProduct,
     } = useAdmin();
 
 
   const [open, setOpen] = React.useState(false);
   const [rows, setRows] = React.useState(productData);
-  
-
- 
-  // Handle the case of delete confirmation where
-  // user click yes delete a specific row of id:i
-  // const removeProduct = (product: ProductData) => {
-  //   console.log(props.product);
-  //   const adminProductList = [...rows];
-  //   //const index = productData.indexOf(products);
-  //   for (let i = 0; i < adminProductList.length; i++) {
-  //     if (adminProductList.includes(props.product)) {
-  //       adminProductList.splice(i);
-  //     }
-  //   }
-
-  //   setRows(adminProductList);
-  //   //setShowConfirm(false);
-  // };
 
   return (
     <React.Fragment>
@@ -85,7 +73,7 @@ function ProductTable(props: Props) {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  <TableRow>
+                  <TableRow contentEditable={isEdit}>
                     <TableCell component="th" scope="row">
                       <img
                         src={props.product.image}
@@ -108,9 +96,32 @@ function ProductTable(props: Props) {
                     </TableCell>
                     <TableCell align="right">{props.product.price}</TableCell>
                     <TableCell>
-                      <Button onClick={() => {removeProduct(props.product)}}>
+                      <Button
+                        onClick={() => {
+                          removeProduct(props.product);
+                        }}
+                      >
                         <DeleteOutline />
                       </Button>
+                      <div>
+                        {!isEdit ? (
+                          <Button
+                            onClick={() => {
+                              setEdit(true);
+                            }}
+                          >
+                            <EditIcon />
+                          </Button>
+                        ) : (
+                          <Button
+                            onClick={() => {
+                              saveProduct(props.product);
+                            }}
+                          >
+                            <DoneIcon />
+                          </Button>
+                        )}
+                      </div>
                     </TableCell>
                   </TableRow>
                 </TableBody>
@@ -151,3 +162,34 @@ export default function CollapsibleTable(props: PropsTable) {
     </TableContainer>
   );
 }
+
+// <div style={{ display: "flex", justifyContent: "space-between" }}>
+//           <div>
+//             {isEdit ? (
+//               <div>
+//                 {rows.length !== 0 && (
+//                   <div>
+//                     {disable ? (
+//                       <Button disabled align="right" onClick={handleSave}>
+//                         <DoneIcon />
+//                         SAVE
+//                       </Button>
+//                     ) : (
+//                       <Button align="right" onClick={handleSave}>
+//                         <DoneIcon />
+//                         SAVE
+//                       </Button>
+//                     )}
+//                   </div>
+//                 )}
+//               </div>
+//             ) : (
+//               <div>
+//                 <Button align="right" onClick={handleEdit}>
+//                   <CreateIcon />
+//                   EDIT
+//                 </Button>
+//               </div>
+//             )}
+//           </div>
+//         </div>
