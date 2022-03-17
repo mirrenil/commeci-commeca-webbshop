@@ -21,7 +21,7 @@ function AdminPage(props: Props) {
         Admin
       </h5>
 
-      <ProductList products={productData} />
+      <ProductList />
     </div>
   );
 }

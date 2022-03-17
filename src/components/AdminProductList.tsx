@@ -13,7 +13,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import * as React from "react";
-import { useAdmin } from "../context/AdminPageContext";
+import { ProductContext, useAdmin } from "../context/AdminPageContext";
 import { productData, ProductData } from "../ProductData";
 
 interface Props {
@@ -25,6 +25,7 @@ function ProductTable(props: Props) {
     const 
     {
     products,
+    addProduct,
     removeProduct,
     } = useAdmin();
 
@@ -83,46 +84,33 @@ function ProductTable(props: Props) {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  <TableRow contentEditable="true">
-                   
-                        <TableCell component="th" scope="row">
-                          <img
-                            src={props.product.image}
-                            alt={props.product.title}
-                            style={{ maxHeight: "200px" }}
-                          />
-                          <Button
-                            variant="contained"
-                            size="small"
-                            component="label"
-                          >
-                            Upload image
-                            <input type="file" hidden />
-                          </Button>
-                        </TableCell>
-                        <TableCell
-                          align="right"
-                        >
-                          {props.product.id}
-                        </TableCell>
-                        <TableCell align="right">
-                          {props.product.title}
-                        </TableCell>
-                        <TableCell
-                          align="left"
-                        >
-                          {props.product.description}
-                        </TableCell>
-                        <TableCell
-                          align="right"
-                        >
-                          {props.product.price}
-                        </TableCell>
-                        <TableCell>
-                          <Button onClick={removeProduct}>
-                            <DeleteOutline />
-                          </Button>
-                        </TableCell>
+                  <TableRow>
+                    <TableCell component="th" scope="row">
+                      <img
+                        src={props.product.image}
+                        alt={props.product.title}
+                        style={{ maxHeight: "200px" }}
+                      />
+                      <Button
+                        variant="contained"
+                        size="small"
+                        component="label"
+                      >
+                        Upload image
+                        <input type="file" hidden />
+                      </Button>
+                    </TableCell>
+                    <TableCell align="right">{props.product.id}</TableCell>
+                    <TableCell align="right">{props.product.title}</TableCell>
+                    <TableCell align="left">
+                      {props.product.description}
+                    </TableCell>
+                    <TableCell align="right">{props.product.price}</TableCell>
+                    <TableCell>
+                      <Button onClick={() => {removeProduct(props.product)}}>
+                        <DeleteOutline />
+                      </Button>
+                    </TableCell>
                   </TableRow>
                 </TableBody>
               </Table>
@@ -135,10 +123,12 @@ function ProductTable(props: Props) {
 }
 
 interface PropsTable {
-  products: ProductData[];
 }
 
 export default function CollapsibleTable(props: PropsTable) {
+
+  const products = React.useContext(ProductContext).products;
+  console.log("PRODUCTS: ", products)
   return (
     <TableContainer component={Paper}>
       <Table aria-label="collapsible table">
@@ -152,7 +142,7 @@ export default function CollapsibleTable(props: PropsTable) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {props.products.map((product) => {
+          {products.map((product) => {
             return <ProductTable key={product.id} product={product} />;
           })}
         </TableBody>
