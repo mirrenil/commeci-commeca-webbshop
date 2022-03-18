@@ -46,15 +46,14 @@ const ProductProvider = (props) => {
         setProducts(updatedProductList);
     };
 
-    const saveProduct = (editedProduct: ProductData) => {
-        // CHECK THIS TOMORROW :D
-        // const updatedProduct = products.map((product) => {
-        //     if (product.id === editedProduct.id) 
-        //     return updatedProduct;
-             
-        // })
-        // console.log(updatedProduct);
-    } 
+
+    const saveProduct = (product: ProductData) => {
+        const updatedList = products.map((item) => (product.id === item.id));
+        setEdit(false)
+        //setProducts(updatedList) 
+    }
+        
+
    
 
     return (
