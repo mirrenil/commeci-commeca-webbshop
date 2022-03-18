@@ -320,7 +320,7 @@ function CheckoutPage() {
                       <Typography
                         style={{
                           fontWeight: "bold",
-                          marginRight: "1rem",
+                          marginRight: "2.5rem",
                           marginTop: ".5rem",
                           justifyContent: "center",
                         }}
@@ -380,7 +380,7 @@ function CheckoutPage() {
                       <Typography
                         style={{
                           fontWeight: "bold",
-                          marginRight: "1rem",
+                          marginRight: "1.5rem",
                           marginTop: ".5rem",
                           justifyContent: "center",
                         }}
