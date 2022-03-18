@@ -27,7 +27,7 @@ export interface FormValues {
   phoneNumber: number;
 }
 
-const InitialValue: ContactFormValues = {
+const InitialValue: FormValues = {
   name: "Name",
   address: "Address",
   email: "Email",
@@ -59,7 +59,7 @@ function CheckoutPage() {
   const { cart, numWithSpaces, sumTotal, emptyCart, createOrder } = useCart();
 
   const { values, errors, touched, handleSubmit, handleChange } =
-    useFormik<ContactFormValues>({
+    useFormik<FormValues>({
       initialValues: InitialValue,
       validationSchema: ContactValidationSchema,
 
