@@ -1,12 +1,9 @@
 import {
   Box,
   Button,
-  Checkbox,
   Container,
-  FormControl,
   FormControlLabel,
   FormGroup,
-  FormLabel,
   Radio,
   RadioGroup,
   TextField,
@@ -24,46 +21,54 @@ import { useCart } from "../context/CartContextProvider";
 import EmptyCart from "./EmptyCart";
 import ShoppingCart from "./ShoppingCart";
 
-interface FormValues {
+interface ContactFormValues {
   name: string;
   email: string;
   address: string;
   phonenumber: number;
 }
 
-const InitialValue: FormValues = {
+const InitialValue: ContactFormValues = {
   name: "Name",
   address: "Address",
   email: "Email",
   phonenumber: 12345,
 };
 
-const validationSchema = yup.object({
+const ContactValidationSchema = yup.object({
   name: yup.string().required("Name is required"),
   address: yup.string().required("Address is required"),
   email: yup.string().required("Email is required"),
-  phonenumber: yup
-    .string()
-    .min(10, "Phonenumber should be minimum 10 characters"),
+  phonenumber: yup.string().required("Phonenumber is required"),
 });
 
-function CheckoutPage() {
+interface PaymentFormValues {
+  card: number;
+  swish: number;
+  invoice: number;
+}
 
+const PaymentValue: PaymentFormValues = {
+  card: 1234,
+  swish: 1234,
+  invoice: 1234,
+};
+
+function CheckoutPage() {
   const navigate = useNavigate();
-  const [order, setOrder] = useState<FormValues[]>([]); // not done, re issue #45
+  const [order, setOrder] = useState<ContactFormValues[]>([]); // not done, re issue #45
 
   const [value, setValue] = useState("postnord");
   const { cart, numWithSpaces, sumCartAmount, emptyCart } = useCart();
 
   const { values, errors, touched, handleSubmit, handleChange } =
-    useFormik<FormValues>({
+    useFormik<ContactFormValues>({
       initialValues: InitialValue,
-      validationSchema: validationSchema,
+      validationSchema: ContactValidationSchema,
 
       // what to do onSubmit: (1) generate order number; (2) save the orer number, the purchase and form values;
       // (3) empty the cart; (4) direct to confirmation page (details in confirmation page shouldnt be inserted from cart)
       onSubmit: (values) => {
-
         console.log(values);
 
         let promise = new Promise((resolve) => {
@@ -156,7 +161,6 @@ function CheckoutPage() {
                   >
                     <img src={DhlLogo} alt="DHL" height="20px" />
                     <Typography variant="body2" style={{ marginLeft: "1rem" }}>
-
                       345 SEK (5-7 Weekdays)
                     </Typography>
                   </Box>
@@ -289,7 +293,7 @@ function CheckoutPage() {
           <Box
             sx={{
               backgroundColor: "#F3F2F0",
-              padding: "1rem",
+              padding: "3rem",
               margin: "1rem",
             }}
           >
@@ -307,10 +311,36 @@ function CheckoutPage() {
                   control={<Radio />}
                   value="card"
                   label={
-                    <Box sx={{ display: "flex", m: "1rem" }}>
-                      <Typography style={{ fontWeight: "bold" }}>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        m: "1rem",
+                      }}
+                    >
+                      <Typography
+                        style={{
+                          fontWeight: "bold",
+                          marginRight: "2.5rem",
+                          marginTop: ".5rem",
+                          justifyContent: "center",
+                        }}
+                      >
                         Card
                       </Typography>
+                      <TextField
+                        style={{
+                          backgroundColor: "white",
+                          width: "250px",
+                        }}
+                        id="card-input"
+                        name="card"
+                        label="Cardnumber"
+                        type="text"
+                        size="small"
+                        onChange={handleChange}
+                        error={touched.name && Boolean(errors.name)}
+                        helperText={errors.name}
+                      />
                     </Box>
                   }
                 />
@@ -319,7 +349,26 @@ function CheckoutPage() {
                   value="swish"
                   label={
                     <Box sx={{ display: "flex", m: "1rem" }}>
-                      <img src={SwishLogo} alt="Swish" height="20px" />
+                      <img
+                        src={SwishLogo}
+                        alt="Swish"
+                        height="20px"
+                        style={{ marginTop: ".5rem", marginRight: "1rem" }}
+                      />
+                      <TextField
+                        style={{
+                          backgroundColor: "white",
+                          width: "250px",
+                        }}
+                        id="number-input"
+                        name="phonenumber"
+                        label="Phonenumber"
+                        type="text"
+                        size="small"
+                        onChange={handleChange}
+                        error={touched.name && Boolean(errors.name)}
+                        helperText={errors.name}
+                      />
                     </Box>
                   }
                 />
@@ -328,9 +377,30 @@ function CheckoutPage() {
                   value="invoice"
                   label={
                     <Box sx={{ display: "flex", m: "1rem" }}>
-                      <Typography style={{ fontWeight: "bold" }}>
+                      <Typography
+                        style={{
+                          fontWeight: "bold",
+                          marginRight: "1.5rem",
+                          marginTop: ".5rem",
+                          justifyContent: "center",
+                        }}
+                      >
                         Invoice
                       </Typography>
+                      <TextField
+                        style={{
+                          backgroundColor: "white",
+                          width: "250px",
+                        }}
+                        id="number-input"
+                        name="phonenumber"
+                        label="Phonenumber"
+                        type="text"
+                        size="small"
+                        onChange={handleChange}
+                        error={touched.name && Boolean(errors.name)}
+                        helperText={errors.name}
+                      />
                     </Box>
                   }
                 />
