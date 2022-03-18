@@ -54,7 +54,7 @@ function CheckoutPage() {
       validationSchema: validationSchema,
 
       // what to do onSubmit: (1) generate order number -done; (2) save the order number, the purchase and form values -half done, saved order no and part of the form value;
-      // (3) empty the cart -done with bug (4) direct to confirmation page (details in confirmation page shouldnt be inserted from order)
+      // (3) empty the cart -done with bug (4) direct to confirmation page -half done for part of the form value
       onSubmit: (values: FormValues) => {
         let promise = new Promise((resolve) => {
           setTimeout(() => {
@@ -64,9 +64,11 @@ function CheckoutPage() {
         });
         promise.then(() => {
           navigate("/confirmation");
+          // console.log(cart);
           emptyCart(); // cart qty is not updated on header
         });
-        // console.log(cart)
+        // console.log(cart);
+        //emptyCart(); // cart qty is updated on header but it empties the cart before it's saved to order
       },
     });
 
