@@ -18,6 +18,7 @@ interface ContextValue {
   addToCart: (product: ProductData) => void;
   sumQuantity: (itemData: CartItemData[]) => number;
   sumTotal: (itemData: CartItemData[]) => number;
+  calculateVat: (itemData: CartItemData[]) => number;
   sumProductPrice: (product: CartItemData) => number;
   onAddQuantity: (product: CartItemData) => void;
   onReduceQuantity: (product: CartItemData) => void;
@@ -34,6 +35,7 @@ export const CartContext = createContext<ContextValue>({
   addToCart: () => {},
   sumQuantity: () => 0,
   sumTotal: () => 0,
+  calculateVat: () => 0,
   sumProductPrice: () => 0,
   onAddQuantity: () => {},
   onReduceQuantity: () => {},
@@ -48,6 +50,7 @@ const CartProvider: FC = (props) => {
   // const [cart, setCart] = useState<CartItemData[]>([]); removed and replaced with the below one that save to LS
   const [cart, setCart] = useLocalStorageState<CartItemData[]>([], "cc-cart");
   const [order, setOrder] = useState<OrderData[]>([]);
+  const vatRate: number = 0.25;
 
   const createOrder = (formValues) => {
     order.length = 0;
@@ -91,6 +94,12 @@ const CartProvider: FC = (props) => {
     for (let i = 0; i < itemData.length; i++) {
       sum += itemData[i].price * itemData[i].quantity;
     }
+    return sum;
+  };
+
+  const calculateVat = (itemData: CartItemData[]) => {
+    let sum = 0;
+    sum = Math.round(sumTotal(itemData) * vatRate);
     return sum;
   };
 
@@ -152,6 +161,7 @@ const CartProvider: FC = (props) => {
         addToCart,
         sumQuantity,
         sumTotal,
+        calculateVat,
         sumProductPrice,
         onAddQuantity,
         onReduceQuantity,

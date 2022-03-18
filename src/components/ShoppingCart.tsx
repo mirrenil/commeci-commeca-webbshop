@@ -10,6 +10,7 @@ function ShoppingCart() {
   const {
     cart,
     sumTotal,
+    calculateVat,
     sumProductPrice,
     onAddQuantity,
     onReduceQuantity,
@@ -151,33 +152,34 @@ function ShoppingCart() {
         ></Box>
         <Box
           sx={{
-            display: "flex",
-            justifyContent: "space-around",
             m: "1rem 2rem",
           }}
         >
-          <Typography
-            variant="h6"
+          <Box
             sx={{
-              width: "800px",
               display: "flex",
-              flexDirection: "row",
-              gap: "1rem",
+              justifyContent: "space-between",
+              placeItems: "center",
             }}
           >
-            Total
-          </Typography>
-          <Typography
+            <Typography variant="h6">Total</Typography>
+            <Typography variant="h6">
+              {numWithSpaces(sumTotal(cart))} SEK
+            </Typography>
+          </Box>
+          <Box
             sx={{
-              width: "800px",
               display: "flex",
-              flexDirection: "row",
-              justifyContent: "flex-end",
-              gap: "1rem",
+              justifyContent: "space-between",
+              margin: "1rem 0 0 0.5rem",
+              placeItems: "center",
             }}
           >
-            {numWithSpaces(sumTotal(cart))} SEK
-          </Typography>
+            <Typography variant="inherit">VAT</Typography>
+            <Typography variant="inherit">
+              {numWithSpaces(calculateVat(cart))} SEK
+            </Typography>
+          </Box>
         </Box>
       </Container>
     </Container>
