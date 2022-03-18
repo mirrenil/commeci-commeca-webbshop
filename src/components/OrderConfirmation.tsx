@@ -14,6 +14,7 @@ import HomeButton from "./shared/HomeButton";
 
 const OrderConfirmation = () => {
   const { order, sumProductPrice, numWithSpaces, sumTotal } = useCart();
+  const vatRate: number = 0.25;
 
   return (
     <Container
@@ -50,13 +51,6 @@ const OrderConfirmation = () => {
               variant="inherit"
             >
               Order#: {orderDetail.orderNo}
-              {/* {console.log(orderDetail.boughtItems)} */}
-              {/* {console.log(
-                Object.keys(orderDetail.boughtItems).map(function (key, item) {
-                  return orderDetail.boughtItems[key];
-                })
-              )} */}
-              {/* {console.log(orderDetail.boughtItems.length)} */}
             </Typography>
             <Typography
               sx={{ fontFamily: "Prata", mt: "1rem" }}
@@ -119,9 +113,11 @@ const OrderConfirmation = () => {
                         sx={{ padding: "30px 16px 5px 16px", border: "none" }}
                       >
                         {numWithSpaces(
-                          sumTotal(orderDetail.boughtItems) * 0.75
+                          Math.round(
+                            sumTotal(orderDetail.boughtItems) * (1 - vatRate)
+                          )
                         )}
-                        SEK
+                        &nbsp;SEK
                       </TableCell>
                     </TableRow>
                     <TableRow>
@@ -162,7 +158,7 @@ const OrderConfirmation = () => {
                         }}
                       >
                         {numWithSpaces(sumTotal(orderDetail.boughtItems))}
-                        SEK
+                        &nbsp;SEK
                       </TableCell>
                     </TableRow>
                     <TableRow>
@@ -195,9 +191,11 @@ const OrderConfirmation = () => {
                         sx={{ padding: "0px 16px", border: "none" }}
                       >
                         {numWithSpaces(
-                          sumTotal(orderDetail.boughtItems) * 0.25
+                          Math.round(
+                            sumTotal(orderDetail.boughtItems) * vatRate
+                          )
                         )}
-                        SEK
+                        &nbsp;SEK
                       </TableCell>
                     </TableRow>
                     <TableRow>
