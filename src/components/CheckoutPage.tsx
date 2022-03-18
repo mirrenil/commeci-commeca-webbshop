@@ -31,23 +31,22 @@ const InitialValue: FormValues = {
   name: "Name",
   address: "Address",
   email: "Email",
-  phonenumber: 0,
+  phonenumber: 1234567890,
 };
 
 const validationSchema = yup.object({
   name: yup.string().required("Name is required"),
   address: yup.string().required("Address is required"),
   email: yup.string().required("Email is required"),
-  phonenumber: yup
+  phoneNumber: yup
     .string()
-    .min(10, "Phonenumber should be minimum 10 characters"),
+    .min(10, "Phone number should be minimum 10 characters"),
 });
 
 function CheckoutPage() {
   const navigate = useNavigate();
   const [value, setValue] = useState("postnord");
-  const { cart, numWithSpaces, sumCartAmount, emptyCart, createOrder } =
-    useCart();
+  const { cart, numWithSpaces, sumTotal, emptyCart, createOrder } = useCart();
 
   const { values, errors, touched, handleSubmit, handleChange } =
     useFormik<FormValues>({
@@ -56,7 +55,7 @@ function CheckoutPage() {
 
       // what to do onSubmit: (1) generate order number -done; (2) save the order number, the purchase and form values -half done, saved order no and part of the form value;
       // (3) empty the cart -done with bug (4) direct to confirmation page (details in confirmation page shouldnt be inserted from order)
-      onSubmit: (values) => {
+      onSubmit: (values: FormValues) => {
         let promise = new Promise((resolve) => {
           setTimeout(() => {
             createOrder(values);
@@ -344,7 +343,8 @@ function CheckoutPage() {
                 fontWeight: "bold",
               }}
             >
-              Total: {numWithSpaces(sumCartAmount())} SEK
+              {/* this calculation must be updated as shipping cost is not added  */}
+              Total: {numWithSpaces(sumTotal(cart))} SEK
             </Typography>
             <Button
               size="large"
