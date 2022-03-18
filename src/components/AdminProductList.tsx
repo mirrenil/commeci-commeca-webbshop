@@ -1,7 +1,7 @@
 import { DeleteOutline } from "@mui/icons-material";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import { Button } from "@mui/material";
+import { Button, TextField } from "@mui/material";
 import Box from "@mui/material/Box";
 import Collapse from "@mui/material/Collapse";
 import IconButton from "@mui/material/IconButton";
@@ -17,7 +17,6 @@ import TableRow from "@mui/material/TableRow";
 import * as React from "react";
 import { ProductContext, useAdmin } from "../context/AdminPageContext";
 import { productData, ProductData } from "../ProductData";
-import { isContentEditable, isEditable } from "@testing-library/user-event/dist/utils";
 
 interface Props {
   product: ProductData;
@@ -37,11 +36,10 @@ function ProductTable(props: Props) {
 
 
   const [open, setOpen] = React.useState(false);
-  const [rows, setRows] = React.useState(productData);
-
+  ///const [rows, setRows] = React.useState(productData);
   return (
-    <React.Fragment>
-      <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
+  <React.Fragment>
+     <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
         <TableCell>
           <IconButton
             aria-label="expand row"
@@ -92,8 +90,7 @@ function ProductTable(props: Props) {
                     <TableCell align="right">{props.product.id}</TableCell>
                     <TableCell align="right">{props.product.title}</TableCell>
                     <TableCell align="left">
-                      {props.product.description}
-                    </TableCell>
+                      {props.product.description} </TableCell>
                     <TableCell align="right">{props.product.price}</TableCell>
                     <TableCell>
                       <Button
@@ -131,10 +128,11 @@ function ProductTable(props: Props) {
         </TableCell>
       </TableRow>
     </React.Fragment>
-  );
+  )
 }
 
 interface PropsTable {
+  products: ProductData[];
 }
 
 export default function CollapsibleTable(props: PropsTable) {
@@ -162,34 +160,3 @@ export default function CollapsibleTable(props: PropsTable) {
     </TableContainer>
   );
 }
-
-// <div style={{ display: "flex", justifyContent: "space-between" }}>
-//           <div>
-//             {isEdit ? (
-//               <div>
-//                 {rows.length !== 0 && (
-//                   <div>
-//                     {disable ? (
-//                       <Button disabled align="right" onClick={handleSave}>
-//                         <DoneIcon />
-//                         SAVE
-//                       </Button>
-//                     ) : (
-//                       <Button align="right" onClick={handleSave}>
-//                         <DoneIcon />
-//                         SAVE
-//                       </Button>
-//                     )}
-//                   </div>
-//                 )}
-//               </div>
-//             ) : (
-//               <div>
-//                 <Button align="right" onClick={handleEdit}>
-//                   <CreateIcon />
-//                   EDIT
-//                 </Button>
-//               </div>
-//             )}
-//           </div>
-//         </div>
