@@ -6,7 +6,8 @@ import { ProductData } from "../ProductData";
 interface CartItemData extends ProductData {
   quantity: number;
 }
-interface OrderData extends FormValues, CartItemData {
+
+interface OrderData extends FormValues {
   orderNo: string;
   boughtItems: CartItemData[];
 }
@@ -49,8 +50,8 @@ const CartProvider: FC = (props) => {
   const [order, setOrder] = useState<OrderData[]>([]);
 
   const createOrder = (formValues) => {
-    // order.length = 0; // add back when done
-    const boughtItems = { ...cart };
+    order.length = 0;
+    const boughtItems = [...cart];
     let updatedOrder: OrderData = {
       ...formValues,
       boughtItems: boughtItems,
