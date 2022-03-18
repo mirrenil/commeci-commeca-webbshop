@@ -16,8 +16,8 @@ interface ContextValue {
   cart: CartItemData[];
   order: OrderData[];
   addToCart: (product: ProductData) => void;
-  sumCartQuantity: () => number;
-  sumCartAmount: () => number;
+  sumQuantity: (itemData: CartItemData[]) => number;
+  sumTotal: (itemData: CartItemData[]) => number;
   sumProductPrice: (product: CartItemData) => number;
   onAddQuantity: (product: CartItemData) => void;
   onReduceQuantity: (product: CartItemData) => void;
@@ -32,8 +32,8 @@ export const CartContext = createContext<ContextValue>({
   cart: [],
   order: [],
   addToCart: () => {},
-  sumCartQuantity: () => 0,
-  sumCartAmount: () => 0,
+  sumQuantity: () => 0,
+  sumTotal: () => 0,
   sumProductPrice: () => 0,
   onAddQuantity: () => {},
   onReduceQuantity: () => {},
@@ -59,7 +59,7 @@ const CartProvider: FC = (props) => {
     };
     setOrder([...order, updatedOrder]);
   };
-  console.log(order);
+  // console.log(order);
 
   const addToCart = async (product: ProductData) => {
     // if (cart.map((item) => item.id).includes(product.id))
@@ -68,30 +68,28 @@ const CartProvider: FC = (props) => {
         if (product.id !== item.id) return item;
         return { ...item, quantity: item.quantity + 1 };
       });
-      setCart(updatedCart);
       setCart(updatedCart); // update to LS
     } else {
       const cartItem: CartItemData = { ...product, quantity: 1 };
-      setCart([...cart, cartItem]);
       setCart([...cart, cartItem]);
     }
     // console.log(cart);
   };
 
-  const sumCartQuantity = () => {
+  const sumQuantity = (itemData: CartItemData[]) => {
     let sum = 0;
-    for (let i = 0; i < cart.length; i++) {
-      sum += cart[i].quantity;
+    for (let i = 0; i < itemData.length; i++) {
+      sum += itemData[i].quantity;
     }
-    sumCartAmount();
+    sumTotal(itemData);
     return sum;
     // return cart.reduce((sum, item) => sum + item.quantity, 0);
   };
 
-  const sumCartAmount = () => {
+  const sumTotal = (itemData: CartItemData[]) => {
     let sum = 0;
-    for (let i = 0; i < cart.length; i++) {
-      sum += cart[i].price * cart[i].quantity;
+    for (let i = 0; i < itemData.length; i++) {
+      sum += itemData[i].price * itemData[i].quantity;
     }
     return sum;
   };
@@ -152,8 +150,8 @@ const CartProvider: FC = (props) => {
         cart,
         order,
         addToCart,
-        sumCartQuantity,
-        sumCartAmount,
+        sumQuantity,
+        sumTotal,
         sumProductPrice,
         onAddQuantity,
         onReduceQuantity,

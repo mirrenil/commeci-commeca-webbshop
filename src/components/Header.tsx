@@ -24,7 +24,7 @@ interface Page {
 }
 
 function Header() {
-  const { sumCartQuantity } = useCart();
+  const { cart, sumQuantity } = useCart();
   const [anchorMenu, setAnchorMenu] = useState(false);
   const { ccLogo, icon, iconsContainer, quantityIcon } = useStyles();
 
@@ -76,7 +76,7 @@ function Header() {
               vertical: "top",
               horizontal: "right",
             }}
-            badgeContent={sumCartQuantity()}
+            badgeContent={sumQuantity(cart)}
             color="warning"
           >
             <img className={icon} src={cartIcon} alt="cart" />

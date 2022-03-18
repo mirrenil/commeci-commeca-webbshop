@@ -13,7 +13,7 @@ import { useCart } from "../context/CartContextProvider";
 import HomeButton from "./shared/HomeButton";
 
 const OrderConfirmation = () => {
-  const { order, sumProductPrice, numWithSpaces, sumCartAmount } = useCart();
+  const { order, sumProductPrice, numWithSpaces, sumTotal } = useCart();
 
   return (
     <Container
@@ -118,7 +118,10 @@ const OrderConfirmation = () => {
                         align="right"
                         sx={{ padding: "30px 16px 5px 16px", border: "none" }}
                       >
-                        {numWithSpaces(sumCartAmount() * 0.75)} SEK
+                        {numWithSpaces(
+                          sumTotal(orderDetail.boughtItems) * 0.75
+                        )}
+                        SEK
                       </TableCell>
                     </TableRow>
                     <TableRow>
@@ -158,7 +161,8 @@ const OrderConfirmation = () => {
                           border: "none",
                         }}
                       >
-                        {numWithSpaces(sumCartAmount())} SEK
+                        {numWithSpaces(sumTotal(orderDetail.boughtItems))}
+                        SEK
                       </TableCell>
                     </TableRow>
                     <TableRow>
@@ -190,7 +194,10 @@ const OrderConfirmation = () => {
                         align="right"
                         sx={{ padding: "0px 16px", border: "none" }}
                       >
-                        {numWithSpaces(sumCartAmount() * 0.25)} SEK
+                        {numWithSpaces(
+                          sumTotal(orderDetail.boughtItems) * 0.25
+                        )}
+                        SEK
                       </TableCell>
                     </TableRow>
                     <TableRow>

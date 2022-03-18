@@ -9,7 +9,7 @@ import { useCart } from "../context/CartContextProvider";
 function ShoppingCart() {
   const {
     cart,
-    sumCartAmount,
+    sumTotal,
     sumProductPrice,
     onAddQuantity,
     onReduceQuantity,
@@ -176,7 +176,7 @@ function ShoppingCart() {
               gap: "1rem",
             }}
           >
-            {numWithSpaces(sumCartAmount())} SEK
+            {numWithSpaces(sumTotal(cart))} SEK
           </Typography>
         </Box>
       </Container>
