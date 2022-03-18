@@ -1,10 +1,12 @@
 import { DeleteOutline } from "@mui/icons-material";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import { Button } from "@mui/material";
+import { Button, TextField } from "@mui/material";
 import Box from "@mui/material/Box";
 import Collapse from "@mui/material/Collapse";
 import IconButton from "@mui/material/IconButton";
+import EditIcon from '@mui/icons-material/Edit';
+import DoneIcon from '@mui/icons-material/Done';
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -22,38 +24,22 @@ interface Props {
 
 function ProductTable(props: Props) {
 
-    const 
+  const
     {
-    products,
-    addProduct,
-    removeProduct,
+      products,
+      addProduct,
+      isEdit,
+      setEdit,
+      saveProduct,
+      removeProduct,
     } = useAdmin();
 
 
   const [open, setOpen] = React.useState(false);
-  const [rows, setRows] = React.useState(productData);
-  
-
- 
-  // Handle the case of delete confirmation where
-  // user click yes delete a specific row of id:i
-  // const removeProduct = (product: ProductData) => {
-  //   console.log(props.product);
-  //   const adminProductList = [...rows];
-  //   //const index = productData.indexOf(products);
-  //   for (let i = 0; i < adminProductList.length; i++) {
-  //     if (adminProductList.includes(props.product)) {
-  //       adminProductList.splice(i);
-  //     }
-  //   }
-
-  //   setRows(adminProductList);
-  //   //setShowConfirm(false);
-  // };
-
+  ///const [rows, setRows] = React.useState(productData);
   return (
-    <React.Fragment>
-      <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
+  <React.Fragment>
+     <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
         <TableCell>
           <IconButton
             aria-label="expand row"
@@ -85,7 +71,7 @@ function ProductTable(props: Props) {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  <TableRow>
+                  <TableRow contentEditable={isEdit}>
                     <TableCell component="th" scope="row">
                       <img
                         src={props.product.image}
@@ -104,13 +90,35 @@ function ProductTable(props: Props) {
                     <TableCell align="right">{props.product.id}</TableCell>
                     <TableCell align="right">{props.product.title}</TableCell>
                     <TableCell align="left">
-                      {props.product.description}
-                    </TableCell>
+                      {props.product.description} </TableCell>
                     <TableCell align="right">{props.product.price}</TableCell>
                     <TableCell>
-                      <Button onClick={() => {removeProduct(props.product)}}>
+                      <Button
+                        onClick={() => {
+                          removeProduct(props.product);
+                        }}
+                      >
                         <DeleteOutline />
                       </Button>
+                      <div>
+                        {!isEdit ? (
+                          <Button
+                            onClick={() => {
+                              setEdit(true);
+                            }}
+                          >
+                            <EditIcon />
+                          </Button>
+                        ) : (
+                          <Button
+                            onClick={() => {
+                              saveProduct(props.product);
+                            }}
+                          >
+                            <DoneIcon />
+                          </Button>
+                        )}
+                      </div>
                     </TableCell>
                   </TableRow>
                 </TableBody>
@@ -120,10 +128,11 @@ function ProductTable(props: Props) {
         </TableCell>
       </TableRow>
     </React.Fragment>
-  );
+  )
 }
 
 interface PropsTable {
+  products: ProductData[];
 }
 
 export default function CollapsibleTable(props: PropsTable) {
