@@ -13,8 +13,8 @@ import { useCart } from "../context/CartContextProvider";
 import HomeButton from "./shared/HomeButton";
 
 const OrderConfirmation = () => {
-  const { order, sumProductPrice, numWithSpaces, sumTotal } = useCart();
-  const vatRate: number = 0.25;
+  const { order, sumProductPrice, numWithSpaces, sumTotal, calculateVat } =
+    useCart();
 
   return (
     <Container
@@ -113,9 +113,8 @@ const OrderConfirmation = () => {
                         sx={{ padding: "30px 16px 5px 16px", border: "none" }}
                       >
                         {numWithSpaces(
-                          Math.round(
-                            sumTotal(orderDetail.boughtItems) * (1 - vatRate)
-                          )
+                          sumTotal(orderDetail.boughtItems) -
+                            calculateVat(orderDetail.boughtItems)
                         )}
                         &nbsp;SEK
                       </TableCell>
@@ -190,11 +189,7 @@ const OrderConfirmation = () => {
                         align="right"
                         sx={{ padding: "0px 16px", border: "none" }}
                       >
-                        {numWithSpaces(
-                          Math.round(
-                            sumTotal(orderDetail.boughtItems) * vatRate
-                          )
-                        )}
+                        {numWithSpaces(calculateVat(orderDetail.boughtItems))}
                         &nbsp;SEK
                       </TableCell>
                     </TableRow>
