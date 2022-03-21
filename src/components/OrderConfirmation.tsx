@@ -212,7 +212,7 @@ const OrderConfirmation = () => {
                           fontSize: { xs: "12px", sm: "14px" },
                         }}
                       >
-                        {numWithSpaces(orderDetail.shippmentOption.cost)} SEK
+                        {numWithSpaces(orderDetail.shipmentOption.cost)} SEK
                       </TableCell>
                     </TableRow>
                     <TableRow>
@@ -262,8 +262,8 @@ const OrderConfirmation = () => {
                         }}
                         colSpan={3}
                       >
-                        {orderDetail.shippmentOption.providerName}&nbsp;(
-                        {orderDetail.shippmentOption.deliveryTime})
+                        {orderDetail.shipmentOption.providerName}&nbsp;(
+                        {orderDetail.shipmentOption.deliveryTime})
                       </TableCell>
                     </TableRow>
                     <TableRow>

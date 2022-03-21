@@ -6,7 +6,7 @@ import { ItemData, useCart } from "./CartContextProvider";
 interface OrderData extends FormValues {
   orderNo: string;
   boughtItems: ItemData[];
-  shippmentOption: ShippingProvider;
+  shipmentOption: ShippingProvider;
 }
 
 interface ContextValue {
@@ -27,17 +27,16 @@ const OrderProvider: FC = (props) => {
   const [order, setOrder] = useState<OrderData[]>([]);
 
   const createOrder = (formValues) => {
-    setOrder([]);
     const boughtItems = [...cart];
     let updatedOrder: OrderData = {
       ...formValues,
       boughtItems: boughtItems,
-      shippmentOption: shipper,
+      shipmentOption: shipper,
       orderNo: generateOrderNum(),
     };
-    setOrder([...order, updatedOrder]);
+    setOrder([updatedOrder]);
   };
-  // console.log(order);
+  console.log(order);
 
   const generateOrderNum = () => {
     const yy: string = new Date().getFullYear().toString().substr(-2);
@@ -55,7 +54,6 @@ const OrderProvider: FC = (props) => {
     <OrderContext.Provider
       value={{
         order,
-        // shippmentProvider,
         createOrder,
         generateOrderNum,
       }}
