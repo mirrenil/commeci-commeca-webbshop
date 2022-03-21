@@ -1,39 +1,68 @@
-import { createContext, FC, useContext } from "react";
+import { createContext, FC, useContext, useState } from "react";
+import { FormValues } from "../components/CheckoutPage";
 import { useLocalStorageState } from "../components/hooks/useLocalStorageState";
 import { ProductData } from "../ProductData";
 
 interface CartItemData extends ProductData {
   quantity: number;
 }
+
+interface OrderData extends FormValues {
+  orderNo: string;
+  boughtItems: CartItemData[];
+}
+
 interface ContextValue {
   cart: CartItemData[];
+  order: OrderData[];
   addToCart: (product: ProductData) => void;
-  sumCartQuantity: () => number;
-  sumCartAmount: () => number;
-  sumProductPrice: (product) => number;
-  onAddQuantity: (product) => void;
-  onReduceQuantity: (product) => void;
-  removeFromCart: (product) => void;
+  sumQuantity: (itemData: CartItemData[]) => number;
+  sumTotal: (itemData: CartItemData[]) => number;
+  calculateVat: (itemData: CartItemData[]) => number;
+  sumProductPrice: (product: CartItemData) => number;
+  onAddQuantity: (product: CartItemData) => void;
+  onReduceQuantity: (product: CartItemData) => void;
+  removeFromCart: (product: CartItemData) => void;
   numWithSpaces: (num: number) => string;
+  createOrder: (values: FormValues) => void;
+  generateOrderNum: () => string;
   emptyCart: () => void;
 }
 
 export const CartContext = createContext<ContextValue>({
   cart: [],
+  order: [],
   addToCart: () => {},
-  sumCartQuantity: () => 0,
-  sumCartAmount: () => 0,
+  sumQuantity: () => 0,
+  sumTotal: () => 0,
+  calculateVat: () => 0,
   sumProductPrice: () => 0,
   onAddQuantity: () => {},
   onReduceQuantity: () => {},
   removeFromCart: () => {},
   numWithSpaces: () => "", // this function can be written in the product context as well for formatting the price
+  createOrder: () => {},
+  generateOrderNum: () => "",
   emptyCart: () => {},
 });
 
 const CartProvider: FC = (props) => {
   // const [cart, setCart] = useState<CartItemData[]>([]); removed and replaced with the below one that save to LS
   const [cart, setCart] = useLocalStorageState<CartItemData[]>([], "cc-cart");
+  const [order, setOrder] = useState<OrderData[]>([]);
+  const vatRate: number = 0.25;
+
+  const createOrder = (formValues) => {
+    order.length = 0;
+    const boughtItems = [...cart];
+    let updatedOrder: OrderData = {
+      ...formValues,
+      boughtItems: boughtItems,
+      orderNo: generateOrderNum(),
+    };
+    setOrder([...order, updatedOrder]);
+  };
+  // console.log(order);
 
   const addToCart = async (product: ProductData) => {
     // if (cart.map((item) => item.id).includes(product.id))
@@ -42,31 +71,35 @@ const CartProvider: FC = (props) => {
         if (product.id !== item.id) return item;
         return { ...item, quantity: item.quantity + 1 };
       });
-      setCart(updatedCart);
       setCart(updatedCart); // update to LS
     } else {
       const cartItem: CartItemData = { ...product, quantity: 1 };
       setCart([...cart, cartItem]);
-      setCart([...cart, cartItem]);
     }
-    console.log(cart);
+    // console.log(cart);
   };
 
-  const sumCartQuantity = () => {
+  const sumQuantity = (itemData: CartItemData[]) => {
     let sum = 0;
-    for (let i = 0; i < cart.length; i++) {
-      sum += cart[i].quantity;
+    for (let i = 0; i < itemData.length; i++) {
+      sum += itemData[i].quantity;
     }
-    sumCartAmount();
+    sumTotal(itemData);
     return sum;
     // return cart.reduce((sum, item) => sum + item.quantity, 0);
   };
 
-  const sumCartAmount = () => {
+  const sumTotal = (itemData: CartItemData[]) => {
     let sum = 0;
-    for (let i = 0; i < cart.length; i++) {
-      sum += cart[i].price * cart[i].quantity;
+    for (let i = 0; i < itemData.length; i++) {
+      sum += itemData[i].price * itemData[i].quantity;
     }
+    return sum;
+  };
+
+  const calculateVat = (itemData: CartItemData[]) => {
+    let sum = 0;
+    sum = Math.round(sumTotal(itemData) * vatRate);
     return sum;
   };
 
@@ -104,6 +137,18 @@ const CartProvider: FC = (props) => {
     return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
   };
 
+  const generateOrderNum = () => {
+    const yy: string = new Date().getFullYear().toString().substr(-2);
+    const mm: number = new Date().getMonth() + 1;
+    const dd: number = new Date().getDate();
+    const formattedDate =
+      yy + (mm > 9 ? "" : "0") + mm + (dd > 9 ? "" : "0") + dd;
+
+    const randomNum: number = Math.floor(Math.random() * 100000);
+    const orderNum: string = formattedDate + "-" + randomNum;
+    return orderNum;
+  };
+
   const emptyCart = () => {
     cart.length = 0;
   };
@@ -112,14 +157,18 @@ const CartProvider: FC = (props) => {
     <CartContext.Provider
       value={{
         cart,
+        order,
         addToCart,
-        sumCartQuantity,
-        sumCartAmount,
+        sumQuantity,
+        sumTotal,
+        calculateVat,
         sumProductPrice,
         onAddQuantity,
         onReduceQuantity,
         removeFromCart,
         numWithSpaces,
+        createOrder,
+        generateOrderNum,
         emptyCart,
       }}
     >

@@ -12,7 +12,6 @@ import {
 import { useFormik } from "formik";
 import { FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
 import * as yup from "yup";
 import DhlLogo from "../assets/images/DhlLogo.png";
 import PostnordLogo from "../assets/images/PostnordLogo.webp";
@@ -21,26 +20,19 @@ import { useCart } from "../context/CartContextProvider";
 import EmptyCart from "./EmptyCart";
 import ShoppingCart from "./ShoppingCart";
 
-interface ContactFormValues {
+export interface FormValues {
   name: string;
   email: string;
   address: string;
-  phonenumber: number;
+  phoneNumber: number;
 }
 
-const InitialValue: ContactFormValues = {
+const InitialValue: FormValues = {
   name: "Name",
   address: "Address",
   email: "Email",
-  phonenumber: 12345,
+  phoneNumber: 1234567890,
 };
-
-const ContactValidationSchema = yup.object({
-  name: yup.string().required("Name is required"),
-  address: yup.string().required("Address is required"),
-  email: yup.string().required("Email is required"),
-  phonenumber: yup.string().required("Phonenumber is required"),
-});
 
 interface PaymentFormValues {
   card: number;
@@ -54,34 +46,39 @@ const PaymentValue: PaymentFormValues = {
   invoice: 1234,
 };
 
+const ContactValidationSchema = yup.object({
+  name: yup.string().required("Name is required"),
+  address: yup.string().required("Address is required"),
+  email: yup.string().required("Email is required"),
+  phoneNumber: yup.string().required("Phone number is required"),
+});
+
 function CheckoutPage() {
   const navigate = useNavigate();
-  const [order, setOrder] = useState<ContactFormValues[]>([]); // not done, re issue #45
-
   const [value, setValue] = useState("postnord");
-  const { cart, numWithSpaces, sumCartAmount, emptyCart } = useCart();
+  const { cart, numWithSpaces, sumTotal, emptyCart, createOrder } = useCart();
 
   const { values, errors, touched, handleSubmit, handleChange } =
-    useFormik<ContactFormValues>({
+    useFormik<FormValues>({
       initialValues: InitialValue,
       validationSchema: ContactValidationSchema,
 
-      // what to do onSubmit: (1) generate order number; (2) save the orer number, the purchase and form values;
-      // (3) empty the cart; (4) direct to confirmation page (details in confirmation page shouldnt be inserted from cart)
-      onSubmit: (values) => {
-        console.log(values);
-
+      // what to do onSubmit: (1) generate order number -done; (2) save the order number, the purchase and form values -half done, saved order no and part of the form value;
+      // (3) empty the cart -done with bug (4) direct to confirmation page -half done for part of the form value
+      onSubmit: (values: FormValues) => {
         let promise = new Promise((resolve) => {
           setTimeout(() => {
-            setOrder([...order, values]);
+            createOrder(values);
             resolve(values);
           }, 2000);
         });
         promise.then(() => {
           navigate("/confirmation");
-          emptyCart(); // not reflecting in header
-          // console.log(order); // not correct
+          // console.log(cart);
+          emptyCart(); // cart qty is not updated on header
         });
+        // console.log(cart);
+        //emptyCart(); // cart qty is updated on header but it empties the cart before it's saved to order
       },
     });
 
@@ -265,14 +262,14 @@ function CheckoutPage() {
                   backgroundColor: "white",
                 }}
                 id="phonennumber-input"
-                name="phonenumber"
-                label="Phonenumber"
+                name="phoneNumber"
+                label="PhoneNumber"
                 type="text"
                 margin="normal"
-                value={values.phonenumber}
+                value={values.phoneNumber}
                 onChange={handleChange}
-                error={touched.phonenumber && Boolean(errors.phonenumber)}
-                helperText={errors.phonenumber}
+                error={touched.phoneNumber && Boolean(errors.phoneNumber)}
+                helperText={errors.phoneNumber}
               />
             </Box>
           </Box>
@@ -361,8 +358,8 @@ function CheckoutPage() {
                           width: "250px",
                         }}
                         id="number-input"
-                        name="phonenumber"
-                        label="Phonenumber"
+                        name="phoneNumber"
+                        label="PhoneNumber"
                         type="text"
                         size="small"
                         onChange={handleChange}
@@ -393,8 +390,8 @@ function CheckoutPage() {
                           width: "250px",
                         }}
                         id="number-input"
-                        name="phonenumber"
-                        label="Phonenumber"
+                        name="phoneNumber"
+                        label="PhoneNumber"
                         type="text"
                         size="small"
                         onChange={handleChange}
@@ -424,7 +421,8 @@ function CheckoutPage() {
                 fontWeight: "bold",
               }}
             >
-              Total: {numWithSpaces(sumCartAmount())} SEK
+              {/* this calculation must be updated as shipping cost is not added  */}
+              Total: {numWithSpaces(sumTotal(cart))} SEK
             </Typography>
             <Button
               size="large"
