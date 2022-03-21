@@ -17,7 +17,7 @@ import SwishLogo from "../assets/images/SwishLogo.svg";
 import { useCart } from "../context/CartContextProvider";
 import { useOrder } from "../context/OrderContextProvider";
 import { numWithSpaces, UseSumTotal } from "../Helper";
-import { shippingProvider, ShippingProvider } from "../ShippingProviderData";
+import { shippingProvider } from "../ShippingProviderData";
 import EmptyCart from "./EmptyCart";
 import ShoppingCart from "./ShoppingCart";
 export interface FormValues {
@@ -53,7 +53,7 @@ const ContactValidationSchema = yup.object({
 function CheckoutPage() {
   const navigate = useNavigate();
   const [value, setValue] = useState("postnord");
-  const { cart, emptyCart } = useCart();
+  const { cart, emptyCart, selectShippment } = useCart();
   const { createOrder } = useOrder();
 
   const { values, errors, touched, handleSubmit, handleChange } =
@@ -62,7 +62,7 @@ function CheckoutPage() {
       validationSchema: ContactValidationSchema,
 
       // what to do onSubmit: (1) generate order number -done; (2) save the order number, the purchase and form values -half done, saved order no and part of the form value;
-      // (3) empty the cart -done with bug (4) direct to confirmation page -half done for part of the form value
+      // (3) empty the cart -done (4) direct to confirmation page -half done for part of the form value
       onSubmit: (values: FormValues) => {
         let promise = new Promise((resolve) => {
           setTimeout(() => {
@@ -72,23 +72,13 @@ function CheckoutPage() {
         });
         promise.then(() => {
           navigate("/confirmation");
-          // console.log(cart);
-          emptyCart(); // cart qty is not updated on header
+          emptyCart();
         });
-        // console.log(cart);
-        //emptyCart(); // cart qty is updated on header but it empties the cart before it's saved to order
       },
     });
 
   const handleRadioChange = (event: FormEvent<HTMLInputElement>) => {
     setValue(event.currentTarget.value);
-  };
-
-  const sumDeliveryCost = (provider: ShippingProvider) => {
-    let sum = 0;
-    sum = UseSumTotal(cart, true) + provider.cost;
-    console.log(sum);
-    return sum;
   };
 
   return cart.length < 1 ? (
@@ -126,9 +116,6 @@ function CheckoutPage() {
               padding: "2rem",
             }}
           >
-            {/* <Typography variant="h6" gutterBottom>
-              Choose delivery:
-            </Typography> */}
             <RadioGroup
               aria-label="delivery method"
               name="delivery"
@@ -141,7 +128,7 @@ function CheckoutPage() {
                     control={<Radio />}
                     value={provider.providerName}
                     key={provider.providerName}
-                    onClick={() => sumDeliveryCost(provider)}
+                    onClick={() => selectShippment(provider)}
                     label={
                       <Box
                         sx={{
@@ -169,7 +156,7 @@ function CheckoutPage() {
                     control={<Radio />}
                     value={provider.providerName}
                     key={provider.providerName}
-                    onClick={() => sumDeliveryCost(provider)}
+                    onClick={() => selectShippment(provider)}
                     label={
                       <Box
                         sx={{

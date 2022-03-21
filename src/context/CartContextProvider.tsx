@@ -8,36 +8,36 @@ export interface ItemData extends ProductData {
 }
 interface ContextValue {
   cart: ItemData[];
-  shippmentProvider: ShippingProvider;
+  shipper: ShippingProvider;
   addToCart: (product: ProductData) => void;
   onAddQuantity: (product: ItemData) => void;
   onReduceQuantity: (product: ItemData) => void;
   removeFromCart: (product: ItemData) => void;
   emptyCart: () => void;
+  selectShippment: (provider: ShippingProvider) => void;
 }
 
 export const CartContext = createContext<ContextValue>({
   cart: [],
-  shippmentProvider: {
+  shipper: {
     providerName: "",
     cost: 0,
     deliveryTime: "",
-    logoImage: "",
   },
   addToCart: () => {},
   onAddQuantity: () => {},
   onReduceQuantity: () => {},
   removeFromCart: () => {},
   emptyCart: () => {},
+  selectShippment: () => {},
 });
 
 const CartProvider: FC = (props) => {
   const [cart, setCart] = useLocalStorageState<ItemData[]>([], "cc-cart");
-  const [shippmentProvider, setShippmentProvider] = useState<ShippingProvider>({
+  const [shipper, setShipper] = useState<ShippingProvider>({
     providerName: "Postnord",
     cost: 495,
     deliveryTime: "3-5 Weekdays",
-    logoImage: "",
   });
 
   const addToCart = async (product: ProductData) => {
@@ -81,16 +81,22 @@ const CartProvider: FC = (props) => {
     setCart([]);
   };
 
+  const selectShippment = (provider: ShippingProvider) => {
+    setShipper(provider);
+    console.log(shipper);
+  };
+
   return (
     <CartContext.Provider
       value={{
         cart,
-        shippmentProvider,
+        shipper,
         addToCart,
         onAddQuantity,
         onReduceQuantity,
         removeFromCart,
         emptyCart,
+        selectShippment,
       }}
     >
       {props.children}

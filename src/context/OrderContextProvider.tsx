@@ -6,7 +6,7 @@ import { ItemData, useCart } from "./CartContextProvider";
 interface OrderData extends FormValues {
   orderNo: string;
   boughtItems: ItemData[];
-  deliveryOption?: ShippingProvider;
+  shippmentOption: ShippingProvider;
 }
 
 interface ContextValue {
@@ -18,27 +18,21 @@ interface ContextValue {
 
 export const OrderContext = createContext<ContextValue>({
   order: [],
-  // shippmentProvider: {
-  //   providerName: "",
-  //   cost: 0,
-  //   deliveryTime: "",
-  //   logoImage: "",
-  // },
   createOrder: () => {},
   generateOrderNum: () => "",
 });
 
 const OrderProvider: FC = (props) => {
-  const { cart } = useCart();
+  const { cart, shipper } = useCart();
   const [order, setOrder] = useState<OrderData[]>([]);
 
   const createOrder = (formValues) => {
-    order.length = 0;
+    setOrder([]);
     const boughtItems = [...cart];
     let updatedOrder: OrderData = {
       ...formValues,
       boughtItems: boughtItems,
-      // deliveryOption: provider,
+      shippmentOption: shipper,
       orderNo: generateOrderNum(),
     };
     setOrder([...order, updatedOrder]);

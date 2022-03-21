@@ -1,4 +1,5 @@
 import { ItemData, useCart } from "./context/CartContextProvider";
+import { ShippingProvider } from "./ShippingProviderData";
 
 export const sumQuantity = (itemData: ItemData[]) => {
   let sum = 0;
@@ -9,14 +10,14 @@ export const sumQuantity = (itemData: ItemData[]) => {
 };
 
 export const UseSumTotal = (itemData: ItemData[], includeShipping: boolean) => {
-  const { shippmentProvider } = useCart();
+  const { shipper } = useCart();
   let sum = 0;
   for (let i = 0; i < itemData.length; i++) {
     sum += itemData[i].price * itemData[i].quantity;
   }
 
   if (includeShipping) {
-    sum += shippmentProvider.cost;
+    sum += shipper.cost;
   }
   return sum;
 };
@@ -36,4 +37,14 @@ export const sumProductPrice = (product: ItemData) => {
 
 export const numWithSpaces = (num: number) => {
   return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+};
+
+export const sumDeliveryCost = (
+  itemData: ItemData[],
+  provider: ShippingProvider
+) => {
+  let sum = 0;
+  sum = UseSumTotal(itemData, true) + provider.cost;
+  console.log(sum);
+  return sum;
 };
