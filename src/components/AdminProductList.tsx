@@ -26,7 +26,6 @@ function ProductTable(props: Props) {
   const
     {
       products,
-      addProduct,
       isEdit,
       setEdit,
       saveProduct,
@@ -220,6 +219,7 @@ export default function CollapsibleTable(props: PropsTable) {
             <TableCell align="right">ID</TableCell>
 
             <TableCell align="right">PRICE</TableCell>
+            
           </TableRow>
         </TableHead>
         <TableBody>

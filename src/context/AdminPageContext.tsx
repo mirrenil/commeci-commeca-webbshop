@@ -9,7 +9,6 @@ interface AdminData extends ProductData {
 
 interface ContextValue {
   products: ProductData[];
-  addProduct: (product: ProductData) => void;
   setEdit: React.Dispatch<React.SetStateAction<boolean>>
   isEdit: boolean
   saveProduct: (product: ProductData) => void;
@@ -19,7 +18,6 @@ interface ContextValue {
 
 export const ProductContext = createContext<ContextValue>({
     products: [],
-    addProduct: (product) => [],
     setEdit: () => [],
     isEdit: false,
     saveProduct: (product) => [],
@@ -32,9 +30,9 @@ const ProductProvider = (props) => {
     const [isEdit, setEdit] = useState(false);
     console.log(products)
 
-    const addProduct = (product: ProductData) => {
-       // setProducts([...products, product]);
-    }
+    // const addProduct = (product: ProductData) => {
+    //    // setProducts([...products, product]);
+    // }
 
     const removeProduct = (productToBeRemoved: ProductData) => {
         const updatedProductList = products.filter((product) => productToBeRemoved.id !== product.id)  
@@ -66,11 +64,6 @@ const ProductProvider = (props) => {
     }
 
         
-    //  const handleChange = (e, editedProduct: ProductData) => {
-    //     let editedText = products.map((products, e) => products !== editedProduct)
-    //         saveProduct(editedText)
-    // }
-
     return (
         <ProductContext.Provider
             value={{
@@ -78,7 +71,6 @@ const ProductProvider = (props) => {
             setEdit,
             isEdit,
             saveProduct,
-            addProduct,
             removeProduct,
             inputChangeHandler,
             }}

@@ -1,5 +1,8 @@
 import { ProductData, productData } from "../ProductData";
+import AddIcon from "@mui/icons-material/Add";
 import ProductList from "./AdminProductList";
+import { Button } from "@mui/material";
+import PopUpPortal from "./PopUpPortal";
 
 interface Props {
   products: ProductData[];
@@ -20,8 +23,15 @@ function AdminPage(props: Props) {
       >
         Admin
       </h5>
-
-      <ProductList products={productData} />
+      <div style={{ paddingRight: "4rem" }}>
+        <Button>
+          ADD
+          <AddIcon />
+        </Button>
+      </div>
+      <div>
+        <ProductList products={productData} />
+      </div>
     </div>
   );
 }
