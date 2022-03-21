@@ -13,18 +13,21 @@ import { useFormik } from "formik";
 import { FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
-import DhlLogo from "../assets/images/DhlLogo.png";
-import PostnordLogo from "../assets/images/PostnordLogo.webp";
 import SwishLogo from "../assets/images/SwishLogo.svg";
 import { useCart } from "../context/CartContextProvider";
+import { useOrder } from "../context/OrderContextProvider";
+import { numWithSpaces, UseSumTotal } from "../Helper";
+import { shippingProvider, ShippingProvider } from "../ShippingProviderData";
 import EmptyCart from "./EmptyCart";
 import ShoppingCart from "./ShoppingCart";
-
 export interface FormValues {
   name: string;
   email: string;
   address: string;
   phoneNumber: number;
+  card: number;
+  swish: number;
+  invoice: number;
 }
 
 const InitialValue: FormValues = {
@@ -32,15 +35,6 @@ const InitialValue: FormValues = {
   address: "Address",
   email: "Email",
   phoneNumber: 1234567890,
-};
-
-interface PaymentFormValues {
-  card: number;
-  swish: number;
-  invoice: number;
-}
-
-const PaymentValue: PaymentFormValues = {
   card: 1234,
   swish: 1234,
   invoice: 1234,
@@ -51,12 +45,16 @@ const ContactValidationSchema = yup.object({
   address: yup.string().required("Address is required"),
   email: yup.string().required("Email is required"),
   phoneNumber: yup.string().required("Phone number is required"),
+  card: yup.string().required("Card number is required"),
+  swish: yup.string().required("Phone number is required"),
+  invoice: yup.string().required("Personal number is required"),
 });
 
 function CheckoutPage() {
   const navigate = useNavigate();
   const [value, setValue] = useState("postnord");
-  const { cart, numWithSpaces, sumTotal, emptyCart, createOrder } = useCart();
+  const { cart, emptyCart } = useCart();
+  const { createOrder } = useOrder();
 
   const { values, errors, touched, handleSubmit, handleChange } =
     useFormik<FormValues>({
@@ -73,14 +71,24 @@ function CheckoutPage() {
           }, 2000);
         });
         promise.then(() => {
-          emptyCart();
           navigate("/confirmation");
+          // console.log(cart);
+          emptyCart(); // cart qty is not updated on header
         });
+        // console.log(cart);
+        //emptyCart(); // cart qty is updated on header but it empties the cart before it's saved to order
       },
     });
 
   const handleRadioChange = (event: FormEvent<HTMLInputElement>) => {
     setValue(event.currentTarget.value);
+  };
+
+  const sumDeliveryCost = (provider: ShippingProvider) => {
+    let sum = 0;
+    sum = UseSumTotal(cart, true) + provider.cost;
+    console.log(sum);
+    return sum;
   };
 
   return cart.length < 1 ? (
@@ -112,7 +120,10 @@ function CheckoutPage() {
           <Box
             sx={{
               backgroundColor: "#F3F2F0",
-              padding: "1rem",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              padding: "2rem",
             }}
           >
             {/* <Typography variant="h6" gutterBottom>
@@ -124,62 +135,63 @@ function CheckoutPage() {
               onChange={handleRadioChange}
               value={value}
             >
-              <FormControlLabel
-                control={<Radio />}
-                value="postnord"
-                label={
-                  <Box
-                    sx={{
-                      display: "flex",
-                      justifyContent: "space-around",
-                      m: "1rem 2rem",
-                    }}
-                  >
-                    <img src={PostnordLogo} alt="Postnord" height="20px" />
-                    <Typography variant="body2" style={{ marginLeft: "1rem" }}>
-                      495 SEK (3-5 Weekdays)
-                    </Typography>
-                  </Box>
-                }
-              />
-              <FormControlLabel
-                control={<Radio />}
-                value="dhl"
-                label={
-                  <Box
-                    sx={{
-                      display: "flex",
-                      justifyContent: "space-around",
-                      m: "1rem 2rem",
-                    }}
-                  >
-                    <img src={DhlLogo} alt="DHL" height="20px" />
-                    <Typography variant="body2" style={{ marginLeft: "1rem" }}>
-                      345 SEK (5-7 Weekdays)
-                    </Typography>
-                  </Box>
-                }
-              />
-              <FormControlLabel
-                control={<Radio />}
-                value="pickup"
-                label={
-                  <Box
-                    sx={{
-                      display: "flex",
-                      justifyContent: "space-around",
-                      m: "1rem 2rem",
-                    }}
-                  >
-                    <Typography style={{ fontWeight: "bold" }}>
-                      Pick up on terminal
-                    </Typography>
-                    <Typography variant="body2" style={{ marginLeft: "1rem" }}>
-                      Free (2-3 Weekdays)
-                    </Typography>
-                  </Box>
-                }
-              />
+              {shippingProvider.map((provider) => {
+                return provider.cost !== 0 ? (
+                  <FormControlLabel
+                    control={<Radio />}
+                    value={provider.providerName}
+                    key={provider.providerName}
+                    onClick={() => sumDeliveryCost(provider)}
+                    label={
+                      <Box
+                        sx={{
+                          display: "flex",
+                          justifyContent: "space-around",
+                          m: "1rem 2rem",
+                        }}
+                      >
+                        <img
+                          src={provider.logoImage}
+                          alt={provider.providerName}
+                          height="20px"
+                        />
+                        <Typography
+                          variant="body2"
+                          style={{ marginLeft: "1rem" }}
+                        >
+                          {provider.cost} SEK ({provider.deliveryTime})
+                        </Typography>
+                      </Box>
+                    }
+                  />
+                ) : (
+                  <FormControlLabel
+                    control={<Radio />}
+                    value={provider.providerName}
+                    key={provider.providerName}
+                    onClick={() => sumDeliveryCost(provider)}
+                    label={
+                      <Box
+                        sx={{
+                          display: "flex",
+                          justifyContent: "space-around",
+                          m: "1rem 2rem",
+                        }}
+                      >
+                        <Typography style={{ fontWeight: "bold" }}>
+                          {provider.providerName}
+                        </Typography>
+                        <Typography
+                          variant="body2"
+                          style={{ marginLeft: "1rem" }}
+                        >
+                          Free ({provider.deliveryTime})
+                        </Typography>
+                      </Box>
+                    }
+                  />
+                );
+              })}
             </RadioGroup>
           </Box>
 
@@ -260,7 +272,7 @@ function CheckoutPage() {
                 }}
                 id="phonennumber-input"
                 name="phoneNumber"
-                label="PhoneNumber"
+                label="Phone number"
                 type="text"
                 margin="normal"
                 value={values.phoneNumber}
@@ -287,13 +299,12 @@ function CheckoutPage() {
           <Box
             sx={{
               backgroundColor: "#F3F2F0",
-              padding: "3rem",
-              margin: "1rem",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              padding: "2rem",
             }}
           >
-            {/* <Typography variant="h6" gutterBottom>
-              Choose payment method:
-            </Typography> */}
             <RadioGroup
               aria-label="payment method"
               name="payment"
@@ -328,12 +339,12 @@ function CheckoutPage() {
                         }}
                         id="card-input"
                         name="card"
-                        label="Cardnumber"
+                        label="Card number"
                         type="text"
                         size="small"
                         onChange={handleChange}
-                        error={touched.name && Boolean(errors.name)}
-                        helperText={errors.name}
+                        error={touched.card && Boolean(errors.card)}
+                        helperText={errors.card}
                       />
                     </Box>
                   }
@@ -355,13 +366,13 @@ function CheckoutPage() {
                           width: "250px",
                         }}
                         id="number-input"
-                        name="phoneNumber"
-                        label="PhoneNumber"
+                        name="phonenumber"
+                        label="Phone number"
                         type="text"
                         size="small"
                         onChange={handleChange}
-                        error={touched.name && Boolean(errors.name)}
-                        helperText={errors.name}
+                        error={touched.swish && Boolean(errors.swish)}
+                        helperText={errors.swish}
                       />
                     </Box>
                   }
@@ -387,13 +398,13 @@ function CheckoutPage() {
                           width: "250px",
                         }}
                         id="number-input"
-                        name="phoneNumber"
-                        label="PhoneNumber"
+                        name="personalnumber"
+                        label="Personal number"
                         type="text"
                         size="small"
                         onChange={handleChange}
-                        error={touched.name && Boolean(errors.name)}
-                        helperText={errors.name}
+                        error={touched.invoice && Boolean(errors.invoice)}
+                        helperText={errors.invoice}
                       />
                     </Box>
                   }
@@ -419,7 +430,7 @@ function CheckoutPage() {
               }}
             >
               {/* this calculation must be updated as shipping cost is not added  */}
-              Total: {numWithSpaces(sumTotal(cart))} SEK
+              Total: {numWithSpaces(UseSumTotal(cart, true))} SEK
             </Typography>
             <Button
               size="large"

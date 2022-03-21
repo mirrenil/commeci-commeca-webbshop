@@ -17,6 +17,7 @@ import cartIcon from "../assets/icons/icon-shopping-cart.webp";
 import userIcon from "../assets/icons/icon-user.webp";
 import logo from "../assets/images/logo.svg";
 import { useCart } from "../context/CartContextProvider";
+import { sumQuantity } from "../Helper";
 
 interface Page {
   label: string;
@@ -24,7 +25,7 @@ interface Page {
 }
 
 function Header() {
-  const { cart, sumQuantity } = useCart();
+  const { cart } = useCart();
   const [anchorMenu, setAnchorMenu] = useState(false);
   const { ccLogo, icon, iconsContainer, quantityIcon } = useStyles();
 

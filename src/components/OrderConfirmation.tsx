@@ -9,12 +9,17 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
-import { useCart } from "../context/CartContextProvider";
+import { useOrder } from "../context/OrderContextProvider";
+import {
+  calculateVat,
+  numWithSpaces,
+  sumProductPrice,
+  UseSumTotal,
+} from "../Helper";
 import HomeButton from "./shared/HomeButton";
 
 const OrderConfirmation = () => {
-  const { order, sumProductPrice, numWithSpaces, sumTotal, calculateVat } =
-    useCart();
+  const { order } = useOrder();
 
   return (
     <Container
@@ -113,7 +118,7 @@ const OrderConfirmation = () => {
                         sx={{ padding: "30px 16px 5px 16px", border: "none" }}
                       >
                         {numWithSpaces(
-                          sumTotal(orderDetail.boughtItems) -
+                          UseSumTotal(orderDetail.boughtItems, false) -
                             calculateVat(orderDetail.boughtItems)
                         )}
                         &nbsp;SEK
@@ -156,7 +161,9 @@ const OrderConfirmation = () => {
                           border: "none",
                         }}
                       >
-                        {numWithSpaces(sumTotal(orderDetail.boughtItems))}
+                        {numWithSpaces(
+                          UseSumTotal(orderDetail.boughtItems, false)
+                        )}
                         &nbsp;SEK
                       </TableCell>
                     </TableRow>
