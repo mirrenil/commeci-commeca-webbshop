@@ -329,7 +329,7 @@ function CheckoutPage() {
                       <TextField
                         style={{
                           backgroundColor: "white",
-                          width: "250px",
+                          width: "200px",
                         }}
                         sx={{
                           mt: {
@@ -376,7 +376,7 @@ function CheckoutPage() {
                       <TextField
                         style={{
                           backgroundColor: "white",
-                          width: "250px",
+                          width: "200px",
                         }}
                         sx={{
                           mt: {
@@ -427,7 +427,7 @@ function CheckoutPage() {
                       <TextField
                         style={{
                           backgroundColor: "white",
-                          width: "250px",
+                          width: "200px",
                         }}
                         sx={{
                           mt: {
