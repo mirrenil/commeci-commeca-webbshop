@@ -267,7 +267,7 @@ const OrderConfirmation = () => {
                         }}
                         colSpan={3}
                       >
-                        {orderDetail.phonenumber}
+                        {orderDetail.phoneNumber}
                       </TableCell>
                     </TableRow>
                     <TableRow>
