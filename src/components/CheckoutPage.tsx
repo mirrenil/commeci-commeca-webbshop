@@ -73,12 +73,9 @@ function CheckoutPage() {
           }, 2000);
         });
         promise.then(() => {
+          emptyCart();
           navigate("/confirmation");
-          // console.log(cart);
-          emptyCart(); // cart qty is not updated on header
         });
-        // console.log(cart);
-        //emptyCart(); // cart qty is updated on header but it empties the cart before it's saved to order
       },
     });
 

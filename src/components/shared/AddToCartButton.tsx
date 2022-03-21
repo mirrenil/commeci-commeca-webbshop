@@ -28,8 +28,8 @@ const AddToCartButton = (props: Props) => {
       loadingIndicator="Adding..."
       style={{ ...props.style, backgroundColor: "#CAC2B9" }}
       onClick={() => {
-        addToCart(props.product);
         buttonOnLoad();
+        addToCart(props.product);
       }}
     >
       Add to cart

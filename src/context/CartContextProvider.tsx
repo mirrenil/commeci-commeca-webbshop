@@ -53,7 +53,7 @@ const CartProvider: FC = (props) => {
   const vatRate: number = 0.25;
 
   const createOrder = (formValues) => {
-    order.length = 0;
+    setOrder([]);
     const boughtItems = [...cart];
     let updatedOrder: OrderData = {
       ...formValues,
@@ -150,7 +150,7 @@ const CartProvider: FC = (props) => {
   };
 
   const emptyCart = () => {
-    cart.length = 0;
+    setCart([]);
   };
 
   return (
