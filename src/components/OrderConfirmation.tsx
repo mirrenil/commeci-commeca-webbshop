@@ -66,10 +66,30 @@ const OrderConfirmation = () => {
                 <Table aria-label="order list">
                   <TableHead>
                     <TableRow>
-                      <TableCell>Article</TableCell>
-                      <TableCell align="right">Quantity</TableCell>
-                      <TableCell align="right">Unit Price</TableCell>
-                      <TableCell align="right">Subtotal</TableCell>
+                      <TableCell sx={{ fontSize: { xs: "12px", sm: "14px" } }}>
+                        Article
+                      </TableCell>
+                      <TableCell
+                        align="center"
+                        sx={{ fontSize: { xs: "12px", sm: "14px" } }}
+                      >
+                        Quantity
+                      </TableCell>
+                      <TableCell
+                        align="right"
+                        sx={{
+                          fontSize: { xs: "12px", sm: "14px" },
+                          padding: { xs: 0, sm: "1rem" },
+                        }}
+                      >
+                        Unit Price
+                      </TableCell>
+                      <TableCell
+                        align="right"
+                        sx={{ fontSize: { xs: "12px", sm: "14px" } }}
+                      >
+                        Subtotal
+                      </TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
@@ -83,6 +103,7 @@ const OrderConfirmation = () => {
                             display: "flex",
                             alignItems: "center",
                             gap: "1rem",
+                            fontSize: { xs: "12px", sm: "14px" },
                           }}
                         >
                           <img
@@ -92,11 +113,27 @@ const OrderConfirmation = () => {
                           />
                           {product.title}
                         </TableCell>
-                        <TableCell align="right">{product.quantity}</TableCell>
-                        <TableCell align="right">
+                        <TableCell
+                          align="center"
+                          sx={{ fontSize: { xs: "12px", sm: "14px" } }}
+                        >
+                          {product.quantity}
+                        </TableCell>
+                        <TableCell
+                          align="right"
+                          sx={{
+                            fontSize: { xs: "12px", sm: "14px" },
+                            padding: { xs: 0, sm: "1rem" },
+                          }}
+                        >
                           {numWithSpaces(product.price)} SEK
                         </TableCell>
-                        <TableCell align="right">
+                        <TableCell
+                          align="right"
+                          sx={{
+                            fontSize: { xs: "12px", sm: "14px" },
+                          }}
+                        >
                           {numWithSpaces(sumProductPrice(product))} SEK
                         </TableCell>
                       </TableRow>
@@ -108,6 +145,7 @@ const OrderConfirmation = () => {
                         sx={{
                           border: "none",
                           padding: "30px 16px 5px 16px",
+                          fontSize: { xs: "12px", sm: "14px" },
                         }}
                         colSpan={3}
                       >
@@ -115,7 +153,11 @@ const OrderConfirmation = () => {
                       </TableCell>
                       <TableCell
                         align="right"
-                        sx={{ padding: "30px 16px 5px 16px", border: "none" }}
+                        sx={{
+                          padding: "30px 16px 5px 16px",
+                          border: "none",
+                          fontSize: { xs: "12px", sm: "14px" },
+                        }}
                       >
                         {numWithSpaces(
                           UseSumTotal(orderDetail.boughtItems, false) -
@@ -128,14 +170,22 @@ const OrderConfirmation = () => {
                       <TableCell sx={{ border: "none" }} />
                       <TableCell
                         align="right"
-                        sx={{ border: "none", padding: "0px 16px" }}
+                        sx={{
+                          border: "none",
+                          padding: "4px 16px",
+                          fontSize: { xs: "12px", sm: "14px" },
+                        }}
                         colSpan={2}
                       >
                         VAT 25%
                       </TableCell>
                       <TableCell
                         align="right"
-                        sx={{ padding: "0px 16px", border: "none" }}
+                        sx={{
+                          padding: "4px 16px",
+                          border: "none",
+                          fontSize: { xs: "12px", sm: "14px" },
+                        }}
                       >
                         {numWithSpaces(calculateVat(orderDetail.boughtItems))}
                         &nbsp;SEK
@@ -145,45 +195,36 @@ const OrderConfirmation = () => {
                       <TableCell sx={{ border: "none" }} />
                       <TableCell
                         align="right"
-                        sx={{ border: "none", padding: "0px 16px" }}
                         colSpan={2}
+                        sx={{
+                          border: "none",
+                          padding: "4px 16px",
+                          fontSize: { xs: "12px", sm: "14px" },
+                        }}
                       >
                         Delivery
                       </TableCell>
                       <TableCell
                         align="right"
-                        sx={{ padding: "0px 16px", border: "none" }}
+                        sx={{
+                          padding: "4px 16px",
+                          border: "none",
+                          fontSize: { xs: "12px", sm: "14px" },
+                        }}
                       >
                         {numWithSpaces(orderDetail.shippmentOption.cost)} SEK
                       </TableCell>
                     </TableRow>
                     <TableRow>
                       <TableCell
-                        sx={{
-                          border: "none",
-                          padding: "4px 16px ",
-                        }}
-                      >
-                        Delivery Method
-                      </TableCell>
-                      <TableCell
-                        sx={{
-                          border: "none",
-                          padding: "4px 16px",
-                          fontWeight: "bold",
-                        }}
-                      >
-                        {orderDetail.shippmentOption.providerName}&nbsp;(
-                        {orderDetail.shippmentOption.deliveryTime})
-                      </TableCell>
-                      <TableCell
                         align="right"
                         sx={{
                           border: "none",
                           fontWeight: "bold",
-                          padding: "0px 16px",
+                          padding: "4px 16px",
+                          fontSize: { xs: "12px", sm: "14px" },
                         }}
-                        colSpan={1}
+                        colSpan={3}
                       >
                         Total
                       </TableCell>
@@ -191,8 +232,9 @@ const OrderConfirmation = () => {
                         align="right"
                         sx={{
                           fontWeight: "bold",
-                          padding: "0px 16px",
+                          padding: "4px 16px",
                           border: "none",
+                          fontSize: { xs: "12px", sm: "14px" },
                         }}
                       >
                         {numWithSpaces(
@@ -205,7 +247,31 @@ const OrderConfirmation = () => {
                       <TableCell
                         sx={{
                           border: "none",
+                          padding: { xs: "16px 16px 0px 16px", sm: "4px 16px" },
+                          fontSize: { xs: "12px", sm: "14px" },
+                        }}
+                      >
+                        Delivery Method
+                      </TableCell>
+                      <TableCell
+                        sx={{
+                          border: "none",
+                          padding: { xs: "16px 16px 0px 16px", sm: "4px 16px" },
+                          fontWeight: "bold",
+                          fontSize: { xs: "12px", sm: "14px" },
+                        }}
+                        colSpan={3}
+                      >
+                        {orderDetail.shippmentOption.providerName}&nbsp;(
+                        {orderDetail.shippmentOption.deliveryTime})
+                      </TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell
+                        sx={{
+                          border: "none",
                           padding: "16px 16px 0px 16px",
+                          fontSize: { xs: "12px", sm: "14px" },
                         }}
                       >
                         Contact Information
@@ -215,6 +281,7 @@ const OrderConfirmation = () => {
                           border: "none",
                           padding: "16px 16px 0 16px",
                           fontWeight: "bold",
+                          fontSize: { xs: "12px", sm: "14px" },
                         }}
                         colSpan={3}
                       >
@@ -227,6 +294,7 @@ const OrderConfirmation = () => {
                         sx={{
                           border: "none",
                           padding: "0 16px",
+                          fontSize: { xs: "12px", sm: "14px" },
                         }}
                       />
                       <TableCell
@@ -234,6 +302,7 @@ const OrderConfirmation = () => {
                           border: "none",
                           padding: "0 16px",
                           fontWeight: "bold",
+                          fontSize: { xs: "12px", sm: "14px" },
                         }}
                         colSpan={3}
                       >
@@ -246,6 +315,7 @@ const OrderConfirmation = () => {
                         sx={{
                           border: "none",
                           padding: "0px 16px",
+                          fontSize: { xs: "12px", sm: "14px" },
                         }}
                       />
                       <TableCell
@@ -253,6 +323,7 @@ const OrderConfirmation = () => {
                           border: "none",
                           padding: "0px 16px",
                           fontWeight: "bold",
+                          fontSize: { xs: "12px", sm: "14px" },
                         }}
                         colSpan={3}
                       >
@@ -265,6 +336,7 @@ const OrderConfirmation = () => {
                         sx={{
                           border: "none",
                           padding: "0px 16px",
+                          fontSize: { xs: "12px", sm: "14px" },
                         }}
                       />
                       <TableCell
@@ -272,6 +344,7 @@ const OrderConfirmation = () => {
                           border: "none",
                           padding: "0px 16px",
                           fontWeight: "bold",
+                          fontSize: { xs: "12px", sm: "14px" },
                         }}
                         colSpan={3}
                       >
@@ -283,6 +356,7 @@ const OrderConfirmation = () => {
                         sx={{
                           border: "none",
                           padding: "16px",
+                          fontSize: { xs: "12px", sm: "14px" },
                         }}
                       >
                         Payment Method
@@ -291,6 +365,7 @@ const OrderConfirmation = () => {
                         sx={{
                           border: "none",
                           fontWeight: "bold",
+                          fontSize: { xs: "12px", sm: "14px" },
                         }}
                         colSpan={3}
                       >
