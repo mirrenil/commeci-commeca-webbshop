@@ -168,12 +168,14 @@ function ShoppingCart() {
             sx={{
               display: "flex",
               justifyContent: "space-between",
-              margin: "1rem 0 0 0.5rem",
+              margin: "0 0 0 .5rem",
               placeItems: "center",
             }}
           >
-            <Typography variant="inherit">VAT</Typography>
-            <Typography variant="inherit">
+            <Typography color="#6C665F" variant="overline">
+              VAT
+            </Typography>
+            <Typography color="#6C665F" variant="overline">
               {numWithSpaces(calculateVat(cart))} SEK
             </Typography>
           </Box>

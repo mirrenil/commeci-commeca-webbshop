@@ -83,7 +83,6 @@ const CartProvider: FC = (props) => {
 
   const selectShippment = (provider: ShippingProvider) => {
     setShipper(provider);
-    console.log(shipper);
   };
 
   return (

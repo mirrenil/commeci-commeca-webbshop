@@ -20,6 +20,7 @@ import { numWithSpaces, UseSumTotal } from "../Helper";
 import { shippingProvider } from "../ShippingProviderData";
 import EmptyCart from "./EmptyCart";
 import ShoppingCart from "./ShoppingCart";
+
 export interface FormValues {
   name: string;
   email: string;
@@ -53,7 +54,7 @@ const ContactValidationSchema = yup.object({
 function CheckoutPage() {
   const navigate = useNavigate();
   const [value, setValue] = useState("postnord");
-  const { cart, emptyCart, selectShippment } = useCart();
+  const { cart, shipper, emptyCart, selectShippment } = useCart();
   const { createOrder } = useOrder();
 
   const { values, errors, touched, handleSubmit, handleChange } =
@@ -133,6 +134,7 @@ function CheckoutPage() {
                       <Box
                         sx={{
                           display: "flex",
+                          placeItems: "center",
                           justifyContent: "space-around",
                           m: "1rem 2rem",
                         }}
@@ -146,7 +148,14 @@ function CheckoutPage() {
                           variant="body2"
                           style={{ marginLeft: "1rem" }}
                         >
-                          {provider.cost} SEK ({provider.deliveryTime})
+                          {provider.cost} SEK
+                        </Typography>
+                        <Typography
+                          variant="overline"
+                          color="#6C665F"
+                          style={{ marginLeft: "1rem" }}
+                        >
+                          ({provider.deliveryTime})
                         </Typography>
                       </Box>
                     }
@@ -161,6 +170,7 @@ function CheckoutPage() {
                       <Box
                         sx={{
                           display: "flex",
+                          placeItems: "center",
                           justifyContent: "space-around",
                           m: "1rem 2rem",
                         }}
@@ -172,7 +182,14 @@ function CheckoutPage() {
                           variant="body2"
                           style={{ marginLeft: "1rem" }}
                         >
-                          Free ({provider.deliveryTime})
+                          FREE
+                        </Typography>
+                        <Typography
+                          variant="overline"
+                          color="#6C665F"
+                          style={{ marginLeft: "1rem" }}
+                        >
+                          ({provider.deliveryTime})
                         </Typography>
                       </Box>
                     }
@@ -410,14 +427,19 @@ function CheckoutPage() {
             }}
           >
             <Typography
-              variant="h6"
+              variant="h5"
               style={{
+                fontFamily: "Prata",
                 marginTop: "2rem",
                 fontWeight: "bold",
+                textTransform: "uppercase",
               }}
             >
-              {/* this calculation must be updated as shipping cost is not added  */}
               Total: {numWithSpaces(UseSumTotal(cart, true))} SEK
+            </Typography>
+            <Typography color="#6C665F" variant="overline">
+              includes delivery fee ({shipper.cost} SEK - {shipper.providerName}
+              )
             </Typography>
             <Button
               size="large"
