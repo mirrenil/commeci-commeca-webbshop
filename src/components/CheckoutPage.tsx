@@ -263,7 +263,7 @@ function CheckoutPage() {
                 }}
                 id="phonennumber-input"
                 name="phoneNumber"
-                label="PhoneNumber"
+                label="Phone number"
                 type="text"
                 margin="normal"
                 value={values.phoneNumber}
@@ -331,7 +331,7 @@ function CheckoutPage() {
                         }}
                         id="card-input"
                         name="card"
-                        label="Cardnumber"
+                        label="Card number"
                         type="text"
                         size="small"
                         onChange={handleChange}
@@ -359,7 +359,7 @@ function CheckoutPage() {
                         }}
                         id="number-input"
                         name="phoneNumber"
-                        label="PhoneNumber"
+                        label="Phone number"
                         type="text"
                         size="small"
                         onChange={handleChange}
@@ -391,7 +391,7 @@ function CheckoutPage() {
                         }}
                         id="number-input"
                         name="phoneNumber"
-                        label="PhoneNumber"
+                        label="Phone number"
                         type="text"
                         size="small"
                         onChange={handleChange}
