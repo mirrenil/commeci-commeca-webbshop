@@ -1,7 +1,7 @@
 import { DeleteOutline } from "@mui/icons-material";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import { Button, TextField } from "@mui/material";
+import { Button, Typography, TextField } from "@mui/material";
 import Box from "@mui/material/Box";
 import Collapse from "@mui/material/Collapse";
 import IconButton from "@mui/material/IconButton";
@@ -14,10 +14,9 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import * as React from "react";
+import React, { Fragment, useState } from "react";
 import { ProductContext, useAdmin } from "../context/AdminPageContext";
 import { productData, ProductData } from "../ProductData";
-
 interface Props {
   product: ProductData;
 }
@@ -32,14 +31,22 @@ function ProductTable(props: Props) {
       setEdit,
       saveProduct,
       removeProduct,
+      inputChangeHandler,
     } = useAdmin();
 
 
   const [open, setOpen] = React.useState(false);
-  ///const [rows, setRows] = React.useState(productData);
+  const [image, setImage] = useState(props.product.image);
+  const [title, setTitle] = useState(props.product.title);
+  const [description, setDescription] = useState(props.product.description);
+  const [price, setPrice] = useState(props.product.price);
+  
+  let productToEdit = props.product;
+
+
   return (
-  <React.Fragment>
-     <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
+    <React.Fragment>
+      <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
         <TableCell>
           <IconButton
             aria-label="expand row"
@@ -72,26 +79,84 @@ function ProductTable(props: Props) {
                 </TableHead>
                 <TableBody>
                   <TableRow contentEditable={isEdit}>
-                    <TableCell component="th" scope="row">
-                      <img
-                        src={props.product.image}
-                        alt={props.product.title}
-                        style={{ maxHeight: "200px" }}
-                      />
-                      <Button
-                        variant="contained"
-                        size="small"
-                        component="label"
-                      >
-                        Upload image
-                        <input type="file" hidden />
-                      </Button>
+                    <TableCell align="right">
+                      {isEdit ? (
+                        <>
+                          <img
+                            src={props.product.image}
+                            alt={props.product.title}
+                            style={{ maxHeight: "200px" }}
+                          />
+                          <Button
+                            variant="contained"
+                            size="small"
+                            component="label"
+                          >
+                            Upload image
+                            <input
+                              type="file"
+                              hidden
+                              onChange={(event) => setImage(event.target.value)}
+                            />
+                          </Button>
+                        </>
+                      ) : (
+                        <img
+                          src={props.product.image}
+                          alt={props.product.title}
+                          style={{ maxHeight: "200px" }}
+                        />
+                      )}
                     </TableCell>
+
                     <TableCell align="right">{props.product.id}</TableCell>
-                    <TableCell align="right">{props.product.title}</TableCell>
-                    <TableCell align="left">
-                      {props.product.description} </TableCell>
-                    <TableCell align="right">{props.product.price}</TableCell>
+                    <TableCell align="right">
+                      {isEdit ? (
+                        <>
+                          <TextField
+                            value={title}
+                            variant="standard"
+                            onChange={(event) => setTitle(event.target.value)}
+                          />
+                        </>
+                      ) : (
+                        props.product.title
+                      )}
+                    </TableCell>
+                    <TableCell align="right">
+                      {isEdit ? (
+                        <>
+                          <TextField
+                            value={description}
+                            variant="standard"
+                            onChange={(event) =>
+                              setDescription(event.target.value)
+                            }
+                          />
+                        </>
+                      ) : (
+                        props.product.description
+                      )}
+                    </TableCell>
+                    <TableCell align="right">
+                      {isEdit ? (
+                        <>
+                          <TextField
+                            value={String(price)}
+                            variant="standard"
+                            onChange={(event) => {
+                              console.log(isNaN(Number(event.target.value)))
+                              if (!isNaN(Number(event.target.value))) {
+                                 setPrice(Number(event.target.value))
+                              } 
+                              }
+                            }
+                          />
+                        </>
+                      ) : (
+                        props.product.price
+                      )}
+                    </TableCell>
                     <TableCell>
                       <Button
                         onClick={() => {
@@ -112,7 +177,13 @@ function ProductTable(props: Props) {
                         ) : (
                           <Button
                             onClick={() => {
-                              saveProduct(props.product);
+                              saveProduct({
+                                id: props.product.id,
+                                title,
+                                image,
+                                description,
+                                price,
+                              });
                             }}
                           >
                             <DoneIcon />
@@ -128,7 +199,7 @@ function ProductTable(props: Props) {
         </TableCell>
       </TableRow>
     </React.Fragment>
-  )
+  );
 }
 
 interface PropsTable {

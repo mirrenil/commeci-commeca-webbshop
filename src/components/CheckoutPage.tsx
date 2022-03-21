@@ -370,7 +370,7 @@ function CheckoutPage() {
                           width: "250px",
                         }}
                         id="number-input"
-                        name="phonenumber"
+                        name="phoneNumber"
                         label="Phone number"
                         type="text"
                         size="small"
@@ -402,8 +402,8 @@ function CheckoutPage() {
                           width: "250px",
                         }}
                         id="number-input"
-                        name="personalnumber"
-                        label="Personal number"
+                        name="phoneNumber"
+                        label="Phone number"
                         type="text"
                         size="small"
                         onChange={handleChange}
