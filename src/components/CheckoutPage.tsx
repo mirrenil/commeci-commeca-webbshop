@@ -209,7 +209,7 @@ function CheckoutPage() {
               sx={{
                 display: "flex",
                 flexDirection: "column",
-                width: "600px",
+                width: { xs: "300px", sm: "450px", md: "600px", lg: "600px" },
               }}
             >
               <TextField
@@ -329,7 +329,7 @@ function CheckoutPage() {
                           width: "250px",
                         }}
                         id="card-input"
-                        name="card"
+                        name="cardNumber"
                         label="Card number"
                         type="text"
                         size="small"
@@ -389,7 +389,7 @@ function CheckoutPage() {
                           width: "250px",
                         }}
                         id="number-input"
-                        name="phoneNumber"
+                        name="personalNumber"
                         label="Personal number"
                         type="text"
                         size="small"
