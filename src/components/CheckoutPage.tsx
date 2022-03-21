@@ -287,9 +287,6 @@ function CheckoutPage() {
           <Box
             sx={{
               backgroundColor: "#F3F2F0",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
               padding: "2rem",
             }}
           >
@@ -311,6 +308,12 @@ function CheckoutPage() {
                       sx={{
                         display: "flex",
                         m: "1rem",
+                        flexDirection: {
+                          xs: "column",
+                          sm: "row",
+                          md: "row",
+                          lg: "row",
+                        },
                       }}
                     >
                       <Typography
@@ -328,6 +331,14 @@ function CheckoutPage() {
                           backgroundColor: "white",
                           width: "250px",
                         }}
+                        sx={{
+                          mt: {
+                            xs: "1rem",
+                            sm: "0rem",
+                            md: "0rem",
+                            lg: "0rem",
+                          },
+                        }}
                         id="card-input"
                         name="cardNumber"
                         label="Card number"
@@ -344,7 +355,18 @@ function CheckoutPage() {
                   control={<Radio />}
                   value="swish"
                   label={
-                    <Box sx={{ display: "flex", m: "1rem" }}>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        m: "1rem",
+                        flexDirection: {
+                          xs: "column",
+                          sm: "row",
+                          md: "row",
+                          lg: "row",
+                        },
+                      }}
+                    >
                       <img
                         src={SwishLogo}
                         alt="Swish"
@@ -355,6 +377,14 @@ function CheckoutPage() {
                         style={{
                           backgroundColor: "white",
                           width: "250px",
+                        }}
+                        sx={{
+                          mt: {
+                            xs: "1rem",
+                            sm: "0rem",
+                            md: "0rem",
+                            lg: "0rem",
+                          },
                         }}
                         id="number-input"
                         name="phoneNumber"
@@ -372,7 +402,18 @@ function CheckoutPage() {
                   control={<Radio />}
                   value="invoice"
                   label={
-                    <Box sx={{ display: "flex", m: "1rem" }}>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        m: "1rem",
+                        flexDirection: {
+                          xs: "column",
+                          sm: "row",
+                          md: "row",
+                          lg: "row",
+                        },
+                      }}
+                    >
                       <Typography
                         style={{
                           fontWeight: "bold",
@@ -387,6 +428,14 @@ function CheckoutPage() {
                         style={{
                           backgroundColor: "white",
                           width: "250px",
+                        }}
+                        sx={{
+                          mt: {
+                            xs: "1rem",
+                            sm: "0rem",
+                            md: "0rem",
+                            lg: "0rem",
+                          },
                         }}
                         id="number-input"
                         name="personalNumber"
