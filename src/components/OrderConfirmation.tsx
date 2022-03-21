@@ -131,17 +131,51 @@ const OrderConfirmation = () => {
                         sx={{ border: "none", padding: "0px 16px" }}
                         colSpan={2}
                       >
+                        VAT 25%
+                      </TableCell>
+                      <TableCell
+                        align="right"
+                        sx={{ padding: "0px 16px", border: "none" }}
+                      >
+                        {numWithSpaces(calculateVat(orderDetail.boughtItems))}
+                        &nbsp;SEK
+                      </TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell sx={{ border: "none" }} />
+                      <TableCell
+                        align="right"
+                        sx={{ border: "none", padding: "0px 16px" }}
+                        colSpan={2}
+                      >
                         Delivery
                       </TableCell>
                       <TableCell
                         align="right"
                         sx={{ padding: "0px 16px", border: "none" }}
                       >
-                        {numWithSpaces(0)} SEK
+                        {numWithSpaces(orderDetail.shippmentOption.cost)} SEK
                       </TableCell>
                     </TableRow>
                     <TableRow>
-                      <TableCell sx={{ border: "none" }} />
+                      <TableCell
+                        sx={{
+                          border: "none",
+                          padding: "4px 16px ",
+                        }}
+                      >
+                        Delivery Method
+                      </TableCell>
+                      <TableCell
+                        sx={{
+                          border: "none",
+                          padding: "4px 16px",
+                          fontWeight: "bold",
+                        }}
+                      >
+                        {orderDetail.shippmentOption.providerName}&nbsp;(
+                        {orderDetail.shippmentOption.deliveryTime})
+                      </TableCell>
                       <TableCell
                         align="right"
                         sx={{
@@ -149,7 +183,7 @@ const OrderConfirmation = () => {
                           fontWeight: "bold",
                           padding: "0px 16px",
                         }}
-                        colSpan={2}
+                        colSpan={1}
                       >
                         Total
                       </TableCell>
@@ -162,41 +196,8 @@ const OrderConfirmation = () => {
                         }}
                       >
                         {numWithSpaces(
-                          UseSumTotal(orderDetail.boughtItems, false)
+                          UseSumTotal(orderDetail.boughtItems, true)
                         )}
-                        &nbsp;SEK
-                      </TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell
-                        sx={{
-                          border: "none",
-                          padding: "8px 16px 0px 16px",
-                        }}
-                      >
-                        Delivery Method
-                      </TableCell>
-                      <TableCell
-                        sx={{
-                          border: "none",
-                          padding: "0px 16px",
-                          fontWeight: "bold",
-                        }}
-                      >
-                        Postnord (3-5 weekdays)
-                      </TableCell>
-                      <TableCell
-                        align="right"
-                        sx={{ border: "none", padding: "0px 16px" }}
-                        colSpan={1}
-                      >
-                        VAT 25%
-                      </TableCell>
-                      <TableCell
-                        align="right"
-                        sx={{ padding: "0px 16px", border: "none" }}
-                      >
-                        {numWithSpaces(calculateVat(orderDetail.boughtItems))}
                         &nbsp;SEK
                       </TableCell>
                     </TableRow>
