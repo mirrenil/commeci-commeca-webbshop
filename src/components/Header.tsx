@@ -53,8 +53,6 @@ function Header() {
       label: "Inspiration",
       href: "/inspiration",
     },
-    { label: "Confirmation", href: "/confirmation" },
-    // above line for confirmation to be deleted when confirmation is linked to checkout
   ];
 
   const handleOpenMenu = (event: MouseEvent<HTMLElement>) => {

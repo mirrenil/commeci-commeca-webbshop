@@ -39,7 +39,6 @@ function App() {
                 />
                 <Route path="/detail/:id" element={<DetailPage />} />
                 <Route path="/confirmation" element={<OrderConfirmation />} />
-                {/* above line for confirmation to be deleted when confirmation is linked to checkout */}
                 {/* added a quick fix in AdminPage component for now */}
                 <Route
                   path="/admin"
