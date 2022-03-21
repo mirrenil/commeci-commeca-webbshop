@@ -1,4 +1,6 @@
+import { useSelect } from "@mui/lab/node_modules/@mui/base";
 import { createContext, useContext, useState } from "react";
+import { hydrate } from "react-dom";
 import { useLocalStorageState } from "../components/hooks/useLocalStorageState";
 import { ProductData, productData } from "../ProductData";
 
@@ -12,6 +14,7 @@ interface ContextValue {
   isEdit: boolean
   saveProduct: (product: ProductData) => void;
   removeProduct: (product: ProductData) => void;
+  inputChangeHandler: (event, product: ProductData) => void;
 }
 
 export const ProductContext = createContext<ContextValue>({
@@ -21,10 +24,10 @@ export const ProductContext = createContext<ContextValue>({
     isEdit: false,
     saveProduct: (product) => [],
     removeProduct: (product) => [],
+    inputChangeHandler: (product) => [],
 });
 
 const ProductProvider = (props) => { 
-    // This line controlls how many rows should be shown, in this case 4
     const [products, setProducts] = useLocalStorageState(productData, "adminLS");
     const [isEdit, setEdit] = useState(false);
     console.log(products)
@@ -38,16 +41,30 @@ const ProductProvider = (props) => {
         setProducts(updatedProductList);
     };
 
-    const saveProduct = (product: ProductData) => {
+    const saveProduct = (editedProduct: ProductData) => {
         // need e.target.value onChange or something
         // filter just shows the product which was edited
-        const editedProductList = products.map((item) => (product.id === item.id));
-        setEdit(false)
+
+        let productListToBeSaved = [...products]
+
+        const editedProductList = products.map((item) => {
+            if(editedProduct.id === item.id) { return editedProduct }
+            return item
+        });
+        setProducts(editedProductList)
+        setEdit(false);
         
         // const filter = editedProductList.filter((element) => { 
         // return element.id === productData.forEach((element) => element.id);})
         // console.log("filter: " + filter);
     }
+    
+        //let productToEdit = props.product
+        const inputChangeHandler = (event, productToEdit: ProductData) => {
+        products.map((product) => (product.id === productToEdit.id)); 
+        console.log(products)
+    }
+
         
     //  const handleChange = (e, editedProduct: ProductData) => {
     //     let editedText = products.map((products, e) => products !== editedProduct)
@@ -63,6 +80,7 @@ const ProductProvider = (props) => {
             saveProduct,
             addProduct,
             removeProduct,
+            inputChangeHandler,
             }}
         >
         {props.children}
