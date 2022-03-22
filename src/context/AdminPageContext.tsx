@@ -14,7 +14,7 @@ interface ContextValue {
   addProduct: (product: ProductData) => void;
   removeProduct: (product: ProductData) => void;
   inputChangeHandler: (event, product: ProductData) => void;
-  onsubmit: (e) => void;
+  handleSave: (e) => void;
 }
 
 export const ProductContext = createContext<ContextValue>({
@@ -25,26 +25,16 @@ export const ProductContext = createContext<ContextValue>({
     saveProduct: (product) => undefined,
     removeProduct: (product) => undefined,
     inputChangeHandler: (product) => undefined,
-    onsubmit: () => undefined,
+    handleSave: () => undefined,
 });
 
 const ProductProvider = (props) => { 
     const [products, setProducts] = useLocalStorageState(productData, "adminLS");
     const [isEdit, setEdit] = useState(false);
 
-    const onsubmit = (e: React.FormEvent<HTMLInputElement>) => {
-        e.preventDefault()
-        console.log("clicked")
-       
-        let newProduct = {
-        id: "",
-        image: "",
-        title: "",
-        description: "",
-        price: parseInt(""),
-      };
-      addProduct(newProduct);
-    };
+    const handleSave = (product: ProductData) => {
+      //addProduct(newProduct);
+    }
 
    const addProduct = (product: ProductData) => {
        console.log('ADDPRODUCT IN CONTEXT');
@@ -92,7 +82,7 @@ const ProductProvider = (props) => {
             saveProduct,
             removeProduct,
             inputChangeHandler,
-            onsubmit,
+            handleSave,
             }}
         >
         {props.children}
