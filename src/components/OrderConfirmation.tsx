@@ -369,7 +369,7 @@ const OrderConfirmation = () => {
                         }}
                         colSpan={3}
                       >
-                        Swish
+                        {orderDetail.paymentMethod}
                       </TableCell>
                     </TableRow>
                   </TableBody>
