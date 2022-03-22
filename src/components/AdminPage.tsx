@@ -1,17 +1,19 @@
 import { ProductData, productData } from "../ProductData";
 import AddIcon from "@mui/icons-material/Add";
 import ProductList from "./AdminProductList";
-import { Button } from "@mui/material";
-import PopUpPortal from "./PopUpPortal";
+import React, { useState } from "react";
+import Modal from './Modal'
+
 
 interface Props {
   products: ProductData[];
 }
 
 function AdminPage(props: Props) {
+  const [isOpen, setIsOpen] = useState(false)
 
   return (
-    <div>
+    <>
       <h5
         style={{
           fontFamily: "Prata",
@@ -24,16 +26,20 @@ function AdminPage(props: Props) {
         Admin
       </h5>
       <div style={{ paddingRight: "4rem" }}>
-        <Button>
+        <button onClick={() => setIsOpen(true)}>
           ADD
           <AddIcon />
-        </Button>
+        </button>
+        <Modal open={isOpen} onClose={() => setIsOpen(false)}>
+          MODAL ÖPPEN
+        </Modal>
       </div>
       <div>
         <ProductList products={productData} />
       </div>
-    </div>
+    </>
   );
 }
+
 
 export default AdminPage;
