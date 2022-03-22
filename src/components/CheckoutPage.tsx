@@ -225,7 +225,7 @@ function CheckoutPage() {
               sx={{
                 display: "flex",
                 flexDirection: "column",
-                width: "600px",
+                width: { xs: "300px", sm: "450px", md: "600px", lg: "600px" },
               }}
             >
               <TextField
@@ -324,6 +324,12 @@ function CheckoutPage() {
                       sx={{
                         display: "flex",
                         m: "1rem",
+                        flexDirection: {
+                          xs: "column",
+                          sm: "row",
+                          md: "row",
+                          lg: "row",
+                        },
                       }}
                     >
                       <Typography
@@ -339,10 +345,18 @@ function CheckoutPage() {
                       <TextField
                         style={{
                           backgroundColor: "white",
-                          width: "250px",
+                          width: "200px",
+                        }}
+                        sx={{
+                          mt: {
+                            xs: "1rem",
+                            sm: "0rem",
+                            md: "0rem",
+                            lg: "0rem",
+                          },
                         }}
                         id="card-input"
-                        name="card"
+                        name="cardNumber"
                         label="Card number"
                         type="text"
                         size="small"
@@ -357,7 +371,18 @@ function CheckoutPage() {
                   control={<Radio />}
                   value="swish"
                   label={
-                    <Box sx={{ display: "flex", m: "1rem" }}>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        m: "1rem",
+                        flexDirection: {
+                          xs: "column",
+                          sm: "row",
+                          md: "row",
+                          lg: "row",
+                        },
+                      }}
+                    >
                       <img
                         src={SwishLogo}
                         alt="Swish"
@@ -367,7 +392,15 @@ function CheckoutPage() {
                       <TextField
                         style={{
                           backgroundColor: "white",
-                          width: "250px",
+                          width: "200px",
+                        }}
+                        sx={{
+                          mt: {
+                            xs: "1rem",
+                            sm: "0rem",
+                            md: "0rem",
+                            lg: "0rem",
+                          },
                         }}
                         id="number-input"
                         name="phoneNumber"
@@ -385,7 +418,18 @@ function CheckoutPage() {
                   control={<Radio />}
                   value="invoice"
                   label={
-                    <Box sx={{ display: "flex", m: "1rem" }}>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        m: "1rem",
+                        flexDirection: {
+                          xs: "column",
+                          sm: "row",
+                          md: "row",
+                          lg: "row",
+                        },
+                      }}
+                    >
                       <Typography
                         style={{
                           fontWeight: "bold",
@@ -399,11 +443,19 @@ function CheckoutPage() {
                       <TextField
                         style={{
                           backgroundColor: "white",
-                          width: "250px",
+                          width: "200px",
+                        }}
+                        sx={{
+                          mt: {
+                            xs: "1rem",
+                            sm: "0rem",
+                            md: "0rem",
+                            lg: "0rem",
+                          },
                         }}
                         id="number-input"
-                        name="phoneNumber"
-                        label="Phone number"
+                        name="personalNumber"
+                        label="Personal number"
                         type="text"
                         size="small"
                         onChange={handleChange}
