@@ -13,10 +13,11 @@ import { useFormik } from "formik";
 import { FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
-import DhlLogo from "../assets/images/DhlLogo.png";
-import PostnordLogo from "../assets/images/PostnordLogo.webp";
 import SwishLogo from "../assets/images/SwishLogo.svg";
 import { useCart } from "../context/CartContextProvider";
+import { useOrder } from "../context/OrderContextProvider";
+import { numWithSpaces, UseSumTotal } from "../Helper";
+import { shippingProvider } from "../ShippingProviderData";
 import EmptyCart from "./EmptyCart";
 import ShoppingCart from "./ShoppingCart";
 
@@ -53,7 +54,8 @@ const ContactValidationSchema = yup.object({
 function CheckoutPage() {
   const navigate = useNavigate();
   const [value, setValue] = useState("postnord");
-  const { cart, numWithSpaces, sumTotal, emptyCart, createOrder } = useCart();
+  const { cart, shipper, emptyCart, selectShippment } = useCart();
+  const { createOrder } = useOrder();
 
   const { values, errors, touched, handleSubmit, handleChange } =
     useFormik<FormValues>({
@@ -61,7 +63,7 @@ function CheckoutPage() {
       validationSchema: ContactValidationSchema,
 
       // what to do onSubmit: (1) generate order number -done; (2) save the order number, the purchase and form values -half done, saved order no and part of the form value;
-      // (3) empty the cart -done with bug (4) direct to confirmation page -half done for part of the form value
+      // (3) empty the cart -done (4) direct to confirmation page -half done for part of the form value
       onSubmit: (values: FormValues) => {
         let promise = new Promise((resolve) => {
           setTimeout(() => {
@@ -70,8 +72,8 @@ function CheckoutPage() {
           }, 2000);
         });
         promise.then(() => {
-          emptyCart();
           navigate("/confirmation");
+          emptyCart();
         });
       },
     });
@@ -115,71 +117,85 @@ function CheckoutPage() {
               padding: "2rem",
             }}
           >
-            {/* <Typography variant="h6" gutterBottom>
-              Choose delivery:
-            </Typography> */}
             <RadioGroup
               aria-label="delivery method"
               name="delivery"
               onChange={handleRadioChange}
               value={value}
             >
-              <FormControlLabel
-                control={<Radio />}
-                value="postnord"
-                label={
-                  <Box
-                    sx={{
-                      display: "flex",
-                      justifyContent: "space-around",
-                      m: "1rem 2rem",
-                    }}
-                  >
-                    <img src={PostnordLogo} alt="Postnord" height="20px" />
-                    <Typography variant="body2" style={{ marginLeft: "1rem" }}>
-                      495 SEK (3-5 Weekdays)
-                    </Typography>
-                  </Box>
-                }
-              />
-              <FormControlLabel
-                control={<Radio />}
-                value="dhl"
-                label={
-                  <Box
-                    sx={{
-                      display: "flex",
-                      justifyContent: "space-around",
-                      m: "1rem 2rem",
-                    }}
-                  >
-                    <img src={DhlLogo} alt="DHL" height="20px" />
-                    <Typography variant="body2" style={{ marginLeft: "1rem" }}>
-                      345 SEK (5-7 Weekdays)
-                    </Typography>
-                  </Box>
-                }
-              />
-              <FormControlLabel
-                control={<Radio />}
-                value="pickup"
-                label={
-                  <Box
-                    sx={{
-                      display: "flex",
-                      justifyContent: "space-around",
-                      m: "1rem 2rem",
-                    }}
-                  >
-                    <Typography style={{ fontWeight: "bold" }}>
-                      Pick up on terminal
-                    </Typography>
-                    <Typography variant="body2" style={{ marginLeft: "1rem" }}>
-                      Free (2-3 Weekdays)
-                    </Typography>
-                  </Box>
-                }
-              />
+              {shippingProvider.map((provider) => {
+                return provider.cost !== 0 ? (
+                  <FormControlLabel
+                    control={<Radio />}
+                    value={provider.providerName}
+                    key={provider.providerName}
+                    onClick={() => selectShippment(provider)}
+                    label={
+                      <Box
+                        sx={{
+                          display: "flex",
+                          placeItems: "center",
+                          justifyContent: "space-around",
+                          m: "1rem 2rem",
+                        }}
+                      >
+                        <img
+                          src={provider.logoImage}
+                          alt={provider.providerName}
+                          height="20px"
+                        />
+                        <Typography
+                          variant="body2"
+                          style={{ marginLeft: "1rem" }}
+                        >
+                          {provider.cost} SEK
+                        </Typography>
+                        <Typography
+                          variant="overline"
+                          color="#6C665F"
+                          style={{ marginLeft: "1rem" }}
+                        >
+                          ({provider.deliveryTime})
+                        </Typography>
+                      </Box>
+                    }
+                  />
+                ) : (
+                  <FormControlLabel
+                    control={<Radio />}
+                    value={provider.providerName}
+                    key={provider.providerName}
+                    onClick={() => selectShippment(provider)}
+                    label={
+                      <Box
+                        sx={{
+                          display: "flex",
+                          placeItems: "center",
+                          justifyContent: "space-around",
+                          m: "1rem 2rem",
+                        }}
+                      >
+                        <Typography style={{ fontWeight: "bold" }}>
+                          {provider.providerName}
+                        </Typography>
+                        <Typography
+                          variant="body2"
+                          style={{ marginLeft: "1rem" }}
+                        >
+                          FREE
+                        </Typography>
+                        <Typography
+                          variant="overline"
+                          color="#6C665F"
+                          style={{ marginLeft: "1rem" }}
+                        >
+                          ({provider.deliveryTime})
+                        </Typography>
+                      </Box>
+                    }
+                  />
+                );
+              })}
             </RadioGroup>
           </Box>
 
@@ -287,12 +303,12 @@ function CheckoutPage() {
           <Box
             sx={{
               backgroundColor: "#F3F2F0",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
               padding: "2rem",
             }}
           >
-            {/* <Typography variant="h6" gutterBottom>
-              Choose payment method:
-            </Typography> */}
             <RadioGroup
               aria-label="payment method"
               name="payment"
@@ -463,14 +479,19 @@ function CheckoutPage() {
             }}
           >
             <Typography
-              variant="h6"
+              variant="h5"
               style={{
+                fontFamily: "Prata",
                 marginTop: "2rem",
                 fontWeight: "bold",
+                textTransform: "uppercase",
               }}
             >
-              {/* this calculation must be updated as shipping cost is not added  */}
-              Total: {numWithSpaces(sumTotal(cart))} SEK
+              Total: {numWithSpaces(UseSumTotal(cart, true))} SEK
+            </Typography>
+            <Typography color="#6C665F" variant="overline">
+              includes delivery fee ({shipper.cost} SEK - {shipper.providerName}
+              )
             </Typography>
             <Button
               size="large"
