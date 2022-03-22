@@ -1,4 +1,4 @@
-import { Button } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import { Form, Formik } from "formik";
 import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
@@ -51,20 +51,17 @@ const ContactValidationSchema = yup.object({
       "test-number",
       "Invalid card number",
       (value) => valid.number(value).isValid
-    )
-    .required(),
+    ),
   cardExpiry: yup
     .string()
     .test(
       "test-number",
       "Invalid",
       (value) => valid.expirationDate(value).isValid
-    )
-    .required(),
+    ),
   cardCVC: yup
     .string()
-    .test("test-number", "Invalid", (value) => valid.cvv(value).isValid)
-    .required(),
+    .test("test-number", "Invalid", (value) => valid.cvv(value).isValid),
   swish: yup.string().matches(phoneRegExp, "Invalid phone number"),
   invoice: yup
     .string()
@@ -98,21 +95,23 @@ function CheckoutFormContainer() {
         <DeliveryDetails />
         <PaymentMethod />
         <PriceOverview />
-        <Button
-          size="large"
-          variant="contained"
-          style={{
-            textAlign: "center",
-            margin: "2rem",
-            width: "400px",
-            backgroundColor: "#CAC2B9",
-            color: "white",
-            letterSpacing: "3px",
-          }}
-          type="submit"
-        >
-          Confirm purchase
-        </Button>
+        <Box style={{ textAlign: "center" }}>
+          <Button
+            size="large"
+            variant="contained"
+            style={{
+              textAlign: "center",
+              margin: "2rem",
+              width: "400px",
+              backgroundColor: "#CAC2B9",
+              color: "white",
+              letterSpacing: "3px",
+            }}
+            type="submit"
+          >
+            Confirm purchase
+          </Button>
+        </Box>
       </Form>
     </Formik>
   );
