@@ -1,5 +1,5 @@
 import { createContext, FC, useContext, useState } from "react";
-import { FormValues } from "../components/CheckoutPage";
+import { FormValues } from "../components/CheckoutFormContainer";
 import { ShippingProvider } from "../ShippingProviderData";
 import { ItemData, useCart } from "./CartContextProvider";
 
