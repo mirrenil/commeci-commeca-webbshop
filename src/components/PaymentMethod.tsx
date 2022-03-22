@@ -9,16 +9,18 @@ import {
   Typography,
 } from "@mui/material";
 import { useFormikContext } from "formik";
-import { FormEvent, useState } from "react";
+import { FormEvent } from "react";
 import SwishLogo from "../assets/images/SwishLogo.svg";
+import { useCart } from "../context/CartContextProvider";
 import { FormValues } from "./CheckoutFormContainer";
 
 const PaymentMethod = () => {
+  const { paymentMethod, selectPaymentMethod } = useCart();
   const { values, errors, touched, handleChange } =
     useFormikContext<FormValues>();
-  const [paymentMethod, setPaymentMethod] = useState("");
+
   const handleRadioChange = (event: FormEvent<HTMLInputElement>) => {
-    setPaymentMethod(event.currentTarget.value);
+    selectPaymentMethod(event.currentTarget.value);
   };
 
   return (
@@ -56,7 +58,7 @@ const PaymentMethod = () => {
           <FormGroup>
             <FormControlLabel
               control={<Radio />}
-              value="card"
+              value="Credit Card"
               label={
                 <Box
                   sx={{
@@ -157,7 +159,7 @@ const PaymentMethod = () => {
             />
             <FormControlLabel
               control={<Radio />}
-              value="swish"
+              value="Swish"
               label={
                 <Box
                   sx={{
@@ -205,7 +207,7 @@ const PaymentMethod = () => {
             />
             <FormControlLabel
               control={<Radio />}
-              value="invoice"
+              value="Invoice"
               label={
                 <Box
                   sx={{
