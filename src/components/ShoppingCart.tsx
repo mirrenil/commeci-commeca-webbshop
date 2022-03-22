@@ -168,7 +168,7 @@ function ShoppingCart() {
             sx={{
               display: "flex",
               justifyContent: "space-between",
-              margin: "0 0 0 .5rem",
+              margin: "0 0 0 1rem",
               placeItems: "center",
             }}
           >
