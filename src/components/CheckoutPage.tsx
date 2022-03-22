@@ -25,6 +25,9 @@ export interface FormValues {
   email: string;
   address: string;
   phoneNumber: number;
+  card: number;
+  swish: number;
+  invoice: number;
 }
 
 const InitialValue: FormValues = {
@@ -32,15 +35,6 @@ const InitialValue: FormValues = {
   address: "Address",
   email: "Email",
   phoneNumber: 1234567890,
-};
-
-interface PaymentFormValues {
-  card: number;
-  swish: number;
-  invoice: number;
-}
-
-const PaymentValue: PaymentFormValues = {
   card: 1234,
   swish: 1234,
   invoice: 1234,
@@ -51,6 +45,9 @@ const ContactValidationSchema = yup.object({
   address: yup.string().required("Address is required"),
   email: yup.string().required("Email is required"),
   phoneNumber: yup.string().required("Phone number is required"),
+  card: yup.string().required("Card number is required"),
+  swish: yup.string().required("Phone number is required"),
+  invoice: yup.string().required("Personal number is required"),
 });
 
 function CheckoutPage() {
@@ -112,7 +109,10 @@ function CheckoutPage() {
           <Box
             sx={{
               backgroundColor: "#F3F2F0",
-              padding: "1rem",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              padding: "2rem",
             }}
           >
             {/* <Typography variant="h6" gutterBottom>
@@ -209,7 +209,7 @@ function CheckoutPage() {
               sx={{
                 display: "flex",
                 flexDirection: "column",
-                width: "600px",
+                width: { xs: "300px", sm: "450px", md: "600px", lg: "600px" },
               }}
             >
               <TextField
@@ -287,8 +287,7 @@ function CheckoutPage() {
           <Box
             sx={{
               backgroundColor: "#F3F2F0",
-              padding: "3rem",
-              margin: "1rem",
+              padding: "2rem",
             }}
           >
             {/* <Typography variant="h6" gutterBottom>
@@ -309,6 +308,12 @@ function CheckoutPage() {
                       sx={{
                         display: "flex",
                         m: "1rem",
+                        flexDirection: {
+                          xs: "column",
+                          sm: "row",
+                          md: "row",
+                          lg: "row",
+                        },
                       }}
                     >
                       <Typography
@@ -324,16 +329,24 @@ function CheckoutPage() {
                       <TextField
                         style={{
                           backgroundColor: "white",
-                          width: "250px",
+                          width: "200px",
+                        }}
+                        sx={{
+                          mt: {
+                            xs: "1rem",
+                            sm: "0rem",
+                            md: "0rem",
+                            lg: "0rem",
+                          },
                         }}
                         id="card-input"
-                        name="card"
+                        name="cardNumber"
                         label="Card number"
                         type="text"
                         size="small"
                         onChange={handleChange}
-                        error={touched.name && Boolean(errors.name)}
-                        helperText={errors.name}
+                        error={touched.card && Boolean(errors.card)}
+                        helperText={errors.card}
                       />
                     </Box>
                   }
@@ -342,7 +355,18 @@ function CheckoutPage() {
                   control={<Radio />}
                   value="swish"
                   label={
-                    <Box sx={{ display: "flex", m: "1rem" }}>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        m: "1rem",
+                        flexDirection: {
+                          xs: "column",
+                          sm: "row",
+                          md: "row",
+                          lg: "row",
+                        },
+                      }}
+                    >
                       <img
                         src={SwishLogo}
                         alt="Swish"
@@ -352,7 +376,15 @@ function CheckoutPage() {
                       <TextField
                         style={{
                           backgroundColor: "white",
-                          width: "250px",
+                          width: "200px",
+                        }}
+                        sx={{
+                          mt: {
+                            xs: "1rem",
+                            sm: "0rem",
+                            md: "0rem",
+                            lg: "0rem",
+                          },
                         }}
                         id="number-input"
                         name="phoneNumber"
@@ -360,8 +392,8 @@ function CheckoutPage() {
                         type="text"
                         size="small"
                         onChange={handleChange}
-                        error={touched.name && Boolean(errors.name)}
-                        helperText={errors.name}
+                        error={touched.swish && Boolean(errors.swish)}
+                        helperText={errors.swish}
                       />
                     </Box>
                   }
@@ -370,7 +402,18 @@ function CheckoutPage() {
                   control={<Radio />}
                   value="invoice"
                   label={
-                    <Box sx={{ display: "flex", m: "1rem" }}>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        m: "1rem",
+                        flexDirection: {
+                          xs: "column",
+                          sm: "row",
+                          md: "row",
+                          lg: "row",
+                        },
+                      }}
+                    >
                       <Typography
                         style={{
                           fontWeight: "bold",
@@ -384,16 +427,24 @@ function CheckoutPage() {
                       <TextField
                         style={{
                           backgroundColor: "white",
-                          width: "250px",
+                          width: "200px",
+                        }}
+                        sx={{
+                          mt: {
+                            xs: "1rem",
+                            sm: "0rem",
+                            md: "0rem",
+                            lg: "0rem",
+                          },
                         }}
                         id="number-input"
-                        name="phoneNumber"
-                        label="Phone number"
+                        name="personalNumber"
+                        label="Personal number"
                         type="text"
                         size="small"
                         onChange={handleChange}
-                        error={touched.name && Boolean(errors.name)}
-                        helperText={errors.name}
+                        error={touched.invoice && Boolean(errors.invoice)}
+                        helperText={errors.invoice}
                       />
                     </Box>
                   }
