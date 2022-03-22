@@ -1,7 +1,7 @@
 import { DeleteOutline } from "@mui/icons-material";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import { Button, Typography, TextField } from "@mui/material";
+import { Button , TextField } from "@mui/material";
 import Box from "@mui/material/Box";
 import Collapse from "@mui/material/Collapse";
 import IconButton from "@mui/material/IconButton";
@@ -28,6 +28,7 @@ function ProductTable(props: Props) {
       products,
       isEdit,
       setEdit,
+      addProduct,
       saveProduct,
       removeProduct,
       inputChangeHandler,
@@ -208,7 +209,6 @@ interface PropsTable {
 export default function CollapsibleTable(props: PropsTable) {
 
   const products = React.useContext(ProductContext).products;
-  console.log("PRODUCTS: ", products)
   return (
     <TableContainer component={Paper}>
       <Table aria-label="collapsible table">

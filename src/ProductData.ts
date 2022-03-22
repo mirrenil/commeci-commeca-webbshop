@@ -24,6 +24,14 @@ export interface ProductData {
   id: string;
 }
 
+// ID GENERATOR?
+// export const generateId: () => string = () => {
+//   return "oijdfsbioa"
+// }
+
+// price: 1599,
+//     id: generateId()",
+
 export const productData: ProductData[] = [
   {
     image: PallJolly,

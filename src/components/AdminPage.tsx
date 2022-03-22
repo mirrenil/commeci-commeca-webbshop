@@ -2,7 +2,8 @@ import { ProductData, productData } from "../ProductData";
 import AddIcon from "@mui/icons-material/Add";
 import ProductList from "./AdminProductList";
 import React, { useState } from "react";
-import Modal from './Modal'
+import Modal from './Modal';
+import AddProductForm from "./AddProductForm";
 
 
 interface Props {
@@ -31,7 +32,7 @@ function AdminPage(props: Props) {
           <AddIcon />
         </button>
         <Modal open={isOpen} onClose={() => setIsOpen(false)}>
-          MODAL ÖPPEN
+          <AddProductForm />
         </Modal>
       </div>
       <div>

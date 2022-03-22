@@ -16,31 +16,37 @@ function App() {
     <BrowserRouter>
       <ProductProvider>
         <CartProvider>
-          <Routes>
-            <Route path="/" element={<Layout />}>
-              <Route index element={<ProductPage />} />
-              <Route path="/textiles" element={<EmptyPage page="Textiles" />} />
-              <Route path="/lighting" element={<EmptyPage page="Lighting" />} />
-              <Route
-                path="/decoration"
-                element={<EmptyPage page="Decoration" />}
-              />
-              <Route
-                path="/inspiration"
-                element={<EmptyPage page="Inspiration" />}
-              />
-              <Route path="/detail/:id" element={<DetailPage />} />
-              <Route path="/confirmation" element={<OrderConfirmation />} />
-              {/* above line for confirmation to be deleted when confirmation is linked to checkout */}
-              {/* added a quick fix in AdminPage component for now */}
-              <Route
-                path="/admin"
-                element={<AdminPage products={productData} />}
-              />
-              <Route path="/checkoutpage" element={<CheckoutPage />} />
-              <Route path="*" element={<NotFound />} />
-            </Route>
-          </Routes>
+            <Routes>
+              <Route path="/" element={<Layout />}>
+                <Route index element={<ProductPage />} />
+                <Route
+                  path="/textiles"
+                  element={<EmptyPage page="Textiles" />}
+                />
+                <Route
+                  path="/lighting"
+                  element={<EmptyPage page="Lighting" />}
+                />
+                <Route
+                  path="/decoration"
+                  element={<EmptyPage page="Decoration" />}
+                />
+                <Route
+                  path="/inspiration"
+                  element={<EmptyPage page="Inspiration" />}
+                />
+                <Route path="/detail/:id" element={<DetailPage />} />
+                <Route path="/confirmation" element={<OrderConfirmation />} />
+                {/* above line for confirmation to be deleted when confirmation is linked to checkout */}
+                {/* added a quick fix in AdminPage component for now */}
+                <Route
+                  path="/admin"
+                  element={<AdminPage products={productData} />}
+                />
+                <Route path="/checkoutpage" element={<CheckoutPage />} />
+                <Route path="*" element={<NotFound />} />
+              </Route>
+            </Routes>
         </CartProvider>
       </ProductProvider>
     </BrowserRouter>
