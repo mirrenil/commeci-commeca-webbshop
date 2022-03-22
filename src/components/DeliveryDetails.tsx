@@ -44,7 +44,7 @@ const DeliveryDetails = () => {
             style={{
               backgroundColor: "white",
             }}
-            id="name-input"
+            id="name"
             name="name"
             label="Name"
             type="text"
@@ -58,9 +58,9 @@ const DeliveryDetails = () => {
             style={{
               backgroundColor: "white",
             }}
-            id="address-input"
+            id="address"
             name="address"
-            label="Home Address"
+            label="Delivery Address"
             type="text"
             margin="normal"
             value={values.address}
@@ -72,7 +72,7 @@ const DeliveryDetails = () => {
             style={{
               backgroundColor: "white",
             }}
-            id="email-input"
+            id="email"
             name="email"
             label="Email"
             type="text"
@@ -86,7 +86,7 @@ const DeliveryDetails = () => {
             style={{
               backgroundColor: "white",
             }}
-            id="phonennumber-input"
+            id="phoneNumber"
             name="phoneNumber"
             label="Phone number"
             type="text"

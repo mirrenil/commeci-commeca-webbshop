@@ -14,7 +14,8 @@ import SwishLogo from "../assets/images/SwishLogo.svg";
 import { FormValues } from "./CheckoutFormContainer";
 
 const PaymentMethod = () => {
-  const { errors, touched, handleChange } = useFormikContext<FormValues>();
+  const { values, errors, touched, handleChange } =
+    useFormikContext<FormValues>();
   const [paymentMethod, setPaymentMethod] = useState("");
   const handleRadioChange = (event: FormEvent<HTMLInputElement>) => {
     setPaymentMethod(event.currentTarget.value);
@@ -37,7 +38,6 @@ const PaymentMethod = () => {
       >
         4. Payment Method
       </Typography>
-
       <Box
         sx={{
           backgroundColor: "#F3F2F0",
@@ -83,7 +83,7 @@ const PaymentMethod = () => {
                   <TextField
                     style={{
                       backgroundColor: "white",
-                      width: "200px",
+                      width: "220px",
                     }}
                     sx={{
                       mt: {
@@ -93,14 +93,64 @@ const PaymentMethod = () => {
                         lg: "0rem",
                       },
                     }}
-                    id="card-input"
-                    name="cardNumber"
-                    label="Card number"
+                    id="cardNumber" // change back to card-number later
+                    name="cardNumber" // change
+                    label="Card Number" // change
                     type="text"
                     size="small"
+                    value={values.cardNumber}
                     onChange={handleChange}
-                    error={touched.card && Boolean(errors.card)}
-                    helperText={errors.card}
+                    placeholder="XXXX-XXXX-XXXX-XXXX"
+                    error={touched.cardNumber && Boolean(errors.cardNumber)}
+                    helperText={errors.cardNumber}
+                  />
+                  <TextField
+                    style={{
+                      backgroundColor: "white",
+                      width: "80px",
+                      marginLeft: "1rem",
+                    }}
+                    sx={{
+                      mt: {
+                        xs: "1rem",
+                        sm: "0rem",
+                        md: "0rem",
+                        lg: "0rem",
+                      },
+                    }}
+                    id="cardExpiry"
+                    name="cardExpiry"
+                    label="MMYY"
+                    type="text"
+                    size="small"
+                    value={values.cardExpiry}
+                    onChange={handleChange}
+                    error={touched.cardExpiry && Boolean(errors.cardExpiry)}
+                    helperText={errors.cardExpiry}
+                  />
+                  <TextField
+                    style={{
+                      backgroundColor: "white",
+                      width: "65px",
+                      marginLeft: "1rem",
+                    }}
+                    sx={{
+                      mt: {
+                        xs: "1rem",
+                        sm: "0rem",
+                        md: "0rem",
+                        lg: "0rem",
+                      },
+                    }}
+                    id="cardCVC"
+                    name="cardCVC"
+                    label="CVC"
+                    type="text"
+                    size="small"
+                    value={values.cardCVC}
+                    onChange={handleChange}
+                    error={touched.cardCVC && Boolean(errors.cardCVC)}
+                    helperText={errors.cardCVC}
                   />
                 </Box>
               }
@@ -140,11 +190,12 @@ const PaymentMethod = () => {
                         lg: "0rem",
                       },
                     }}
-                    id="number-input"
-                    name="phoneNumber"
-                    label="Phone number"
+                    id="swish"
+                    name="swish"
+                    label="Phone Number"
                     type="text"
                     size="small"
+                    value={values.swish}
                     onChange={handleChange}
                     error={touched.swish && Boolean(errors.swish)}
                     helperText={errors.swish}
@@ -181,7 +232,7 @@ const PaymentMethod = () => {
                   <TextField
                     style={{
                       backgroundColor: "white",
-                      width: "200px",
+                      width: "220px",
                     }}
                     sx={{
                       mt: {
@@ -191,11 +242,13 @@ const PaymentMethod = () => {
                         lg: "0rem",
                       },
                     }}
-                    id="number-input"
-                    name="personalNumber"
-                    label="Personal number"
+                    id="invoice"
+                    name="invoice"
+                    label="Personal Identity Number"
                     type="text"
                     size="small"
+                    placeholder="YYYYMMDD-XXXX"
+                    value={values.invoice}
                     onChange={handleChange}
                     error={touched.invoice && Boolean(errors.invoice)}
                     helperText={errors.invoice}
