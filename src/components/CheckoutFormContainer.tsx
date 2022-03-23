@@ -15,6 +15,9 @@ export interface FormValues {
   email: string;
   address: string;
   phoneNumber: number | "";
+  isSwish: boolean;
+  isCreditCard: boolean;
+  isInvoice: boolean;
   cardNumber: number | "";
   cardExpiry: number | "";
   cardCVC: number | "";
@@ -26,6 +29,9 @@ const InitialValue: FormValues = {
   email: "",
   address: "",
   phoneNumber: "",
+  isSwish: false || true,
+  isCreditCard: false || true,
+  isInvoice: false || true,
   cardNumber: "",
   cardExpiry: "",
   cardCVC: "",
@@ -35,20 +41,15 @@ const InitialValue: FormValues = {
 
 function CheckoutFormContainer() {
   const navigate = useNavigate();
-  const { emptyCart, paymentMethod } = useCart();
+  const { emptyCart } = useCart();
   const { createOrder } = useOrder();
+  console.log(InitialValue);
 
   const phoneRegExp = /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/;
   const personalIdentityRegExp =
     /^(19|20)?(\d{6}([-+]|\s)\d{4}|(?!19|20)\d{10})$/;
 
-  console.log(
-    "Credit Card: " + Boolean(paymentMethod === "creditcard").toString()
-  );
-  console.log("Swish: " + Boolean(paymentMethod === "swish").toString());
-  console.log("Invoice: " + Boolean(paymentMethod === "invoice").toString());
-
-  const ValidationSchema = yup.object({
+  const ValidationSchema = yup.object().shape({
     name: yup.string().min(2).required("Required"),
     address: yup.string().min(5).required("Required"),
     email: yup.string().email("Invalid email").required("Required"),
@@ -57,52 +58,58 @@ function CheckoutFormContainer() {
       .required("Required")
       .matches(phoneRegExp, "Invalid phone number"),
 
-    cardNumber: yup.string().when("paymentMethod", {
-      is: (paymentMethod) => paymentMethod === "creditcard",
+    isCreditCard: yup.boolean(),
+    cardNumber: yup.string().when("isCreditCard", {
+      is: true,
       then: yup
         .string()
         .test(
           "test-number",
           "Invalid card number",
           (value) => valid.number(value).isValid
-        ),
+        )
+        .required("Required"),
       otherwise: yup.string(),
     }),
 
-    cardExpiry: yup.string().when("paymentMethod", {
-      is: (paymentMethod) => paymentMethod === "creditcard",
+    cardExpiry: yup.string().when("isSwish", {
+      is: true,
       then: yup
         .string()
         .test(
           "test-number",
           "Invalid",
           (value) => valid.expirationDate(value).isValid
-        ),
+        )
+        .required("Required"),
       otherwise: yup.string(),
     }),
 
-    cardCVC: yup.string().when("paymentMethod", {
-      is: (paymentMethod) => paymentMethod === "creditcard",
+    cardCVC: yup.string().when("isSwish", {
+      is: true,
       then: yup
         .string()
         .test("test-number", "Invalid", (value) => valid.cvv(value).isValid),
-      otherwise: yup.string(),
+      otherwise: yup.string().required(),
     }),
 
-    swish: yup.string().when(Boolean(paymentMethod === "swish").toString(), {
+    isSwish: yup.boolean(),
+    swish: yup.string().when("isSwish", {
       is: true,
       then: yup
         .string()
         .matches(phoneRegExp, "Invalid phone number")
-        .required("this must be filled"),
-      otherwise: yup.string().required("this is required"),
+        .required("Required"),
+      otherwise: yup.string(),
     }),
 
-    invoice: yup.string().when("paymentMethod", {
-      is: (paymentMethod) => paymentMethod === "invoice",
+    isInvoice: yup.boolean(),
+    invoice: yup.string().when("isInvoice", {
+      is: true,
       then: yup
         .string()
-        .matches(personalIdentityRegExp, "Invalid personal identity number"),
+        .matches(personalIdentityRegExp, "Invalid personal identity number")
+        .required("Required"),
       otherwise: yup.string(),
     }),
   });
