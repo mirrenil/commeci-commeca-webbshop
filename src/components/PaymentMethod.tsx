@@ -9,12 +9,18 @@ import PaymentInvoice from "./PaymentInvoice";
 import PaymentSwish from "./PaymentSwish";
 
 const PaymentMethod = () => {
-  const [selection, setSelection] = useState("credit card");
-  const { paymentMethod, selectPaymentMethod } = useCart();
+  const [selectPayment, setSelectPayment] = useState("credit card");
+  const {
+    paymentMethod,
+    selectPaymentMethod,
+    selectSwish,
+    selectCreditCard,
+    selectInvoice,
+  } = useCart();
 
   const handleToggle = (event, newSelection: string | null) => {
     if (newSelection !== null) {
-      setSelection(newSelection);
+      setSelectPayment(newSelection);
       selectPaymentMethod(event.currentTarget.name);
     }
   };
@@ -47,8 +53,7 @@ const PaymentMethod = () => {
         }}
       >
         <ToggleButtonGroup
-          //  value={paymentMethod}
-          value={selection}
+          value={selectPayment}
           exclusive
           onChange={handleToggle}
           aria-label="payment method"
@@ -57,6 +62,7 @@ const PaymentMethod = () => {
             name="Credit Card"
             aria-label="credit card"
             value="credit card"
+            onClick={selectCreditCard}
           >
             Credit Card
           </ToggleButton>
@@ -65,6 +71,7 @@ const PaymentMethod = () => {
             name="Swish"
             aria-label="swish"
             value="swish"
+            onClick={selectSwish}
           >
             <img src={SwishLogo} alt="Swish" height="20px" />
           </ToggleButton>
@@ -73,6 +80,7 @@ const PaymentMethod = () => {
             name="Invoice"
             aria-label="invoice"
             value="invoice"
+            onClick={selectInvoice}
           >
             Invoice
           </ToggleButton>
