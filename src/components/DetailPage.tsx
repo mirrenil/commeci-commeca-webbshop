@@ -1,12 +1,16 @@
 import { Container, Typography } from "@mui/material";
 import { useParams } from "react-router-dom";
 import detailInfo from "../assets/images/detailinfo.png";
-import { productData } from "../ProductData";
+import { ProductData, productData } from "../ProductData";
 import AddToCartButton from "./shared/AddToCartButton";
+import React from "react"
+import { ProductContext } from "../context/AdminPageContext";
 
 function DetailPage() {
+
+  const newproduct = React.useContext(ProductContext).products;
   const params = useParams<{ id: string }>();
-  const product = productData.find((products) => products.id === params?.id);
+  const product = newproduct.find((product) => product.id === params?.id);
   if (!product) return null;
 
   return (
@@ -30,9 +34,8 @@ function DetailPage() {
           marginTop: "2rem",
           marginBottom: "2rem",
         }}
-        src={product.image}
-        title={product.title}
-        id={product.id}
+         src={product.image}
+        
       ></Container>
       <Container
         style={{
@@ -85,5 +88,7 @@ function DetailPage() {
     </Container>
   );
 }
+
+
 
 export default DetailPage;

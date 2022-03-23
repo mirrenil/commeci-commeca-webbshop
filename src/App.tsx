@@ -13,6 +13,7 @@ import OrderConfirmation from "./components/OrderConfirmation";
 import OrderProvider from "./context/OrderContextProvider";
 
 function App() {
+
   return (
     <BrowserRouter>
       <ProductProvider>
@@ -39,7 +40,7 @@ function App() {
                 />
                 <Route path="/detail/:id" element={<DetailPage />} />
                 <Route path="/confirmation" element={<OrderConfirmation />} />
-                {/* added a quick fix in AdminPage component for now */}
+      
                 <Route
                   path="/admin"
                   element={<AdminPage products={productData} />}
