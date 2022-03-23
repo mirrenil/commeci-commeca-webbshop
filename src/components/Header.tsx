@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { Box } from "@mui/system";
-import { MouseEvent, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import cartIcon from "../assets/icons/icon-shopping-cart.webp";
 import userIcon from "../assets/icons/icon-user.webp";
@@ -55,11 +55,11 @@ function Header() {
     },
   ];
 
-  const handleOpenMenu = (event: MouseEvent<HTMLElement>) => {
+  const handleOpenMenu = () => {
     setAnchorMenu(true);
   };
 
-  const handleCloseMenu = (event: MouseEvent<HTMLElement>) => {
+  const handleCloseMenu = () => {
     setAnchorMenu(false);
   };
 
