@@ -1,17 +1,22 @@
 import { Box, Container, Typography } from "@mui/material";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
+import { useState } from "react";
+import SwishLogo from "../assets/images/SwishLogo.svg";
 import { useCart } from "../context/CartContextProvider";
 import PaymentCreditCard from "./PaymentCreditCard";
 import PaymentInvoice from "./PaymentInvoice";
 import PaymentSwish from "./PaymentSwish";
 
 const PaymentMethod = () => {
+  const [selection, setSelection] = useState("credit card");
   const { paymentMethod, selectPaymentMethod } = useCart();
 
-  const handleToggle = (event) => {
-    selectPaymentMethod(event.currentTarget.value);
-    console.log(paymentMethod);
+  const handleToggle = (event, newSelection: string | null) => {
+    if (newSelection !== null) {
+      setSelection(newSelection);
+      selectPaymentMethod(event.currentTarget.name);
+    }
   };
 
   return (
@@ -42,34 +47,49 @@ const PaymentMethod = () => {
         }}
       >
         <ToggleButtonGroup
-          value={paymentMethod}
+          //  value={paymentMethod}
+          value={selection}
           exclusive
           onChange={handleToggle}
-          aria-label="text alignment"
+          aria-label="payment method"
         >
-          <ToggleButton value="creditcard" aria-label="left aligned">
+          <ToggleButton
+            name="Credit Card"
+            aria-label="credit card"
+            value="credit card"
+          >
             Credit Card
           </ToggleButton>
-          <ToggleButton value="swish" aria-label="centered">
-            Swish
+          <ToggleButton
+            id="swish"
+            name="Swish"
+            aria-label="swish"
+            value="swish"
+          >
+            <img src={SwishLogo} alt="Swish" height="20px" />
           </ToggleButton>
-          <ToggleButton value="invoice" aria-label="right aligned">
+          <ToggleButton
+            id="invoice"
+            name="Invoice"
+            aria-label="invoice"
+            value="invoice"
+          >
             Invoice
           </ToggleButton>
         </ToggleButtonGroup>
+
         <Container>
-          {paymentMethod === "creditcard" ? (
-            <PaymentCreditCard />
-          ) : paymentMethod === "swish" ? (
+          {paymentMethod === "Swish" ? (
             <PaymentSwish />
-          ) : paymentMethod === "invoice" ? (
+          ) : paymentMethod === "Invoice" ? (
             <PaymentInvoice />
           ) : (
-            <Container />
+            <PaymentCreditCard />
           )}
         </Container>
       </Box>
     </Container>
   );
 };
+
 export default PaymentMethod;
