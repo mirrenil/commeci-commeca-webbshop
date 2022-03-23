@@ -1,5 +1,5 @@
 import { createContext, FC, useContext, useState } from "react";
-import { FormValues } from "../components/CheckoutPage";
+import { FormValues } from "../components/CheckoutFormContainer";
 import { ShippingProvider } from "../ShippingProviderData";
 import { ItemData, useCart } from "./CartContextProvider";
 
@@ -7,11 +7,11 @@ interface OrderData extends FormValues {
   orderNo: string;
   boughtItems: ItemData[];
   shipmentOption: ShippingProvider;
+  paymentMethod: string;
 }
 
 interface ContextValue {
   order: OrderData[];
-  // shippmentProvider: ShippingProvider;
   createOrder: (values: FormValues) => void;
   generateOrderNum: () => string;
 }
@@ -23,7 +23,7 @@ export const OrderContext = createContext<ContextValue>({
 });
 
 const OrderProvider: FC = (props) => {
-  const { cart, shipper } = useCart();
+  const { cart, shipper, paymentMethod } = useCart();
   const [order, setOrder] = useState<OrderData[]>([]);
 
   const createOrder = (formValues) => {
@@ -32,6 +32,7 @@ const OrderProvider: FC = (props) => {
       ...formValues,
       boughtItems: boughtItems,
       shipmentOption: shipper,
+      paymentMethod: paymentMethod,
       orderNo: generateOrderNum(),
     };
     setOrder([updatedOrder]);

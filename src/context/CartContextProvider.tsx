@@ -9,12 +9,14 @@ export interface ItemData extends ProductData {
 interface ContextValue {
   cart: ItemData[];
   shipper: ShippingProvider;
+  paymentMethod: String;
   addToCart: (product: ProductData) => void;
   onAddQuantity: (product: ItemData) => void;
   onReduceQuantity: (product: ItemData) => void;
   removeFromCart: (product: ItemData) => void;
   emptyCart: () => void;
   selectShippment: (provider: ShippingProvider) => void;
+  selectPaymentMethod: (method: String) => void;
 }
 
 export const CartContext = createContext<ContextValue>({
@@ -24,12 +26,14 @@ export const CartContext = createContext<ContextValue>({
     cost: 0,
     deliveryTime: "",
   },
+  paymentMethod: "",
   addToCart: () => {},
   onAddQuantity: () => {},
   onReduceQuantity: () => {},
   removeFromCart: () => {},
   emptyCart: () => {},
   selectShippment: () => {},
+  selectPaymentMethod: () => "",
 });
 
 const CartProvider: FC = (props) => {
@@ -39,6 +43,7 @@ const CartProvider: FC = (props) => {
     cost: 495,
     deliveryTime: "3-5 Weekdays",
   });
+  const [paymentMethod, setPaymentMethod] = useState<String>("");
 
   const addToCart = async (product: ProductData) => {
     if (cart.some((item) => item.id === product.id)) {
@@ -85,17 +90,23 @@ const CartProvider: FC = (props) => {
     setShipper(provider);
   };
 
+  const selectPaymentMethod = (method: String) => {
+    setPaymentMethod(method);
+  };
+
   return (
     <CartContext.Provider
       value={{
         cart,
         shipper,
+        paymentMethod,
         addToCart,
         onAddQuantity,
         onReduceQuantity,
         removeFromCart,
         emptyCart,
         selectShippment,
+        selectPaymentMethod,
       }}
     >
       {props.children}
