@@ -1,71 +1,51 @@
 import { createContext, FC, useContext, useState } from "react";
-import { FormValues } from "../components/CheckoutPage";
 import { useLocalStorageState } from "../components/hooks/useLocalStorageState";
 import { ProductData } from "../ProductData";
+import { ShippingProvider } from "../ShippingProviderData";
 
-interface CartItemData extends ProductData {
+export interface ItemData extends ProductData {
   quantity: number;
 }
-
-interface OrderData extends FormValues {
-  orderNo: string;
-  boughtItems: CartItemData[];
-}
-
 interface ContextValue {
-  cart: CartItemData[];
-  order: OrderData[];
+  cart: ItemData[];
+  shipper: ShippingProvider;
+  paymentMethod: String;
   addToCart: (product: ProductData) => void;
-  sumQuantity: (itemData: CartItemData[]) => number;
-  sumTotal: (itemData: CartItemData[]) => number;
-  calculateVat: (itemData: CartItemData[]) => number;
-  sumProductPrice: (product: CartItemData) => number;
-  onAddQuantity: (product: CartItemData) => void;
-  onReduceQuantity: (product: CartItemData) => void;
-  removeFromCart: (product: CartItemData) => void;
-  numWithSpaces: (num: number) => string;
-  createOrder: (values: FormValues) => void;
-  generateOrderNum: () => string;
+  onAddQuantity: (product: ItemData) => void;
+  onReduceQuantity: (product: ItemData) => void;
+  removeFromCart: (product: ItemData) => void;
   emptyCart: () => void;
+  selectShippment: (provider: ShippingProvider) => void;
+  selectPaymentMethod: (method: String) => void;
 }
 
 export const CartContext = createContext<ContextValue>({
   cart: [],
-  order: [],
+  shipper: {
+    providerName: "",
+    cost: 0,
+    deliveryTime: "",
+  },
+  paymentMethod: "",
   addToCart: () => {},
-  sumQuantity: () => 0,
-  sumTotal: () => 0,
-  calculateVat: () => 0,
-  sumProductPrice: () => 0,
   onAddQuantity: () => {},
   onReduceQuantity: () => {},
   removeFromCart: () => {},
-  numWithSpaces: () => "", // this function can be written in the product context as well for formatting the price
-  createOrder: () => {},
-  generateOrderNum: () => "",
   emptyCart: () => {},
+  selectShippment: () => {},
+  selectPaymentMethod: () => "",
 });
 
 const CartProvider: FC = (props) => {
-  // const [cart, setCart] = useState<CartItemData[]>([]); removed and replaced with the below one that save to LS
-  const [cart, setCart] = useLocalStorageState<CartItemData[]>([], "cc-cart");
-  const [order, setOrder] = useState<OrderData[]>([]);
-  const vatRate: number = 0.25;
-
-  const createOrder = (formValues) => {
-    setOrder([]);
-    const boughtItems = [...cart];
-    let updatedOrder: OrderData = {
-      ...formValues,
-      boughtItems: boughtItems,
-      orderNo: generateOrderNum(),
-    };
-    setOrder([...order, updatedOrder]);
-  };
-  // console.log(order);
+  const [cart, setCart] = useLocalStorageState<ItemData[]>([], "cc-cart");
+  const [shipper, setShipper] = useState<ShippingProvider>({
+    providerName: "Postnord",
+    cost: 495,
+    deliveryTime: "3-5 Weekdays",
+  });
+  const [paymentMethod, setPaymentMethod] = useState<String>("");
 
   const addToCart = async (product: ProductData) => {
-    // if (cart.map((item) => item.id).includes(product.id))
     if (cart.some((item) => item.id === product.id)) {
       const updatedCart = cart.map((item) => {
         if (product.id !== item.id) return item;
@@ -73,43 +53,12 @@ const CartProvider: FC = (props) => {
       });
       setCart(updatedCart); // update to LS
     } else {
-      const cartItem: CartItemData = { ...product, quantity: 1 };
+      const cartItem: ItemData = { ...product, quantity: 1 };
       setCart([...cart, cartItem]);
     }
-    // console.log(cart);
   };
 
-  const sumQuantity = (itemData: CartItemData[]) => {
-    let sum = 0;
-    for (let i = 0; i < itemData.length; i++) {
-      sum += itemData[i].quantity;
-    }
-    sumTotal(itemData);
-    return sum;
-    // return cart.reduce((sum, item) => sum + item.quantity, 0);
-  };
-
-  const sumTotal = (itemData: CartItemData[]) => {
-    let sum = 0;
-    for (let i = 0; i < itemData.length; i++) {
-      sum += itemData[i].price * itemData[i].quantity;
-    }
-    return sum;
-  };
-
-  const calculateVat = (itemData: CartItemData[]) => {
-    let sum = 0;
-    sum = Math.round(sumTotal(itemData) * vatRate);
-    return sum;
-  };
-
-  const sumProductPrice = (product: CartItemData) => {
-    let sum = 0;
-    sum += product.price * product.quantity;
-    return sum;
-  };
-
-  const onAddQuantity = (product: CartItemData) => {
+  const onAddQuantity = (product: ItemData) => {
     const updatedQuantity = cart.map((item) => {
       if (product.id !== item.id) return item;
       return { ...item, quantity: item.quantity + 1 };
@@ -117,7 +66,7 @@ const CartProvider: FC = (props) => {
     setCart(updatedQuantity);
   };
 
-  const onReduceQuantity = (product: CartItemData) => {
+  const onReduceQuantity = (product: ItemData) => {
     const updatedQuantity = cart.map((item) => {
       if (product.id === item.id && item.quantity > 1)
         return { ...item, quantity: item.quantity - 1 };
@@ -126,50 +75,38 @@ const CartProvider: FC = (props) => {
     setCart(updatedQuantity);
   };
 
-  const removeFromCart = (product: CartItemData) => {
+  const removeFromCart = (product: ItemData) => {
     if (cart.find((item) => item.id === product.id)) {
       const updatedCart = cart.filter((item) => item.id !== product.id);
       setCart(updatedCart);
     }
   };
 
-  const numWithSpaces = (num: number) => {
-    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
-  };
-
-  const generateOrderNum = () => {
-    const yy: string = new Date().getFullYear().toString().substr(-2);
-    const mm: number = new Date().getMonth() + 1;
-    const dd: number = new Date().getDate();
-    const formattedDate =
-      yy + (mm > 9 ? "" : "0") + mm + (dd > 9 ? "" : "0") + dd;
-
-    const randomNum: number = Math.floor(Math.random() * 100000);
-    const orderNum: string = formattedDate + "-" + randomNum;
-    return orderNum;
-  };
-
   const emptyCart = () => {
     setCart([]);
+  };
+
+  const selectShippment = (provider: ShippingProvider) => {
+    setShipper(provider);
+  };
+
+  const selectPaymentMethod = (method: String) => {
+    setPaymentMethod(method);
   };
 
   return (
     <CartContext.Provider
       value={{
         cart,
-        order,
+        shipper,
+        paymentMethod,
         addToCart,
-        sumQuantity,
-        sumTotal,
-        calculateVat,
-        sumProductPrice,
         onAddQuantity,
         onReduceQuantity,
         removeFromCart,
-        numWithSpaces,
-        createOrder,
-        generateOrderNum,
         emptyCart,
+        selectShippment,
+        selectPaymentMethod,
       }}
     >
       {props.children}
