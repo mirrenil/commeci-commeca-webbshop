@@ -123,10 +123,14 @@ function CheckoutFormContainer() {
             resolve(values);
           }, 2000);
         });
-        promise.then(() => {
-          navigate("/confirmation");
-          emptyCart();
-        });
+        promise
+          .then(() => {
+            navigate("/confirmation");
+            emptyCart();
+          })
+          .catch((error: Error) => {
+            alert(error.message);
+          });
       }}
     >
       <Form>
