@@ -5,18 +5,15 @@ import { Box, Button, ButtonGroup, Container, Typography } from "@mui/material";
 import { CSSProperties } from "react";
 import { Link } from "react-router-dom";
 import { useCart } from "../context/CartContextProvider";
+import {
+  calculateVat,
+  numWithSpaces,
+  sumProductPrice,
+  UseSumTotal,
+} from "../Helper";
 
 function ShoppingCart() {
-  const {
-    cart,
-    sumTotal,
-    calculateVat,
-    sumProductPrice,
-    onAddQuantity,
-    onReduceQuantity,
-    removeFromCart,
-    numWithSpaces,
-  } = useCart();
+  const { cart, onAddQuantity, onReduceQuantity, removeFromCart } = useCart();
 
   return (
     <Container
@@ -164,19 +161,21 @@ function ShoppingCart() {
           >
             <Typography variant="h6">Total</Typography>
             <Typography variant="h6">
-              {numWithSpaces(sumTotal(cart))} SEK
+              {numWithSpaces(UseSumTotal(cart, false))} SEK
             </Typography>
           </Box>
           <Box
             sx={{
               display: "flex",
               justifyContent: "space-between",
-              margin: "1rem 0 0 0.5rem",
+              margin: "0 0 0 1rem",
               placeItems: "center",
             }}
           >
-            <Typography variant="inherit">VAT</Typography>
-            <Typography variant="inherit">
+            <Typography color="#6C665F" variant="overline">
+              VAT
+            </Typography>
+            <Typography color="#6C665F" variant="overline">
               {numWithSpaces(calculateVat(cart))} SEK
             </Typography>
           </Box>

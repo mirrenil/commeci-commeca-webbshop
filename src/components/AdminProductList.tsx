@@ -16,7 +16,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import React, { Fragment, useState } from "react";
 import { ProductContext, useAdmin } from "../context/AdminPageContext";
-import { productData, ProductData } from "../ProductData";
+import { ProductData } from "../ProductData";
 interface Props {
   product: ProductData;
 }
@@ -32,8 +32,7 @@ function ProductTable(props: Props) {
       saveProduct,
       removeProduct,
       inputChangeHandler,
-    } = useAdmin();
-
+    } = useAdmin()
 
   const [open, setOpen] = React.useState(false);
   const [image, setImage] = useState(props.product.image);
@@ -75,31 +74,27 @@ function ProductTable(props: Props) {
                     <TableCell align="right">Title</TableCell>
                     <TableCell align="left">Description</TableCell>
                     <TableCell align="right">Price</TableCell>
+                    <TableCell align="right"></TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
                   <TableRow contentEditable={isEdit}>
                     <TableCell align="right">
                       {isEdit ? (
-                        <>
+                        <div style={{display: "flex", flexDirection: "column", alignItems: 'center'}}>
                           <img
                             src={props.product.image}
                             alt={props.product.title}
                             style={{ maxHeight: "200px" }}
                           />
-                          <Button
-                            variant="contained"
-                            size="small"
-                            component="label"
-                          >
-                            Upload image
-                            <input
-                              type="file"
-                              hidden
+                          <TextField
+                              required
+                              multiline
+                              label="image url"
+                              variant="standard"
                               onChange={(event) => setImage(event.target.value)}
-                            />
-                          </Button>
-                        </>
+                          />
+                        </div>
                       ) : (
                         <img
                           src={props.product.image}
@@ -145,12 +140,11 @@ function ProductTable(props: Props) {
                             value={String(price)}
                             variant="standard"
                             onChange={(event) => {
-                              console.log(isNaN(Number(event.target.value)))
+                              console.log(isNaN(Number(event.target.value)));
                               if (!isNaN(Number(event.target.value))) {
-                                 setPrice(Number(event.target.value))
-                              } 
+                                setPrice(Number(event.target.value));
                               }
-                            }
+                            }}
                           />
                         </>
                       ) : (
@@ -163,7 +157,7 @@ function ProductTable(props: Props) {
                           removeProduct(props.product);
                         }}
                       >
-                        <DeleteOutline />
+                        <DeleteOutline style={{ color: "#ed6c02" }} />
                       </Button>
                       <div>
                         {!isEdit ? (
@@ -172,7 +166,7 @@ function ProductTable(props: Props) {
                               setEdit(true);
                             }}
                           >
-                            <EditIcon />
+                            <EditIcon style={{ color: "#ed6c02" }} />
                           </Button>
                         ) : (
                           <Button
@@ -186,7 +180,7 @@ function ProductTable(props: Props) {
                               });
                             }}
                           >
-                            <DoneIcon />
+                            <DoneIcon style={{ color: "#ed6c02" }} />
                           </Button>
                         )}
                       </div>
@@ -210,24 +204,24 @@ export default function CollapsibleTable(props: PropsTable) {
 
   const products = React.useContext(ProductContext).products;
   return (
-    <TableContainer component={Paper}>
-      <Table aria-label="collapsible table">
-        <TableHead>
-          <TableRow>
-            <TableCell align="right">TITLE</TableCell>
-
-            <TableCell align="right">ID</TableCell>
-
-            <TableCell align="right">PRICE</TableCell>
-            
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {products.map((product) => {
-            return <ProductTable key={product.id} product={product} />;
-          })}
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <div style={{ padding: "4rem" }}>
+      <TableContainer component={Paper} style={{ boxShadow: "none" }}>
+        <Table aria-label="collapsible table">
+          <TableHead>
+            <TableRow>
+              <TableCell></TableCell>
+              <TableCell>TITLE</TableCell>
+              <TableCell>ID</TableCell>
+              <TableCell>PRICE</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {products.map((product) => {
+              return <ProductTable key={product.id} product={product} />;
+            })}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </div>
   );
 }

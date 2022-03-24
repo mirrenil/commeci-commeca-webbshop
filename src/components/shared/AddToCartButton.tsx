@@ -1,5 +1,4 @@
 import LoadingButton from "@mui/lab/LoadingButton";
-import { Box } from "@mui/system";
 import { CSSProperties, useState } from "react";
 import { useCart } from "../../context/CartContextProvider";
 import { ProductData } from "../../ProductData";
@@ -17,7 +16,7 @@ const AddToCartButton = (props: Props) => {
   // change button text for one second
   const buttonOnLoad = () => {
     setIsLoading(true);
-    setTimeout(() => setIsLoading(false), 1000);
+    setTimeout(() => setIsLoading(false), 500);
   };
 
   return (

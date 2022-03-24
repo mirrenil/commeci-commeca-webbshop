@@ -12,7 +12,6 @@ interface ContextValue {
   addProduct: (product: ProductData) => void;
   removeProduct: (product: ProductData) => void;
   inputChangeHandler: (event, product: ProductData) => void;
-  handleSave: (e) => void;
 }
 
 export const ProductContext = createContext<ContextValue>({
@@ -23,16 +22,11 @@ export const ProductContext = createContext<ContextValue>({
     saveProduct: (product) => undefined,
     removeProduct: (product) => undefined,
     inputChangeHandler: (product) => undefined,
-    handleSave: () => undefined,
 });
 
 const ProductProvider = (props) => { 
     const [products, setProducts] = useLocalStorageState(productData, "adminLS");
     const [isEdit, setEdit] = useState(false);
-
-    const handleSave = (product: ProductData) => {
-      //addProduct(newProduct);
-    }
 
    const addProduct = (newProduct: ProductData) => {
        console.log(newProduct)
@@ -48,8 +42,12 @@ const ProductProvider = (props) => {
     };
 
     const saveProduct = (editedProduct: ProductData) => {
-        // need e.target.value onChange or something
-        // filter just shows the product which was edited
+        const productExists = products.find((item) => item.id === editedProduct.id);
+       if (productExists) {
+           setProducts(products.map((item) => item.id === editedProduct.id ? {...editedProduct} : item))
+       } else {
+           setProducts([...products, editedProduct]);
+       }
 
         let productListToBeSaved = [...products]
 
@@ -57,7 +55,7 @@ const ProductProvider = (props) => {
             if(editedProduct.id === item.id) { return editedProduct }
             return item
         });
-        setProducts(editedProductList)
+        setProducts(editedProductList);
         setEdit(false);
         
         // const filter = editedProductList.filter((element) => { 
@@ -81,7 +79,6 @@ const ProductProvider = (props) => {
             saveProduct,
             removeProduct,
             inputChangeHandler,
-            handleSave,
             }}
         >
         {props.children}
