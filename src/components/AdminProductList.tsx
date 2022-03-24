@@ -1,7 +1,7 @@
 import { DeleteOutline } from "@mui/icons-material";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import { Button , TextField } from "@mui/material";
+import { Button, TextField, Typography } from "@mui/material";
 import Box from "@mui/material/Box";
 import Collapse from "@mui/material/Collapse";
 import IconButton from "@mui/material/IconButton";
@@ -17,23 +17,23 @@ import TableRow from "@mui/material/TableRow";
 import React, { Fragment, useState } from "react";
 import { ProductContext, useAdmin } from "../context/AdminPageContext";
 import { ProductData } from "../ProductData";
+import { numWithSpaces } from "../Helper";
 interface Props {
   product: ProductData;
 }
 
 function AdminProductList(props: Props) {
-  const
-    {
-      products,
-      isEdit,
-      setEdit,
-      addProduct,
-      saveProduct,
-      removeProduct,
-      inputChangeHandler,
-    } = useAdmin()
+  const {
+    products,
+    isEdit,
+    setEdit,
+    addProduct,
+    saveProduct,
+    removeProduct,
+    inputChangeHandler,
+  } = useAdmin();
 
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const [image, setImage] = useState(props.product.image);
   const [title, setTitle] = useState(props.product.title);
   const [description, setDescription] = useState(props.product.description);
@@ -57,99 +57,115 @@ function AdminProductList(props: Props) {
           {props.product.title}
         </TableCell>
         <TableCell>{props.product.id}</TableCell>
-        <TableCell>{props.product.price}:-</TableCell>
+        <TableCell>{numWithSpaces(props.product.price)} SEK</TableCell>
       </TableRow>
       {/* All info om produkten som är klickad*/}
       <TableRow>
-        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+        <TableCell
+          style={{
+            padding: 0,
+            backgroundColor: "#F8F4EF",
+          }}
+          colSpan={6}
+        >
           <Collapse in={open} timeout="auto" unmountOnExit>
-            <Box sx={{ margin: 1 }}>
+            <Box>
               <Table size="small" aria-label="purchases">
                 <TableHead>
                   <TableRow>
-                    <TableCell>Image</TableCell>
-                    <TableCell>ID</TableCell>
-                    <TableCell align="right">Title</TableCell>
-                    <TableCell align="left">Description</TableCell>
-                    <TableCell align="right">Price</TableCell>
-                    <TableCell align="right"></TableCell>
+                    <TableCell
+                      align="left"
+                      sx={{
+                        paddingX: { md: "5rem" },
+                        color: "#6C665F",
+                      }}
+                    >
+                      Image
+                    </TableCell>
+                    <TableCell align="center" style={{ color: "#6C665F" }}>
+                      ID
+                    </TableCell>
+                    <TableCell align="center" style={{ color: "#6C665F" }}>
+                      Title
+                    </TableCell>
+                    <TableCell align="center" style={{ color: "#6C665F" }}>
+                      Price
+                    </TableCell>
+                    <TableCell
+                      align="right"
+                      sx={{
+                        paddingX: { md: "5rem" },
+                      }}
+                    ></TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
                   <TableRow contentEditable={isEdit}>
-                    <TableCell align="right">
+                    <TableCell
+                      align="left"
+                      sx={{
+                        paddingX: { md: "5rem" },
+                      }}
+                    >
                       {isEdit ? (
-                        <div style={{display: "flex", flexDirection: "column", alignItems: 'center'}}>
+                        <Box
+                          style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "center",
+                          }}
+                        >
                           <img
                             src={props.product.image}
                             alt={props.product.title}
-                            style={{ maxHeight: "200px" }}
+                            style={{ maxHeight: "180px" }}
                           />
                           <TextField
-                              required
-                              multiline
-                              label="image url"
-                              variant="standard"
-                              onChange={(event) => setImage(event.target.value)}
+                            required
+                            multiline
+                            label="image url"
+                            variant="standard"
+                            onChange={(event) => setImage(event.target.value)}
                           />
-                        </div>
+                        </Box>
                       ) : (
                         <img
                           src={props.product.image}
                           alt={props.product.title}
-                          style={{ maxHeight: "200px" }}
+                          style={{ maxHeight: "180px" }}
                         />
                       )}
                     </TableCell>
 
-                    <TableCell align="right">{props.product.id}</TableCell>
-                    <TableCell align="right">
+                    <TableCell align="center">{props.product.id}</TableCell>
+                    <TableCell align="center">
                       {isEdit ? (
-                        <>
-                          <TextField
-                            value={title}
-                            variant="standard"
-                            onChange={(event) => setTitle(event.target.value)}
-                          />
-                        </>
+                        <TextField
+                          value={title}
+                          variant="standard"
+                          onChange={(event) => setTitle(event.target.value)}
+                        />
                       ) : (
                         props.product.title
                       )}
                     </TableCell>
-                    <TableCell align="right">
+                    <TableCell align="center">
                       {isEdit ? (
-                        <>
-                          <TextField
-                            value={description}
-                            variant="standard"
-                            onChange={(event) =>
-                              setDescription(event.target.value)
+                        <TextField
+                          value={String(price)}
+                          variant="standard"
+                          onChange={(event) => {
+                            console.log(isNaN(Number(event.target.value)));
+                            if (!isNaN(Number(event.target.value))) {
+                              setPrice(Number(event.target.value));
                             }
-                          />
-                        </>
+                          }}
+                        />
                       ) : (
-                        props.product.description
+                        numWithSpaces(props.product.price)
                       )}
                     </TableCell>
-                    <TableCell align="right">
-                      {isEdit ? (
-                        <>
-                          <TextField
-                            value={String(price)}
-                            variant="standard"
-                            onChange={(event) => {
-                              console.log(isNaN(Number(event.target.value)));
-                              if (!isNaN(Number(event.target.value))) {
-                                setPrice(Number(event.target.value));
-                              }
-                            }}
-                          />
-                        </>
-                      ) : (
-                        props.product.price
-                      )}
-                    </TableCell>
-                    <TableCell>
+                    <TableCell align="center">
                       <Button
                         onClick={() => {
                           removeProduct(props.product);
@@ -157,33 +173,61 @@ function AdminProductList(props: Props) {
                       >
                         <DeleteOutline style={{ color: "#ed6c02" }} />
                       </Button>
-                      <div>
-                        {!isEdit ? (
-                          <Button
-                            onClick={() => {
-                              setEdit(true);
-                            }}
-                          >
-                            <EditIcon style={{ color: "#ed6c02" }} />
-                          </Button>
-                        ) : (
-                          <Button
-                            onClick={() => {
-                              saveProduct({
-                                id: props.product.id,
-                                title,
-                                image,
-                                description,
-                                price,
-                              });
-                            }}
-                          >
-                            <DoneIcon style={{ color: "#ed6c02" }} />
-                          </Button>
-                        )}
-                      </div>
+                      {!isEdit ? (
+                        <Button
+                          onClick={() => {
+                            setEdit(true);
+                          }}
+                        >
+                          <EditIcon style={{ color: "#ed6c02" }} />
+                        </Button>
+                      ) : (
+                        <Button
+                          onClick={() => {
+                            saveProduct({
+                              id: props.product.id,
+                              title,
+                              image,
+                              description,
+                              price,
+                            });
+                          }}
+                        >
+                          <DoneIcon style={{ color: "#ed6c02" }} />
+                        </Button>
+                      )}
                     </TableCell>
                   </TableRow>
+                  <TableRow>
+                    <TableCell
+                      colSpan={5}
+                      align="left"
+                      sx={{
+                        paddingX: { md: "5rem" },
+                        color: "#6C665F",
+                      }}
+                    >
+                      Description
+                    </TableCell>
+                  </TableRow>
+
+                  <TableCell
+                    colSpan={5}
+                    align="left"
+                    sx={{
+                      paddingX: { md: "5rem" },
+                    }}
+                  >
+                    {isEdit ? (
+                      <TextField
+                        value={description}
+                        variant="standard"
+                        onChange={(event) => setDescription(event.target.value)}
+                      />
+                    ) : (
+                      props.product.description
+                    )}
+                  </TableCell>
                 </TableBody>
               </Table>
             </Box>

@@ -1,5 +1,5 @@
 import AddIcon from "@mui/icons-material/Add";
-import { Container, Typography } from "@mui/material";
+import { Box, Button, Container, Typography } from "@mui/material";
 import { useState } from "react";
 import AddProductForm from "./AddProductForm";
 import AdminCollapsibleTable from "./AdminCollapsibleTable";
@@ -23,15 +23,24 @@ function AdminPage() {
       >
         Admin
       </Typography>
-      <div style={{ paddingRight: "4rem" }}>
-        <button onClick={() => setIsOpen(true)}>
+      <Box style={{ display: "flex", justifyContent: "flex-end" }}>
+        <Button
+          variant="contained"
+          style={{
+            display: "flex",
+            width: "fit-content",
+            backgroundColor: "#CAC2B9",
+            textTransform: "none",
+          }}
+          onClick={() => setIsOpen(true)}
+        >
           ADD
           <AddIcon />
-        </button>
+        </Button>
         <Modal open={isOpen} onClose={() => setIsOpen(false)}>
           <AddProductForm />
         </Modal>
-      </div>
+      </Box>
       <AdminCollapsibleTable />
     </Container>
   );
