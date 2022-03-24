@@ -33,7 +33,7 @@ const ProductProvider = (props) => {
     console.log(products)
 
     const addProduct = (product: ProductData) => {
-       // setProducts([...products, product]);
+       
     }
 
     const removeProduct = (productToBeRemoved: ProductData) => {
@@ -42,8 +42,12 @@ const ProductProvider = (props) => {
     };
 
     const saveProduct = (editedProduct: ProductData) => {
-        // need e.target.value onChange or something
-        // filter just shows the product which was edited
+        const productExists = products.find((item) => item.id === editedProduct.id);
+       if (productExists) {
+           setProducts(products.map((item) => item.id === editedProduct.id ? {...editedProduct} : item))
+       } else {
+           setProducts([...products, editedProduct]);
+       }
 
         let productListToBeSaved = [...products]
 
@@ -51,7 +55,7 @@ const ProductProvider = (props) => {
             if(editedProduct.id === item.id) { return editedProduct }
             return item
         });
-        setProducts(editedProductList)
+        setProducts(editedProductList);
         setEdit(false);
         
         // const filter = editedProductList.filter((element) => { 

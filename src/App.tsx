@@ -13,6 +13,7 @@ import OrderConfirmation from "./components/OrderConfirmation";
 import OrderProvider from "./context/OrderContextProvider";
 
 function App() {
+
   return (
     <BrowserRouter>
       <ProductProvider>

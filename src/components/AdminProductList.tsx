@@ -16,7 +16,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import React, { Fragment, useState } from "react";
 import { ProductContext, useAdmin } from "../context/AdminPageContext";
-import { productData, ProductData } from "../ProductData";
+import { ProductData } from "../ProductData";
 interface Props {
   product: ProductData;
 }
@@ -71,31 +71,27 @@ function AdminProductList(props: Props) {
                     <TableCell align="right">Title</TableCell>
                     <TableCell align="left">Description</TableCell>
                     <TableCell align="right">Price</TableCell>
+                    <TableCell align="right"></TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
                   <TableRow contentEditable={isEdit}>
                     <TableCell align="right">
                       {isEdit ? (
-                        <>
+                        <div style={{display: "flex", flexDirection: "column", alignItems: 'center'}}>
                           <img
                             src={props.product.image}
                             alt={props.product.title}
                             style={{ maxHeight: "200px" }}
                           />
-                          <Button
-                            variant="contained"
-                            size="small"
-                            component="label"
-                          >
-                            Upload image
-                            <input
-                              type="file"
-                              hidden
+                          <TextField
+                              required
+                              multiline
+                              label="image url"
+                              variant="standard"
                               onChange={(event) => setImage(event.target.value)}
-                            />
-                          </Button>
-                        </>
+                          />
+                        </div>
                       ) : (
                         <img
                           src={props.product.image}
@@ -158,7 +154,7 @@ function AdminProductList(props: Props) {
                           removeProduct(props.product);
                         }}
                       >
-                        <DeleteOutline />
+                        <DeleteOutline style={{ color: "#ed6c02" }} />
                       </Button>
                       <div>
                         {!isEdit ? (
@@ -167,7 +163,7 @@ function AdminProductList(props: Props) {
                               setEdit(true);
                             }}
                           >
-                            <EditIcon />
+                            <EditIcon style={{ color: "#ed6c02" }} />
                           </Button>
                         ) : (
                           <Button
@@ -181,7 +177,7 @@ function AdminProductList(props: Props) {
                               });
                             }}
                           >
-                            <DoneIcon />
+                            <DoneIcon style={{ color: "#ed6c02" }} />
                           </Button>
                         )}
                       </div>
