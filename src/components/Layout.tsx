@@ -4,6 +4,7 @@ import Header from "./Header";
 import ErrorBoundary from "./shared/ErrorBoundary";
 
 function Layout() {
+  window.scrollTo(0, 0);
   const navigate = useNavigate();
   return (
     <div>
