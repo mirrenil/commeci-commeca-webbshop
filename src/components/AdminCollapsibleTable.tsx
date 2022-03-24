@@ -21,14 +21,21 @@ function AdminCollapsibleTable() {
       <Table aria-label="collapsible table">
         <TableHead>
           <TableRow style={{ backgroundColor: "#CAC2B9" }}>
-            <TableCell align="left" colSpan={2}>
-              <Typography variant="subtitle1">TITLE</Typography>
+            <TableCell />
+            <TableCell align="left">
+              <Typography variant="subtitle1" fontWeight="bold" color="white">
+                Title
+              </Typography>
             </TableCell>
             <TableCell align="left">
-              <Typography variant="subtitle1">ID</Typography>
+              <Typography variant="subtitle1" fontWeight="bold" color="white">
+                ID
+              </Typography>
             </TableCell>
             <TableCell align="left">
-              <Typography variant="subtitle1">PRICE</Typography>
+              <Typography variant="subtitle1" fontWeight="bold" color="white">
+                Price
+              </Typography>
             </TableCell>
           </TableRow>
         </TableHead>
