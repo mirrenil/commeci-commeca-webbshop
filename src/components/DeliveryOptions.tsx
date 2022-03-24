@@ -63,13 +63,13 @@ const DeliveryOptions = () => {
                       display: "flex",
                       placeItems: "center",
                       justifyContent: "space-around",
-                      m: "1rem 2rem",
+                      m: "1rem 1rem",
                     }}
                   >
                     <img
                       src={provider.logoImage}
                       alt={provider.providerName}
-                      height="20px"
+                      height="18px"
                     />
                     <Typography variant="body2" style={{ marginLeft: "1rem" }}>
                       {provider.cost} SEK
@@ -99,7 +99,7 @@ const DeliveryOptions = () => {
                       m: "1rem 2rem",
                     }}
                   >
-                    <Typography style={{ fontWeight: "bold" }}>
+                    <Typography variant="body2" style={{ fontWeight: "bold" }}>
                       {provider.providerName}
                     </Typography>
                     <Typography variant="body2" style={{ marginLeft: "1rem" }}>

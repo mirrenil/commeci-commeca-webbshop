@@ -145,10 +145,17 @@ function CheckoutFormContainer() {
             style={{
               textAlign: "center",
               margin: "2rem",
-              width: "400px",
               backgroundColor: "#CAC2B9",
               color: "white",
               letterSpacing: "3px",
+            }}
+            sx={{
+              width: {
+                xs: "300px",
+                sm: "400px",
+                md: "400px",
+                lg: "400px",
+              },
             }}
             type="submit"
           >
