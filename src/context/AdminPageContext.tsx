@@ -1,6 +1,4 @@
-import { useSelect } from "@mui/lab/node_modules/@mui/base";
 import { createContext, useContext, useState } from "react";
-import { hydrate } from "react-dom";
 import { useLocalStorageState } from "../components/hooks/useLocalStorageState";
 import { ProductData, productData } from "../ProductData";
 interface AdminData extends ProductData {
@@ -37,8 +35,7 @@ const ProductProvider = (props) => {
     }
 
    const addProduct = (product: ProductData) => {
-       console.log('ADDPRODUCT IN CONTEXT');
-       
+       // tar emot en  ny produkt
         //setProducts(newProduct);
    }
   
@@ -70,7 +67,6 @@ const ProductProvider = (props) => {
         products.map((product) => (product.id === productToEdit.id)); 
         console.log(products)
     }
-
         
     return (
         <ProductContext.Provider

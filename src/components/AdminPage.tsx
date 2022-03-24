@@ -5,7 +5,6 @@ import React, { useState } from "react";
 import Modal from './Modal';
 import AddProductForm from "./AddProductForm";
 
-
 interface Props {
   products: ProductData[];
 }
