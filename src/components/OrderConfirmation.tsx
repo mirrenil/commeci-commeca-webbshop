@@ -285,7 +285,7 @@ const OrderConfirmation = () => {
                         }}
                         colSpan={3}
                       >
-                        {orderDetail.name}
+                        {orderDetail.customer.name}
                       </TableCell>
                     </TableRow>
                     <TableRow>
@@ -306,7 +306,7 @@ const OrderConfirmation = () => {
                         }}
                         colSpan={3}
                       >
-                        {orderDetail.address}
+                        {orderDetail.customer.address}
                       </TableCell>
                     </TableRow>
                     <TableRow>
@@ -327,7 +327,7 @@ const OrderConfirmation = () => {
                         }}
                         colSpan={3}
                       >
-                        {orderDetail.email}
+                        {orderDetail.customer.email}
                       </TableCell>
                     </TableRow>
                     <TableRow>
@@ -348,7 +348,7 @@ const OrderConfirmation = () => {
                         }}
                         colSpan={3}
                       >
-                        {orderDetail.phoneNumber}
+                        {orderDetail.customer.phoneNumber}
                       </TableCell>
                     </TableRow>
                     <TableRow>

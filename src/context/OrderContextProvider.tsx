@@ -1,18 +1,25 @@
 import { createContext, FC, useContext, useState } from "react";
-import { FormValues } from "../components/CheckoutFormContainer";
 import { ShippingProvider } from "../ShippingProviderData";
 import { ItemData, useCart } from "./CartContextProvider";
 
-interface OrderData extends FormValues {
+interface OrderData {
   orderNo: string;
   boughtItems: ItemData[];
   shipmentOption: ShippingProvider;
-  paymentMethod: string;
+  paymentMethod: String;
+  customer: Customer;
+}
+
+export interface Customer {
+  name: string;
+  email: string;
+  address: string;
+  phoneNumber: number | "";
 }
 
 interface ContextValue {
   order: OrderData[];
-  createOrder: (values: FormValues) => void;
+  createOrder: (customerValues: Customer) => void;
   generateOrderNum: () => string;
 }
 
@@ -26,10 +33,17 @@ const OrderProvider: FC = (props) => {
   const { cart, shipper, paymentMethod } = useCart();
   const [order, setOrder] = useState<OrderData[]>([]);
 
-  const createOrder = (formValues) => {
+  const createOrder = (customerValues: Customer) => {
     const boughtItems = [...cart];
+    const customer: Customer = {
+      name: customerValues.name,
+      email: customerValues.email,
+      address: customerValues.address,
+      phoneNumber: customerValues.phoneNumber,
+    };
+
     let updatedOrder: OrderData = {
-      ...formValues,
+      customer: customer,
       boughtItems: boughtItems,
       shipmentOption: shipper,
       paymentMethod: paymentMethod,
