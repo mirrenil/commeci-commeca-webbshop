@@ -1,6 +1,6 @@
 import { Button } from '@mui/material';
 import zIndex from '@mui/material/styles/zIndex';
-import { padding } from '@mui/system';
+import { color, padding } from '@mui/system';
 import React, { CSSProperties } from 'react';
 import ReactDOM from "react-dom";
 import { transform } from 'typescript';
@@ -38,15 +38,15 @@ export default function Modal({open, children, onClose}) {
         <AddProductForm />
         <div style={overlayStyles} />
         <div style={modalStyles}>
+          <Button onClick={onClose} style={{ position: "fixed", padding: '0', top: '15px', left:'5px' }}>
+            <CloseIcon style={{ color: "#333" }} />
+          </Button>
           <div>
-            <Button onClick={onClose} style={{position: "fixed"}}>
-              <CloseIcon style={{ color: "#333" }} />
-            </Button>
             <h3
               style={{
                 left: "50%",
                 right: "50%",
-                textAlign: 'center',
+                textAlign: "center",
                 fontFamily: "Prata",
                 paddingBottom: "1rem",
               }}
