@@ -11,13 +11,14 @@ const PaymentSwish = () => {
     <Box
       sx={{
         display: "flex",
-        m: "1rem",
+        m: "2rem",
         flexDirection: {
           xs: "column",
           sm: "row",
           md: "row",
           lg: "row",
         },
+        justifyContent: "center",
       }}
     >
       <img

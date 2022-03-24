@@ -1,6 +1,7 @@
-import { Box, TextField, Typography } from "@mui/material";
+import { Box, TextField } from "@mui/material";
 import { useFormikContext } from "formik";
 import { FormValues } from "./CheckoutFormContainer";
+import invoiceLogo from "../assets/images/invoiceLogo.png";
 
 const PaymentInvoice = () => {
   const { values, errors, touched, handleChange } =
@@ -10,25 +11,22 @@ const PaymentInvoice = () => {
     <Box
       sx={{
         display: "flex",
-        m: "1rem",
+        m: "2rem",
         flexDirection: {
           xs: "column",
           sm: "row",
           md: "row",
           lg: "row",
         },
+        justifyContent: "center",
       }}
     >
-      <Typography
-        style={{
-          fontWeight: "bold",
-          marginRight: "1.5rem",
-          marginTop: ".5rem",
-          justifyContent: "center",
-        }}
-      >
-        Invoice
-      </Typography>
+      <img
+        src={invoiceLogo}
+        alt="invoice"
+        height="25px"
+        style={{ marginTop: ".5rem", marginRight: "1rem" }}
+      />
       <TextField
         style={{
           backgroundColor: "white",
