@@ -57,7 +57,7 @@ const PaymentCreditCard = () => {
           style={{
             backgroundColor: "white",
             width: "80px",
-            marginLeft: "1rem",
+            marginLeft: "2rem",
           }}
           sx={{
             mt: {

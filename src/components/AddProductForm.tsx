@@ -1,5 +1,5 @@
 import { useAdmin } from "../context/AdminPageContext";
-import {generateId, ProductData } from "../ProductData";
+import { generateId, ProductData } from "../ProductData";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import TextField from "@mui/material/TextField";
@@ -25,12 +25,11 @@ const InitialValue: ProductValues = {
 const ProductValidationSchema = yup.object({
   title: yup.string().required("Title is required"),
   description: yup.string().required("Description is required"),
-  price: yup.string().required("Price is required"),
+  price: yup.number().required("Price is required"),
   image: yup.string().required(),
 });
 
 function AddProductForm() {
- 
   const navigate = useNavigate();
   const { addProduct } = useAdmin();
   const [confirmation, setConfirmation] = useState(false);
@@ -45,26 +44,25 @@ function AddProductForm() {
           description: values.description,
           price: values.price,
           image: values.image,
-        }
+        };
         addProduct(newProduct);
         resolve(newProduct);
+
       }, 500);
-      
+
     });
     promise.then(() => {
       console.log('ddfghjk');
       setConfirmation(true)
     });
-    
   };
-
 
   const { values, errors, touched, handleSubmit, handleChange } =
     useFormik<ProductValues>({
       initialValues: InitialValue,
       validationSchema: ProductValidationSchema,
-      onSubmit: validateAndSaveNewProduct
- });
+      onSubmit: validateAndSaveNewProduct,
+    });
 
   const onInputChange = (values: ProductValues) => {
     /* const newProduct: ProductData = {
@@ -86,7 +84,7 @@ function AddProductForm() {
       <h4>Add new products</h4>
       <form onSubmit={handleSubmit}>
         <TextField
-        required
+          required
           type="text"
           name="title"
           label="Title"
@@ -96,7 +94,7 @@ function AddProductForm() {
           error={touched.title && Boolean(errors.title)}
         />
         <TextField
-        required
+          required
           type="text"
           name="description"
           label="Description"
@@ -106,8 +104,8 @@ function AddProductForm() {
           margin="normal"
         />
         <TextField
-        required
-          type="text"
+          required
+          type="number"
           name="price"
           label="Price"
           value={values.price}
