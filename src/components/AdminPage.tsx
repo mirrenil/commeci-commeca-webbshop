@@ -1,19 +1,13 @@
-import { ProductData, productData } from "../ProductData";
 import AddIcon from "@mui/icons-material/Add";
-import { useState } from "react";
-import Modal from './Modal';
-import AddProductForm from "./AddProductForm";
 import { Container, Typography } from "@mui/material";
+import { useState } from "react";
+import AddProductForm from "./AddProductForm";
 import AdminCollapsibleTable from "./AdminCollapsibleTable";
-
-interface Props {
-  products: ProductData[];
-}
-
-function AdminPage(props: Props) {
-  const [isOpen, setIsOpen] = useState(false)
+import Modal from "./Modal";
 
 function AdminPage() {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <Container
       sx={{
@@ -42,6 +36,5 @@ function AdminPage() {
     </Container>
   );
 }
-
 
 export default AdminPage;
