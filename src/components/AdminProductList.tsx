@@ -5,8 +5,8 @@ import { Button , TextField } from "@mui/material";
 import Box from "@mui/material/Box";
 import Collapse from "@mui/material/Collapse";
 import IconButton from "@mui/material/IconButton";
-import EditIcon from '@mui/icons-material/Edit';
-import DoneIcon from '@mui/icons-material/Done';
+import EditIcon from "@mui/icons-material/Edit";
+import DoneIcon from "@mui/icons-material/Done";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -21,8 +21,7 @@ interface Props {
   product: ProductData;
 }
 
-function ProductTable(props: Props) {
-
+function AdminProductList(props: Props) {
   const
     {
       products,
@@ -39,9 +38,8 @@ function ProductTable(props: Props) {
   const [title, setTitle] = useState(props.product.title);
   const [description, setDescription] = useState(props.product.description);
   const [price, setPrice] = useState(props.product.price);
-  
-  let productToEdit = props.product;
 
+  let productToEdit = props.product;
 
   return (
     <React.Fragment>
@@ -195,33 +193,4 @@ function ProductTable(props: Props) {
     </React.Fragment>
   );
 }
-
-interface PropsTable {
-  products: ProductData[];
-}
-
-export default function CollapsibleTable(props: PropsTable) {
-
-  const products = React.useContext(ProductContext).products;
-  return (
-    <div style={{ padding: "4rem" }}>
-      <TableContainer component={Paper} style={{ boxShadow: "none" }}>
-        <Table aria-label="collapsible table">
-          <TableHead>
-            <TableRow>
-              <TableCell></TableCell>
-              <TableCell>TITLE</TableCell>
-              <TableCell>ID</TableCell>
-              <TableCell>PRICE</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {products.map((product) => {
-              return <ProductTable key={product.id} product={product} />;
-            })}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </div>
-  );
-}
+export default AdminProductList;

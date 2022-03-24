@@ -1,9 +1,10 @@
 import { ProductData, productData } from "../ProductData";
 import AddIcon from "@mui/icons-material/Add";
-import ProductList from "./AdminProductList";
-import React, { useState } from "react";
+import { useState } from "react";
 import Modal from './Modal';
 import AddProductForm from "./AddProductForm";
+import { Container, Typography } from "@mui/material";
+import AdminCollapsibleTable from "./AdminCollapsibleTable";
 
 interface Props {
   products: ProductData[];
@@ -12,19 +13,22 @@ interface Props {
 function AdminPage(props: Props) {
   const [isOpen, setIsOpen] = useState(false)
 
+function AdminPage() {
   return (
-    <>
-      <h5
-        style={{
-          fontFamily: "Prata",
-          fontWeight: "400",
-          fontSize: "1.5rem",
-          marginTop: "2rem",
-          marginLeft: "10rem",
-        }}
+    <Container
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        padding: "1rem",
+        minHeight: "35rem",
+      }}
+    >
+      <Typography
+        sx={{ textTransform: "uppercase", fontFamily: "Prata", mt: "1rem" }}
+        variant="h5"
       >
         Admin
-      </h5>
+      </Typography>
       <div style={{ paddingRight: "4rem" }}>
         <button onClick={() => setIsOpen(true)}>
           ADD
@@ -34,10 +38,8 @@ function AdminPage(props: Props) {
           <AddProductForm />
         </Modal>
       </div>
-      <div>
-        <ProductList products={productData} />
-      </div>
-    </>
+      <AdminCollapsibleTable />
+    </Container>
   );
 }
 
