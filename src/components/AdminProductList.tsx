@@ -5,8 +5,8 @@ import { Button, Typography, TextField } from "@mui/material";
 import Box from "@mui/material/Box";
 import Collapse from "@mui/material/Collapse";
 import IconButton from "@mui/material/IconButton";
-import EditIcon from '@mui/icons-material/Edit';
-import DoneIcon from '@mui/icons-material/Done';
+import EditIcon from "@mui/icons-material/Edit";
+import DoneIcon from "@mui/icons-material/Done";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -21,28 +21,24 @@ interface Props {
   product: ProductData;
 }
 
-function ProductTable(props: Props) {
-
-  const
-    {
-      products,
-      addProduct,
-      isEdit,
-      setEdit,
-      saveProduct,
-      removeProduct,
-      inputChangeHandler,
-    } = useAdmin();
-
+function AdminProductList(props: Props) {
+  const {
+    products,
+    addProduct,
+    isEdit,
+    setEdit,
+    saveProduct,
+    removeProduct,
+    inputChangeHandler,
+  } = useAdmin();
 
   const [open, setOpen] = React.useState(false);
   const [image, setImage] = useState(props.product.image);
   const [title, setTitle] = useState(props.product.title);
   const [description, setDescription] = useState(props.product.description);
   const [price, setPrice] = useState(props.product.price);
-  
-  let productToEdit = props.product;
 
+  let productToEdit = props.product;
 
   return (
     <React.Fragment>
@@ -145,12 +141,11 @@ function ProductTable(props: Props) {
                             value={String(price)}
                             variant="standard"
                             onChange={(event) => {
-                              console.log(isNaN(Number(event.target.value)))
+                              console.log(isNaN(Number(event.target.value)));
                               if (!isNaN(Number(event.target.value))) {
-                                 setPrice(Number(event.target.value))
-                              } 
+                                setPrice(Number(event.target.value));
                               }
-                            }
+                            }}
                           />
                         </>
                       ) : (
@@ -201,33 +196,4 @@ function ProductTable(props: Props) {
     </React.Fragment>
   );
 }
-
-interface PropsTable {
-  products: ProductData[];
-}
-
-export default function CollapsibleTable(props: PropsTable) {
-
-  const products = React.useContext(ProductContext).products;
-  console.log("PRODUCTS: ", products)
-  return (
-    <TableContainer component={Paper}>
-      <Table aria-label="collapsible table">
-        <TableHead>
-          <TableRow>
-            <TableCell align="right">TITLE</TableCell>
-
-            <TableCell align="right">ID</TableCell>
-
-            <TableCell align="right">PRICE</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {products.map((product) => {
-            return <ProductTable key={product.id} product={product} />;
-          })}
-        </TableBody>
-      </Table>
-    </TableContainer>
-  );
-}
+export default AdminProductList;
