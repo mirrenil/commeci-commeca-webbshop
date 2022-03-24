@@ -1,28 +1,25 @@
-import { ProductData, productData } from "../ProductData";
+import { Container, Typography } from "@mui/material";
+import { productData } from "../ProductData";
 import ProductList from "./AdminProductList";
 
-interface Props {
-  products: ProductData[];
-}
-
-function AdminPage(props: Props) {
-
+function AdminPage() {
   return (
-    <div>
-      <h5
-        style={{
-          fontFamily: "Prata",
-          fontWeight: "400",
-          fontSize: "1.5rem",
-          marginTop: "2rem",
-          marginLeft: "10rem",
-        }}
+    <Container
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        padding: "1rem",
+        minHeight: "35rem",
+      }}
+    >
+      <Typography
+        sx={{ textTransform: "uppercase", fontFamily: "Prata", mt: "1rem" }}
+        variant="h5"
       >
         Admin
-      </h5>
-
+      </Typography>
       <ProductList products={productData} />
-    </div>
+    </Container>
   );
 }
 

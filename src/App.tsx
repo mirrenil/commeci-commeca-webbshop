@@ -40,10 +40,7 @@ function App() {
                 <Route path="/detail/:id" element={<DetailPage />} />
                 <Route path="/confirmation" element={<OrderConfirmation />} />
                 {/* added a quick fix in AdminPage component for now */}
-                <Route
-                  path="/admin"
-                  element={<AdminPage products={productData} />}
-                />
+                <Route path="/admin" element={<AdminPage />} />
                 <Route path="/checkoutpage" element={<CheckoutPage />} />
                 <Route path="*" element={<NotFound />} />
               </Route>
