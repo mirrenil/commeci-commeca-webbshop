@@ -2,7 +2,7 @@ import { Button } from '@mui/material';
 import zIndex from '@mui/material/styles/zIndex';
 import { color, padding } from '@mui/system';
 import React, { CSSProperties } from 'react';
-import ReactDOM from "react-dom";
+import ReactDOM, { hydrate } from "react-dom";
 import { transform } from 'typescript';
 import AddProductForm from './AddProductForm';
 import CloseIcon from "@mui/icons-material/Close";
@@ -26,12 +26,21 @@ const overlayStyles: CSSProperties = {
   left: 0,
   right: 0,
   bottom: 0,
-  backgroundColor: "rgba(0, 0, 0, .5)",
+  backgroundColor: "rgba(0, 0, 0, .55)",
   zIndex: 1000,
 };
 
 export default function Modal({open, children, onClose}) {
-    if (!open) return null
+    if (!open) return null;
+
+    // if modal is opened, following code disallowes you to scroll
+    // (not fully functional yet)
+    const body : HTMLBodyElement | any = document.querySelector("body");
+    if (open) {
+      body.style.overflow = "hidden";
+    } else if (!open) {
+      body.style.overflow = "scroll";
+    }
 
     return ReactDOM.createPortal(
       <>
