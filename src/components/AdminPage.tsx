@@ -1,6 +1,5 @@
 import { Container, Typography } from "@mui/material";
-import { productData } from "../ProductData";
-import ProductList from "./AdminProductList";
+import AdminCollapsibleTable from "./AdminCollapsibleTable";
 
 function AdminPage() {
   return (
@@ -18,7 +17,7 @@ function AdminPage() {
       >
         Admin
       </Typography>
-      <ProductList products={productData} />
+      <AdminCollapsibleTable />
     </Container>
   );
 }
