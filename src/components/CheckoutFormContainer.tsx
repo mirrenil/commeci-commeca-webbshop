@@ -117,16 +117,21 @@ function CheckoutFormContainer() {
       initialValues={InitialValue}
       validationSchema={ValidationSchema}
       onSubmit={(values: FormValues) => {
-        let promise = new Promise((resolve) => {
+        let promise = new Promise((resolve, reject) => {
           setTimeout(() => {
             createOrder(values);
-            resolve(values);
+            /* resolve(values); */
+            reject(new Error("Something went wrong!"));
           }, 2000);
         });
-        promise.then(() => {
-          navigate("/confirmation");
-          emptyCart();
-        });
+        promise
+          .then(() => {
+            navigate("/confirmation");
+            emptyCart();
+          })
+          .catch((error: Error) => {
+            alert(error.message);
+          });
       }}
     >
       <Form>
