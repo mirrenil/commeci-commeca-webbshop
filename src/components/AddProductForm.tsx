@@ -5,6 +5,8 @@ import * as yup from "yup";
 import TextField from "@mui/material/TextField";
 import { Button, Container } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import NewProductConfirmation from "./NewProductConfirmation";
+import { useState } from "react";
 
 export interface ProductValues {
   title: string;
@@ -30,6 +32,7 @@ const ProductValidationSchema = yup.object({
 function AddProductForm() {
   const navigate = useNavigate();
   const { addProduct } = useAdmin();
+  const [confirmation, setConfirmation] = useState(false);
 
   const validateAndSaveNewProduct = (values: ProductValues) => {
     // SKAPA NY PRODUKT
@@ -44,10 +47,13 @@ function AddProductForm() {
         };
         addProduct(newProduct);
         resolve(newProduct);
-      }, 2000);
+
+      }, 500);
+
     });
     promise.then(() => {
-      navigate("/admin");
+      console.log('ddfghjk');
+      setConfirmation(true)
     });
   };
 
@@ -59,8 +65,6 @@ function AddProductForm() {
     });
 
   const onInputChange = (values: ProductValues) => {
-    // SKAPA NY PRODUKT
-    console.log("clicked ONINPUTCHANGE");
     /* const newProduct: ProductData = {
       id: "",
       image: "",
@@ -120,6 +124,7 @@ function AddProductForm() {
           margin="normal"
         />
         <Button
+        onClick={NewProductConfirmation}
           size="large"
           variant="contained"
           style={{
@@ -135,6 +140,7 @@ function AddProductForm() {
           ADD PRODUCT
         </Button>
       </form>
+      {confirmation ? <NewProductConfirmation/> : undefined}  
     </Container>
   );
 }
