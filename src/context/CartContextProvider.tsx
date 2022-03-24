@@ -10,6 +10,12 @@ interface ContextValue {
   cart: ItemData[];
   shipper: ShippingProvider;
   paymentMethod: String;
+  isSwish?: Boolean;
+  isCreditCard?: Boolean;
+  isInvoice?: Boolean;
+  selectSwish: () => void;
+  selectCreditCard: () => void;
+  selectInvoice: () => void;
   addToCart: (product: ProductData) => void;
   onAddQuantity: (product: ItemData) => void;
   onReduceQuantity: (product: ItemData) => void;
@@ -27,6 +33,9 @@ export const CartContext = createContext<ContextValue>({
     deliveryTime: "",
   },
   paymentMethod: "",
+  selectSwish: () => {},
+  selectCreditCard: () => {},
+  selectInvoice: () => {},
   addToCart: () => {},
   onAddQuantity: () => {},
   onReduceQuantity: () => {},
@@ -44,6 +53,27 @@ const CartProvider: FC = (props) => {
     deliveryTime: "3-5 Weekdays",
   });
   const [paymentMethod, setPaymentMethod] = useState<String>("");
+  const [isCreditCard, setIsCreditCard] = useState<Boolean>(true);
+  const [isSwish, setIsSwish] = useState<Boolean>(false);
+  const [isInvoice, setIsInvoice] = useState<Boolean>(false);
+
+  const selectSwish = () => {
+    setIsSwish(true);
+    setIsCreditCard(false);
+    setIsInvoice(false);
+  };
+
+  const selectCreditCard = () => {
+    setIsSwish(false);
+    setIsCreditCard(true);
+    setIsInvoice(false);
+  };
+
+  const selectInvoice = () => {
+    setIsSwish(false);
+    setIsCreditCard(false);
+    setIsInvoice(true);
+  };
 
   const addToCart = async (product: ProductData) => {
     if (cart.some((item) => item.id === product.id)) {
@@ -100,6 +130,12 @@ const CartProvider: FC = (props) => {
         cart,
         shipper,
         paymentMethod,
+        isSwish,
+        isCreditCard,
+        isInvoice,
+        selectSwish,
+        selectCreditCard,
+        selectInvoice,
         addToCart,
         onAddQuantity,
         onReduceQuantity,

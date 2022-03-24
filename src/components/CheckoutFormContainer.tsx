@@ -1,4 +1,5 @@
 import { Box, Button } from "@mui/material";
+import valid from "card-validator";
 import { Form, Formik } from "formik";
 import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
@@ -8,7 +9,6 @@ import DeliveryDetails from "./DeliveryDetails";
 import DeliveryOptions from "./DeliveryOptions";
 import PaymentMethod from "./PaymentMethod";
 import PriceOverview from "./PriceOverview";
-import valid from "card-validator";
 
 export interface FormValues {
   name: string;
@@ -21,62 +21,101 @@ export interface FormValues {
   swish: number | "";
   invoice: number | "";
 }
-const InitialValue: FormValues = {
-  name: "",
-  email: "",
-  address: "",
-  phoneNumber: "",
-  cardNumber: "",
-  cardExpiry: "",
-  cardCVC: "",
-  swish: "",
-  invoice: "",
-};
-
-const phoneRegExp = /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/;
-const personalIdentityRegExp =
-  /^(19|20)?(\d{6}([-+]|\s)\d{4}|(?!19|20)\d{10})$/;
-
-const ContactValidationSchema = yup.object({
-  name: yup.string().min(2).required("Required"),
-  address: yup.string().min(5).required("Required"),
-  email: yup.string().email("Invalid email").required("Required"),
-  phoneNumber: yup
-    .string()
-    .required("Required")
-    .matches(phoneRegExp, "Invalid phone number"),
-  cardNumber: yup
-    .string()
-    .test(
-      "test-number",
-      "Invalid card number",
-      (value) => valid.number(value).isValid
-    ),
-  cardExpiry: yup
-    .string()
-    .test(
-      "test-number",
-      "Invalid",
-      (value) => valid.expirationDate(value).isValid
-    ),
-  cardCVC: yup
-    .string()
-    .test("test-number", "Invalid", (value) => valid.cvv(value).isValid),
-  swish: yup.string().matches(phoneRegExp, "Invalid phone number"),
-  invoice: yup
-    .string()
-    .matches(personalIdentityRegExp, "Invalid personal identity number"),
-});
 
 function CheckoutFormContainer() {
   const navigate = useNavigate();
-  const { emptyCart } = useCart();
+  const { emptyCart, isSwish, isCreditCard, isInvoice } = useCart();
   const { createOrder } = useOrder();
+
+  const phoneRegExp = /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/;
+  const personalIdentityRegExp =
+    /^(19|20)?(\d{6}([-+]|\s)\d{4}|(?!19|20)\d{10})$/;
+
+  const InitialValue: FormValues = {
+    name: "",
+    email: "",
+    address: "",
+    phoneNumber: "",
+    cardNumber: "",
+    cardExpiry: "",
+    cardCVC: "",
+    swish: "",
+    invoice: "",
+  };
+
+  const ValidationSchema = yup.object().shape({
+    name: yup.string().min(2).required("Required"),
+    address: yup.string().min(5).required("Required"),
+    email: yup.string().email("Invalid email").required("Required"),
+    phoneNumber: yup
+      .string()
+      .required("Required")
+      .matches(phoneRegExp, "Invalid phone number"),
+
+    cardNumber: yup.lazy(() => {
+      if (isCreditCard) {
+        return yup
+          .string()
+          .required("Required")
+          .test(
+            "test-number",
+            "Invalid card number",
+            (value) => valid.number(value).isValid
+          );
+      }
+      return yup.string();
+    }),
+
+    cardExpiry: yup.lazy(() => {
+      if (isCreditCard) {
+        return yup
+          .string()
+          .required("Required")
+          .test(
+            "test-number",
+            "Invalid",
+            (value) => valid.expirationDate(value).isValid
+          );
+      }
+      return yup.string();
+    }),
+
+    cardCVC: yup.lazy(() => {
+      if (isCreditCard) {
+        return yup
+          .string()
+          .required("Required")
+          .test("test-number", "Invalid", (value) => valid.cvv(value).isValid);
+      }
+
+      return yup.string();
+    }),
+
+    swish: yup.lazy(() => {
+      if (isSwish) {
+        return yup
+          .string()
+          .required("Required")
+          .matches(phoneRegExp, "Invalid phone number");
+      }
+      return yup.string();
+    }),
+
+    invoice: yup.lazy(() => {
+      if (isInvoice) {
+        return yup
+          .string()
+          .required("Required")
+          .matches(personalIdentityRegExp, "Invalid personal identity number");
+      }
+      return yup.string();
+    }),
+  });
 
   return (
     <Formik
       initialValues={InitialValue}
-      validationSchema={ContactValidationSchema}
+      validationSchema={ValidationSchema}
       onSubmit={(values: FormValues) => {
         let promise = new Promise((resolve) => {
           setTimeout(() => {
