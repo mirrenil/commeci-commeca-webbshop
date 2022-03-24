@@ -1,41 +1,41 @@
-import { useSelect } from "@mui/lab/node_modules/@mui/base";
 import { createContext, useContext, useState } from "react";
-import { hydrate } from "react-dom";
 import { useLocalStorageState } from "../components/hooks/useLocalStorageState";
 import { ProductData, productData } from "../ProductData";
-
 interface AdminData extends ProductData {
 }
 
 interface ContextValue {
   products: ProductData[];
-  addProduct: (product: ProductData) => void;
   setEdit: React.Dispatch<React.SetStateAction<boolean>>
   isEdit: boolean
   saveProduct: (product: ProductData) => void;
+  addProduct: (product: ProductData) => void;
   removeProduct: (product: ProductData) => void;
   inputChangeHandler: (event, product: ProductData) => void;
 }
 
 export const ProductContext = createContext<ContextValue>({
     products: [],
-    addProduct: (product) => [],
-    setEdit: () => [],
+    addProduct: () => undefined,
+    setEdit: () => undefined,
     isEdit: false,
-    saveProduct: (product) => [],
-    removeProduct: (product) => [],
-    inputChangeHandler: (product) => [],
+    saveProduct: (product) => undefined,
+    removeProduct: (product) => undefined,
+    inputChangeHandler: (product) => undefined,
 });
 
 const ProductProvider = (props) => { 
     const [products, setProducts] = useLocalStorageState(productData, "adminLS");
     const [isEdit, setEdit] = useState(false);
-    console.log(products)
 
-    const addProduct = (product: ProductData) => {
-       
-    }
-
+   const addProduct = (newProduct: ProductData) => {
+       console.log(newProduct)
+       let newProductList = [...products];
+       newProductList.push(newProduct);
+       setProducts(newProductList);
+       console.log(products); 
+   }
+  
     const removeProduct = (productToBeRemoved: ProductData) => {
         const updatedProductList = products.filter((product) => productToBeRemoved.id !== product.id)  
         setProducts(updatedProductList);
@@ -68,21 +68,15 @@ const ProductProvider = (props) => {
         products.map((product) => (product.id === productToEdit.id)); 
         console.log(products)
     }
-
         
-    //  const handleChange = (e, editedProduct: ProductData) => {
-    //     let editedText = products.map((products, e) => products !== editedProduct)
-    //         saveProduct(editedText)
-    // }
-
     return (
         <ProductContext.Provider
             value={{
             products,
             setEdit,
+            addProduct,
             isEdit,
             saveProduct,
-            addProduct,
             removeProduct,
             inputChangeHandler,
             }}
