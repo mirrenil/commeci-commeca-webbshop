@@ -1,9 +1,12 @@
+import { Button } from '@mui/material';
 import zIndex from '@mui/material/styles/zIndex';
 import { padding } from '@mui/system';
 import React, { CSSProperties } from 'react';
 import ReactDOM from "react-dom";
 import { transform } from 'typescript';
 import AddProductForm from './AddProductForm';
+import CloseIcon from "@mui/icons-material/Close";
+
 
 const modalStyles: CSSProperties = {
   position: 'fixed',
@@ -13,8 +16,8 @@ const modalStyles: CSSProperties = {
   backgroundColor: '#FFF',
   padding: '50px',
   zIndex: 1000,
-  width: '80vw',
-  height: '70vh',
+  width: '75vw',
+  height: '65vh',
 }
 
 const overlayStyles: CSSProperties = {
@@ -31,14 +34,29 @@ export default function Modal({open, children, onClose}) {
     if (!open) return null
 
     return ReactDOM.createPortal(
-        <>
+      <>
         <AddProductForm />
         <div style={overlayStyles} />
         <div style={modalStyles}>
-            {children}
-            <button onClick={onClose}>Close</button>
+          <div>
+            <Button onClick={onClose} style={{position: "fixed"}}>
+              <CloseIcon style={{ color: "#333" }} />
+            </Button>
+            <h3
+              style={{
+                left: "50%",
+                right: "50%",
+                textAlign: 'center',
+                fontFamily: "Prata",
+                paddingBottom: "1rem",
+              }}
+            >
+              ADD A NEW PRODUCT
+            </h3>
+          </div>
+          {children}
         </div>
-        </>,
-        document.getElementById('portal')!
-    )
+      </>,
+      document.getElementById("portal")!
+    );
 }
