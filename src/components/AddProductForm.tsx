@@ -44,13 +44,14 @@ function AddProductForm() {
           image: values.image,
         }
         addProduct(newProduct);
-        resolve(values);
+        resolve(newProduct);
       }, 2000);
       
     });
     promise.then(() => {
       navigate("/admin");
     });
+    
   };
 
 

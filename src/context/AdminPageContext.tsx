@@ -34,9 +34,12 @@ const ProductProvider = (props) => {
       //addProduct(newProduct);
     }
 
-   const addProduct = (product: ProductData) => {
-       // tar emot en  ny produkt
-        //setProducts(newProduct);
+   const addProduct = (newProduct: ProductData) => {
+       console.log(newProduct)
+       let newProductList = [...products];
+       newProductList.push(newProduct);
+       setProducts(newProductList);
+       console.log(products); 
    }
   
     const removeProduct = (productToBeRemoved: ProductData) => {
