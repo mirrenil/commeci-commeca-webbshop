@@ -1,3 +1,4 @@
+import { Female } from "@mui/icons-material";
 import {
   Box,
   Container,
@@ -53,7 +54,7 @@ const DeliveryOptions = () => {
           {shippingProvider.map((provider) => {
             return provider.cost !== 0 ? (
               <FormControlLabel
-                control={<Radio />}
+                control={<Radio required={true} />}
                 value={provider.providerName}
                 key={provider.providerName}
                 onClick={() => selectShippment(provider)}
