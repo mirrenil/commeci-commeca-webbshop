@@ -4,17 +4,13 @@ import { Form, Formik } from "formik";
 import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
 import { useCart } from "../context/CartContextProvider";
-import { useOrder } from "../context/OrderContextProvider";
+import { Customer, useOrder } from "../context/OrderContextProvider";
 import DeliveryDetails from "./DeliveryDetails";
 import DeliveryOptions from "./DeliveryOptions";
 import PaymentMethod from "./PaymentMethod";
 import PriceOverview from "./PriceOverview";
 
-export interface FormValues {
-  name: string;
-  email: string;
-  address: string;
-  phoneNumber: number | "";
+export interface FormValues extends Customer {
   cardNumber: number | "";
   cardExpiry: number | "";
   cardCVC: number | "";
