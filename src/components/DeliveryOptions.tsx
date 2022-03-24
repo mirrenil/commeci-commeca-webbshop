@@ -41,7 +41,7 @@ const DeliveryOptions = () => {
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
-          padding: "2rem",
+          padding: { xs: ".5rem", sm: "2rem", md: "2rem", lg: "2rem" },
         }}
       >
         <RadioGroup

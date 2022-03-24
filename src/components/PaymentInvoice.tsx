@@ -12,12 +12,7 @@ const PaymentInvoice = () => {
       sx={{
         display: "flex",
         m: "2rem",
-        flexDirection: {
-          xs: "column",
-          sm: "row",
-          md: "row",
-          lg: "row",
-        },
+        flexDirection: "row",
         justifyContent: "center",
       }}
     >
@@ -31,14 +26,6 @@ const PaymentInvoice = () => {
         style={{
           backgroundColor: "white",
           width: "220px",
-        }}
-        sx={{
-          mt: {
-            xs: "1rem",
-            sm: "0rem",
-            md: "0rem",
-            lg: "0rem",
-          },
         }}
         id="invoice"
         name="invoice"

@@ -12,12 +12,7 @@ const PaymentCreditCard = () => {
       sx={{
         display: "flex",
         m: "2rem",
-        flexDirection: {
-          xs: "column",
-          sm: "row",
-          md: "row",
-          lg: "column",
-        },
+        flexDirection: "column",
         justifyContent: "center",
       }}
     >
@@ -38,14 +33,6 @@ const PaymentCreditCard = () => {
           style={{
             backgroundColor: "white",
             width: "220px",
-          }}
-          sx={{
-            mt: {
-              xs: "1rem",
-              sm: "0rem",
-              md: "0rem",
-              lg: "0rem",
-            },
           }}
           id="cardNumber" // change back to card-number later
           name="cardNumber" // change
