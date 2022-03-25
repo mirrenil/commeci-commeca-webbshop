@@ -7,7 +7,6 @@ import Modal from "./Modal";
 
 function AdminPage() {
   const [isOpen, setIsOpen] = useState(false);
-
   return (
     <Container
       sx={{
@@ -42,6 +41,7 @@ function AdminPage() {
         </Modal>
       </Box>
       <AdminCollapsibleTable />
+      
     </Container>
   );
 }

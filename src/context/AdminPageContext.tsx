@@ -1,9 +1,6 @@
 import { createContext, useContext, useState } from "react";
 import { useLocalStorageState } from "../components/hooks/useLocalStorageState";
 import { ProductData, productData } from "../ProductData";
-interface AdminData extends ProductData {
-}
-
 interface ContextValue {
   products: ProductData[];
   setEdit: React.Dispatch<React.SetStateAction<boolean>>
@@ -57,13 +54,7 @@ const ProductProvider = (props) => {
         });
         setProducts(editedProductList);
         setEdit(false);
-        
-        // const filter = editedProductList.filter((element) => { 
-        // return element.id === productData.forEach((element) => element.id);})
-        // console.log("filter: " + filter);
     }
-    
-        //let productToEdit = props.product
         const inputChangeHandler = (event, productToEdit: ProductData) => {
         products.map((product) => (product.id === productToEdit.id)); 
         console.log(products)
