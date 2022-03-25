@@ -11,6 +11,7 @@ import CartProvider from "./context/CartContextProvider";
 import { productData } from "./ProductData";
 import OrderConfirmation from "./components/OrderConfirmation";
 import OrderProvider from "./context/OrderContextProvider";
+import StartPage from "./components/StartPage";
 
 function App() {
   return (
@@ -20,7 +21,8 @@ function App() {
           <OrderProvider>
             <Routes>
               <Route path="/" element={<Layout />}>
-                <Route index element={<ProductPage />} />
+                <Route index element={<StartPage />} />
+                <Route path="/furniture" element={<ProductPage />} />
                 <Route
                   path="/textiles"
                   element={<EmptyPage page="Textiles" />}

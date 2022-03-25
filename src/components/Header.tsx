@@ -32,7 +32,7 @@ function Header() {
   const menuLeft: Page[] = [
     {
       label: "Furniture",
-      href: "/",
+      href: "/furniture",
     },
     {
       label: "Textiles",
