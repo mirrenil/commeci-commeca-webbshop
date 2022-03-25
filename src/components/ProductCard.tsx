@@ -11,6 +11,7 @@ import {
 import { CSSProperties } from "react";
 import { Link } from "react-router-dom";
 import { useAdmin } from "../context/AdminPageContext";
+import { numWithSpaces } from "../Helper";
 import AddToCartButton from "./shared/AddToCartButton";
 
 function ProductCard() {
@@ -57,7 +58,7 @@ function ProductCard() {
             }}
           >
             <Typography variant="body2" color="text.secondary">
-              {product.price} SEK
+              {numWithSpaces(product.price)} SEK
             </Typography>
             <CardActions>
               <AddToCartButton product={product} size="small" />
