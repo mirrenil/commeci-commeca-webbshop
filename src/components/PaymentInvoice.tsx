@@ -26,6 +26,7 @@ const PaymentInvoice = () => {
         style={{
           backgroundColor: "white",
           width: "220px",
+          height: "40px",
         }}
         id="invoice"
         name="invoice"

@@ -26,6 +26,7 @@ const PaymentSwish = () => {
         style={{
           backgroundColor: "white",
           width: "200px",
+          height: "40px",
         }}
         id="swish"
         name="swish"

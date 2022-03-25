@@ -2,14 +2,13 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import AdminPage from "./components/AdminPage";
 import CheckoutPage from "./components/CheckoutPage";
 import DetailPage from "./components/DetailPage";
-import EmptyPage from "./components/shared/EmptyPage";
 import Layout from "./components/Layout";
 import NotFound from "./components/NotFound";
+import OrderConfirmation from "./components/OrderConfirmation";
 import ProductPage from "./components/ProductPage";
+import EmptyPage from "./components/shared/EmptyPage";
 import ProductProvider from "./context/AdminPageContext";
 import CartProvider from "./context/CartContextProvider";
-import { productData } from "./ProductData";
-import OrderConfirmation from "./components/OrderConfirmation";
 import OrderProvider from "./context/OrderContextProvider";
 
 function App() {
