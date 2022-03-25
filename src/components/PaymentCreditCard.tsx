@@ -1,7 +1,7 @@
 import { Box, TextField } from "@mui/material";
 import { useFormikContext } from "formik";
-import { FormValues } from "./CheckoutFormContainer";
 import creditCardLogo from "../assets/images/creditCardLogo.png";
+import { FormValues } from "./CheckoutFormContainer";
 
 const PaymentCreditCard = () => {
   const { values, errors, touched, handleChange } =
@@ -33,6 +33,8 @@ const PaymentCreditCard = () => {
           style={{
             backgroundColor: "white",
             width: "220px",
+            height: "40px",
+            marginBottom: "1.5rem",
           }}
           id="cardNumber" // change back to card-number later
           name="cardNumber" // change
@@ -57,6 +59,7 @@ const PaymentCreditCard = () => {
           style={{
             backgroundColor: "white",
             width: "80px",
+            height: "40px",
             marginLeft: "2rem",
           }}
           sx={{
@@ -69,7 +72,7 @@ const PaymentCreditCard = () => {
           }}
           id="cardExpiry"
           name="cardExpiry"
-          label="MM-YY"
+          label="MMYY"
           type="text"
           size="small"
           value={values.cardExpiry}
@@ -80,7 +83,8 @@ const PaymentCreditCard = () => {
         <TextField
           style={{
             backgroundColor: "white",
-            width: "65px",
+            width: "75px",
+            height: "40px",
             marginLeft: "1rem",
           }}
           sx={{

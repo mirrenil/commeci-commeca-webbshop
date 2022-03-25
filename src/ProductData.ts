@@ -1,21 +1,3 @@
-//import PallJolly from "./assets/images/PallJolly.webp";
-//import FatoljXander from "./assets/images/FatoljXander.webp";
-// import SangbordMagnolia from "./assets/images/SangbordMagnolia.webp";
-// import SanggavelBella from "./assets/images/sanggavelBella.webp";
-//import SidobordEssentials from "./assets/images/SidobordEssentials.webp";
-//import skankDitti from "./assets/images/skankDitti.webp";
-//import BankDagny from "./assets/images/BankDagny.webp";
-// import charleston from "./assets/images/charleston.webp";
-//import golvSpegelMinna from "./assets/images/golvSpegelMinna.webp";
-// import KuddfodralDaisy from "./assets/images/KuddfodralDaisy.webp";
-//import stolPirri from "./assets/images/stolPirri.webp";
-//import fatoljChardonne from "./assets/images/FatoljChardonne.webp";
-//import skapVincent from "./assets/images/skapVincent.webp";
-//import Merlisso from "./assets/images/soffBordMerlisso.webp";
-// import barrel from "./assets/images/barrel.webp";
-//import SkrivbordAlba from "./assets/images/SkrivbordAlba.webp";
-//import sanggavelBetty from "./assets/images/sanggavelBetty.webp";
-
 export interface ProductData {
   image: string;
   title: string;
@@ -24,7 +6,9 @@ export interface ProductData {
   id: string;
 }
 
-// Function that returns a unique Id
+/**
+ * function that returns a unique Id, both numbers and letters
+ */
 export const generateId = () => {
   const newId = Math.floor(1 + Math.random() * 0x1000)
     .toString(16)

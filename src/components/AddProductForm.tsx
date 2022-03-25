@@ -1,12 +1,12 @@
+import { Button, Container } from "@mui/material";
+import TextField from "@mui/material/TextField";
+import { useFormik } from "formik";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import * as yup from "yup";
 import { useAdmin } from "../context/AdminPageContext";
 import { generateId, ProductData } from "../ProductData";
-import { useFormik } from "formik";
-import * as yup from "yup";
-import TextField from "@mui/material/TextField";
-import { Button, Container } from "@mui/material";
-import { useNavigate } from "react-router-dom";
 import NewProductConfirmation from "./NewProductConfirmation";
-import { useState } from "react";
 
 export interface ProductValues {
   title: string;
@@ -35,7 +35,9 @@ function AddProductForm() {
   const [confirmation, setConfirmation] = useState(false);
 
   const validateAndSaveNewProduct = (values: ProductValues) => {
-    // SKAPA NY PRODUKT
+    /**
+     * makes new product and after 0.5 sec shows confirmation
+     */
     let promise = new Promise((resolve) => {
       setTimeout(() => {
         const newProduct: ProductData = {
@@ -47,12 +49,10 @@ function AddProductForm() {
         };
         addProduct(newProduct);
         resolve(newProduct);
-
       }, 500);
-
     });
     promise.then(() => {
-      setConfirmation(true)
+      setConfirmation(true);
     });
   };
 
@@ -62,17 +62,7 @@ function AddProductForm() {
       validationSchema: ProductValidationSchema,
       onSubmit: validateAndSaveNewProduct,
     });
-
-  // const onInputChange = (values: ProductValues) => {
-  //   /* const newProduct: ProductData = {
-  //     id: "",
-  //     image: "",
-  //     title: "",
-  //     description: "",
-  //     price: parseInt(""),
-  //   }; */
-  // };
-
+    
   return (
     <Container
       style={{
@@ -142,7 +132,7 @@ function AddProductForm() {
         </div>
         <Button
           onClick={NewProductConfirmation}
-          size="medium"
+          size="large"
           variant="contained"
           style={{
             display: "flex",
