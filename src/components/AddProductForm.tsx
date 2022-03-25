@@ -35,7 +35,9 @@ function AddProductForm() {
   const [confirmation, setConfirmation] = useState(false);
 
   const validateAndSaveNewProduct = (values: ProductValues) => {
-    // SKAPA NY PRODUKT
+    /**
+     * makes new product and after 0.5 sec shows confirmation
+     */
     let promise = new Promise((resolve) => {
       setTimeout(() => {
         const newProduct: ProductData = {
@@ -47,12 +49,10 @@ function AddProductForm() {
         };
         addProduct(newProduct);
         resolve(newProduct);
-
       }, 500);
-
     });
     promise.then(() => {
-      setConfirmation(true)
+      setConfirmation(true);
     });
   };
 
@@ -62,17 +62,7 @@ function AddProductForm() {
       validationSchema: ProductValidationSchema,
       onSubmit: validateAndSaveNewProduct,
     });
-
-  // const onInputChange = (values: ProductValues) => {
-  //   /* const newProduct: ProductData = {
-  //     id: "",
-  //     image: "",
-  //     title: "",
-  //     description: "",
-  //     price: parseInt(""),
-  //   }; */
-  // };
-
+    
   return (
     <Container
       style={{
