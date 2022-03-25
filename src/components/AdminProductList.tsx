@@ -1,23 +1,25 @@
 import { DeleteOutline } from "@mui/icons-material";
+import DoneIcon from "@mui/icons-material/Done";
+import EditIcon from "@mui/icons-material/Edit";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import { Button, TextField, Typography } from "@mui/material";
-import Box from "@mui/material/Box";
-import Collapse from "@mui/material/Collapse";
-import IconButton from "@mui/material/IconButton";
-import EditIcon from "@mui/icons-material/Edit";
-import DoneIcon from "@mui/icons-material/Done";
-import Paper from "@mui/material/Paper";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import React, { Fragment, useState } from "react";
-import { ProductContext, useAdmin } from "../context/AdminPageContext";
-import { ProductData } from "../ProductData";
+import {
+  Box,
+  Button,
+  Collapse,
+  IconButton,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+  TextareaAutosize,
+  TextField,
+} from "@mui/material";
+import { Fragment, useState } from "react";
+import { useAdmin } from "../context/AdminPageContext";
 import { numWithSpaces } from "../Helper";
+import { ProductData } from "../ProductData";
 interface Props {
   product: ProductData;
 }
@@ -42,7 +44,7 @@ function AdminProductList(props: Props) {
   let productToEdit = props.product;
 
   return (
-    <React.Fragment>
+    <Fragment>
       <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
         <TableCell>
           <IconButton
@@ -123,9 +125,11 @@ function AdminProductList(props: Props) {
                           <TextField
                             required
                             multiline
-                            label="image url"
+                            label="Image URL"
                             variant="standard"
                             onChange={(event) => setImage(event.target.value)}
+                            inputProps={{ style: { fontSize: ".9rem" } }}
+                            InputLabelProps={{ style: { fontSize: ".9rem" } }}
                           />
                         </Box>
                       ) : (
@@ -144,6 +148,8 @@ function AdminProductList(props: Props) {
                           value={title}
                           variant="standard"
                           onChange={(event) => setTitle(event.target.value)}
+                          inputProps={{ style: { fontSize: ".9rem" } }}
+                          InputLabelProps={{ style: { fontSize: ".9rem" } }}
                         />
                       ) : (
                         props.product.title
@@ -160,6 +166,8 @@ function AdminProductList(props: Props) {
                               setPrice(Number(event.target.value));
                             }
                           }}
+                          inputProps={{ style: { fontSize: ".9rem" } }}
+                          InputLabelProps={{ style: { fontSize: ".9rem" } }}
                         />
                       ) : (
                         numWithSpaces(props.product.price)
@@ -219,9 +227,18 @@ function AdminProductList(props: Props) {
                     }}
                   >
                     {isEdit ? (
-                      <TextField
+                      <TextareaAutosize
+                        aria-label="description"
                         value={description}
-                        variant="standard"
+                        style={{
+                          width: "100%",
+                          border: "none",
+                          fontFamily: "inherit",
+                          fontSize: ".9rem",
+                          padding: "0.5rem 0.2rem ",
+                          backgroundColor: "#F8F4EF",
+                          borderBottom: "1px solid grey",
+                        }}
                         onChange={(event) => setDescription(event.target.value)}
                       />
                     ) : (
@@ -234,7 +251,7 @@ function AdminProductList(props: Props) {
           </Collapse>
         </TableCell>
       </TableRow>
-    </React.Fragment>
+    </Fragment>
   );
 }
 export default AdminProductList;
