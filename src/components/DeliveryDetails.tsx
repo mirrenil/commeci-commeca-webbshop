@@ -43,6 +43,8 @@ const DeliveryDetails = () => {
           <TextField
             style={{
               backgroundColor: "white",
+              height: "55px",
+              marginBottom: "1rem",
             }}
             id="name"
             name="name"
@@ -57,6 +59,8 @@ const DeliveryDetails = () => {
           <TextField
             style={{
               backgroundColor: "white",
+              height: "55px",
+              marginBottom: "1rem",
             }}
             id="address"
             name="address"
@@ -71,6 +75,8 @@ const DeliveryDetails = () => {
           <TextField
             style={{
               backgroundColor: "white",
+              height: "55px",
+              marginBottom: "1rem",
             }}
             id="email"
             name="email"
@@ -85,6 +91,8 @@ const DeliveryDetails = () => {
           <TextField
             style={{
               backgroundColor: "white",
+              height: "55px",
+              marginBottom: "1rem",
             }}
             id="phoneNumber"
             name="phoneNumber"

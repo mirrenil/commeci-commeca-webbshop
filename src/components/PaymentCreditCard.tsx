@@ -1,29 +1,14 @@
-import { TextFields } from "@mui/icons-material";
 import { Box, TextField } from "@mui/material";
-import { makeStyles } from "@mui/styles";
 import { useFormikContext } from "formik";
 import creditCardLogo from "../assets/images/creditCardLogo.png";
 import { FormValues } from "./CheckoutFormContainer";
+import { makeStyles } from "@mui/styles";
 
 const PaymentCreditCard = () => {
   const { values, errors, touched, handleChange } =
     useFormikContext<FormValues>();
 
-  const { required } = useStyles();
-
-  const styles = (theme) => ({
-    labelAsterisk: {
-      color: "red",
-    },
-    cssLabel: {
-      color: "orange",
-    },
-    cssRequired: {
-      "&:before": {
-        borderBottom: "2px solid orange",
-      },
-    },
-  });
+  const helperText = helperTextStyles();
 
   return (
     <Box
@@ -48,10 +33,11 @@ const PaymentCreditCard = () => {
           style={{ marginTop: ".5rem", marginRight: "1rem" }}
         />
         <TextField
-          className={required}
           style={{
             backgroundColor: "white",
             width: "220px",
+            height: "40px",
+            marginBottom: "1.5rem",
           }}
           id="cardNumber" // change back to card-number later
           name="cardNumber" // change
@@ -76,6 +62,7 @@ const PaymentCreditCard = () => {
           style={{
             backgroundColor: "white",
             width: "80px",
+            height: "40px",
             marginLeft: "2rem",
           }}
           sx={{
@@ -88,7 +75,7 @@ const PaymentCreditCard = () => {
           }}
           id="cardExpiry"
           name="cardExpiry"
-          label="MM-YY"
+          label="MMYY"
           type="text"
           size="small"
           value={values.cardExpiry}
@@ -100,6 +87,7 @@ const PaymentCreditCard = () => {
           style={{
             backgroundColor: "white",
             width: "75px",
+            height: "40px",
             marginLeft: "1rem",
           }}
           sx={{
@@ -125,8 +113,16 @@ const PaymentCreditCard = () => {
   );
 };
 
-const useStyles = makeStyles(() => ({
-  required: {},
+const helperTextStyles = makeStyles((theme) => ({
+  root: {
+    margin: 4,
+    color: "black",
+  },
+  helperText: {
+    "&.MuiFormHelperText-root.Mui-error": {
+      //color: theme.palette.common.white,
+    },
+  },
 }));
 
 export default PaymentCreditCard;
