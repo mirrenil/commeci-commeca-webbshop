@@ -17,13 +17,13 @@ export interface Customer {
   phoneNumber: number | "";
 }
 
-interface ContextValue {
+interface OrderContextValue {
   order: OrderData[];
   createOrder: (customerValues: Customer) => void;
   generateOrderNum: () => string;
 }
 
-export const OrderContext = createContext<ContextValue>({
+export const OrderContext = createContext<OrderContextValue>({
   order: [],
   createOrder: () => {},
   generateOrderNum: () => "",

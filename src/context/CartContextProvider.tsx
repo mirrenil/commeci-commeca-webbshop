@@ -6,7 +6,7 @@ import { ShippingProvider } from "../ShippingProviderData";
 export interface ItemData extends ProductData {
   quantity: number;
 }
-interface ContextValue {
+interface CartContextValue {
   cart: ItemData[];
   shipper: ShippingProvider;
   paymentMethod: String;
@@ -25,7 +25,7 @@ interface ContextValue {
   selectPaymentMethod: (method: String) => void;
 }
 
-export const CartContext = createContext<ContextValue>({
+export const CartContext = createContext<CartContextValue>({
   cart: [],
   shipper: {
     providerName: "",
