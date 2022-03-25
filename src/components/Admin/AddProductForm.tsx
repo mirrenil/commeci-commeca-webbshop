@@ -2,10 +2,9 @@ import { Button, Container } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import { useFormik } from "formik";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
-import { useAdmin } from "../context/AdminPageContext";
-import { generateId, ProductData } from "../ProductData";
+import { useAdmin } from "../../context/AdminPageContext";
+import { generateId, ProductData } from "../../ProductData";
 import NewProductConfirmation from "./NewProductConfirmation";
 
 export interface ProductValues {
@@ -30,7 +29,6 @@ const ProductValidationSchema = yup.object({
 });
 
 function AddProductForm() {
-  const navigate = useNavigate();
   const { addProduct } = useAdmin();
   const [confirmation, setConfirmation] = useState(false);
 

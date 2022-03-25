@@ -9,7 +9,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useContext } from "react";
-import { ProductContext } from "../context/AdminPageContext";
+import { ProductContext } from "../../context/AdminPageContext";
 import AdminProductList from "./AdminProductList";
 
 function AdminCollapsibleTable() {

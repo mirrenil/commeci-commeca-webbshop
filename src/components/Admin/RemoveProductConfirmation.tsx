@@ -5,9 +5,8 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import { useAdmin } from '../context/AdminPageContext';
-import { color } from '@mui/system';
-import { ProductData } from '../ProductData';
+import { useAdmin } from '../../context/AdminPageContext';
+import { ProductData } from '../../ProductData';
 
 interface Props {
     product: ProductData;
