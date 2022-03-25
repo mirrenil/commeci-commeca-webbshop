@@ -2,13 +2,10 @@ import { Box, TextField } from "@mui/material";
 import { useFormikContext } from "formik";
 import creditCardLogo from "../assets/images/creditCardLogo.png";
 import { FormValues } from "./CheckoutFormContainer";
-import { makeStyles } from "@mui/styles";
 
 const PaymentCreditCard = () => {
   const { values, errors, touched, handleChange } =
     useFormikContext<FormValues>();
-
-  const helperText = helperTextStyles();
 
   return (
     <Box
@@ -112,17 +109,5 @@ const PaymentCreditCard = () => {
     </Box>
   );
 };
-
-const helperTextStyles = makeStyles((theme) => ({
-  root: {
-    margin: 4,
-    color: "black",
-  },
-  helperText: {
-    "&.MuiFormHelperText-root.Mui-error": {
-      //color: theme.palette.common.white,
-    },
-  },
-}));
 
 export default PaymentCreditCard;
