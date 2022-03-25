@@ -28,7 +28,7 @@ function ProductCard() {
       }}
     >
       {products.map((product) => (
-        <Card sx={cardStyle}>
+        <Card sx={cardStyle} key={product.title}>
           <Link to={`/detail/${product.id}`} style={linkStyle}>
             <CardActionArea>
               <CardMedia
