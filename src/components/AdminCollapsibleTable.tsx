@@ -14,21 +14,27 @@ import AdminProductList from "./AdminProductList";
 
 function AdminCollapsibleTable() {
   const products = useContext(ProductContext).products;
-  console.log("PRODUCTS: ", products);
 
   return (
     <TableContainer component={Paper} sx={{ my: "1.5rem" }}>
       <Table aria-label="collapsible table">
         <TableHead>
           <TableRow style={{ backgroundColor: "#CAC2B9" }}>
-            <TableCell align="left" colSpan={2}>
-              <Typography variant="subtitle1">TITLE</Typography>
+            <TableCell />
+            <TableCell align="left">
+              <Typography variant="subtitle1" fontWeight="bold" color="white">
+                Title
+              </Typography>
             </TableCell>
             <TableCell align="left">
-              <Typography variant="subtitle1">ID</Typography>
+              <Typography variant="subtitle1" fontWeight="bold" color="white">
+                ID
+              </Typography>
             </TableCell>
             <TableCell align="left">
-              <Typography variant="subtitle1">PRICE</Typography>
+              <Typography variant="subtitle1" fontWeight="bold" color="white">
+                Price
+              </Typography>
             </TableCell>
           </TableRow>
         </TableHead>
@@ -36,9 +42,11 @@ function AdminCollapsibleTable() {
           {products.map((product) => {
             return <AdminProductList key={product.id} product={product} />;
           })}
+  );
         </TableBody>
       </Table>
     </TableContainer>
+    
   );
 }
 
