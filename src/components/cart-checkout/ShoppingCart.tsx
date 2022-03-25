@@ -2,15 +2,14 @@ import AddIcon from "@mui/icons-material/Add";
 import ClearIcon from "@mui/icons-material/Clear";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { Box, Button, ButtonGroup, Container, Typography } from "@mui/material";
-import { CSSProperties } from "react";
 import { Link } from "react-router-dom";
-import { useCart } from "../context/CartContextProvider";
+import { useCart } from "../../context/CartContextProvider";
 import {
   calculateVat,
   numWithSpaces,
   sumProductPrice,
   UseSumTotal,
-} from "../Helper";
+} from "../../Helper";
 
 function ShoppingCart() {
   const { cart, onAddQuantity, onReduceQuantity, removeFromCart } = useCart();
@@ -46,15 +45,19 @@ function ShoppingCart() {
             sx={{
               textAlign: "center",
               display: "flex",
-              padding: ".8rem 2rem",
+              padding: ".8rem 1rem",
             }}
             key={product.id}
           >
-            <img style={imageStyle} src={product.image} alt={product.title} />
+            <img
+              style={{ width: 80 }}
+              src={product.image}
+              alt={product.title}
+            />
             <Box
               key={product.id}
               sx={{
-                width: "82%",
+                width: 1,
                 display: "flex",
                 justifyContent: "space-between",
                 margin: "auto",
@@ -112,12 +115,12 @@ function ShoppingCart() {
                   </Button>
                 </ButtonGroup>
               </Box>
-              {/* <p style={textStyle}>Unit Price: {product.price}</p> */}
               <Typography
                 variant="inherit"
                 sx={{
                   display: "flex",
                   placeItems: "center",
+                  fontSize: { xs: "14px", sm: "inherit" },
                 }}
               >
                 {numWithSpaces(sumProductPrice(product))} SEK
@@ -184,9 +187,5 @@ function ShoppingCart() {
     </Container>
   );
 }
-
-const imageStyle: CSSProperties = {
-  width: "80px",
-};
 
 export default ShoppingCart;

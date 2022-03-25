@@ -230,7 +230,7 @@ function Header() {
         </Box>
         {getMenuButtonsLeft()}
         <Link to="/">
-          <img className={ccLogo} src={logo} alt="comme ci comme ca"></img>
+          <img className={ccLogo} src={logo} alt="comme ci comme ça"></img>
         </Link>
         {getMenuButtonsRight()}
         {icons()}

@@ -1,9 +1,9 @@
 import { Box, TextField } from "@mui/material";
 import { useFormikContext } from "formik";
-import SwishLogo from "../assets/images/SwishLogo.svg";
-import { FormValues } from "./CheckoutFormContainer";
+import invoiceLogo from "../../../assets/images/invoiceLogo.png";
+import { FormValues } from "../../cart-checkout/CheckoutFormContainer";
 
-const PaymentSwish = () => {
+const PaymentInvoice = () => {
   const { values, errors, touched, handleChange } =
     useFormikContext<FormValues>();
 
@@ -17,29 +17,30 @@ const PaymentSwish = () => {
       }}
     >
       <img
-        src={SwishLogo}
-        alt="Swish"
-        height="20px"
+        src={invoiceLogo}
+        alt="invoice"
+        height="25px"
         style={{ marginTop: ".5rem", marginRight: "1rem" }}
       />
       <TextField
         style={{
           backgroundColor: "white",
-          width: "200px",
+          width: "220px",
           height: "40px",
         }}
-        id="swish"
-        name="swish"
-        label="Phone Number"
+        id="invoice"
+        name="invoice"
+        label="Personal Identity Number"
         type="text"
         size="small"
-        value={values.swish}
+        placeholder="YYYYMMDD-XXXX"
+        value={values.invoice}
         onChange={handleChange}
-        error={touched.swish && Boolean(errors.swish)}
-        helperText={errors.swish}
+        error={touched.invoice && Boolean(errors.invoice)}
+        helperText={errors.invoice}
       />
     </Box>
   );
 };
 
-export default PaymentSwish;
+export default PaymentInvoice;

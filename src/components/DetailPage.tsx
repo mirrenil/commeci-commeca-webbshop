@@ -76,7 +76,7 @@ function DetailPage() {
           size="large"
           style={{
             margin: "2rem",
-            width: "360px",
+            maxWidth: "360px",
             backgroundColor: "#CAC2B9",
             letterSpacing: "3px",
           }}

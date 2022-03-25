@@ -9,14 +9,14 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
-import { useOrder } from "../context/OrderContextProvider";
+import { useOrder } from "../../context/OrderContextProvider";
 import {
   calculateVat,
   numWithSpaces,
   sumProductPrice,
   UseSumTotal,
-} from "../Helper";
-import HomeButton from "./shared/HomeButton";
+} from "../../Helper";
+import HomeButton from "../shared/HomeButton";
 
 const OrderConfirmation = () => {
   const { order } = useOrder();

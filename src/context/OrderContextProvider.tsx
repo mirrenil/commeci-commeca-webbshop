@@ -33,6 +33,7 @@ const OrderProvider: FC = (props) => {
   const { cart, shipper, paymentMethod } = useCart();
   const [order, setOrder] = useState<OrderData[]>([]);
 
+  /** push in everything related to the order to the order state */
   const createOrder = (customerValues: Customer) => {
     const boughtItems = [...cart];
     const customer: Customer = {
@@ -41,7 +42,6 @@ const OrderProvider: FC = (props) => {
       address: customerValues.address,
       phoneNumber: customerValues.phoneNumber,
     };
-
     let updatedOrder: OrderData = {
       customer: customer,
       boughtItems: boughtItems,
@@ -51,15 +51,15 @@ const OrderProvider: FC = (props) => {
     };
     setOrder([updatedOrder]);
   };
-  console.log(order);
+  // console.log(order);
 
+  /** generate an unique order numder */
   const generateOrderNum = () => {
     const yy: string = new Date().getFullYear().toString().substr(-2);
     const mm: number = new Date().getMonth() + 1;
     const dd: number = new Date().getDate();
     const formattedDate =
       yy + (mm > 9 ? "" : "0") + mm + (dd > 9 ? "" : "0") + dd;
-
     const randomNum: number = Math.floor(Math.random() * 100000);
     const orderNum: string = formattedDate + "-" + randomNum;
     return orderNum;
