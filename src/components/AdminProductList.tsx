@@ -20,6 +20,8 @@ import { Fragment, useState } from "react";
 import { useAdmin } from "../context/AdminPageContext";
 import { numWithSpaces } from "../Helper";
 import { ProductData } from "../ProductData";
+import RemoveProductConfirmation from "./RemoveProductConfirmation";
+
 interface Props {
   product: ProductData;
 }
@@ -39,7 +41,7 @@ function AdminProductList(props: Props) {
   const [title, setTitle] = useState(props.product.title);
   const [description, setDescription] = useState(props.product.description);
   const [price, setPrice] = useState(props.product.price);
-
+  const [openRemove, setOpenRemove] = useState(false);
   let productToEdit = props.product;
 
   return (
@@ -173,13 +175,12 @@ function AdminProductList(props: Props) {
                       )}
                     </TableCell>
                     <TableCell align="center">
-                      <Button
-                        onClick={() => {
-                          removeProduct(props.product);
-                        }}
-                      >
-                        <DeleteOutline style={{ color: "#ed6c02" }} />
-                      </Button>
+                     <Button onClick={() => setOpenRemove(true)}>
+                       {openRemove ? <RemoveProductConfirmation product={props.product}/> : undefined}
+                        <DeleteOutline 
+                        style={{ color: "#ed6c02" }} />
+                       </Button>    
+                       
                       {!isEdit ? (
                         <Button
                           onClick={() => {

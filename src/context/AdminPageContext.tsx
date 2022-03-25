@@ -3,6 +3,7 @@ import { useLocalStorageState } from "../components/hooks/useLocalStorageState";
 import { ProductData, productData } from "../ProductData";
 
 interface AdminContextValue {
+
   products: ProductData[];
   isEdit: boolean;
   setEdit: React.Dispatch<React.SetStateAction<boolean>>;
@@ -60,6 +61,7 @@ const ProductProvider: FC = (props) => {
     } else {
       setProducts([...products, editedProduct]);
     }
+
 
     /**
      * makes a new list that contains the edited product, sets edit to false
