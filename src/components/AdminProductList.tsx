@@ -32,7 +32,6 @@ function AdminProductList(props: Props) {
     addProduct,
     saveProduct,
     removeProduct,
-    inputChangeHandler,
   } = useAdmin();
 
   const [open, setOpen] = useState(false);
