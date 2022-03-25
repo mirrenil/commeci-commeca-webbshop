@@ -1,5 +1,6 @@
 import { Box, Typography } from "@mui/material";
-import { CSSProperties, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { useAdmin } from "../context/AdminPageContext";
 import { numWithSpaces } from "../Helper";
 import { ProductData } from "../ProductData";
@@ -11,7 +12,7 @@ const StartPage = () => {
   useEffect(() => {
     const getRandomProduct = () => {
       let randoms: ProductData[] = [];
-      const numOfRandomProducts: number = 3;
+      const numOfRandomProducts: number = 6;
       while (randoms.length < numOfRandomProducts) {
         let random: ProductData =
           products[Math.floor(Math.random() * products.length)];
@@ -19,7 +20,6 @@ const StartPage = () => {
           randoms.push(random);
         }
       }
-
       setRandomProducts(randoms);
     };
     getRandomProduct();
@@ -30,6 +30,7 @@ const StartPage = () => {
       sx={{
         display: "flex",
         justifyContent: "center",
+        flexWrap: "wrap",
       }}
     >
       {randomProducts.map((product) => (
@@ -41,13 +42,29 @@ const StartPage = () => {
             position: "relative",
           }}
         >
-          <img src={product.image} alt={product.title} style={imageStyle} />
           <Box
+            component="img"
+            sx={{
+              width: {
+                xs: 1,
+                md: `calc(100vw/2)`,
+                lg: `calc(100vw/3)`,
+              },
+            }}
+            alt={product.title}
+            src={product.image}
+          />
+          <Box
+            component={Link}
+            {...{
+              to: `/detail/${product.id}`,
+            }}
             style={{
               position: "absolute",
-              top: Math.floor(Math.random() * (250 - 10) + 10),
-              left: Math.floor(Math.random() * (400 - 10) + 10),
+              top: Math.floor(Math.random() * (400 - 50) + 50),
+              left: Math.floor(Math.random() * (350 - 50) + 50),
               textAlign: "center",
+              textDecoration: "none",
             }}
           >
             <Typography
@@ -73,10 +90,6 @@ const StartPage = () => {
       ))}
     </Box>
   );
-};
-
-const imageStyle: CSSProperties = {
-  width: `calc(100vw/3)`,
 };
 
 export default StartPage;
