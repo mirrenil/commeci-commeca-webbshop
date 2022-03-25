@@ -3,9 +3,9 @@ import valid from "card-validator";
 import { Form, Formik } from "formik";
 import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
-import { useCart } from "../context/CartContextProvider";
-import { Customer, useOrder } from "../context/OrderContextProvider";
-import DeliveryDetails from "./DeliveryDetails";
+import { useCart } from "../../context/CartContextProvider";
+import { Customer, useOrder } from "../../context/OrderContextProvider";
+import CustomerDetails from "./CustomerDetails";
 import DeliveryOptions from "./DeliveryOptions";
 import PaymentMethod from "./PaymentMethod";
 import PriceOverview from "./PriceOverview";
@@ -130,7 +130,7 @@ function CheckoutFormContainer() {
     >
       <Form>
         <DeliveryOptions />
-        <DeliveryDetails />
+        <CustomerDetails />
         <PaymentMethod />
         <PriceOverview />
         <Box style={{ textAlign: "center" }}>

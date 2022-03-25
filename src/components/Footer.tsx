@@ -11,6 +11,7 @@ function Footer() {
         py={{ xs: 5, sm: 8 }}
         bgcolor="#6C665F"
         color="white"
+        sx={{ boxShadow: 3 }}
       >
         <Container maxWidth="lg">
           <Grid container spacing={3}>
@@ -82,9 +83,15 @@ function Footer() {
             <InstagramIcon />
             <FacebookIcon />
           </Box>
-          <Box textAlign="center" pt={{ xs: 2, sm: 4 }} pb={{ xs: 2, sm: 0 }}>
+          <Typography
+            variant="body2"
+            textAlign="center"
+            pt={{ xs: 2, sm: 4 }}
+            pb={{ xs: 2, sm: 0 }}
+            style={{ fontFamily: "Prata" }}
+          >
             comme ci comme ça &reg; {new Date().getFullYear()}
-          </Box>
+          </Typography>
         </Container>
       </Box>
     </footer>

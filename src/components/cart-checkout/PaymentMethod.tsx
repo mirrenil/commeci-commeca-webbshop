@@ -1,14 +1,14 @@
-import { Box, Container, Typography } from "@mui/material";
 import CreditCardIcon from "@mui/icons-material/CreditCard";
+import { Box, Container, Typography } from "@mui/material";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import { useState } from "react";
-import SwishLogo from "../assets/images/SwishLogo.svg";
-import invoiceLogo from "../assets/images/invoiceLogo.png";
-import { useCart } from "../context/CartContextProvider";
-import PaymentCreditCard from "./PaymentCreditCard";
-import PaymentInvoice from "./PaymentInvoice";
-import PaymentSwish from "./PaymentSwish";
+import invoiceLogo from "../../assets/images/invoiceLogo.png";
+import SwishLogo from "../../assets/images/SwishLogo.svg";
+import { useCart } from "../../context/CartContextProvider";
+import PaymentCreditCard from "./payment-methods/PaymentCreditCard";
+import PaymentInvoice from "./payment-methods/PaymentInvoice";
+import PaymentSwish from "./payment-methods/PaymentSwish";
 
 const PaymentMethod = () => {
   const [selectPayment, setSelectPayment] = useState("credit card");
@@ -20,6 +20,7 @@ const PaymentMethod = () => {
     selectInvoice,
   } = useCart();
 
+  /** handle selected of payment method */
   const handleToggle = (event, newSelection: string | null) => {
     if (newSelection !== null) {
       setSelectPayment(newSelection);

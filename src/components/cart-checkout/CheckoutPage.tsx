@@ -1,7 +1,7 @@
 import { Container } from "@mui/material";
-import { useCart } from "../context/CartContextProvider";
+import { useCart } from "../../context/CartContextProvider";
+import EmptyCart from "../EmptyCart";
 import CheckoutFormContainer from "./CheckoutFormContainer";
-import EmptyCart from "./EmptyCart";
 import ShoppingCart from "./ShoppingCart";
 
 function CheckoutPage() {

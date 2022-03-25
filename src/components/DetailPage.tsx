@@ -1,13 +1,12 @@
 import { Container, Typography } from "@mui/material";
+import React from "react";
 import { useParams } from "react-router-dom";
 import detailInfo from "../assets/images/detailinfo.png";
-import { ProductData, productData } from "../ProductData";
-import AddToCartButton from "./shared/AddToCartButton";
-import React from "react"
 import { ProductContext } from "../context/AdminPageContext";
+import { numWithSpaces } from "../Helper";
+import AddToCartButton from "./shared/AddToCartButton";
 
 function DetailPage() {
-
   const newproduct = React.useContext(ProductContext).products;
   const params = useParams<{ id: string }>();
   const product = newproduct.find((product) => product.id === params?.id);
@@ -34,8 +33,7 @@ function DetailPage() {
           marginTop: "2rem",
           marginBottom: "2rem",
         }}
-         src={product.image}
-        
+        src={product.image}
       ></Container>
       <Container
         style={{
@@ -71,14 +69,14 @@ function DetailPage() {
             fontSize: "1.4rem",
           }}
         >
-          {product.price} SEK
+          {numWithSpaces(product.price)} SEK
         </Typography>
         <AddToCartButton
           product={product}
           size="large"
           style={{
             margin: "2rem",
-            width: "360px",
+            maxWidth: "360px",
             backgroundColor: "#CAC2B9",
             letterSpacing: "3px",
           }}
@@ -88,7 +86,5 @@ function DetailPage() {
     </Container>
   );
 }
-
-
 
 export default DetailPage;

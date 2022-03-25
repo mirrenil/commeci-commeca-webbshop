@@ -1,12 +1,13 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import AdminPage from "./components/AdminPage";
-import CheckoutPage from "./components/CheckoutPage";
+import CheckoutPage from "./components/cart-checkout/CheckoutPage";
 import DetailPage from "./components/DetailPage";
 import Layout from "./components/Layout";
 import NotFound from "./components/NotFound";
-import OrderConfirmation from "./components/OrderConfirmation";
+import OrderConfirmation from "./components/cart-checkout/OrderConfirmation";
 import ProductPage from "./components/ProductPage";
 import EmptyPage from "./components/shared/EmptyPage";
+import StartPage from "./components/StartPage";
 import ProductProvider from "./context/AdminPageContext";
 import CartProvider from "./context/CartContextProvider";
 import OrderProvider from "./context/OrderContextProvider";
@@ -19,7 +20,8 @@ function App() {
           <OrderProvider>
             <Routes>
               <Route path="/" element={<Layout />}>
-                <Route index element={<ProductPage />} />
+                <Route index element={<StartPage />} />
+                <Route path="/furniture" element={<ProductPage />} />
                 <Route
                   path="/textiles"
                   element={<EmptyPage page="Textiles" />}
