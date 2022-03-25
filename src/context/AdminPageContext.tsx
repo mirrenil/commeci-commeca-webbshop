@@ -9,7 +9,6 @@ interface AdminContextValue {
   saveProduct: (product: ProductData) => void;
   addProduct: (product: ProductData) => void;
   removeProduct: (product: ProductData) => void;
-  inputChangeHandler: (event, product: ProductData) => void; // function not in use anywhere
 }
 
 export const ProductContext = createContext<AdminContextValue>({
@@ -19,21 +18,26 @@ export const ProductContext = createContext<AdminContextValue>({
   setEdit: () => {},
   saveProduct: () => {},
   removeProduct: () => {},
-  inputChangeHandler: () => {},
 });
 
 const ProductProvider: FC = (props) => {
   const [products, setProducts] = useLocalStorageState(productData, "adminLS");
   const [isEdit, setEdit] = useState(false);
 
+  /**
+   * function that pushes new product to a new list and then updates LS
+   * @param newProduct
+   */
   const addProduct = (newProduct: ProductData) => {
-    console.log(newProduct);
     let newProductList = [...products];
     newProductList.push(newProduct);
     setProducts(newProductList);
-    console.log(products);
   };
 
+  /**
+   * function that removes a product, makes a new list and updates LS
+   * @param productToBeRemoved
+   */
   const removeProduct = (productToBeRemoved: ProductData) => {
     const updatedProductList = products.filter(
       (product) => productToBeRemoved.id !== product.id
@@ -41,6 +45,10 @@ const ProductProvider: FC = (props) => {
     setProducts(updatedProductList);
   };
 
+  /**
+   * function that saves an edited product
+   * @param editedProduct
+   */
   const saveProduct = (editedProduct: ProductData) => {
     const productExists = products.find((item) => item.id === editedProduct.id);
     if (productExists) {
@@ -53,8 +61,9 @@ const ProductProvider: FC = (props) => {
       setProducts([...products, editedProduct]);
     }
 
-    // let productListToBeSaved = [...products];
-
+    /**
+     * makes a new list that contains the edited product, sets edit to false
+     */
     const editedProductList = products.map((item) => {
       if (editedProduct.id === item.id) {
         return editedProduct;
@@ -63,15 +72,6 @@ const ProductProvider: FC = (props) => {
     });
     setProducts(editedProductList);
     setEdit(false);
-    // const filter = editedProductList.filter((element) => {
-    // return element.id === productData.forEach((element) => element.id);})
-    // console.log("filter: " + filter);
-  };
-
-  //let productToEdit = props.product
-  const inputChangeHandler = (event, productToEdit: ProductData) => {
-    products.map((product) => product.id === productToEdit.id);
-    console.log(products);
   };
 
   return (
@@ -83,7 +83,6 @@ const ProductProvider: FC = (props) => {
         addProduct,
         saveProduct,
         removeProduct,
-        inputChangeHandler,
       }}
     >
       {props.children}
