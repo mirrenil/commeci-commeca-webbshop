@@ -1,12 +1,12 @@
+import { Button, Container } from "@mui/material";
+import TextField from "@mui/material/TextField";
+import { useFormik } from "formik";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import * as yup from "yup";
 import { useAdmin } from "../context/AdminPageContext";
 import { generateId, ProductData } from "../ProductData";
-import { useFormik } from "formik";
-import * as yup from "yup";
-import TextField from "@mui/material/TextField";
-import { Button, Container } from "@mui/material";
-import { useNavigate } from "react-router-dom";
 import NewProductConfirmation from "./NewProductConfirmation";
-import { useState } from "react";
 
 export interface ProductValues {
   title: string;
@@ -47,13 +47,11 @@ function AddProductForm() {
         };
         addProduct(newProduct);
         resolve(newProduct);
-
       }, 500);
-
     });
     promise.then(() => {
-      console.log('ddfghjk');
-      setConfirmation(true)
+      console.log("ddfghjk");
+      setConfirmation(true);
     });
   };
 
@@ -124,7 +122,7 @@ function AddProductForm() {
           margin="normal"
         />
         <Button
-        onClick={NewProductConfirmation}
+          onClick={NewProductConfirmation}
           size="large"
           variant="contained"
           style={{
@@ -140,7 +138,7 @@ function AddProductForm() {
           ADD PRODUCT
         </Button>
       </form>
-      {confirmation ? <NewProductConfirmation/> : undefined}  
+      {confirmation ? <NewProductConfirmation /> : undefined}
     </Container>
   );
 }

@@ -1,11 +1,29 @@
+import { TextFields } from "@mui/icons-material";
 import { Box, TextField } from "@mui/material";
+import { makeStyles } from "@mui/styles";
 import { useFormikContext } from "formik";
-import { FormValues } from "./CheckoutFormContainer";
 import creditCardLogo from "../assets/images/creditCardLogo.png";
+import { FormValues } from "./CheckoutFormContainer";
 
 const PaymentCreditCard = () => {
   const { values, errors, touched, handleChange } =
     useFormikContext<FormValues>();
+
+  const { required } = useStyles();
+
+  const styles = (theme) => ({
+    labelAsterisk: {
+      color: "red",
+    },
+    cssLabel: {
+      color: "orange",
+    },
+    cssRequired: {
+      "&:before": {
+        borderBottom: "2px solid orange",
+      },
+    },
+  });
 
   return (
     <Box
@@ -30,6 +48,7 @@ const PaymentCreditCard = () => {
           style={{ marginTop: ".5rem", marginRight: "1rem" }}
         />
         <TextField
+          className={required}
           style={{
             backgroundColor: "white",
             width: "220px",
@@ -80,7 +99,7 @@ const PaymentCreditCard = () => {
         <TextField
           style={{
             backgroundColor: "white",
-            width: "65px",
+            width: "75px",
             marginLeft: "1rem",
           }}
           sx={{
@@ -105,5 +124,9 @@ const PaymentCreditCard = () => {
     </Box>
   );
 };
+
+const useStyles = makeStyles(() => ({
+  required: {},
+}));
 
 export default PaymentCreditCard;
