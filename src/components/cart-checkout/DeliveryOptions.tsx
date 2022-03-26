@@ -7,8 +7,8 @@ import {
   Typography,
 } from "@mui/material";
 import { FormEvent, useState } from "react";
-import { useCart } from "../context/CartContextProvider";
-import { shippingProvider } from "../ShippingProviderData";
+import { useCart } from "../../context/CartContextProvider";
+import { shippingProvider } from "../../ShippingProviderData";
 
 const DeliveryOptions = () => {
   const { selectShippment } = useCart();
@@ -41,7 +41,7 @@ const DeliveryOptions = () => {
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
-          padding: { xs: ".5rem", sm: "2rem", md: "2rem", lg: "2rem" },
+          padding: { xs: "1rem", sm: "2rem", md: "2rem", lg: "2rem" },
         }}
       >
         <RadioGroup
@@ -62,8 +62,9 @@ const DeliveryOptions = () => {
                     sx={{
                       display: "flex",
                       placeItems: "center",
-                      justifyContent: "space-around",
-                      m: "1rem 1rem",
+                      justifyContent: "space-between",
+                      m: "1rem",
+                      flexWrap: "wrap",
                     }}
                   >
                     <img
@@ -71,14 +72,10 @@ const DeliveryOptions = () => {
                       alt={provider.providerName}
                       height="18px"
                     />
-                    <Typography variant="body2" style={{ marginLeft: "1rem" }}>
+                    <Typography variant="body2" sx={{ marginX: "1rem" }}>
                       {provider.cost} SEK
                     </Typography>
-                    <Typography
-                      variant="overline"
-                      color="#6C665F"
-                      style={{ marginLeft: "1rem" }}
-                    >
+                    <Typography variant="overline" color="#6C665F">
                       ({provider.deliveryTime})
                     </Typography>
                   </Box>
@@ -95,21 +92,18 @@ const DeliveryOptions = () => {
                     sx={{
                       display: "flex",
                       placeItems: "center",
-                      justifyContent: "space-around",
-                      m: "1rem 2rem",
+                      justifyContent: "space-between",
+                      m: "1rem",
+                      flexWrap: "wrap",
                     }}
                   >
                     <Typography variant="body2" style={{ fontWeight: "bold" }}>
                       {provider.providerName}
                     </Typography>
-                    <Typography variant="body2" style={{ marginLeft: "1rem" }}>
+                    <Typography variant="body2" sx={{ marginX: "1rem" }}>
                       FREE
                     </Typography>
-                    <Typography
-                      variant="overline"
-                      color="#6C665F"
-                      style={{ marginLeft: "1rem" }}
-                    >
+                    <Typography variant="overline" color="#6C665F">
                       ({provider.deliveryTime})
                     </Typography>
                   </Box>

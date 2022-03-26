@@ -1,6 +1,6 @@
 import { Box, Typography } from "@mui/material";
-import { useCart } from "../context/CartContextProvider";
-import { numWithSpaces, UseSumTotal } from "../Helper";
+import { useCart } from "../../context/CartContextProvider";
+import { numWithSpaces, UseSumTotal } from "../../Helper";
 
 const PriceOverview = () => {
   const { cart, shipper } = useCart();

@@ -2,7 +2,7 @@ import { Box, Container, TextField, Typography } from "@mui/material";
 import { useFormikContext } from "formik";
 import { FormValues } from "./CheckoutFormContainer";
 
-const DeliveryDetails = () => {
+const CustomerDetails = () => {
   const { values, errors, touched, handleChange } =
     useFormikContext<FormValues>();
 
@@ -109,4 +109,4 @@ const DeliveryDetails = () => {
     </Container>
   );
 };
-export default DeliveryDetails;
+export default CustomerDetails;
