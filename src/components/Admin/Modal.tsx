@@ -1,9 +1,6 @@
 import { Button } from '@mui/material';
-import zIndex from '@mui/material/styles/zIndex';
-import { color, padding } from '@mui/system';
 import React, { CSSProperties } from 'react';
-import ReactDOM, { hydrate } from "react-dom";
-import { transform } from 'typescript';
+import ReactDOM from "react-dom";
 import AddProductForm from './AddProductForm';
 import CloseIcon from "@mui/icons-material/Close";
 

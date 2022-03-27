@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import AdminPage from "./components/AdminPage";
-import CheckoutPage from "./components/cart-checkout/CheckoutPage";
+import AdminPage from "./components/Admin/AdminPage";
+import CheckoutPage from "./components/CheckoutPage";
 import DetailPage from "./components/DetailPage";
 import Layout from "./components/Layout";
 import NotFound from "./components/NotFound";

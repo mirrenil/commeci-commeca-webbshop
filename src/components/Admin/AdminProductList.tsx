@@ -17,9 +17,9 @@ import {
   TextField,
 } from "@mui/material";
 import { Fragment, useState } from "react";
-import { useAdmin } from "../context/AdminPageContext";
-import { numWithSpaces } from "../Helper";
-import { ProductData } from "../ProductData";
+import { useAdmin } from "../../context/AdminPageContext";
+import { numWithSpaces } from "../../Helper";
+import { ProductData } from "../../ProductData";
 import RemoveProductConfirmation from "./RemoveProductConfirmation";
 
 interface Props {
@@ -28,12 +28,9 @@ interface Props {
 
 function AdminProductList(props: Props) {
   const {
-    products,
     isEdit,
     setEdit,
-    addProduct,
     saveProduct,
-    removeProduct,
   } = useAdmin();
 
   const [open, setOpen] = useState(false);
@@ -42,7 +39,6 @@ function AdminProductList(props: Props) {
   const [description, setDescription] = useState(props.product.description);
   const [price, setPrice] = useState(props.product.price);
   const [openRemove, setOpenRemove] = useState(false);
-  let productToEdit = props.product;
 
   return (
     <Fragment>
