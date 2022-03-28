@@ -245,6 +245,6 @@ function AdminProductList(props: Props) {
         </TableCell>
       </TableRow>
     </Fragment>
-  );
+  )
 }
 export default AdminProductList;

@@ -1,14 +1,38 @@
-# comme ci comme ça ® 2022
+## comme ci comme ça ® 2022
+
+# ![comme ci comme ça ® 2022](src/assets/images/Logo.png)
+
+## About this project
+
+This project is a school assignement where the task was to create a fully functional webshop where the costumer can order products. The customer can add/remove items from the cart and then fill out his/her name, address, email etc. The customer should after that have the option to choose how the products should be delivered (three different options avaialable) and choose a payment option. All input ields has a validator to provide a user friendly experience. Once the payment has been completed the user will be presented with an order confirmation!
+
+Our webshop also has an admin page, you can access it by pressing the profile icon next to the shopping cart.
+In the admin page you can add/remove products and change the price, description, image and so on.
+Any product which is added from the admin page will be visibale for the customer since it's saved to the local storage!
+
+This project was build with React, TypeScript and Material UI.
+
+## Initiate project 👨‍💻
+
+To run the project, simply write the following command in the terminal:
+
+```
+
+npm install
+
+npm start
+
+```
 
 ## Made by:
 
-**Fia Andersson [github](https://github.com/fiababiakandersson)**
+**Fia Andersson [**github**](https://github.com/fiababiakandersson)**
 
-**Millie Chueng [github](https://github.com/millie-wy)**
+**Millie Chueng [**github**](https://github.com/millie-wy)**
 
-**Sara Lindqvist [github](https://github.com/saralindqvist)**
+**Sara Lindqvist [**github**](https://github.com/saralindqvist)**
 
-**Miranda Nilhag [github](https://github.com/mirrenil)**
+**Miranda Nilhag [**github**](https://github.com/mirrenil)**
 
 [demo]()
 

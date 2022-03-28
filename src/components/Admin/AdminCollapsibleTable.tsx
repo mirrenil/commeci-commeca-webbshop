@@ -41,7 +41,6 @@ function AdminCollapsibleTable() {
           {products.map((product) => {
             return <AdminProductList key={product.id} product={product} />;
           })}
-          );
         </TableBody>
       </Table>
     </TableContainer>
