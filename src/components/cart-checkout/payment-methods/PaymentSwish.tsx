@@ -29,7 +29,6 @@ const PaymentSwish = () => {
         height="20px"
         style={{ marginTop: ".5rem", marginRight: "1rem" }}
       />
-      {/* had to remove the error to import the phone number automatically! //error={touched.swish && Boolean(errors.swish)} */}
       <TextField
         style={{
           backgroundColor: "white",
@@ -38,11 +37,12 @@ const PaymentSwish = () => {
         }}
         id="swish"
         name="swish"
-        label="Phone number"
+        label="Phone Number"
         type="text"
         size="small"
-        value={values.phoneNumber}
+        value={values.swish}
         onChange={handleChange}
+        error={touched.swish && Boolean(errors.swish)}
         helperText={errors.swish}
       />
     </Box>

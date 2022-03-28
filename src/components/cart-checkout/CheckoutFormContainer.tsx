@@ -51,7 +51,6 @@ function CheckoutFormContainer() {
       .string()
       .required("Required")
       .matches(phoneRegExp, "Invalid phone number"),
-      
 
     cardNumber: yup.lazy(() => {
       if (isCreditCard) {
@@ -91,12 +90,13 @@ function CheckoutFormContainer() {
 
       return yup.string();
     }),
-/*  Had to remove the //.required("Required") field to make the phone number import the value from the user */
+
     swish: yup.lazy(() => {
       if (isSwish) {
         return yup
           .string()
-          .matches(phoneRegExp, "Invalid phone number");
+          .matches(phoneRegExp, "Invalid phone number")
+          .required("Required");
       }
       return yup.string();
     }),
