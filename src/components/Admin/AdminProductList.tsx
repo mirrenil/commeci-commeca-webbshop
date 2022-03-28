@@ -27,11 +27,7 @@ interface Props {
 }
 
 function AdminProductList(props: Props) {
-  const {
-    isEdit,
-    setEdit,
-    saveProduct,
-  } = useAdmin();
+  const { isEdit, setEdit, saveProduct } = useAdmin();
 
   const [open, setOpen] = useState(false);
   const [image, setImage] = useState(props.product.image);
@@ -171,12 +167,13 @@ function AdminProductList(props: Props) {
                       )}
                     </TableCell>
                     <TableCell align="center">
-                     <Button onClick={() => setOpenRemove(true)}>
-                       {openRemove ? <RemoveProductConfirmation product={props.product}/> : undefined}
-                        <DeleteOutline 
-                        style={{ color: "#ed6c02" }} />
-                       </Button>    
-                       
+                      <Button onClick={() => setOpenRemove(true)}>
+                        {openRemove ? (
+                          <RemoveProductConfirmation product={props.product} />
+                        ) : undefined}
+                        <DeleteOutline style={{ color: "#ed6c02" }} />
+                      </Button>
+
                       {!isEdit ? (
                         <Button
                           onClick={() => {
