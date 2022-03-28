@@ -35,7 +35,7 @@ const OrderConfirmation = () => {
             sx={{
               display: "flex",
               flexDirection: "column",
-              padding: "1rem",
+              padding: { xs: "0rem", sm: ".5rem", md: "1rem" },
               background: "#F3F2F0",
               textAlign: "center",
             }}
@@ -66,12 +66,21 @@ const OrderConfirmation = () => {
                 <Table aria-label="order list">
                   <TableHead>
                     <TableRow>
-                      <TableCell sx={{ fontSize: { xs: "12px", sm: "14px" } }}>
+                      <TableCell
+                        sx={{
+                          fontSize: { xs: "12px", sm: "14px" },
+                          width: { xs: "100px", sm: "150px", md: "200px" },
+                        }}
+                      >
                         Article
                       </TableCell>
                       <TableCell
                         align="center"
-                        sx={{ fontSize: { xs: "12px", sm: "14px" } }}
+                        sx={{
+                          fontSize: { xs: "12px", sm: "14px" },
+                          padding: { xs: 0, sm: 0, md: "1rem" },
+                        }}
+                        style={{ width: "50px" }}
                       >
                         Quantity
                       </TableCell>
@@ -158,6 +167,7 @@ const OrderConfirmation = () => {
                           border: "none",
                           fontSize: { xs: "12px", sm: "14px" },
                         }}
+                        colSpan={1}
                       >
                         {numWithSpaces(
                           UseSumTotal(orderDetail.boughtItems, false) -
@@ -167,7 +177,6 @@ const OrderConfirmation = () => {
                       </TableCell>
                     </TableRow>
                     <TableRow>
-                      <TableCell sx={{ border: "none" }} />
                       <TableCell
                         align="right"
                         sx={{
@@ -175,7 +184,7 @@ const OrderConfirmation = () => {
                           padding: "4px 16px",
                           fontSize: { xs: "12px", sm: "14px" },
                         }}
-                        colSpan={2}
+                        colSpan={3}
                       >
                         VAT 25%
                       </TableCell>
@@ -186,16 +195,16 @@ const OrderConfirmation = () => {
                           border: "none",
                           fontSize: { xs: "12px", sm: "14px" },
                         }}
+                        colSpan={1}
                       >
                         {numWithSpaces(calculateVat(orderDetail.boughtItems))}
                         &nbsp;SEK
                       </TableCell>
                     </TableRow>
                     <TableRow>
-                      <TableCell sx={{ border: "none" }} />
                       <TableCell
                         align="right"
-                        colSpan={2}
+                        colSpan={3}
                         sx={{
                           border: "none",
                           padding: "4px 16px",
@@ -211,6 +220,7 @@ const OrderConfirmation = () => {
                           border: "none",
                           fontSize: { xs: "12px", sm: "14px" },
                         }}
+                        colSpan={1}
                       >
                         {numWithSpaces(orderDetail.shipmentOption.cost)} SEK
                       </TableCell>
@@ -236,6 +246,7 @@ const OrderConfirmation = () => {
                           border: "none",
                           fontSize: { xs: "12px", sm: "14px" },
                         }}
+                        colSpan={1}
                       >
                         {numWithSpaces(
                           UseSumTotal(orderDetail.boughtItems, true)
