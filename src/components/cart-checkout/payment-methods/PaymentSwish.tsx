@@ -1,11 +1,18 @@
 import { Box, TextField } from "@mui/material";
 import { useFormikContext } from "formik";
+import { useEffect, useState } from "react";
 import SwishLogo from "../../../assets/images/SwishLogo.svg";
 import { FormValues } from "../../cart-checkout/CheckoutFormContainer";
 
 const PaymentSwish = () => {
-  const { values, errors, touched, handleChange } =
+  const { values, errors, touched, handleChange, setFieldValue } =
     useFormikContext<FormValues>();
+  const [swishNumber, setSwishNumber] = useState(values.phoneNumber);
+
+  useEffect(() => {
+    setSwishNumber(swishNumber);
+    setFieldValue("swish", swishNumber);
+  }, [setFieldValue, swishNumber]);
 
   return (
     <Box
