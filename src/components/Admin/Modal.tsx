@@ -7,14 +7,14 @@ import CloseIcon from "@mui/icons-material/Close";
 
 const modalStyles: CSSProperties = {
   position: 'fixed',
-  top: '56.5%',
+  top: '56%', 
   left: '50%',
   transform: 'translate(-50%, -50%)',
   backgroundColor: '#FFF',
   padding: '50px',
   zIndex: 1000,
   width: '75vw',
-  height: '65vh',
+  height: '71vh',
 }
 
 const overlayStyles: CSSProperties = {
@@ -23,21 +23,12 @@ const overlayStyles: CSSProperties = {
   left: 0,
   right: 0,
   bottom: 0,
-  backgroundColor: "rgba(0, 0, 0, .55)",
+  backgroundColor: "rgba(0, 0, 0, .8)",
   zIndex: 1000,
 };
 
 export default function Modal({open, children, onClose}) {
     if (!open) return null;
-
-    // if modal is opened, following code disallowes you to scroll
-    // (not fully functional yet)
-    const body : HTMLBodyElement | any = document.querySelector("body");
-    if (open) {
-      body.style.overflow = "hidden";
-    } else if (!open) {
-      body.style.overflow = "scroll";
-    }
 
     return ReactDOM.createPortal(
       <>
