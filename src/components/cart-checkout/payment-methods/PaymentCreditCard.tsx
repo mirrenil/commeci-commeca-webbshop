@@ -21,20 +21,46 @@ const PaymentCreditCard = () => {
           m: ".5rem",
           display: "flex",
           justifyContent: "center",
+          alignItems: {
+            xs: "center",
+            sm: "flex-start",
+            md: "flex-start",
+            lg: "flex-start",
+          },
+          flexDirection: {
+            xs: "column",
+            sm: "row",
+            md: "row",
+            lg: "row",
+          },
         }}
       >
         <img
           src={creditCardLogo}
-          alt="Swish"
+          alt="creditCard"
           height="20px"
-          style={{ marginTop: ".5rem", marginRight: "1rem" }}
+          width="50px"
+          style={{
+            marginTop: "1.5rem",
+            marginRight: "1rem",
+          }}
         />
         <TextField
           style={{
             backgroundColor: "white",
             width: "220px",
             height: "40px",
-            marginBottom: "1.5rem",
+          }}
+          sx={{
+            mb: {
+              xs: ".5rem",
+              sm: "1.5rem",
+              md: "1.5rem",
+              lg: "1.5rem",
+            },
+            mt: {
+              xs: "1rem",
+            },
           }}
           id="cardNumber"
           name="cardNumber"
@@ -52,7 +78,19 @@ const PaymentCreditCard = () => {
         sx={{
           display: "flex",
           justifyContent: "center",
-          ml: "2rem",
+          alignItems: "center",
+          ml: {
+            xs: "0rem",
+            sm: "2rem",
+            md: "2rem",
+            lg: "2rem",
+          },
+          flexDirection: {
+            xs: "column",
+            sm: "row",
+            md: "row",
+            lg: "row",
+          },
         }}
       >
         <TextField
@@ -60,14 +98,14 @@ const PaymentCreditCard = () => {
             backgroundColor: "white",
             width: "80px",
             height: "40px",
-            marginLeft: "2rem",
+            marginLeft: "1rem",
           }}
           sx={{
-            mt: {
-              xs: "1rem",
-              sm: "0rem",
-              md: "0rem",
-              lg: "0rem",
+            ml: {
+              xs: "0rem",
+              sm: "2rem",
+              md: "2rem",
+              lg: "2rem",
             },
           }}
           id="cardExpiry"

@@ -146,7 +146,7 @@ function CheckoutFormContainer() {
             }}
             sx={{
               width: {
-                xs: "300px",
+                xs: "200px",
                 sm: "400px",
                 md: "400px",
                 lg: "400px",
