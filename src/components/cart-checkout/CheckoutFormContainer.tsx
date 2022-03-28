@@ -1,6 +1,8 @@
-import { Box, Button } from "@mui/material";
+import { LoadingButton } from "@mui/lab";
+import { Box } from "@mui/material";
 import valid from "card-validator";
 import { Form, Formik } from "formik";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
 import { useCart } from "../../context/CartContextProvider";
@@ -21,6 +23,9 @@ function CheckoutFormContainer() {
   const navigate = useNavigate();
   const { emptyCart, isSwish, isCreditCard, isInvoice } = useCart();
   const { createOrder } = useOrder();
+
+  const [isLoading, setIsLoading] = useState(false);
+  console.log(isLoading);
 
   const phoneRegExp = /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/;
   const personalIdentityRegExp =
@@ -46,6 +51,7 @@ function CheckoutFormContainer() {
       .string()
       .required("Required")
       .matches(phoneRegExp, "Invalid phone number"),
+      
 
     cardNumber: yup.lazy(() => {
       if (isCreditCard) {
@@ -85,12 +91,11 @@ function CheckoutFormContainer() {
 
       return yup.string();
     }),
-
+/*  Had to remove the //.required("Required") field to make the phone number import the value from the user */
     swish: yup.lazy(() => {
       if (isSwish) {
         return yup
           .string()
-          .required("Required")
           .matches(phoneRegExp, "Invalid phone number");
       }
       return yup.string();
@@ -113,6 +118,7 @@ function CheckoutFormContainer() {
       validationSchema={ValidationSchema}
       onSubmit={(values: FormValues) => {
         let promise = new Promise((resolve) => {
+          setIsLoading(true);
           setTimeout(() => {
             createOrder(values);
             resolve(values);
@@ -120,6 +126,7 @@ function CheckoutFormContainer() {
         });
         promise
           .then(() => {
+            setIsLoading(false);
             navigate("/confirmation");
             emptyCart();
           })
@@ -134,15 +141,17 @@ function CheckoutFormContainer() {
         <PaymentMethod />
         <PriceOverview />
         <Box style={{ textAlign: "center" }}>
-          <Button
+          <LoadingButton
             size="large"
             variant="contained"
+            loading={isLoading}
+            disabled={isLoading}
+            loadingIndicator="Confirming..."
             style={{
               textAlign: "center",
               margin: "2rem",
-              backgroundColor: "#CAC2B9",
-              color: "white",
               letterSpacing: "3px",
+              backgroundColor: "#CAC2B9",
             }}
             sx={{
               width: {
@@ -155,7 +164,7 @@ function CheckoutFormContainer() {
             type="submit"
           >
             Confirm purchase
-          </Button>
+          </LoadingButton>
         </Box>
       </Form>
     </Formik>

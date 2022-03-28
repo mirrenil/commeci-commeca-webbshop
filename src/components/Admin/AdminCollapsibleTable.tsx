@@ -8,12 +8,11 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
-import { useContext } from "react";
-import { ProductContext } from "../../context/AdminPageContext";
+import { useAdmin } from "../../context/AdminPageContext";
 import AdminProductList from "./AdminProductList";
 
 function AdminCollapsibleTable() {
-  const products = useContext(ProductContext).products;
+  const { products } = useAdmin();
 
   return (
     <TableContainer component={Paper} sx={{ my: "1.5rem" }}>
@@ -45,7 +44,6 @@ function AdminCollapsibleTable() {
         </TableBody>
       </Table>
     </TableContainer>
-    
   );
 }
 
