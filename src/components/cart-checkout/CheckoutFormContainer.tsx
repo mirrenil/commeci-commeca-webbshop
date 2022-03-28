@@ -120,14 +120,12 @@ function CheckoutFormContainer() {
         let promise = new Promise((resolve) => {
           setIsLoading(true);
           setTimeout(() => {
-            console.log(isLoading);
             createOrder(values);
             resolve(values);
           }, 2000);
         });
         promise
           .then(() => {
-            console.log(isLoading);
             setIsLoading(false);
             navigate("/confirmation");
             emptyCart();
