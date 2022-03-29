@@ -34,7 +34,7 @@ npm start
 
 **Miranda Nilhag [**github**](https://github.com/mirrenil)**
 
-[demo]()
+[demo](https://commecicommeca.netlify.app/)
 
 ### Krav för VG
 
